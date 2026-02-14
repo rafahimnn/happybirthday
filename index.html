@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🎂 জন্মদিনের চমক</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -16,10 +15,95 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             color: white;
-            overflow-x: hidden;
+        }
+
+        /* লোডিং স্ক্রিন */
+        .countdown-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+            padding: 20px;
+        }
+
+        .countdown-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .countdown-title {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: gold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .countdown-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 30px;
+            border: 3px solid gold;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            min-width: 300px;
+        }
+
+        .count-item {
+            background: rgba(0,0,0,0.5);
+            padding: 20px 10px;
+            border-radius: 20px;
+            border: 2px solid gold;
+        }
+
+        .count-number {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            color: gold;
+            display: block;
+            line-height: 1;
+        }
+
+        .count-label {
+            font-size: 0.9rem;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .countdown-message {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        /* মেইন কন্টেন্ট - শুরুতে লুকানো */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            pointer-events: none;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            pointer-events: all;
         }
 
         /* কন্টেইনার */
@@ -31,115 +115,41 @@
 
         /* হিরো সেকশন */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        /* কাউন্টডাউন সেকশন */
-        .countdown-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 40px;
-            border: 2px solid rgba(255,215,0,0.3);
-            width: 100%;
-            max-width: 700px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-
-        .countdown-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 600;
-            color: gold;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .count-box {
-            background: rgba(0,0,0,0.4);
-            padding: 20px 10px;
-            border-radius: 20px;
-            border: 2px solid gold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .count-number {
+        .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .birthday-name {
+            font-size: clamp(3rem, 10vw, 5rem);
             color: gold;
-            display: block;
-            line-height: 1;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+            margin-bottom: 30px;
         }
 
-        .count-label {
-            font-size: clamp(0.8rem, 2.5vw, 1rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .birthday-message {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            color: gold;
-            margin-top: 30px;
-            padding: 15px;
-            border-top: 2px dashed gold;
-            border-bottom: 2px dashed gold;
-        }
-
-        /* কেক সেকশন - শুরুতে লুকানো */
+        /* কেক সেকশন */
         .cake-section {
-            margin-top: 50px;
-            text-align: center;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             padding: 40px 20px;
             border-radius: 50px;
-            width: 100%;
-            max-width: 600px;
-            display: none;
+            margin: 40px 0;
             border: 2px solid gold;
         }
 
-        .cake-section.active {
-            display: block;
-            animation: slideUp 1s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .cake-container {
-            width: 100%;
-            max-width: 350px;
-            margin: 0 auto;
+            text-align: center;
         }
 
         .cake-emoji {
-            font-size: clamp(7rem, 25vw, 10rem);
-            filter: drop-shadow(0 15px 30px rgba(255,215,0,0.6));
+            font-size: clamp(6rem, 20vw, 9rem);
+            filter: drop-shadow(0 10px 20px gold);
             animation: float 3s ease-in-out infinite;
         }
 
@@ -151,17 +161,12 @@
         .candles-container {
             font-size: 2.5rem;
             margin-top: -20px;
-            letter-spacing: 8px;
         }
 
         .cake-status {
             font-size: 1.5rem;
-            margin: 25px 0;
             color: gold;
-            background: rgba(0,0,0,0.3);
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: 2px solid gold;
+            margin: 20px 0;
         }
 
         .button-group {
@@ -169,7 +174,6 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
         }
 
         .action-btn {
@@ -179,14 +183,9 @@
             font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #1a1a2e;
             border: 2px solid white;
-            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
         }
 
         .action-btn.secondary {
@@ -197,12 +196,6 @@
         .action-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
-            transform: none;
-        }
-
-        .action-btn:not(:disabled):hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(255,215,0,0.5);
         }
 
         /* ফটো অ্যালবাম */
@@ -226,7 +219,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         .photo-item:hover {
@@ -244,9 +237,8 @@
             left: 0;
             right: 0;
             padding: 15px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: gold;
-            font-weight: 600;
             transform: translateY(100%);
             transition: 0.3s;
         }
@@ -274,13 +266,6 @@
             backdrop-filter: blur(8px);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: 0.3s;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            border-color: gold;
         }
 
         .video-wrapper {
@@ -305,12 +290,6 @@
         .video-title {
             font-size: 1.2rem;
             color: gold;
-            margin-bottom: 5px;
-        }
-
-        .video-desc {
-            color: #ccc;
-            font-size: 0.9rem;
         }
 
         /* মেসেজ সেকশন */
@@ -320,24 +299,21 @@
             border-radius: 40px;
             padding: 50px 30px;
             text-align: center;
-            margin: 50px 0;
-            border: 2px solid gold;
+            margin: 40px 0;
         }
 
         .message-text {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: 1.8rem;
             line-height: 1.8;
             white-space: pre-line;
-            color: #fff;
         }
 
         /* সেকশন টাইটেল */
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 6vw, 2.5rem);
-            margin: 60px 0 30px;
+            font-size: 2.5rem;
             color: gold;
-            position: relative;
+            margin: 50px 0 30px;
         }
 
         .section-title::after {
@@ -345,9 +321,8 @@
             display: block;
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, gold, #ff1493);
+            background: gold;
             margin: 15px auto;
-            border-radius: 2px;
         }
 
         /* লাইটবক্স */
@@ -362,7 +337,6 @@
             z-index: 10000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
         .lightbox.active {
@@ -370,10 +344,9 @@
         }
 
         .lightbox img {
-            max-width: 100%;
+            max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
-            box-shadow: 0 0 50px gold;
         }
 
         .lightbox .close {
@@ -387,158 +360,172 @@
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             color: #aaa;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 50px;
         }
     </style>
 </head>
 <body>
+    <!-- কাউন্টডাউন স্ক্রিন (শুরুতে দেখা যাবে) -->
+    <div class="countdown-screen" id="countdownScreen">
+        <div class="countdown-title">⏰ জন্মদিন আসতে বাকি</div>
+        
+        <div class="countdown-box">
+            <div class="countdown" id="countdown">
+                <div class="count-item">
+                    <span class="count-number" id="days">00</span>
+                    <span class="count-label">দিন</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="hours">00</span>
+                    <span class="count-label">ঘণ্টা</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="mins">00</span>
+                    <span class="count-label">মিনিট</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="secs">00</span>
+                    <span class="count-label">সেকেন্ড</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="countdown-message" id="countdownMessage">
+            🎂 স্পেশাল ডে আসছে 🎂
+        </div>
+    </div>
+
+    <!-- মেইন কন্টেন্ট (জন্মদিন এলে দেখাবে) -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <!-- হিরো সেকশন -->
+            <section class="hero">
+                <h1>🎉 শুভ জন্মদিন 🎉</h1>
+                <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
+                
+                <!-- কেক সেকশন -->
+                <div class="cake-section">
+                    <div class="cake-container">
+                        <div class="cake-emoji" id="cakeEmoji">🎂</div>
+                        <div class="candles-container" id="candlesContainer"></div>
+                    </div>
+                    <div class="cake-status" id="cakeStatus"></div>
+                    
+                    <div class="button-group">
+                        <button class="action-btn" id="cutBtn" onclick="cutCake()">
+                            <i class="fas fa-utensils"></i> কেক কাটো
+                        </button>
+                        <button class="action-btn secondary" id="blowBtn" onclick="blowCandles()">
+                            <i class="fas fa-wind"></i> ফুঁ দাও
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ফটো অ্যালবাম -->
+            <section>
+                <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির পাতা</h2>
+                <div class="photo-album" id="photoAlbum">
+                    <!-- ছবি গুলো -->
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory">
+                        <div class="photo-overlay">💖 প্রথম দেখা</div>
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory">
+                        <div class="photo-overlay">💖 একসাথে</div>
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory">
+                        <div class="photo-overlay">💖 হাসি</div>
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory">
+                        <div class="photo-overlay">💖 ভালোবাসা</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ভিডিও গ্যালারি -->
+            <section>
+                <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও বার্তা</h2>
+                <div class="video-gallery">
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
+                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
+                                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- মেসেজ সেকশন -->
+            <section>
+                <div class="message-section">
+                    <h2 class="section-title">💌 ভালোবাসার কথা</h2>
+                    <p class="message-text">
+আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
+তোমার জীবন হোক আনন্দে ভরপুর। 💝
+
+🎂 শুভ জন্মদিন 🎂
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>❤️ তৈরি করেছে ভালোবাসা</p>
+            <p>© ২০২৫ স্পেশাল ডে</p>
+        </footer>
+    </div>
+
     <!-- লাইটবক্স -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close">&times;</span>
         <img src="" id="lightboxImg" alt="">
     </div>
 
-    <div class="container">
-        <!-- হিরো সেকশন - শুধু কাউন্টডাউন -->
-        <section class="hero">
-            <div class="countdown-section">
-                <div class="countdown-title">⏰ জন্মদিন আসতে বাকি</div>
-                
-                <div class="countdown" id="countdown">
-                    <div class="count-box">
-                        <span class="count-number" id="days">00</span>
-                        <span class="count-label">দিন</span>
-                    </div>
-                    <div class="count-box">
-                        <span class="count-number" id="hours">00</span>
-                        <span class="count-label">ঘণ্টা</span>
-                    </div>
-                    <div class="count-box">
-                        <span class="count-number" id="mins">00</span>
-                        <span class="count-label">মিনিট</span>
-                    </div>
-                    <div class="count-box">
-                        <span class="count-number" id="secs">00</span>
-                        <span class="count-label">সেকেন্ড</span>
-                    </div>
-                </div>
-
-                <div class="birthday-message" id="birthdayMessage">
-                    🎂 স্পেশাল ডে কাউন্টডাউন 🎂
-                </div>
-            </div>
-
-            <!-- কেক সেকশন - শুরুতে লুকানো -->
-            <div class="cake-section" id="cakeSection">
-                <div class="cake-container">
-                    <div class="cake-emoji" id="cakeEmoji">🎂</div>
-                    <div class="candles-container" id="candlesContainer"></div>
-                </div>
-                <div class="cake-status" id="cakeStatus"></div>
-                
-                <div class="button-group">
-                    <button class="action-btn" id="cutBtn" onclick="cutCake()">
-                        <i class="fas fa-utensils"></i> কেক কাটো
-                    </button>
-                    <button class="action-btn secondary" id="blowBtn" onclick="blowCandles()">
-                        <i class="fas fa-wind"></i> ফুঁ দাও
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ফটো অ্যালবাম -->
-        <section id="photos">
-            <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
-            <div class="photo-album">
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                    <div class="photo-overlay">💖 প্রথম দেখা</div>
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                    <div class="photo-overlay">💖 একসাথে</div>
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                    <div class="photo-overlay">💖 হাসি</div>
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                    <div class="photo-overlay">💖 ভালোবাসা</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ভিডিও গ্যালারি -->
-        <section id="videos">
-            <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও শুভেচ্ছা</h2>
-            <div class="video-gallery">
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
-                        <p class="video-desc">তোমার জন্য ভালোবাসা</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">🎥 শুভ কামনা</h3>
-                        <p class="video-desc">শুভ জন্মদিন</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- মেসেজ সেকশন -->
-        <section>
-            <div class="message-section">
-                <h2 class="section-title" style="margin-bottom: 20px;">💌 ভালোবাসার কথা</h2>
-                <p class="message-text">
-আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
-তোমার প্রতিটি স্বপ্ন পূরণ হোক।
-জীবনের পথে থাকুক অ endless happiness। 💝
-
-🎂 শুভ জন্মদিন 🎂
-                </p>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>❤️ তৈরি করেছে অফুরান ভালোবাসা</p>
-        <p style="margin-top: 10px;">© ২০২৫ স্পেশাল ডে</p>
-    </footer>
-
     <script>
-        // কনফিগারেশন - এখানে জন্মদিন সেট করো
-        const BIRTHDAY_CONFIG = {
-            month: 4,        // মে = 4 (জানুয়ারি = 0, ফেব্রুয়ারি = 1, ...)
-            day: 11,         // ১১ তারিখ
-            age: 16          // ১৬তম জন্মদিন
+        // ------------------ কনফিগারেশন ------------------
+        const CONFIG = {
+            birthMonth: 4,        // মে = 4 (জানুয়ারি = 0)
+            birthDay: 11,         // ১১ তারিখ
+            age: 16,              // ১৬তম জন্মদিন
+            name: "প্রিয়জন"      // ডিফল্ট নাম
         };
 
-        // স্টেট ম্যানেজমেন্ট
+        // URL থেকে নাম নেওয়া
+        const urlParams = new URLSearchParams(window.location.search);
+        const nameParam = urlParams.get('name');
+        if (nameParam) {
+            CONFIG.name = decodeURIComponent(nameParam);
+        }
+        document.getElementById('birthdayName').textContent = CONFIG.name;
+
+        // স্টেট
         let cakeCut = false;
         let candlesBlown = false;
 
-        // চেক করে যে আজ জন্মদিন কিনা
+        // আজ কি জন্মদিন?
         function isBirthdayToday() {
             const today = new Date();
-            return today.getMonth() === BIRTHDAY_CONFIG.month && 
-                   today.getDate() === BIRTHDAY_CONFIG.day;
+            return today.getMonth() === CONFIG.birthMonth && 
+                   today.getDate() === CONFIG.birthDay;
         }
 
         // কাউন্টডাউন আপডেট
@@ -546,15 +533,27 @@
             const now = new Date();
             const currentYear = now.getFullYear();
             
-            // এ বছরের জন্মদিন
-            let birthday = new Date(currentYear, BIRTHDAY_CONFIG.month, BIRTHDAY_CONFIG.day);
+            let birthday = new Date(currentYear, CONFIG.birthMonth, CONFIG.birthDay, 0, 0, 0);
             
-            // যদি এ বছরের জন্মদিন শেষ হয়ে যায়, পরের বছর নাও
             if (now > birthday) {
-                birthday = new Date(currentYear + 1, BIRTHDAY_CONFIG.month, BIRTHDAY_CONFIG.day);
+                birthday = new Date(currentYear + 1, CONFIG.birthMonth, CONFIG.birthDay, 0, 0, 0);
             }
             
             const diff = birthday - now;
+            
+            if (diff <= 0) {
+                // জন্মদিন এসে গেছে!
+                document.getElementById('countdownScreen').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('visible');
+                
+                // কনফেটি
+                confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+                
+                // কেক স্টেট লোড
+                loadCakeState();
+                renderCake();
+                return;
+            }
             
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -566,32 +565,19 @@
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
 
-            // কাউন্টডাউন মেসেজ আপডেট
-            const messageElement = document.getElementById('birthdayMessage');
-            if (days === 0 && hours === 0 && mins === 0 && secs === 0) {
-                messageElement.innerHTML = '🎉 আজকের দিন! অপেক্ষা শেষ 🎉';
+            // মেসেজ আপডেট
+            const msg = document.getElementById('countdownMessage');
+            if (days === 0 && hours < 24) {
+                msg.innerHTML = '🎉 কালকে বড় দিন! 🎉';
             } else {
-                messageElement.innerHTML = '🎂 স্পেশাল ডে কাউন্টডাউন 🎂';
-            }
-
-            // কেক সেকশন দেখানোর চেক
-            const cakeSection = document.getElementById('cakeSection');
-            
-            // যদি আজ জন্মদিন হয়
-            if (isBirthdayToday()) {
-                cakeSection.classList.add('active');
-                loadCakeState();
-                renderCake();
-            } else {
-                cakeSection.classList.remove('active');
+                msg.innerHTML = '🎂 স্পেশাল ডে আসছে 🎂';
             }
         }
 
-        // লোকাল স্টোরেজ থেকে স্টেট লোড
+        // কেক স্টেট লোড
         function loadCakeState() {
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${BIRTHDAY_CONFIG.month}-${BIRTHDAY_CONFIG.day}`;
-            
+            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
             cakeCut = localStorage.getItem(`cakeCut_${dateStr}`) === 'true';
             candlesBlown = localStorage.getItem(`candlesBlown_${dateStr}`) === 'true';
         }
@@ -607,7 +593,7 @@
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
                 candlesContainer.innerHTML = '';
-                cakeStatus.textContent = '🎉 কেক কাটা হয়ে গেছে! শুভ জন্মদিন! 🎉';
+                cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
                 blowBtn.disabled = true;
             } else {
@@ -615,16 +601,16 @@
                 
                 if (candlesBlown) {
                     candlesContainer.innerHTML = '💨';
-                    cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে';
+                    cakeStatus.textContent = 'মোমবাতি নিভে গেছে';
                     blowBtn.disabled = true;
                     cutBtn.disabled = false;
                 } else {
                     let candles = '';
-                    for (let i = 0; i < BIRTHDAY_CONFIG.age; i++) {
+                    for (let i = 0; i < CONFIG.age; i++) {
                         candles += '🕯️';
                     }
                     candlesContainer.innerHTML = candles;
-                    cakeStatus.textContent = `${BIRTHDAY_CONFIG.age}টি মোমবাতি জ্বলছে`;
+                    cakeStatus.textContent = `${CONFIG.age}টি মোমবাতি জ্বলছে`;
                     blowBtn.disabled = false;
                     cutBtn.disabled = false;
                 }
@@ -636,21 +622,17 @@
             if (!isBirthdayToday() || cakeCut) return;
 
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${BIRTHDAY_CONFIG.month}-${BIRTHDAY_CONFIG.day}`;
+            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
             
             cakeCut = true;
             localStorage.setItem(`cakeCut_${dateStr}`, 'true');
             
             renderCake();
-
+            
             // কনফেটি
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => {
-                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
-            }, 200);
-            setTimeout(() => {
-                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
-            }, 400);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 } }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 } }), 400);
         };
 
         // মোমবাতি নেভানো
@@ -658,20 +640,12 @@
             if (!isBirthdayToday() || cakeCut || candlesBlown) return;
 
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${BIRTHDAY_CONFIG.month}-${BIRTHDAY_CONFIG.day}`;
+            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
             
             candlesBlown = true;
             localStorage.setItem(`candlesBlown_${dateStr}`, 'true');
             
             renderCake();
-
-            // স্মোক ইফেক্ট
-            confetti({
-                particleCount: 50,
-                spread: 80,
-                colors: ['#aaaaaa', '#cccccc'],
-                startVelocity: 20
-            });
         };
 
         // লাইটবক্স
@@ -684,9 +658,19 @@
             document.getElementById('lightbox').classList.remove('active');
         };
 
-        // প্রতি সেকেন্ডে কাউন্টডাউন আপডেট
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // চেক করে দেখি আজ কি জন্মদিন
+        if (isBirthdayToday()) {
+            // জন্মদিন হলে সরাসরি কন্টেন্ট দেখাও
+            document.getElementById('countdownScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('visible');
+            loadCakeState();
+            renderCake();
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        } else {
+            // না হলে কাউন্টডাউন চালাও
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
     </script>
 </body>
 </html>
