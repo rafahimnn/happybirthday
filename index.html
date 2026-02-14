@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Special Birthday Celebration</title>
+    <title>🎁 Special Surprise Gift</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -13,74 +15,86 @@
         }
 
         :root {
-            --primary: #ff006e;
-            --secondary: #8338ec;
-            --accent: #06ffa5;
             --gold: #ffd700;
             --pink: #ff1493;
+            --purple: #8338ec;
+            --accent: #06ffa5;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0033 0%, #000 50%, #330066 100%);
-            color: white;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a0033, #000, #330066);
             min-height: 100vh;
+            color: white;
             overflow-x: hidden;
         }
 
-        /* Navigation */
-        .nav {
+        /* Intro Screen */
+        .intro-screen {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            display: flex;
-            justify-content: space-around;
-            z-index: 1000;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .nav-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 10px;
-            transition: all 0.3s;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000, #1a0033);
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
+            z-index: 9999;
+            transition: opacity 1s, transform 1s;
         }
 
-        .nav-btn span {
-            font-size: 0.7rem;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            color: var(--accent);
+        .intro-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
             transform: scale(1.1);
         }
 
-        /* Sections */
-        .section {
-            display: none;
-            padding: 80px 20px 100px;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s;
+        .gift-box {
+            font-size: 8rem;
+            cursor: pointer;
+            animation: bounce 2s infinite, glow 2s infinite alternate;
+            filter: drop-shadow(0 0 30px var(--gold));
         }
 
-        .section.active {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px var(--gold)); }
+            to { filter: drop-shadow(0 0 60px var(--pink)); }
+        }
+
+        .tap-text {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Container */
+        .main-container {
+            display: none;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .main-container.active {
             display: block;
+            animation: fadeIn 1s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -91,30 +105,53 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(90deg, var(--gold), var(--primary), var(--accent));
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
 
-        .birthday-person {
-            font-size: 3rem;
-            color: var(--gold);
-            text-shadow: 0 0 30px rgba(255,215,0,0.5);
+        .birthday-name {
             font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-top: 10px;
+            text-shadow: 0 0 30px rgba(255,215,0,0.5);
         }
 
-        /* Cake Section */
-        .cake-container {
+        /* Sections - Initially Hidden */
+        .section {
+            display: none;
+            margin: 40px 0;
+            animation: slideUp 0.8s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
             text-align: center;
-            padding: 20px;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--accent);
         }
 
-        .cake-wrapper {
+        /* CAKE SECTION */
+        .cake-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cake-container {
             position: relative;
-            width: 300px;
-            height: 400px;
+            width: 320px;
+            height: 450px;
             margin: 0 auto;
         }
 
@@ -123,41 +160,43 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 250px;
-            height: 120px;
-            background: linear-gradient(135deg, #8B4513, #D2691E);
-            border-radius: 20px 20px 40px 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 280px;
+            height: 140px;
+            background: linear-gradient(135deg, #8B4513, #D2691E, #A0522D);
+            border-radius: 20px 20px 50px 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
         .cake-middle {
             position: absolute;
-            bottom: 110px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 100px;
-            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            width: 230px;
+            height: 110px;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1, #FF1493);
             border-radius: 15px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
         }
 
         .cake-top {
             position: absolute;
-            bottom: 200px;
+            bottom: 230px;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
-            height: 80px;
-            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            width: 180px;
+            height: 90px;
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3, #FFE4B5);
             border-radius: 10px;
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.1);
         }
 
         .candle {
             position: absolute;
-            width: 20px;
-            height: 60px;
-            background: linear-gradient(to right, #ff006e, #ff1493);
-            border-radius: 10px;
+            width: 25px;
+            height: 70px;
+            background: linear-gradient(to right, #ff006e, #ff1493, #ff006e);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -165,125 +204,147 @@
         .candle::before {
             content: '';
             position: absolute;
-            top: -25px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 40px;
-            background: radial-gradient(ellipse at bottom, #ffd700, #ff8c00, transparent);
+            width: 35px;
+            height: 45px;
+            background: radial-gradient(ellipse at bottom, #ffd700 0%, #ff8c00 40%, #ff4500 70%, transparent 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: flicker 0.5s infinite alternate;
-            box-shadow: 0 0 20px #ff8c00;
+            animation: flicker 0.6s infinite alternate;
+            box-shadow: 0 0 30px #ff8c00, 0 0 60px #ff4500;
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
-            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+            0% { transform: translateX(-50%) scale(1) rotate(-3deg); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.15) rotate(3deg); opacity: 0.9; }
+        }
+
+        .candle.blown {
+            background: linear-gradient(to right, #555, #777, #555);
         }
 
         .candle.blown::before {
             display: none;
         }
 
-        .candle:nth-child(4) { bottom: 280px; left: 35%; }
-        .candle:nth-child(5) { bottom: 280px; left: 50%; transform: translateX(-50%); }
-        .candle:nth-child(6) { bottom: 280px; right: 35%; }
+        .candle:nth-child(4) { bottom: 320px; left: 30%; }
+        .candle:nth-child(5) { bottom: 320px; left: 50%; transform: translateX(-50%); }
+        .candle:nth-child(6) { bottom: 320px; right: 30%; }
 
-        .cut-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: rgba(255,255,255,0.5);
-            display: none;
-            pointer-events: none;
-        }
-
-        .cake-slice {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            display: none;
-        }
-
+        /* Blow Button */
         .blow-btn {
-            margin-top: 30px;
-            padding: 15px 40px;
+            margin-top: 40px;
+            padding: 18px 50px;
             background: linear-gradient(45deg, #ff6b6b, #ff8e53);
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            animation: pulse 2s infinite;
+            animation: pulse-btn 2s infinite;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes pulse-btn {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255,107,107,0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
         }
 
+        /* Cut Button */
         .cut-btn {
             margin-top: 20px;
-            padding: 15px 40px;
+            padding: 18px 50px;
             background: linear-gradient(45deg, var(--accent), #00d4ff);
             border: none;
             border-radius: 50px;
             color: #000;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             display: none;
+            animation: glow-btn 2s infinite alternate;
         }
 
-        /* Photo Album */
-        .upload-area {
-            border: 3px dashed rgba(255,255,255,0.3);
-            border-radius: 20px;
+        @keyframes glow-btn {
+            from { box-shadow: 0 0 20px var(--accent); }
+            to { box-shadow: 0 0 40px var(--accent), 0 0 60px var(--accent); }
+        }
+
+        /* LETTER SECTION */
+        .letter-container {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,20,147,0.1));
+            border: 3px solid rgba(255,215,0,0.3);
+            border-radius: 30px;
             padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            transition: all 0.3s;
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .upload-area:hover {
-            border-color: var(--accent);
-            background: rgba(6,255,165,0.1);
+        .letter-paper {
+            background: #fffef0;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
+            min-height: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            line-height: 2;
+            position: relative;
         }
 
-        .upload-area input {
-            display: none;
+        .letter-paper::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: white;
+            padding: 0 20px;
+            border-radius: 50%;
         }
 
-        .upload-btn {
-            padding: 15px 30px;
-            background: var(--primary);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
+        .letter-content {
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 30px;
+            color: var(--pink);
+            font-size: 1.6rem;
+        }
+
+        /* PHOTO ALBUM */
+        .photo-album {
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 30px;
         }
 
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .photo-item {
             aspect-ratio: 1;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            border: 3px solid transparent;
         }
 
         .photo-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(2deg);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
         .photo-item img {
@@ -292,163 +353,111 @@
             object-fit: cover;
         }
 
-        .photo-item .delete {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(255,0,0,0.8);
-            border: none;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 0.8rem;
+        /* VIDEO SECTION */
+        .video-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 30px;
         }
 
-        /* Video Section */
-        .video-box {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            background: #000;
-            border-radius: 20px;
-            margin: 0 auto 20px;
-            overflow: hidden;
-            border: 3px solid var(--accent);
-            position: relative;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .rec-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .btn-record { background: #ff0000; color: white; }
-        .btn-stop { background: #333; color: white; }
-        .btn-upload { background: linear-gradient(45deg, var(--accent), #00d4ff); color: #000; font-weight: bold; }
-        .btn:hover { transform: scale(1.05); }
-
-        .videos-list {
+        .video-grid {
             display: grid;
-            gap: 20px;
+            gap: 25px;
         }
 
         .video-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
             overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
         .video-card video {
             width: 100%;
-            height: 200px;
+            height: 250px;
+            object-fit: cover;
         }
 
         .video-info {
-            padding: 15px;
-        }
-
-        /* Letter Section */
-        .letter-container {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,0,110,0.1));
-            border: 2px solid rgba(255,215,0,0.3);
-            border-radius: 20px;
-            padding: 30px;
-            position: relative;
-        }
-
-        .letter-paper {
-            background: #fffef0;
-            color: #333;
-            padding: 30px;
-            border-radius: 10px;
-            min-height: 400px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.3rem;
-            line-height: 1.8;
-        }
-
-        .letter-input {
-            width: 100%;
-            min-height: 300px;
-            border: none;
-            background: transparent;
-            font-family: inherit;
-            font-size: inherit;
-            line-height: inherit;
-            resize: vertical;
-            outline: none;
-        }
-
-        .letter-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .saved-letters {
-            margin-top: 30px;
-        }
-
-        .letter-item {
-            background: rgba(255,255,255,0.1);
             padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--gold);
         }
 
-        .letter-author {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .letter-date {
-            color: #888;
-            font-size: 0.85rem;
-            margin-top: 10px;
-        }
-
-        /* Loading */
-        .loading {
-            display: none;
+        /* LOVE CALCULATOR */
+        .love-container {
+            background: linear-gradient(135deg, rgba(255,0,110,0.2), rgba(131,56,236,0.2));
+            border-radius: 30px;
+            padding: 40px;
             text-align: center;
-            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        .spinner {
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+        .love-inputs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .love-input {
+            padding: 15px 30px;
+            border: 2px solid var(--pink);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 200px;
+        }
+
+        .love-heart {
+            font-size: 3rem;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .love-btn {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .love-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,20,147,0.4);
+        }
+
+        .love-result {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 30px 0;
+            opacity: 0;
+            transition: all 1s;
+            text-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .love-result.show {
+            opacity: 1;
+            animation: popIn 1s;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
 
         /* Lightbox */
         .lightbox {
@@ -458,16 +467,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
             justify-content: center;
             align-items: center;
         }
 
+        .lightbox.active {
+            display: flex;
+        }
+
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255,255,255,0.2);
         }
 
         .lightbox .close {
@@ -477,23 +491,73 @@
             font-size: 3rem;
             color: white;
             cursor: pointer;
+            z-index: 10001;
+        }
+
+        /* Admin Upload Panel (Hidden from normal users) */
+        .admin-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            display: none;
+            z-index: 999;
+        }
+
+        .admin-panel.show {
+            display: block;
+        }
+
+        .admin-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            z-index: 998;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.1);
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--accent));
+            width: 0%;
+            transition: width 0.5s;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .birthday-person { font-size: 2rem; }
-            .cake-wrapper { width: 250px; height: 350px; }
-            .cake-base { width: 200px; height: 100px; }
-            .cake-middle { width: 160px; height: 80px; bottom: 90px; }
-            .cake-top { width: 120px; height: 60px; bottom: 160px; }
-            .candle { height: 50px; }
-            .candle:nth-child(4) { bottom: 220px; }
-            .candle:nth-child(5) { bottom: 220px; }
-            .candle:nth-child(6) { bottom: 220px; }
-            .video-box { height: 250px; }
-            .nav-btn { font-size: 1.2rem; }
-            .nav-btn span { font-size: 0.6rem; }
+            .gift-box { font-size: 6rem; }
+            .birthday-name { font-size: 2.5rem; }
+            .cake-container { width: 280px; height: 400px; }
+            .cake-base { width: 240px; height: 120px; }
+            .cake-middle { width: 200px; height: 100px; bottom: 110px; }
+            .cake-top { width: 160px; height: 80px; bottom: 200px; }
+            .candle { height: 60px; }
+            .candle:nth-child(4) { bottom: 280px; }
+            .candle:nth-child(5) { bottom: 280px; }
+            .candle:nth-child(6) { bottom: 280px; }
+            .letter-paper { padding: 30px 20px; font-size: 1.2rem; }
+            .love-result { font-size: 3.5rem; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         .hidden { display: none !important; }
@@ -501,167 +565,164 @@
 </head>
 <body>
 
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Admin Button -->
+    <button class="admin-btn" onclick="toggleAdmin()" title="Admin">⚙️</button>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h3 style="color: var(--gold); margin-bottom: 15px;">Admin Upload</h3>
+        <input type="file" id="photoUpload" accept="image/*" multiple onchange="uploadPhotos(event)">
+        <input type="file" id="videoUpload" accept="video/*" onchange="uploadVideo(event)">
+        <textarea id="letterText" placeholder="Letter content..." style="width: 100%; margin: 10px 0; padding: 10px;"></textarea>
+        <button onclick="saveLetter()" style="width: 100%; padding: 10px; background: var(--accent); border: none; border-radius: 5px; cursor: pointer;">Save Letter</button>
+        <button onclick="clearAll()" style="width: 100%; padding: 10px; margin-top: 10px; background: #ff4444; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear All</button>
+    </div>
+
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="gift-box" onclick="openGift()">🎁</div>
+        <p class="tap-text">ট্যাপ করতে সারপ্রাইজ খুলুন!</p>
+    </div>
+
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close">&times;</span>
-        <img src="" alt="Full size" id="lightboxImg">
+        <img src="" id="lightboxImg">
     </div>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>🎉 Happy Birthday 🎂</h1>
-        <div class="birthday-person" id="birthdayName">প্রিয়জন</div>
-        <p style="color: #aaa; margin-top: 10px;">একটি বিশেষ দিনের স্মৃতি</p>
-    </div>
-
-    <!-- CAKE SECTION -->
-    <div class="section active" id="cakeSection">
-        <div class="cake-container">
-            <div class="cake-wrapper" id="cake">
-                <div class="cake-base"></div>
-                <div class="cake-middle"></div>
-                <div class="cake-top"></div>
-                <div class="candle" onclick="blowCandle(this)"></div>
-                <div class="candle" onclick="blowCandle(this)"></div>
-                <div class="candle" onclick="blowCandle(this)"></div>
-            </div>
-            
-            <button class="blow-btn" id="blowBtn" onclick="blowAllCandles()">
-                🌬️ মোমবাতি নিভান (ফু দিন)
-            </button>
-            
-            <button class="cut-btn" id="cutBtn" onclick="cutCake()">
-                🔪 কেক কাটুন
-            </button>
-            
-            <p id="cakeMessage" style="margin-top: 20px; color: var(--accent); opacity: 0; transition: all 0.5s;">
-                🎉 শুভ জন্মদিন! 🎉
-            </p>
-        </div>
-    </div>
-
-    <!-- PHOTO SECTION -->
-    <div class="section" id="photoSection">
-        <h2 style="text-align: center; margin-bottom: 20px; color: var(--gold);">📸 Photo Album</h2>
+    <!-- Main Container -->
+    <div class="main-container" id="mainContainer">
         
-        <div class="upload-area" onclick="document.getElementById('photoInput').click()">
-            <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)">
-            <p style="font-size: 3rem; margin-bottom: 10px;">📷</p>
-            <p>ফোটো আপলোড করতে ক্লিক করুন</p>
-            <p style="color: #888; font-size: 0.9rem; margin-top: 10px;">অথবা ড্র্যাগ করুন</p>
+        <!-- Header -->
+        <div class="header">
+            <h1>🎉 Happy Birthday 🎂</h1>
+            <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
         </div>
 
-        <div class="loading" id="photoLoading">
-            <div class="spinner"></div>
-            <p>আপলোড হচ্ছে...</p>
-        </div>
+        <!-- SECTION 1: CAKE -->
+        <div class="section active" id="cakeSection">
+            <div class="cake-section">
+                <div class="cake-container" id="cake">
+                    <div class="cake-base"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-top"></div>
+                    <div class="candle" onclick="blowCandle(this)"></div>
+                    <div class="candle" onclick="blowCandle(this)"></div>
+                    <div class="candle" onclick="blowCandle(this)"></div>
+                </div>
 
-        <div class="photo-grid" id="photoGrid">
-            <!-- Photos will appear here -->
-        </div>
-    </div>
+                <button class="blow-btn" id="blowBtn" onclick="blowAllCandles()">
+                    🌬️ ফু দিয়ে মোমবাতি নিভান
+                </button>
 
-    <!-- VIDEO SECTION -->
-    <div class="section" id="videoSection">
-        <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent);">🎥 Birthday Wishes</h2>
-        
-        <div class="video-box">
-            <video id="previewVideo" autoplay playsinline muted></video>
-            <video id="recordedVideo" class="hidden" controls></video>
-        </div>
-
-        <div class="rec-controls">
-            <button class="btn btn-record" onclick="startRecording()">🔴 Record</button>
-            <button class="btn btn-stop" onclick="stopRecording()">⏹️ Stop</button>
-            <button class="btn btn-upload hidden" id="uploadVideoBtn" onclick="uploadVideo()">🚀 Upload</button>
-        </div>
-
-        <div class="loading" id="videoLoading">
-            <div class="spinner"></div>
-            <p>ভিডিও আপলোড হচ্ছে...</p>
-        </div>
-
-        <div class="videos-list" id="videosList">
-            <!-- Videos will appear here -->
-        </div>
-    </div>
-
-    <!-- LETTER SECTION -->
-    <div class="section" id="letterSection">
-        <h2 style="text-align: center; margin-bottom: 20px; color: var(--pink);">💌 Birthday Letter</h2>
-        
-        <div class="letter-container">
-            <div class="letter-paper">
-                <input type="text" id="letterAuthor" placeholder="আপনার নাম" style="width: 100%; border: none; border-bottom: 2px solid #ddd; margin-bottom: 20px; padding: 10px; font-size: 1.1rem; outline: none;">
-                <textarea class="letter-input" id="letterContent" placeholder="এখানে আপনার চিঠি লিখুন...&#10;&#10;প্রিয় জন্মদিনের মানুষ,&#10;&#10;তোমাকে অনেক অনেক শুভেচ্ছা..."></textarea>
-            </div>
-            
-            <div class="letter-actions">
-                <button class="btn btn-upload" onclick="saveLetter()">💾 সেভ করুন</button>
-                <button class="btn" style="background: var(--secondary); color: white;" onclick="clearLetter()">🔄 নতুন</button>
+                <button class="cut-btn" id="cutBtn" onclick="cutCake()">
+                    🔪 কেক কাটুন
+                </button>
             </div>
         </div>
 
-        <div class="saved-letters" id="savedLetters">
-            <h3 style="color: var(--gold); margin-bottom: 20px;">📜 সেভ করা চিঠি</h3>
-            <!-- Letters will appear here -->
-        </div>
-    </div>
+        <!-- SECTION 2: LETTER (Hidden initially) -->
+        <div class="section" id="letterSection">
+            <h2 class="section-title">💌 একটি চিঠি</h2>
+            <div class="letter-container">
+                <div class="letter-paper">
+                    <div class="letter-content" id="letterContent">
+প্রিয় জন্মদিনের মানুষ,
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <button class="nav-btn active" onclick="showSection('cakeSection', this)">
-            🎂
-            <span>কেক</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('photoSection', this)">
-            📸
-            <span>ফটো</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('videoSection', this)">
-            🎥
-            <span>ভিডিও</span>
-        </button>
-        <button class="nav-btn" onclick="showSection('letterSection', this)">
-            💌
-            <span>চিঠি</span>
-        </button>
-    </nav>
+শুভ জন্মদিন! 🎂
+
+আজ তোমার বিশেষ দিন। এই দিনে তোমাকে জানাতে চাই, তুমি আমার জীবনে কতটা বিশেষ।
+
+তোমার হাসি, তোমার আনন্দ, সবকিছুই আমার জন্য priceless।
+
+আশা করি এই ছোট্ট উপহার তোমার মুখে হাসি ফোটাবে!
+
+💖 সবসময় তোমার পাশে থাকবো।
+                    </div>
+                    <div class="letter-signature">- তোমার প্রিয়জন</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: PHOTOS (Hidden initially) -->
+        <div class="section" id="photoSection">
+            <h2 class="section-title">📸 স্মৃতির অ্যালবাম</h2>
+            <div class="photo-album">
+                <div class="photo-grid" id="photoGrid">
+                    <!-- Photos loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: VIDEOS (Hidden initially) -->
+        <div class="section" id="videoSection">
+            <h2 class="section-title">🎥 বিশেষ ভিডিও বার্তা</h2>
+            <div class="video-container">
+                <div class="video-grid" id="videoGrid">
+                    <!-- Videos loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: LOVE CALCULATOR (Hidden initially) -->
+        <div class="section" id="loveSection">
+            <h2 class="section-title">💕 Love Calculator</h2>
+            <div class="love-container">
+                <p style="margin-bottom: 20px;">আমাদের ভালোবাসার হিসেব!</p>
+                <div class="love-inputs">
+                    <input type="text" class="love-input" id="name1" placeholder="তোমার নাম" value="">
+                    <div class="love-heart">❤️</div>
+                    <input type="text" class="love-input" id="name2" placeholder="আমার নাম" value="">
+                </div>
+                <button class="love-btn" onclick="calculateLove()">
+                    ক্যালকুলেট করুন
+                </button>
+                <div class="love-result" id="loveResult">0%</div>
+                <p id="loveMessage" style="color: var(--accent); font-size: 1.2rem;"></p>
+            </div>
+        </div>
+
+    </div>
 
     <script>
-        // ⚠️ CLOUDINARY CONFIG - এখানে আপনার তথ্য বসান
-        const CLOUD_NAME = 'YOUR_CLOUD_NAME';
-        const UPLOAD_PRESET = 'birthday_preset';
-
-        // Variables
-        let mediaRecorder;
-        let recordedChunks = [];
-        let stream;
-        let videoBlob;
+        // Data Storage
         let photos = JSON.parse(localStorage.getItem('birthdayPhotos')) || [];
         let videos = JSON.parse(localStorage.getItem('birthdayVideos')) || [];
-        let letters = JSON.parse(localStorage.getItem('birthdayLetters')) || [];
+        let letterData = JSON.parse(localStorage.getItem('birthdayLetter')) || null;
+        let blownCandles = 0;
+        let currentSection = 0;
+        const sections = ['cakeSection', 'letterSection', 'photoSection', 'videoSection', 'loveSection'];
 
         // Initialize
         window.onload = () => {
-            initCamera();
-            loadPhotos();
-            loadVideos();
-            loadLetters();
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            if (name) {
+                document.getElementById('birthdayName').textContent = decodeURIComponent(name);
+            }
+            
+            loadContent();
+            updateProgress();
         };
 
-        // Navigation
-        function showSection(sectionId, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        // Open Gift
+        function openGift() {
+            document.getElementById('introScreen').classList.add('hidden');
+            document.getElementById('mainContainer').classList.add('active');
             
-            document.getElementById(sectionId).classList.add('active');
-            btn.classList.add('active');
+            // Play birthday song
+            const msg = new SpeechSynthesisUtterance('Happy Birthday! Click the candles to blow them out, then cut the cake!');
+            msg.lang = 'en-US';
+            msg.rate = 0.9;
+            speechSynthesis.speak(msg);
         }
 
         // CAKE FUNCTIONS
-        let blownCandles = 0;
-
         function blowCandle(candle) {
             if (candle.classList.contains('blown')) return;
             
@@ -675,325 +736,218 @@
                 document.getElementById('blowBtn').style.display = 'none';
                 document.getElementById('cutBtn').style.display = 'inline-block';
                 
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    colors: ['#ffd700', '#ff8c00']
-                });
+                // Auto voice
+                const msg = new SpeechSynthesisUtterance('Great! Now cut the cake!');
+                speechSynthesis.speak(msg);
             }
         }
 
         function blowAllCandles() {
             document.querySelectorAll('.candle').forEach((candle, index) => {
-                setTimeout(() => blowCandle(candle), index * 200);
+                setTimeout(() => blowCandle(candle), index * 300);
             });
         }
 
         function createSmoke(element) {
-            for (let i = 0; i < 5; i++) {
-                const smoke = document.createElement('div');
-                smoke.style.cssText = `
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    background: rgba(200,200,200,0.5);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    animation: smokeUp 1s forwards;
-                `;
-                smoke.style.left = element.offsetLeft + 10 + 'px';
-                smoke.style.top = element.offsetTop - 20 + 'px';
-                element.parentElement.appendChild(smoke);
-                setTimeout(() => smoke.remove(), 1000);
-            }
+            const smoke = document.createElement('div');
+            smoke.style.cssText = `
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: radial-gradient(circle, rgba(200,200,200,0.8), transparent);
+                border-radius: 50%;
+                pointer-events: none;
+                animation: smokeUp 1.5s forwards;
+                z-index: 100;
+            `;
+            const rect = element.getBoundingClientRect();
+            const cakeRect = document.getElementById('cake').getBoundingClientRect();
+            smoke.style.left = (rect.left - cakeRect.left + 10) + 'px';
+            smoke.style.top = (rect.top - cakeRect.top - 20) + 'px';
+            element.parentElement.appendChild(smoke);
+            setTimeout(() => smoke.remove(), 1500);
         }
 
         function cutCake() {
             const cake = document.getElementById('cake');
             
-            // Cut animation
-            cake.style.transform = 'scale(0.95)';
-            setTimeout(() => cake.style.transform = 'scale(1)', 200);
+            // Animation
+            cake.style.transform = 'scale(0.9) rotate(-5deg)';
+            setTimeout(() => cake.style.transform = 'scale(1) rotate(0deg)', 300);
             
-            // Show slice
-            const slice = document.createElement('div');
-            slice.innerHTML = '🍰';
-            slice.style.cssText = `
-                position: absolute;
-                font-size: 4rem;
-                animation: sliceOut 2s forwards;
-                left: 50%;
-                top: 50%;
-            `;
-            cake.appendChild(slice);
+            // Voice
+            const msg = new SpeechSynthesisUtterance('Happy Birthday! Here is your surprise gift!');
+            msg.rate = 0.8;
+            msg.pitch = 1.2;
+            speechSynthesis.speak(msg);
             
-            setTimeout(() => slice.remove(), 2000);
-            
-            document.getElementById('cakeMessage').style.opacity = '1';
-            
+            // Confetti
             confetti({
-                particleCount: 200,
+                particleCount: 300,
                 spread: 100,
                 origin: { y: 0.6 },
-                colors: ['#ff006e', '#8338ec', '#06ffa5', '#ffd700']
+                colors: ['#ffd700', '#ff1493', '#06ffa5', '#8338ec', '#ff6b6b']
             });
+            
+            // Show next section after delay
+            setTimeout(() => {
+                showNextSection();
+            }, 2000);
+        }
+
+        // SECTION NAVIGATION
+        function showNextSection() {
+            if (currentSection < sections.length - 1) {
+                document.getElementById(sections[currentSection]).classList.remove('active');
+                currentSection++;
+                document.getElementById(sections[currentSection]).classList.add('active');
+                updateProgress();
+                
+                // Scroll to section
+                document.getElementById(sections[currentSection]).scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentSection + 1) / sections.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // LOVE CALCULATOR
+        function calculateLove() {
+            const name1 = document.getElementById('name1').value.trim() || 'You';
+            const name2 = document.getElementById('name2').value.trim() || 'Me';
+            
+            let score = 0;
+            const combined = (name1 + name2).toLowerCase();
+            for (let char of combined) {
+                score += char.charCodeAt(0);
+            }
+            score = (score % 30) + 70; // 70-100 range
+            
+            const resultEl = document.getElementById('loveResult');
+            const msgEl = document.getElementById('loveMessage');
+            
+            resultEl.classList.remove('show');
+            setTimeout(() => {
+                resultEl.textContent = score + '%';
+                resultEl.classList.add('show');
+                
+                let message = '';
+                if (score >= 90) message = '🔥 পরফেক্ট ম্যাচ! সোলমেট! 🔥';
+                else if (score >= 80) message = '💖 দারুণ কম্প্যাটিবিলিটি! 💖';
+                else message = '💕 চমৎকার সম্পর্ক! 💕';
+                
+                msgEl.textContent = message;
+                
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    colors: ['#ff1493', '#ffd700', '#ff006e']
+                });
+            }, 100);
+        }
+
+        // ADMIN FUNCTIONS
+        function toggleAdmin() {
+            document.getElementById('adminPanel').classList.toggle('show');
+        }
+
+        function uploadPhotos(event) {
+            const files = event.target.files;
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    photos.push(e.target.result);
+                    localStorage.setItem('birthdayPhotos', JSON.stringify(photos));
+                    loadPhotos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function uploadVideo(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                videos.push(e.target.result);
+                localStorage.setItem('birthdayVideos', JSON.stringify(videos));
+                loadVideos();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveLetter() {
+            const text = document.getElementById('letterText').value;
+            if (text) {
+                letterData = text;
+                localStorage.setItem('birthdayLetter', JSON.stringify(letterData));
+                document.getElementById('letterContent').textContent = text;
+                alert('Letter saved!');
+            }
+        }
+
+        function clearAll() {
+            if (confirm('Clear all data?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // LOAD CONTENT
+        function loadContent() {
+            // Load letter
+            if (letterData) {
+                document.getElementById('letterContent').textContent = letterData;
+            }
+            
+            // Load photos
+            const photoGrid = document.getElementById('photoGrid');
+            photoGrid.innerHTML = '';
+            photos.forEach((url, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.innerHTML = `<img src="${url}" onclick="openLightbox('${url}')">`;
+                photoGrid.appendChild(item);
+            });
+            
+            // Load videos
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+            videos.forEach((url, index) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <video controls src="${url}"></video>
+                    <div class="video-info">
+                        <strong style="color: var(--accent);">🎂 Birthday Wish #${index + 1}</strong>
+                    </div>
+                `;
+                videoGrid.appendChild(card);
+            });
+        }
+
+        // Lightbox
+        function openLightbox(url) {
+            document.getElementById('lightboxImg').src = url;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
         }
 
         // Add smoke animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes smokeUp {
-                to { transform: translateY(-50px) scale(2); opacity: 0; }
-            }
-            @keyframes sliceOut {
-                0% { transform: translate(-50%, -50%) scale(0); }
-                50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); }
-                100% { transform: translate(100px, 100px) scale(1) rotate(45deg); opacity: 0; }
+                0% { transform: translateY(0) scale(1); opacity: 0.8; }
+                100% { transform: translateY(-100px) scale(3); opacity: 0; }
             }
         `;
         document.head.appendChild(style);
-
-        // PHOTO FUNCTIONS
-        async function handlePhotos(event) {
-            const files = event.target.files;
-            if (!files.length) return;
-
-            document.getElementById('photoLoading').style.display = 'block';
-
-            for (let file of files) {
-                try {
-                    const url = await uploadToCloudinary(file, 'image');
-                    photos.push({
-                        url: url,
-                        date: new Date().toISOString()
-                    });
-                } catch (err) {
-                    console.error('Upload failed:', err);
-                    // Fallback to local
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        photos.push({
-                            url: e.target.result,
-                            date: new Date().toISOString(),
-                            local: true
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-
-            localStorage.setItem('birthdayPhotos', JSON.stringify(photos));
-            loadPhotos();
-            document.getElementById('photoLoading').style.display = 'none';
-        }
-
-        function loadPhotos() {
-            const grid = document.getElementById('photoGrid');
-            grid.innerHTML = '';
-            
-            photos.forEach((photo, index) => {
-                const item = document.createElement('div');
-                item.className = 'photo-item';
-                item.innerHTML = `
-                    <img src="${photo.url}" alt="Memory" onclick="openLightbox('${photo.url}')">
-                    <button class="delete" onclick="deletePhoto(${index})">×</button>
-                `;
-                grid.appendChild(item);
-            });
-        }
-
-        function deletePhoto(index) {
-            photos.splice(index, 1);
-            localStorage.setItem('birthdayPhotos', JSON.stringify(photos));
-            loadPhotos();
-        }
-
-        function openLightbox(url) {
-            document.getElementById('lightboxImg').src = url;
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
-
-        // VIDEO FUNCTIONS
-        async function initCamera() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                document.getElementById('previewVideo').srcObject = stream;
-            } catch (err) {
-                console.log('Camera not available');
-            }
-        }
-
-        function startRecording() {
-            if (!stream) {
-                initCamera().then(() => startRecordingActual());
-                return;
-            }
-            startRecordingActual();
-        }
-
-        function startRecordingActual() {
-            recordedChunks = [];
-            mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
-            
-            mediaRecorder.ondataavailable = (e) => {
-                if (e.data.size > 0) recordedChunks.push(e.data);
-            };
-            
-            mediaRecorder.onstop = () => {
-                videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
-                const url = URL.createObjectURL(videoBlob);
-                
-                document.getElementById('previewVideo').classList.add('hidden');
-                const recorded = document.getElementById('recordedVideo');
-                recorded.classList.remove('hidden');
-                recorded.src = url;
-                
-                document.getElementById('uploadVideoBtn').classList.remove('hidden');
-            };
-            
-            mediaRecorder.start();
-        }
-
-        function stopRecording() {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
-            }
-        }
-
-        async function uploadVideo() {
-            if (!videoBlob) return;
-            
-            document.getElementById('videoLoading').style.display = 'block';
-            
-            try {
-                const url = await uploadToCloudinary(videoBlob, 'video');
-                const author = prompt('আপনার নাম:', 'Friend') || 'Anonymous';
-                
-                videos.push({
-                    url: url,
-                    author: author,
-                    date: new Date().toISOString()
-                });
-                
-                localStorage.setItem('birthdayVideos', JSON.stringify(videos));
-                loadVideos();
-                
-                // Reset
-                document.getElementById('recordedVideo').classList.add('hidden');
-                document.getElementById('previewVideo').classList.remove('hidden');
-                document.getElementById('uploadVideoBtn').classList.add('hidden');
-                document.getElementById('videoLoading').style.display = 'none';
-                
-                confetti({ particleCount: 100, spread: 70 });
-                
-            } catch (err) {
-                alert('আপলোড ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
-                document.getElementById('videoLoading').style.display = 'none';
-            }
-        }
-
-        function loadVideos() {
-            const list = document.getElementById('videosList');
-            list.innerHTML = '';
-            
-            videos.forEach(video => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.innerHTML = `
-                    <video controls src="${video.url}"></video>
-                    <div class="video-info">
-                        <strong style="color: var(--accent);">👤 ${video.author}</strong>
-                        <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">
-                            🎂 ${new Date(video.date).toLocaleDateString('bn-BD')}
-                        </p>
-                    </div>
-                `;
-                list.appendChild(card);
-            });
-        }
-
-        // LETTER FUNCTIONS
-        function saveLetter() {
-            const author = document.getElementById('letterAuthor').value.trim() || 'Anonymous';
-            const content = document.getElementById('letterContent').value.trim();
-            
-            if (!content) {
-                alert('চিঠি লিখুন!');
-                return;
-            }
-            
-            letters.push({
-                author: author,
-                content: content,
-                date: new Date().toISOString()
-            });
-            
-            localStorage.setItem('birthdayLetters', JSON.stringify(letters));
-            loadLetters();
-            clearLetter();
-            
-            confetti({
-                particleCount: 50,
-                colors: ['#ffd700', '#ff69b4']
-            });
-        }
-
-        function clearLetter() {
-            document.getElementById('letterAuthor').value = '';
-            document.getElementById('letterContent').value = '';
-        }
-
-        function loadLetters() {
-            const container = document.getElementById('savedLetters');
-            // Keep header
-            const header = container.querySelector('h3');
-            container.innerHTML = '';
-            container.appendChild(header);
-            
-            letters.slice().reverse().forEach(letter => {
-                const item = document.createElement('div');
-                item.className = 'letter-item';
-                item.innerHTML = `
-                    <div class="letter-author">👤 ${letter.author}</div>
-                    <div style="white-space: pre-wrap; line-height: 1.8;">${letter.content}</div>
-                    <div class="letter-date">📝 ${new Date(letter.date).toLocaleString('bn-BD')}</div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        // CLOUDINARY UPLOAD
-        async function uploadToCloudinary(file, type) {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', UPLOAD_PRESET);
-            
-            const resourceType = type === 'video' ? 'video' : 'image';
-            
-            const response = await fetch(
-                `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
-                {
-                    method: 'POST',
-                    body: formData
-                }
-            );
-            
-            if (!response.ok) throw new Error('Upload failed');
-            
-            const data = await response.json();
-            return data.secure_url;
-        }
-
-        // Get name from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name');
-        if (name) {
-            document.getElementById('birthdayName').textContent = decodeURIComponent(name);
-        }
     </script>
 
 </body>
