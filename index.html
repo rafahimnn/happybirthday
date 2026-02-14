@@ -2,8 +2,8 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 জন্মদিনের কেক ও চমক</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🎂 ১৬তম জন্মদিন - স্পেশাল চমক</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -15,28 +15,51 @@
         }
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #0a0a1a;
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
             position: relative;
         }
+        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড */
         .gradient-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #ff6b6b, #f06595, #6c5ce7, #20c997);
             background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            animation: gradient 12s ease infinite;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.25;
         }
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        /* ভাসমান হৃদয় */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float-up 12s infinite;
+            opacity: 0.4;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
         /* লোডার */
         .loader {
@@ -45,13 +68,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0f0f1f;
+            background: #0a0a1a;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 1s;
+            transition: opacity 0.8s;
         }
         .loader.hidden {
             opacity: 0;
@@ -59,11 +82,17 @@
         }
         .loader-cake {
             font-size: 5rem;
-            animation: bounce 1s infinite;
+            animation: bounce 0.8s infinite alternate;
         }
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
+            from { transform: translateY(0); }
+            to { transform: translateY(-30px); }
+        }
+        /* কন্টেইনার */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         /* হিরো সেকশন */
         .hero {
@@ -73,155 +102,249 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 20px 10px;
         }
         .hero h1 {
-            font-size: 4rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, gold, #ff69b4, #00ffff);
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            background: linear-gradient(135deg, #ffd700, #ff69b4, #00ffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255,215,0,0.3);
         }
         .birthday-name {
             font-family: 'Dancing Script', cursive;
-            font-size: 5rem;
+            font-size: clamp(3rem, 12vw, 5.5rem);
             color: #ffd700;
-            text-shadow: 0 0 30px rgba(255,215,0,0.8);
-            margin-bottom: 30px;
+            text-shadow: 0 0 40px rgba(255,215,0,0.8);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            word-break: break-word;
         }
-        /* কাউন্টডাউন */
+        .age-badge {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border: 3px solid gold;
+            padding: 8px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            font-weight: 800;
+        }
+        /* কাউন্টডাউন - মোবাইলের জন্য গ্রিড */
         .countdown {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+            width: 100%;
+            max-width: 500px;
         }
         .count-box {
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            padding: 20px 30px;
+            backdrop-filter: blur(12px);
+            padding: 15px 5px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-            min-width: 100px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
         .count-number {
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
             font-weight: 800;
             color: gold;
             display: block;
+            line-height: 1;
         }
         .count-label {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2.5vw, 1rem);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ddd;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.8);
         }
         /* কেক সেকশন */
         .cake-section {
             margin: 40px 0;
             text-align: center;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 100%;
+            max-width: 500px;
         }
         .cake-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            max-width: 300px;
             margin: 0 auto;
-            cursor: pointer;
-            transition: 0.3s;
+            transition: 0.4s;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .cake-container.locked {
-            filter: grayscale(0.7) blur(1px);
-            opacity: 0.7;
-            cursor: not-allowed;
+            filter: grayscale(0.8) blur(2px);
+            opacity: 0.6;
+            pointer-events: none;
         }
         .cake-emoji {
-            font-size: 8rem;
+            font-size: clamp(6rem, 25vw, 9rem);
             line-height: 1;
             transition: 0.3s;
+            filter: drop-shadow(0 10px 20px rgba(255,215,0,0.5));
         }
-        .candles {
-            font-size: 2rem;
+        .candles-container {
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
             margin-top: -10px;
             letter-spacing: 5px;
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+            flex-wrap: wrap;
+            transition: 0.3s;
         }
         .cake-status {
-            font-size: 1.5rem;
-            margin-top: 20px;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            margin: 20px 0;
             color: gold;
             background: rgba(0,0,0,0.5);
             padding: 10px 20px;
             border-radius: 40px;
             display: inline-block;
+            backdrop-filter: blur(4px);
+            border: 1px solid gold;
+            word-break: break-word;
         }
-        .cut-btn {
-            margin-top: 30px;
-            padding: 15px 50px;
-            background: linear-gradient(45deg, #ff006e, #ff1493);
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .action-btn {
+            padding: 12px 25px;
             border: none;
-            border-radius: 50px;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 10px 20px rgba(255,0,110,0.4);
-            transition: 0.3s;
-            border: 2px solid gold;
+            border-radius: 40px;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
             font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #1a1a2e;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+            border: 2px solid rgba(255,255,255,0.3);
+            min-width: 140px;
         }
-        .cut-btn:disabled {
+        .action-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-            border-color: gray;
         }
-        .cut-btn:not(:disabled):hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(255,215,0,0.6);
+        .action-btn:not(:disabled):hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.6);
         }
-        /* সেকশন */
-        section {
-            padding: 80px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #6c5ce7, #a363d9);
+            color: white;
         }
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
+        /* লাভ ক্যালকুলেটর */
+        .love-calculator {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px 20px;
+            margin: 50px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+        .love-title {
+            font-size: clamp(2rem, 6vw, 2.5rem);
             color: gold;
-            position: relative;
+            margin-bottom: 25px;
         }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, gold, #ff1493);
-            margin: 20px auto;
-            border-radius: 2px;
+        .love-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
         }
-        /* ফটো অ্যালবাম */
+        .love-input {
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,215,0,0.5);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .love-input:focus {
+            border-color: gold;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+        .love-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .calculate-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff1493, #ff6b6b);
+            color: white;
+            width: 100%;
+            transition: 0.3s;
+            border: 2px solid gold;
+        }
+        .calculate-btn:active {
+            transform: scale(0.98);
+        }
+        .love-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 30px;
+            border: 2px solid gold;
+        }
+        .love-percentage {
+            font-size: 3rem;
+            font-weight: 800;
+            color: gold;
+        }
+        .love-message {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: #fff;
+        }
+        /* ফটো অ্যালবাম - মোবাইলের জন্য 2 কলাম */
         .photo-album {
-            columns: 3;
-            column-gap: 20px;
+            columns: 2;
+            column-gap: 15px;
         }
-        @media (max-width: 768px) {
-            .photo-album { columns: 2; }
-        }
-        @media (max-width: 480px) {
-            .photo-album { columns: 1; }
+        @media (min-width: 768px) {
+            .photo-album {
+                columns: 3;
+            }
         }
         .photo-item {
             break-inside: avoid;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
@@ -230,28 +353,25 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .photo-item:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-5px) scale(1.02);
         }
         .photo-item img {
             width: 100%;
             display: block;
             transition: 0.4s;
         }
-        .photo-item:hover img {
-            transform: scale(1.1);
-        }
         .photo-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 20px;
+            padding: 15px;
             background: linear-gradient(transparent, rgba(0,0,0,0.9));
             transform: translateY(100%);
             transition: 0.3s;
             color: gold;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .photo-item:hover .photo-overlay {
             transform: translateY(0);
@@ -259,8 +379,13 @@
         /* ভিডিও গ্যালারি */
         .video-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .video-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         .video-card {
             background: rgba(255,255,255,0.1);
@@ -271,9 +396,8 @@
             transition: 0.3s;
         }
         .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: #06ffa5;
+            transform: translateY(-5px);
+            border-color: gold;
         }
         .video-wrapper {
             position: relative;
@@ -289,40 +413,33 @@
             object-fit: cover;
         }
         .video-info {
-            padding: 20px;
+            padding: 15px;
         }
         .video-title {
-            font-size: 1.3rem;
-            color: #06ffa5;
-            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: gold;
+            margin-bottom: 8px;
         }
         .video-desc {
             color: #ccc;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             border-radius: 40px;
-            padding: 60px;
+            padding: 30px 20px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.2);
+            margin: 50px 0;
         }
         .message-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            line-height: 2;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            line-height: 1.8;
             color: #fff;
-            max-width: 800px;
-            margin: 0 auto;
             white-space: pre-line;
-        }
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #aaa;
-            border-top: 1px solid rgba(255,255,255,0.1);
         }
         /* লাইটবক্স */
         .lightbox {
@@ -342,7 +459,7 @@
             display: flex;
         }
         .lightbox img {
-            max-width: 90%;
+            max-width: 100%;
             max-height: 90%;
             border-radius: 10px;
             box-shadow: 0 0 50px rgba(255,255,255,0.3);
@@ -355,27 +472,38 @@
             color: white;
             cursor: pointer;
         }
-        /* ভাসমান হৃদয় */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* সেকশন টাইটেল */
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 7vw, 3rem);
+            margin: 40px 0 30px;
+            color: gold;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, gold, #ff1493);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #aaa;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        /* ইউটিলিটি */
+        .text-center {
+            text-align: center;
+        }
+        .w-100 {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
         }
-        .heart {
-            position: absolute;
-            font-size: 2rem;
-            animation: float-up 10s infinite;
-            opacity: 0.6;
-        }
-        @keyframes float-up {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        .container {
+            width: 100%;
+            padding: 0 15px;
         }
     </style>
 </head>
@@ -386,7 +514,7 @@
     <!-- লোডার -->
     <div class="loader" id="loader">
         <div class="loader-cake">🎂</div>
-        <p style="margin-top: 20px; color: gold;">জন্মদিনের চমক তৈরি হচ্ছে...</p>
+        <p style="margin-top: 20px; color: gold; font-size: 1.2rem;">জন্মদিনের চমক তৈরি হচ্ছে...</p>
     </div>
 
     <!-- লাইটবক্স -->
@@ -395,84 +523,116 @@
         <img src="" id="lightboxImg" alt="">
     </div>
 
-    <!-- হিরো সেকশন -->
-    <section class="hero">
-        <h1>🎉 শুভ জন্মদিন 🎉</h1>
-        <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
-        
-        <!-- কাউন্টডাউন (শুধু জন্মদিন না হলে দেখাবে) -->
-        <div class="countdown" id="countdown">
-            <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">দিন</span></div>
-            <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">ঘণ্টা</span></div>
-            <div class="count-box"><span class="count-number" id="mins">00</span><span class="count-label">মিনিট</span></div>
-            <div class="count-box"><span class="count-number" id="secs">00</span><span class="count-label">সেকেন্ড</span></div>
-        </div>
+    <div class="container">
+        <!-- হিরো সেকশন -->
+        <section class="hero">
+            <h1>🎉 শুভ জন্মদিন 🎉</h1>
+            <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
+            <div class="age-badge" id="ageBadge">১৬ তম জন্মদিন</div>
+            
+            <!-- কাউন্টডাউন -->
+            <div class="countdown" id="countdown">
+                <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">দিন</span></div>
+                <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">ঘণ্টা</span></div>
+                <div class="count-box"><span class="count-number" id="mins">00</span><span class="count-label">মিনিট</span></div>
+                <div class="count-box"><span class="count-number" id="secs">00</span><span class="count-label">সেকেন্ড</span></div>
+            </div>
 
-        <!-- কেক সেকশন -->
-        <div class="cake-section">
-            <div class="cake-container" id="cakeContainer">
-                <div class="cake-emoji" id="cakeEmoji">🎂</div>
-                <div class="candles" id="candles"></div>
-            </div>
-            <div class="cake-status" id="cakeStatus">জন্মদিনের অপেক্ষায়...</div>
-            <button class="cut-btn" id="cutBtn" disabled onclick="cutCake()">🍰 কেক কাটো</button>
-        </div>
-    </section>
-
-    <!-- ফটো অ্যালবাম -->
-    <section id="photos">
-        <h2 class="section-title"><i class="fas fa-images"></i> সোনালী স্মৃতি</h2>
-        <div class="photo-album" id="photoAlbum">
-            <!-- নমুনা ছবি (তোমার নিজের ছবির লিংক বসাও) -->
-            <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                <div class="photo-overlay">💖 প্রথম দেখা</div>
-            </div>
-            <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                <div class="photo-overlay">💖 একসাথে</div>
-            </div>
-            <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                <div class="photo-overlay">💖 হাসি</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ভিডিও গ্যালারি -->
-    <section id="videos">
-        <h2 class="section-title"><i class="fas fa-video"></i> বিশেষ ভিডিও বার্তা</h2>
-        <div class="video-gallery" id="videoGallery">
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    </video>
+            <!-- কেক সেকশন -->
+            <div class="cake-section">
+                <div class="cake-container" id="cakeContainer">
+                    <div class="cake-emoji" id="cakeEmoji">🎂</div>
+                    <div class="candles-container" id="candlesContainer"></div>
                 </div>
-                <div class="video-info">
-                    <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
-                    <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা তোমার জন্য।</p>
+                <div class="cake-status" id="cakeStatus">জন্মদিনের অপেক্ষায়...</div>
+                
+                <div class="button-group">
+                    <button class="action-btn" id="cutBtn" onclick="cutCake()" disabled>
+                        <i class="fas fa-utensils"></i> কেক কাটো
+                    </button>
+                    <button class="action-btn secondary" id="blowBtn" onclick="blowCandles()" disabled>
+                        <i class="fas fa-wind"></i> ফুঁ দাও
+                    </button>
                 </div>
             </div>
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                        <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                    </video>
+        </section>
+
+        <!-- লাভ ক্যালকুলেটর -->
+        <section>
+            <h2 class="section-title"><i class="fas fa-heart" style="color: #ff1493;"></i> লাভ ক্যালকুলেটর</h2>
+            <div class="love-calculator">
+                <div class="love-input-group">
+                    <input type="text" class="love-input" id="name1" placeholder="তোমার নাম" value="তুমি">
+                    <input type="text" class="love-input" id="name2" placeholder="তার নাম" value="সে">
                 </div>
-                <div class="video-info">
-                    <h3 class="video-title">🎥 বন্ধুদের পক্ষ থেকে</h3>
-                    <p class="video-desc">সবাই মিলে জানাই শুভ জন্মদিন!</p>
+                <button class="calculate-btn" onclick="calculateLove()">
+                    <i class="fas fa-calculator"></i> ভালোবাসা মাপো
+                </button>
+                <div class="love-result" id="loveResult" style="display: none;">
+                    <div class="love-percentage" id="lovePercentage">0%</div>
+                    <div class="love-message" id="loveMessage"></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- মেসেজ সেকশন -->
-    <section>
-        <div class="message-section">
-            <h2 class="section-title" style="margin-bottom: 30px;">💌 একটি বিশেষ বার্তা</h2>
-            <p class="message-text" id="specialMessage">
+        <!-- ফটো অ্যালবাম -->
+        <section id="photos">
+            <h2 class="section-title"><i class="fas fa-images"></i> সোনালী স্মৃতি</h2>
+            <div class="photo-album" id="photoAlbum">
+                <!-- নমুনা ছবি -->
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                    <div class="photo-overlay">💖 প্রথম দেখা</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                    <div class="photo-overlay">💖 একসাথে</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                    <div class="photo-overlay">💖 হাসি</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                    <div class="photo-overlay">💖 সিনেমা দেখি</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ভিডিও গ্যালারি -->
+        <section id="videos">
+            <h2 class="section-title"><i class="fas fa-video"></i> বিশেষ ভিডিও বার্তা</h2>
+            <div class="video-gallery" id="videoGallery">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
+                        <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা তোমার জন্য।</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
+                            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">🎥 বন্ধুদের পক্ষ থেকে</h3>
+                        <p class="video-desc">সবাই মিলে জানাই শুভ জন্মদিন!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- মেসেজ সেকশন -->
+        <section>
+            <div class="message-section">
+                <h2 class="section-title" style="margin-bottom: 20px;">💌 একটি বিশেষ বার্তা</h2>
+                <p class="message-text" id="specialMessage">
 প্রিয় জন্মদিনের মানুষ,
 
 তুমি আমার জীবনের সবচেয়ে বিশেষ মানুষ।
@@ -480,33 +640,32 @@
 তোমার জন্য অনেক অনেক ভালোবাসা! 💝
 
 শুভ জন্মদিন! 🎂✨
-            </p>
-        </div>
-    </section>
+                </p>
+            </div>
+        </section>
+    </div>
 
     <footer>
         <p>❤️ তৈরি করা হয়েছে অফুরান ভালোবাসায়</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">© ২০২৫ জন্মদিনের চমক</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">© ২০২৫ ১৬তম জন্মদিনের চমক</p>
     </footer>
 
     <script>
         (function() {
-            // ------------------ কনফিগারেশন (এখানে জন্মদিনের তথ্য বসাও) ------------------
+            // ------------------ কনফিগারেশন ------------------
             const CONFIG = {
-                // জন্মদিনের মানুষের নাম (URL-এ ?name=... দিয়ে ওভাররাইড করা যাবে)
-                name: "স্নিগ্ধা", 
-                // জন্মসাল, মাস (০-ভিত্তিতে, তাই জানুয়ারি=০, ফেব্রুয়ারি=১, ...), তারিখ
-                birthYear: 2026,
-                birthMonth: 03,      // 03 = মে (May)
-                birthDay: 15
+                name: "প্রিয়জন",
+                birthYear: 2009,      // ২০০৯ সালে জন্ম = ২০২৫ সালে ১৬ বছর
+                birthMonth: 4,         // ৪ = মে (May)
+                birthDay: 11,
+                age: 16                // বয়স ১৬ ফিক্সড (কারণ ১৬তম জন্মদিন)
             };
-            // -------------------------------------------------------------------------
 
-            // গ্লোবাল ভেরিয়েবল
-            let currentStatus = {
+            // গ্লোবাল স্টেট
+            let state = {
                 isBirthday: false,
-                age: 0,
                 cakeCut: false,
+                candlesBlown: false,
                 nextBirthday: null
             };
 
@@ -517,6 +676,7 @@
                 CONFIG.name = decodeURIComponent(nameParam);
             }
             document.getElementById('birthdayName').textContent = CONFIG.name;
+            document.getElementById('ageBadge').innerHTML = `${CONFIG.age} তম জন্মদিন`;
 
             // লোডার লুকানো
             window.addEventListener('load', function() {
@@ -525,63 +685,46 @@
                 }, 1500);
             });
 
-            // হেল্পার ফাংশন: তারিখ সমান কিনা (শুধু বছর, মাস, দিন চেক)
+            // তারিখ তুলনা
             function isSameDate(d1, d2) {
                 return d1.getFullYear() === d2.getFullYear() &&
                        d1.getMonth() === d2.getMonth() &&
                        d1.getDate() === d2.getDate();
             }
 
-            // স্ট্যাটাস আপডেট
-            function updateBirthdayStatus() {
+            // স্টেট আপডেট
+            function updateState() {
                 const now = new Date();
                 const currentYear = now.getFullYear();
                 
-                // চলতি বছরের জন্মদিন
                 const thisYearBirthday = new Date(currentYear, CONFIG.birthMonth, CONFIG.birthDay);
-                // আগামী বছরের জন্মদিন
                 const nextYearBirthday = new Date(currentYear + 1, CONFIG.birthMonth, CONFIG.birthDay);
                 
-                // বের করি পরবর্তী জন্মদিন
-                let nextBirthday;
-                if (now < thisYearBirthday) {
-                    nextBirthday = thisYearBirthday;
-                } else {
-                    nextBirthday = nextYearBirthday;
-                }
-                currentStatus.nextBirthday = nextBirthday;
+                state.nextBirthday = now < thisYearBirthday ? thisYearBirthday : nextYearBirthday;
 
-                // আজ কি জন্মদিন?
                 const isBirthdayToday = isSameDate(now, thisYearBirthday);
-                
-                if (isBirthdayToday) {
-                    // বয়স গণনা: currentYear - birthYear (কারণ আজ জন্মদিন)
-                    currentStatus.age = currentYear - CONFIG.birthYear;
-                    currentStatus.isBirthday = true;
+                state.isBirthday = isBirthdayToday;
 
-                    // চেক করা যে আজ কেক কাটা হয়েছে কিনা (localStorage)
+                if (isBirthdayToday) {
                     const todayStr = `${currentYear}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
-                    const cutKey = `cakeCut_${todayStr}`;
-                    if (localStorage.getItem(cutKey) === 'true') {
-                        currentStatus.cakeCut = true;
-                    } else {
-                        currentStatus.cakeCut = false;
-                    }
+                    state.cakeCut = localStorage.getItem(`cakeCut_${todayStr}`) === 'true';
+                    state.candlesBlown = localStorage.getItem(`candlesBlown_${todayStr}`) === 'true';
                 } else {
-                    currentStatus.isBirthday = false;
-                    currentStatus.cakeCut = false;
+                    state.cakeCut = false;
+                    state.candlesBlown = false;
                 }
             }
 
             // কাউন্টডাউন আপডেট
             function updateCountdown() {
                 const now = new Date();
-                const diff = currentStatus.nextBirthday - now;
+                const diff = state.nextBirthday - now;
+                
                 if (diff <= 0) {
-                    // জন্মদিন চলে এসেছে, স্ট্যাটাস রিফ্রেশ
-                    updateBirthdayStatus();
+                    updateState();
                     renderCake();
                 }
+                
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -593,62 +736,118 @@
                 document.getElementById('secs').textContent = String(secs).padStart(2, '0');
             }
 
-            // কেক ও বাটনের অবস্থা রেন্ডার
+            // কেক রেন্ডার
             function renderCake() {
                 const cakeContainer = document.getElementById('cakeContainer');
                 const cakeEmoji = document.getElementById('cakeEmoji');
-                const candlesDiv = document.getElementById('candles');
+                const candlesContainer = document.getElementById('candlesContainer');
                 const cakeStatus = document.getElementById('cakeStatus');
                 const cutBtn = document.getElementById('cutBtn');
+                const blowBtn = document.getElementById('blowBtn');
 
-                if (currentStatus.isBirthday) {
-                    // জন্মদিন
+                if (state.isBirthday) {
                     cakeContainer.classList.remove('locked');
-                    if (currentStatus.cakeCut) {
+                    
+                    if (state.cakeCut) {
                         cakeEmoji.textContent = '🍰'; // কাটা কেক
-                        candlesDiv.innerHTML = ''; // মোমবাতি সরিয়ে দাও
+                        candlesContainer.innerHTML = ''; // মোমবাতি নেই
                         cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                         cutBtn.disabled = true;
+                        blowBtn.disabled = true;
                     } else {
                         cakeEmoji.textContent = '🎂';
-                        // বয়স অনুযায়ী মোমবাতি
-                        const candleCount = currentStatus.age;
-                        let candlesHtml = '';
-                        for (let i = 0; i < candleCount; i++) {
-                            candlesHtml += '🕯️';
+                        
+                        // মোমবাতি দেখানো
+                        if (state.candlesBlown) {
+                            candlesContainer.innerHTML = '💨'; // নিভে গেছে
+                            cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে! আবার জ্বালাতে পারো না';
+                            blowBtn.disabled = true;
+                        } else {
+                            // ১৬টি মোমবাতি
+                            let candles = '';
+                            for (let i = 0; i < CONFIG.age; i++) {
+                                candles += '🕯️';
+                            }
+                            candlesContainer.innerHTML = candles;
+                            cakeStatus.textContent = `${CONFIG.age} টি মোমবাতি জ্বলছে! ফুঁ দাও 🎂`;
+                            blowBtn.disabled = false;
                         }
-                        candlesDiv.innerHTML = candlesHtml;
-                        cakeStatus.textContent = `🎂 ${candleCount} টি মোমবাতি জ্বলছে!`;
                         cutBtn.disabled = false;
                     }
                 } else {
-                    // জন্মদিন নয়
                     cakeContainer.classList.add('locked');
                     cakeEmoji.textContent = '🎂';
-                    candlesDiv.innerHTML = '🔒';
-                    const next = currentStatus.nextBirthday;
+                    candlesContainer.innerHTML = '🔒';
+                    const next = state.nextBirthday;
                     const options = { year: 'numeric', month: 'long', day: 'numeric' };
                     cakeStatus.textContent = `পরবর্তী জন্মদিন: ${next.toLocaleDateString('bn-BD', options)}`;
                     cutBtn.disabled = true;
+                    blowBtn.disabled = true;
                 }
             }
 
-            // কেক কাটার ফাংশন (গ্লোবালি কল করার জন্য)
+            // কেক কাটা
             window.cutCake = function() {
-                if (!currentStatus.isBirthday || currentStatus.cakeCut) return;
+                if (!state.isBirthday || state.cakeCut) return;
 
-                // লোকাল স্টোরেজে সেভ
                 const today = new Date();
                 const todayStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
                 localStorage.setItem(`cakeCut_${todayStr}`, 'true');
-
-                currentStatus.cakeCut = true;
+                
+                state.cakeCut = true;
                 renderCake();
 
                 // কনফেটি
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
                 setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
+            };
+
+            // মোমবাতি নেভানো
+            window.blowCandles = function() {
+                if (!state.isBirthday || state.cakeCut || state.candlesBlown) return;
+
+                const today = new Date();
+                const todayStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
+                localStorage.setItem(`candlesBlown_${todayStr}`, 'true');
+                
+                state.candlesBlown = true;
+                renderCake();
+
+                // স্মোক ইফেক্ট (ছোট কনফেটি)
+                confetti({
+                    particleCount: 50,
+                    spread: 80,
+                    origin: { y: 0.5 },
+                    colors: ['#aaaaaa', '#cccccc'],
+                    startVelocity: 20,
+                    decay: 0.9
+                });
+            };
+
+            // লাভ ক্যালকুলেটর
+            window.calculateLove = function() {
+                const name1 = document.getElementById('name1').value.trim() || 'তুমি';
+                const name2 = document.getElementById('name2').value.trim() || 'সে';
+                
+                // সিম্পল এলগরিদম: নামের দৈর্ঘ্য + এলোমেলো
+                const base = (name1.length + name2.length) * 7;
+                const random = Math.floor(Math.random() * 30);
+                let percentage = (base + random) % 101;
+                
+                // কমপক্ষে ৫০% দেখাতে
+                if (percentage < 40) percentage += 40;
+                
+                document.getElementById('lovePercentage').textContent = percentage + '%';
+                
+                let message = '';
+                if (percentage >= 90) message = '🍿 পাকা প্রেম! বিয়ের পিঁড়িতে বসো!';
+                else if (percentage >= 70) message = '💖 দারুন সম্পর্ক! একটু কেয়ার করো';
+                else if (percentage >= 50) message = '💕 ভালো বন্ধু হতে পারো';
+                else message = '😅 আরও সময় লাগবে';
+                
+                document.getElementById('loveMessage').textContent = message;
+                document.getElementById('loveResult').style.display = 'block';
             };
 
             // লাইটবক্স
@@ -659,17 +858,6 @@
             window.closeLightbox = function() {
                 document.getElementById('lightbox').classList.remove('active');
             };
-
-            // স্মুথ স্ক্রোল
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
 
             // ভাসমান হৃদয়
             function createFloatingHearts() {
@@ -684,16 +872,27 @@
                     heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
                     container.appendChild(heart);
                     setTimeout(() => heart.remove(), 10000);
-                }, 1500);
+                }, 2000);
             }
             createFloatingHearts();
 
-            // ইনিশিয়াল স্ট্যাটাস ও ইন্টারভাল
-            updateBirthdayStatus();
+            // স্মুথ স্ক্রোল
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ইনিশিয়ালাইজ
+            updateState();
             renderCake();
-            updateCountdown(); // প্রথমবার দেখানোর জন্য
+            updateCountdown();
             setInterval(() => {
-                updateBirthdayStatus();
+                updateState();
                 renderCake();
                 updateCountdown();
             }, 1000);
