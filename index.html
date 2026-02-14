@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🎂 জন্মদিনের চমক</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -19,6 +19,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: white;
+            overflow-x: hidden;
         }
 
         /* কন্টেইনার */
@@ -39,136 +40,153 @@
             padding: 20px;
         }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            background: linear-gradient(135deg, #ffd700, #ff1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .birthday-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(3rem, 10vw, 5rem);
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
-            margin-bottom: 30px;
-        }
-
-        /* কাউন্টডাউন */
-        .countdown-container {
+        /* কাউন্টডাউন সেকশন */
+        .countdown-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 30px;
-            margin: 30px 0;
+            padding: 40px 30px;
+            border-radius: 40px;
+            border: 2px solid rgba(255,215,0,0.3);
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
         .countdown-title {
-            font-size: 1.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 600;
             color: gold;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .count-box {
-            background: rgba(0,0,0,0.3);
-            padding: 15px 5px;
-            border-radius: 15px;
+            background: rgba(0,0,0,0.4);
+            padding: 20px 10px;
+            border-radius: 20px;
             border: 2px solid gold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .count-number {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 800;
             color: gold;
             display: block;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
         }
 
         .count-label {
-            font-size: 0.8rem;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
             color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .birthday-message {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: gold;
+            margin-top: 30px;
+            padding: 15px;
+            border-top: 2px dashed gold;
+            border-bottom: 2px dashed gold;
         }
 
         /* কেক সেকশন - শুরুতে লুকানো */
         .cake-section {
-            margin: 40px 0;
+            margin-top: 50px;
             text-align: center;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 40px;
+            padding: 40px 20px;
+            border-radius: 50px;
             width: 100%;
-            max-width: 500px;
-            display: none; /* শুরুতে লুকানো */
+            max-width: 600px;
+            display: none;
+            border: 2px solid gold;
         }
 
         .cake-section.active {
-            display: block; /* জন্মদিন এলে দেখাবে */
-            animation: fadeIn 1s;
+            display: block;
+            animation: slideUp 1s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cake-container {
             width: 100%;
-            max-width: 300px;
+            max-width: 350px;
             margin: 0 auto;
         }
 
         .cake-emoji {
-            font-size: clamp(6rem, 20vw, 9rem);
-            filter: drop-shadow(0 10px 20px rgba(255,215,0,0.5));
+            font-size: clamp(7rem, 25vw, 10rem);
+            filter: drop-shadow(0 15px 30px rgba(255,215,0,0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .candles-container {
-            font-size: 2rem;
-            margin-top: -10px;
-            letter-spacing: 5px;
+            font-size: 2.5rem;
+            margin-top: -20px;
+            letter-spacing: 8px;
         }
 
         .cake-status {
-            font-size: 1.3rem;
-            margin: 20px 0;
+            font-size: 1.5rem;
+            margin: 25px 0;
             color: gold;
             background: rgba(0,0,0,0.3);
-            padding: 10px 20px;
-            border-radius: 40px;
-            border: 1px solid gold;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 2px solid gold;
         }
 
         .button-group {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .action-btn {
-            padding: 12px 25px;
+            padding: 15px 35px;
             border: none;
-            border-radius: 40px;
-            font-size: 1.1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #1a1a2e;
             border: 2px solid white;
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
         }
 
         .action-btn.secondary {
@@ -179,10 +197,12 @@
         .action-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
+            transform: none;
         }
 
         .action-btn:not(:disabled):hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.5);
         }
 
         /* ফটো অ্যালবাম */
@@ -206,7 +226,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .photo-item:hover {
@@ -224,7 +244,7 @@
             left: 0;
             right: 0;
             padding: 15px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             color: gold;
             font-weight: 600;
             transform: translateY(100%);
@@ -255,6 +275,12 @@
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: gold;
         }
 
         .video-wrapper {
@@ -291,33 +317,34 @@
         .message-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px 20px;
+            border-radius: 40px;
+            padding: 50px 30px;
             text-align: center;
-            margin: 40px 0;
-            border: 1px solid rgba(255,255,255,0.2);
+            margin: 50px 0;
+            border: 2px solid gold;
         }
 
         .message-text {
-            font-family: 'Dancing Script', cursive;
             font-size: clamp(1.5rem, 4vw, 2rem);
             line-height: 1.8;
             white-space: pre-line;
+            color: #fff;
         }
 
         /* সেকশন টাইটেল */
         .section-title {
             text-align: center;
             font-size: clamp(2rem, 6vw, 2.5rem);
-            margin: 50px 0 30px;
+            margin: 60px 0 30px;
             color: gold;
+            position: relative;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 3px;
+            width: 100px;
+            height: 4px;
             background: linear-gradient(90deg, gold, #ff1493);
             margin: 15px auto;
             border-radius: 2px;
@@ -346,6 +373,7 @@
             max-width: 100%;
             max-height: 90%;
             border-radius: 10px;
+            box-shadow: 0 0 50px gold;
         }
 
         .lightbox .close {
@@ -359,9 +387,10 @@
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             color: #aaa;
             border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -373,14 +402,11 @@
     </div>
 
     <div class="container">
-        <!-- হিরো সেকশন -->
+        <!-- হিরো সেকশন - শুধু কাউন্টডাউন -->
         <section class="hero">
-            <h1>🎉 Happy Birthday 🎉</h1>
-            <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
-            
-            <!-- কাউন্টডাউন কন্টেইনার -->
-            <div class="countdown-container">
+            <div class="countdown-section">
                 <div class="countdown-title">⏰ জন্মদিন আসতে বাকি</div>
+                
                 <div class="countdown" id="countdown">
                     <div class="count-box">
                         <span class="count-number" id="days">00</span>
@@ -399,9 +425,13 @@
                         <span class="count-label">সেকেন্ড</span>
                     </div>
                 </div>
+
+                <div class="birthday-message" id="birthdayMessage">
+                    🎂 স্পেশাল ডে কাউন্টডাউন 🎂
+                </div>
             </div>
 
-            <!-- কেক সেকশন - শুরুতে লুকানো, জন্মদিন এলে দেখাবে -->
+            <!-- কেক সেকশন - শুরুতে লুকানো -->
             <div class="cake-section" id="cakeSection">
                 <div class="cake-container">
                     <div class="cake-emoji" id="cakeEmoji">🎂</div>
@@ -422,12 +452,11 @@
 
         <!-- ফটো অ্যালবাম -->
         <section id="photos">
-            <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতিগুলো</h2>
-            <div class="photo-album" id="photoAlbum">
-                <!-- নমুনা ছবি -->
+            <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
+            <div class="photo-album">
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
                     <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                    <div class="photo-overlay">💖 বিশেষ মুহূর্ত</div>
+                    <div class="photo-overlay">💖 প্রথম দেখা</div>
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
                     <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
@@ -446,7 +475,7 @@
 
         <!-- ভিডিও গ্যালারি -->
         <section id="videos">
-            <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও বার্তা</h2>
+            <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
                 <div class="video-card">
                     <div class="video-wrapper">
@@ -455,8 +484,8 @@
                         </video>
                     </div>
                     <div class="video-info">
-                        <h3 class="video-title">🎥 শুভেচ্ছা</h3>
-                        <p class="video-desc">তোমার জন্য ভালোবাসার বার্তা</p>
+                        <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
+                        <p class="video-desc">তোমার জন্য ভালোবাসা</p>
                     </div>
                 </div>
                 <div class="video-card">
@@ -466,8 +495,8 @@
                         </video>
                     </div>
                     <div class="video-info">
-                        <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
-                        <p class="video-desc">শুভ জন্মদিন প্রিয়জন</p>
+                        <h3 class="video-title">🎥 শুভ কামনা</h3>
+                        <p class="video-desc">শুভ জন্মদিন</p>
                     </div>
                 </div>
             </div>
@@ -477,40 +506,29 @@
         <section>
             <div class="message-section">
                 <h2 class="section-title" style="margin-bottom: 20px;">💌 ভালোবাসার কথা</h2>
-                <p class="message-text" id="specialMessage">
-প্রিয়জন,
+                <p class="message-text">
+আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
+তোমার প্রতিটি স্বপ্ন পূরণ হোক।
+জীবনের পথে থাকুক অ endless happiness। 💝
 
-তুমি আমার জীবনের সবচেয়ে বিশেষ মানুষ।
-তোমার হাসি আমার পৃথিবী আলোকিত করে।
-তোমার জন্য অফুরান ভালোবাসা। 💝
-
-শুভ জন্মদিন! 🎂
+🎂 শুভ জন্মদিন 🎂
                 </p>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>❤️ তৈরি করেছে ভালোবাসা</p>
-        <p style="margin-top: 10px;">© ২০২৫ জন্মদিনের চমক</p>
+        <p>❤️ তৈরি করেছে অফুরান ভালোবাসা</p>
+        <p style="margin-top: 10px;">© ২০২৫ স্পেশাল ডে</p>
     </footer>
 
     <script>
         // কনফিগারেশন - এখানে জন্মদিন সেট করো
         const BIRTHDAY_CONFIG = {
-            month: 4,        // মে = 4 (জানুয়ারি = 0)
+            month: 4,        // মে = 4 (জানুয়ারি = 0, ফেব্রুয়ারি = 1, ...)
             day: 11,         // ১১ তারিখ
-            age: 16,         // ১৬তম জন্মদিন
-            name: "প্রিয়জন"  // ডিফল্ট নাম
+            age: 16          // ১৬তম জন্মদিন
         };
-
-        // URL থেকে নাম নেওয়া
-        const urlParams = new URLSearchParams(window.location.search);
-        const nameParam = urlParams.get('name');
-        if (nameParam) {
-            BIRTHDAY_CONFIG.name = decodeURIComponent(nameParam);
-        }
-        document.getElementById('birthdayName').textContent = BIRTHDAY_CONFIG.name;
 
         // স্টেট ম্যানেজমেন্ট
         let cakeCut = false;
@@ -548,12 +566,19 @@
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
 
+            // কাউন্টডাউন মেসেজ আপডেট
+            const messageElement = document.getElementById('birthdayMessage');
+            if (days === 0 && hours === 0 && mins === 0 && secs === 0) {
+                messageElement.innerHTML = '🎉 আজকের দিন! অপেক্ষা শেষ 🎉';
+            } else {
+                messageElement.innerHTML = '🎂 স্পেশাল ডে কাউন্টডাউন 🎂';
+            }
+
             // কেক সেকশন দেখানোর চেক
             const cakeSection = document.getElementById('cakeSection');
-            const today = new Date();
             
-            // যদি আজ জন্মদিন হয় এবং সময় ১২টা পেরিয়ে গেছে
-            if (isBirthdayToday() && today.getHours() >= 0) {
+            // যদি আজ জন্মদিন হয়
+            if (isBirthdayToday()) {
                 cakeSection.classList.add('active');
                 loadCakeState();
                 renderCake();
@@ -621,10 +646,10 @@
             // কনফেটি
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             setTimeout(() => {
-                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 } });
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
             }, 200);
             setTimeout(() => {
-                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 } });
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
             }, 400);
         };
 
@@ -642,7 +667,7 @@
 
             // স্মোক ইফেক্ট
             confetti({
-                particleCount: 30,
+                particleCount: 50,
                 spread: 80,
                 colors: ['#aaaaaa', '#cccccc'],
                 startVelocity: 20
