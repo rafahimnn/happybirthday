@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 ১৬তম জন্মদিন - স্পেশাল চমক</title>
+    <title>🎂 জন্মদিনের চমক - কেক ও স্মৃতি</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -259,79 +259,6 @@
             background: linear-gradient(135deg, #6c5ce7, #a363d9);
             color: white;
         }
-        /* লাভ ক্যালকুলেটর */
-        .love-calculator {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 30px 20px;
-            margin: 50px 0;
-            border: 1px solid rgba(255,255,255,0.2);
-            width: 100%;
-            max-width: 500px;
-        }
-        .love-title {
-            font-size: clamp(2rem, 6vw, 2.5rem);
-            color: gold;
-            margin-bottom: 25px;
-        }
-        .love-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .love-input {
-            padding: 15px 20px;
-            border-radius: 50px;
-            border: 2px solid rgba(255,215,0,0.5);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 1.1rem;
-            outline: none;
-            transition: 0.3s;
-            width: 100%;
-        }
-        .love-input:focus {
-            border-color: gold;
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
-        }
-        .love-input::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-        .calculate-btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            background: linear-gradient(135deg, #ff1493, #ff6b6b);
-            color: white;
-            width: 100%;
-            transition: 0.3s;
-            border: 2px solid gold;
-        }
-        .calculate-btn:active {
-            transform: scale(0.98);
-        }
-        .love-result {
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 30px;
-            border: 2px solid gold;
-        }
-        .love-percentage {
-            font-size: 3rem;
-            font-weight: 800;
-            color: gold;
-        }
-        .love-message {
-            font-size: 1.3rem;
-            margin-top: 10px;
-            color: #fff;
-        }
         /* ফটো অ্যালবাম - মোবাইলের জন্য 2 কলাম */
         .photo-album {
             columns: 2;
@@ -494,17 +421,6 @@
             color: #aaa;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
-        /* ইউটিলিটি */
-        .text-center {
-            text-align: center;
-        }
-        .w-100 {
-            width: 100%;
-        }
-        .container {
-            width: 100%;
-            padding: 0 15px;
-        }
     </style>
 </head>
 <body>
@@ -557,29 +473,11 @@
             </div>
         </section>
 
-        <!-- লাভ ক্যালকুলেটর -->
-        <section>
-            <h2 class="section-title"><i class="fas fa-heart" style="color: #ff1493;"></i> লাভ ক্যালকুলেটর</h2>
-            <div class="love-calculator">
-                <div class="love-input-group">
-                    <input type="text" class="love-input" id="name1" placeholder="তোমার নাম" value="তুমি">
-                    <input type="text" class="love-input" id="name2" placeholder="তার নাম" value="সে">
-                </div>
-                <button class="calculate-btn" onclick="calculateLove()">
-                    <i class="fas fa-calculator"></i> ভালোবাসা মাপো
-                </button>
-                <div class="love-result" id="loveResult" style="display: none;">
-                    <div class="love-percentage" id="lovePercentage">0%</div>
-                    <div class="love-message" id="loveMessage"></div>
-                </div>
-            </div>
-        </section>
-
         <!-- ফটো অ্যালবাম -->
         <section id="photos">
             <h2 class="section-title"><i class="fas fa-images"></i> সোনালী স্মৃতি</h2>
             <div class="photo-album" id="photoAlbum">
-                <!-- নমুনা ছবি -->
+                <!-- নমুনা ছবি (তোমার নিজের ছবির লিংক বসাও) -->
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
                     <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
                     <div class="photo-overlay">💖 প্রথম দেখা</div>
@@ -647,7 +545,7 @@
 
     <footer>
         <p>❤️ তৈরি করা হয়েছে অফুরান ভালোবাসায়</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">© ২০২৫ ১৬তম জন্মদিনের চমক</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">© ২০২৫ জন্মদিনের চমক</p>
     </footer>
 
     <script>
@@ -658,7 +556,7 @@
                 birthYear: 2009,      // ২০০৯ সালে জন্ম = ২০২৫ সালে ১৬ বছর
                 birthMonth: 4,         // ৪ = মে (May)
                 birthDay: 11,
-                age: 16                // বয়স ১৬ ফিক্সড (কারণ ১৬তম জন্মদিন)
+                age: 16                // বয়স ১৬
             };
 
             // গ্লোবাল স্টেট
@@ -685,11 +583,9 @@
                 }, 1500);
             });
 
-            // তারিখ তুলনা
-            function isSameDate(d1, d2) {
-                return d1.getFullYear() === d2.getFullYear() &&
-                       d1.getMonth() === d2.getMonth() &&
-                       d1.getDate() === d2.getDate();
+            // তারিখ তুলনা (শুধু দিন/মাস চেক, বছর বাদ)
+            function isSameDayMonth(d1, d2) {
+                return d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
             }
 
             // স্টেট আপডেট
@@ -697,21 +593,35 @@
                 const now = new Date();
                 const currentYear = now.getFullYear();
                 
+                // চলতি বছরের জন্মদিন
                 const thisYearBirthday = new Date(currentYear, CONFIG.birthMonth, CONFIG.birthDay);
+                // আগামী বছরের জন্মদিন
                 const nextYearBirthday = new Date(currentYear + 1, CONFIG.birthMonth, CONFIG.birthDay);
                 
-                state.nextBirthday = now < thisYearBirthday ? thisYearBirthday : nextYearBirthday;
-
-                const isBirthdayToday = isSameDate(now, thisYearBirthday);
-                state.isBirthday = isBirthdayToday;
-
+                // আজ কি জন্মদিন? (শুধু দিন/মাস চেক)
+                const isBirthdayToday = isSameDayMonth(now, thisYearBirthday);
+                
                 if (isBirthdayToday) {
+                    state.isBirthday = true;
+                    
+                    // স্টোরেজ থেকে স্টেট লোড
                     const todayStr = `${currentYear}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
                     state.cakeCut = localStorage.getItem(`cakeCut_${todayStr}`) === 'true';
                     state.candlesBlown = localStorage.getItem(`candlesBlown_${todayStr}`) === 'true';
+                    
+                    // নেক্সট বার্থডে হবে আগামী বছর
+                    state.nextBirthday = nextYearBirthday;
                 } else {
+                    state.isBirthday = false;
                     state.cakeCut = false;
                     state.candlesBlown = false;
+                    
+                    // পরবর্তী জন্মদিন নির্ধারণ
+                    if (now < thisYearBirthday) {
+                        state.nextBirthday = thisYearBirthday;
+                    } else {
+                        state.nextBirthday = nextYearBirthday;
+                    }
                 }
             }
 
@@ -760,7 +670,7 @@
                         // মোমবাতি দেখানো
                         if (state.candlesBlown) {
                             candlesContainer.innerHTML = '💨'; // নিভে গেছে
-                            cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে! আবার জ্বালাতে পারো না';
+                            cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে!';
                             blowBtn.disabled = true;
                         } else {
                             // ১৬টি মোমবাতি
@@ -825,31 +735,6 @@
                 });
             };
 
-            // লাভ ক্যালকুলেটর
-            window.calculateLove = function() {
-                const name1 = document.getElementById('name1').value.trim() || 'তুমি';
-                const name2 = document.getElementById('name2').value.trim() || 'সে';
-                
-                // সিম্পল এলগরিদম: নামের দৈর্ঘ্য + এলোমেলো
-                const base = (name1.length + name2.length) * 7;
-                const random = Math.floor(Math.random() * 30);
-                let percentage = (base + random) % 101;
-                
-                // কমপক্ষে ৫০% দেখাতে
-                if (percentage < 40) percentage += 40;
-                
-                document.getElementById('lovePercentage').textContent = percentage + '%';
-                
-                let message = '';
-                if (percentage >= 90) message = '🍿 পাকা প্রেম! বিয়ের পিঁড়িতে বসো!';
-                else if (percentage >= 70) message = '💖 দারুন সম্পর্ক! একটু কেয়ার করো';
-                else if (percentage >= 50) message = '💕 ভালো বন্ধু হতে পারো';
-                else message = '😅 আরও সময় লাগবে';
-                
-                document.getElementById('loveMessage').textContent = message;
-                document.getElementById('loveResult').style.display = 'block';
-            };
-
             // লাইটবক্স
             window.openLightbox = function(url) {
                 document.getElementById('lightboxImg').src = url;
@@ -875,17 +760,6 @@
                 }, 2000);
             }
             createFloatingHearts();
-
-            // স্মুথ স্ক্রোল
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
 
             // ইনিশিয়ালাইজ
             updateState();
