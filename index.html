@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Special Birthday Wish</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>🎂 Special Birthday Celebration</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -18,176 +17,296 @@
             --secondary: #8338ec;
             --accent: #06ffa5;
             --gold: #ffd700;
+            --pink: #ff1493;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a0033, #000, #330066);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #000 50%, #330066 100%);
             color: white;
+            min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-btn span {
+            font-size: 0.7rem;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            padding: 80px 20px 100px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Header */
         .header {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(180deg, rgba(255,0,110,0.2), transparent);
+            padding: 30px 20px;
         }
 
-        .main-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+        .header h1 {
+            font-size: 2.5rem;
             background: linear-gradient(90deg, var(--gold), var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 3s infinite;
+            margin-bottom: 10px;
         }
 
-        @keyframes glow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.5); }
-        }
-
-        .birthday-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+        .birthday-person {
+            font-size: 3rem;
             color: var(--gold);
-            margin-top: 20px;
             text-shadow: 0 0 30px rgba(255,215,0,0.5);
-        }
-
-        /* Sections */
-        .section {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 40px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--accent);
-            text-align: center;
-            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
         }
 
         /* Cake Section */
         .cake-container {
             text-align: center;
-            padding: 40px;
+            padding: 20px;
         }
 
-        .cake {
-            font-size: 8rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
+        .cake-wrapper {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
         }
 
-        .cake:hover {
-            transform: scale(1.1) rotate(5deg);
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 120px;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            border-radius: 20px 20px 40px 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .cake.cut {
-            animation: cutCake 1s forwards;
+        .cake-middle {
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            border-radius: 15px;
         }
 
-        @keyframes cutCake {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2) rotate(-10deg); }
-            100% { transform: scale(1); filter: brightness(1.2); }
-        }
-
-        .candles {
-            margin: 20px 0;
+        .cake-top {
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            border-radius: 10px;
         }
 
         .candle {
-            display: inline-block;
-            font-size: 3rem;
-            margin: 0 10px;
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: linear-gradient(to right, #ff006e, #ff1493);
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .candle:hover {
-            transform: scale(1.2);
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 40px;
+            background: radial-gradient(ellipse at bottom, #ffd700, #ff8c00, transparent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.5s infinite alternate;
+            box-shadow: 0 0 20px #ff8c00;
         }
 
-        .candle.blown {
-            filter: grayscale(100%) brightness(0.3);
-            transform: scale(0.8);
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
         }
 
-        /* Love Calculator */
-        .love-calc {
-            text-align: center;
+        .candle.blown::before {
+            display: none;
         }
 
-        .love-inputs {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
+        .candle:nth-child(4) { bottom: 280px; left: 35%; }
+        .candle:nth-child(5) { bottom: 280px; left: 50%; transform: translateX(-50%); }
+        .candle:nth-child(6) { bottom: 280px; right: 35%; }
+
+        .cut-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.5);
+            display: none;
+            pointer-events: none;
         }
 
-        .love-input {
-            padding: 15px 25px;
-            border: 2px solid var(--primary);
-            background: rgba(0,0,0,0.3);
-            color: white;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            text-align: center;
+        .cake-slice {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            display: none;
         }
 
-        .love-btn {
+        .blow-btn {
+            margin-top: 30px;
             padding: 15px 40px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .cut-btn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--accent), #00d4ff);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Photo Album */
+        .upload-area {
+            border: 3px dashed rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
             transition: all 0.3s;
         }
 
-        .love-btn:hover {
+        .upload-area:hover {
+            border-color: var(--accent);
+            background: rgba(6,255,165,0.1);
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-btn {
+            padding: 15px 30px;
+            background: var(--primary);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .photo-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255,0,110,0.4);
         }
 
-        .love-result {
-            font-size: 4rem;
-            font-family: 'Orbitron', sans-serif;
-            color: var(--gold);
-            margin: 20px 0;
-            opacity: 0;
-            transition: all 1s;
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .love-result.show {
-            opacity: 1;
-            animation: popIn 1s;
+        .photo-item .delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,0,0,0.8);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0) rotate(-180deg); }
-            100% { transform: scale(1) rotate(0); }
-        }
-
-        /* Video Recorder */
-        .recorder-section {
-            text-align: center;
-        }
-
+        /* Video Section */
         .video-box {
             width: 100%;
             max-width: 600px;
@@ -195,12 +314,12 @@
             background: #000;
             border-radius: 20px;
             margin: 0 auto 20px;
-            position: relative;
             overflow: hidden;
             border: 3px solid var(--accent);
+            position: relative;
         }
 
-        #previewVideo, #recordVideo {
+        video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -208,55 +327,28 @@
 
         .rec-controls {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
-        .rec-btn {
-            padding: 12px 30px;
+        .btn {
+            padding: 12px 25px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
 
-        .btn-record {
-            background: #ff0000;
-            color: white;
-        }
+        .btn-record { background: #ff0000; color: white; }
+        .btn-stop { background: #333; color: white; }
+        .btn-upload { background: linear-gradient(45deg, var(--accent), #00d4ff); color: #000; font-weight: bold; }
+        .btn:hover { transform: scale(1.05); }
 
-        .btn-stop {
-            background: #333;
-            color: white;
-        }
-
-        .btn-publish {
-            background: linear-gradient(45deg, var(--accent), #00d4ff);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .rec-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Published Videos */
-        .published-videos {
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .published-videos h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .video-grid {
+        .videos-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -264,99 +356,144 @@
             background: rgba(255,255,255,0.1);
             border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .video-card video {
             width: 100%;
-            height: 150px;
-            object-fit: cover;
+            height: 200px;
         }
 
         .video-info {
             padding: 15px;
         }
 
-        .video-author {
-            color: var(--accent);
-            font-size: 0.9rem;
+        /* Letter Section */
+        .letter-container {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,0,110,0.1));
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
         }
 
-        .video-date {
-            color: #888;
-            font-size: 0.8rem;
-            margin-top: 5px;
+        .letter-paper {
+            background: #fffef0;
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            min-height: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            line-height: 1.8;
         }
 
-        /* Message Wall */
-        .message-wall {
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
+        .letter-input {
+            width: 100%;
+            min-height: 300px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            resize: vertical;
+            outline: none;
         }
 
-        .message-item {
+        .letter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .saved-letters {
+            margin-top: 30px;
+        }
+
+        .letter-item {
             background: rgba(255,255,255,0.1);
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 15px;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--gold);
         }
 
-        .message-author {
-            color: var(--gold);
+        .letter-author {
+            color: var(--accent);
             font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .message-text {
-            color: #ddd;
-            line-height: 1.6;
+        .letter-date {
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 10px;
         }
 
-        /* Interactive Elements */
-        .interactive-btn {
-            padding: 15px 40px;
-            margin: 10px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
             color: white;
-        }
-
-        .interactive-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255,0,110,0.4);
+            cursor: pointer;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .main-title { font-size: 2rem; }
-            .birthday-name { font-size: 2.5rem; }
-            .section { margin: 20px; padding: 20px; }
-            .cake { font-size: 5rem; }
-            .love-result { font-size: 2.5rem; }
+            .header h1 { font-size: 1.8rem; }
+            .birthday-person { font-size: 2rem; }
+            .cake-wrapper { width: 250px; height: 350px; }
+            .cake-base { width: 200px; height: 100px; }
+            .cake-middle { width: 160px; height: 80px; bottom: 90px; }
+            .cake-top { width: 120px; height: 60px; bottom: 160px; }
+            .candle { height: 50px; }
+            .candle:nth-child(4) { bottom: 220px; }
+            .candle:nth-child(5) { bottom: 220px; }
+            .candle:nth-child(6) { bottom: 220px; }
             .video-box { height: 250px; }
-        }
-
-        /* Animations */
-        .float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            .nav-btn { font-size: 1.2rem; }
+            .nav-btn span { font-size: 0.6rem; }
         }
 
         .hidden { display: none !important; }
@@ -364,57 +501,69 @@
 </head>
 <body>
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img src="" alt="Full size" id="lightboxImg">
+    </div>
+
     <!-- Header -->
     <div class="header">
-        <h1 class="main-title">🎉 Special Birthday Celebration 🎉</h1>
-        <div class="birthday-name" id="heroName">বন্ধু</div>
-        <p style="margin-top: 20px; color: var(--accent);">
-            একটি বিশেষ দিন, একটি বিশেষ মানুষের জন্য 💝
-        </p>
+        <h1>🎉 Happy Birthday 🎂</h1>
+        <div class="birthday-person" id="birthdayName">প্রিয়জন</div>
+        <p style="color: #aaa; margin-top: 10px;">একটি বিশেষ দিনের স্মৃতি</p>
     </div>
 
-    <!-- Virtual Cake Section -->
-    <div class="section">
-        <h2 class="section-title">🎂 Virtual Cake Cutting</h2>
+    <!-- CAKE SECTION -->
+    <div class="section active" id="cakeSection">
         <div class="cake-container">
-            <div class="candles">
-                <span class="candle" onclick="blowCandle(this)">🕯️</span>
-                <span class="candle" onclick="blowCandle(this)">🕯️</span>
-                <span class="candle" onclick="blowCandle(this)">🕯️</span>
+            <div class="cake-wrapper" id="cake">
+                <div class="cake-base"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-top"></div>
+                <div class="candle" onclick="blowCandle(this)"></div>
+                <div class="candle" onclick="blowCandle(this)"></div>
+                <div class="candle" onclick="blowCandle(this)"></div>
             </div>
-            <div class="cake float" id="mainCake" onclick="cutCake()">🎂</div>
-            <p style="margin-top: 20px; color: #aaa;">
-                মোমবাতি নিভিয়ে কেকে ক্লিক করুন!
+            
+            <button class="blow-btn" id="blowBtn" onclick="blowAllCandles()">
+                🌬️ মোমবাতি নিভান (ফু দিন)
+            </button>
+            
+            <button class="cut-btn" id="cutBtn" onclick="cutCake()">
+                🔪 কেক কাটুন
+            </button>
+            
+            <p id="cakeMessage" style="margin-top: 20px; color: var(--accent); opacity: 0; transition: all 0.5s;">
+                🎉 শুভ জন্মদিন! 🎉
             </p>
-            <button class="interactive-btn" onclick="celebrate()">
-                🎊 Celebration Start!
-            </button>
         </div>
     </div>
 
-    <!-- Love Calculator -->
-    <div class="section">
-        <h2 class="section-title">💕 Love Calculator</h2>
-        <div class="love-calc">
-            <div class="love-inputs">
-                <input type="text" class="love-input" id="name1" placeholder="Your Name">
-                <span style="font-size: 2rem;">❤️</span>
-                <input type="text" class="love-input" id="name2" placeholder="Partner/Crush Name">
-            </div>
-            <button class="love-btn" onclick="calculateLove()">
-                Calculate Compatibility
-            </button>
-            <div class="love-result" id="loveResult">0%</div>
-            <p id="loveMessage" style="color: var(--accent); margin-top: 10px;"></p>
+    <!-- PHOTO SECTION -->
+    <div class="section" id="photoSection">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--gold);">📸 Photo Album</h2>
+        
+        <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+            <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)">
+            <p style="font-size: 3rem; margin-bottom: 10px;">📷</p>
+            <p>ফোটো আপলোড করতে ক্লিক করুন</p>
+            <p style="color: #888; font-size: 0.9rem; margin-top: 10px;">অথবা ড্র্যাগ করুন</p>
+        </div>
+
+        <div class="loading" id="photoLoading">
+            <div class="spinner"></div>
+            <p>আপলোড হচ্ছে...</p>
+        </div>
+
+        <div class="photo-grid" id="photoGrid">
+            <!-- Photos will appear here -->
         </div>
     </div>
 
-    <!-- Video Recorder Section -->
-    <div class="section recorder-section">
-        <h2 class="section-title">📹 Record Birthday Message</h2>
-        <p style="margin-bottom: 20px; color: #aaa;">
-            আপনার শুভেচ্ছা ভিডিও রেকর্ড করুন এবং পাবলিশ করুন!
-        </p>
+    <!-- VIDEO SECTION -->
+    <div class="section" id="videoSection">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent);">🎥 Birthday Wishes</h2>
         
         <div class="video-box">
             <video id="previewVideo" autoplay playsinline muted></video>
@@ -422,294 +571,430 @@
         </div>
 
         <div class="rec-controls">
-            <button class="rec-btn btn-record" onclick="startRecording()">
-                🔴 Start Recording
-            </button>
-            <button class="rec-btn btn-stop" onclick="stopRecording()">
-                ⏹️ Stop
-            </button>
-            <button class="rec-btn btn-publish hidden" id="publishBtn" onclick="publishVideo()">
-                🚀 Publish Message
-            </button>
+            <button class="btn btn-record" onclick="startRecording()">🔴 Record</button>
+            <button class="btn btn-stop" onclick="stopRecording()">⏹️ Stop</button>
+            <button class="btn btn-upload hidden" id="uploadVideoBtn" onclick="uploadVideo()">🚀 Upload</button>
         </div>
 
-        <!-- Published Videos -->
-        <div class="published-videos" id="publishedVideos">
-            <h3>🎥 Birthday Messages from Friends</h3>
-            <div class="video-grid" id="videoGrid">
-                <!-- Videos will appear here -->
-                <div class="video-card" id="demoVideo">
-                    <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='150'%3E%3Crect fill='%23333' width='250' height='150'/%3E%3Ctext fill='%23fff' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3EDemo Message%3C/text%3E%3C/svg%3E">
-                        <source src="" type="video/webm">
-                    </video>
-                    <div class="video-info">
-                        <div class="video-author">👤 Demo User</div>
-                        <div class="video-date">🎂 Birthday Wish</div>
-                    </div>
-                </div>
-            </div>
+        <div class="loading" id="videoLoading">
+            <div class="spinner"></div>
+            <p>ভিডিও আপলোড হচ্ছে...</p>
+        </div>
+
+        <div class="videos-list" id="videosList">
+            <!-- Videos will appear here -->
         </div>
     </div>
 
-    <!-- Message Wall -->
-    <div class="section">
-        <h2 class="section-title">💌 Birthday Wishes Wall</h2>
-        <div style="text-align: center; margin-bottom: 20px;">
-            <input type="text" id="wishName" placeholder="Your Name" style="padding: 12px; border-radius: 25px; border: none; margin: 5px; width: 200px;">
-            <textarea id="wishText" placeholder="Write your birthday wish..." style="padding: 12px; border-radius: 15px; border: none; margin: 5px; width: 300px; height: 80px; display: block; margin: 10px auto;"></textarea>
-            <button class="interactive-btn" onclick="postWish()">
-                📤 Post Wish
-            </button>
-        </div>
+    <!-- LETTER SECTION -->
+    <div class="section" id="letterSection">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--pink);">💌 Birthday Letter</h2>
         
-        <div class="message-wall" id="messageWall">
-            <div class="message-item">
-                <div class="message-author">🎉 Best Friend</div>
-                <div class="message-text">শুভ জন্মদিন! তোমার সব স্বপ্ন পূর্ণ হোক! 💝</div>
+        <div class="letter-container">
+            <div class="letter-paper">
+                <input type="text" id="letterAuthor" placeholder="আপনার নাম" style="width: 100%; border: none; border-bottom: 2px solid #ddd; margin-bottom: 20px; padding: 10px; font-size: 1.1rem; outline: none;">
+                <textarea class="letter-input" id="letterContent" placeholder="এখানে আপনার চিঠি লিখুন...&#10;&#10;প্রিয় জন্মদিনের মানুষ,&#10;&#10;তোমাকে অনেক অনেক শুভেচ্ছা..."></textarea>
             </div>
+            
+            <div class="letter-actions">
+                <button class="btn btn-upload" onclick="saveLetter()">💾 সেভ করুন</button>
+                <button class="btn" style="background: var(--secondary); color: white;" onclick="clearLetter()">🔄 নতুন</button>
+            </div>
+        </div>
+
+        <div class="saved-letters" id="savedLetters">
+            <h3 style="color: var(--gold); margin-bottom: 20px;">📜 সেভ করা চিঠি</h3>
+            <!-- Letters will appear here -->
         </div>
     </div>
 
-    <!-- Footer -->
-    <div style="text-align: center; padding: 40px; color: #666;">
-        <p>Made with 💝 for someone special</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">
-            This is a private celebration page. Share the link with your loved ones!
-        </p>
-    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn active" onclick="showSection('cakeSection', this)">
+            🎂
+            <span>কেক</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('photoSection', this)">
+            📸
+            <span>ফটো</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('videoSection', this)">
+            🎥
+            <span>ভিডিও</span>
+        </button>
+        <button class="nav-btn" onclick="showSection('letterSection', this)">
+            💌
+            <span>চিঠি</span>
+        </button>
+    </nav>
 
     <script>
+        // ⚠️ CLOUDINARY CONFIG - এখানে আপনার তথ্য বসান
+        const CLOUD_NAME = 'YOUR_CLOUD_NAME';
+        const UPLOAD_PRESET = 'birthday_preset';
+
         // Variables
         let mediaRecorder;
         let recordedChunks = [];
         let stream;
         let videoBlob;
-        let videoCount = 1;
+        let photos = JSON.parse(localStorage.getItem('birthdayPhotos')) || [];
+        let videos = JSON.parse(localStorage.getItem('birthdayVideos')) || [];
+        let letters = JSON.parse(localStorage.getItem('birthdayLetters')) || [];
 
-        // Initialize camera
-        async function initCamera() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: "user" }, 
-                    audio: true 
+        // Initialize
+        window.onload = () => {
+            initCamera();
+            loadPhotos();
+            loadVideos();
+            loadLetters();
+        };
+
+        // Navigation
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // CAKE FUNCTIONS
+        let blownCandles = 0;
+
+        function blowCandle(candle) {
+            if (candle.classList.contains('blown')) return;
+            
+            candle.classList.add('blown');
+            blownCandles++;
+            
+            // Smoke effect
+            createSmoke(candle);
+            
+            if (blownCandles === 3) {
+                document.getElementById('blowBtn').style.display = 'none';
+                document.getElementById('cutBtn').style.display = 'inline-block';
+                
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    colors: ['#ffd700', '#ff8c00']
                 });
-                document.getElementById('previewVideo').srcObject = stream;
-            } catch (err) {
-                alert('Camera access needed for recording. Please allow camera permission.');
-                console.error('Camera error:', err);
             }
         }
 
-        // Start recording
+        function blowAllCandles() {
+            document.querySelectorAll('.candle').forEach((candle, index) => {
+                setTimeout(() => blowCandle(candle), index * 200);
+            });
+        }
+
+        function createSmoke(element) {
+            for (let i = 0; i < 5; i++) {
+                const smoke = document.createElement('div');
+                smoke.style.cssText = `
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    background: rgba(200,200,200,0.5);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: smokeUp 1s forwards;
+                `;
+                smoke.style.left = element.offsetLeft + 10 + 'px';
+                smoke.style.top = element.offsetTop - 20 + 'px';
+                element.parentElement.appendChild(smoke);
+                setTimeout(() => smoke.remove(), 1000);
+            }
+        }
+
+        function cutCake() {
+            const cake = document.getElementById('cake');
+            
+            // Cut animation
+            cake.style.transform = 'scale(0.95)';
+            setTimeout(() => cake.style.transform = 'scale(1)', 200);
+            
+            // Show slice
+            const slice = document.createElement('div');
+            slice.innerHTML = '🍰';
+            slice.style.cssText = `
+                position: absolute;
+                font-size: 4rem;
+                animation: sliceOut 2s forwards;
+                left: 50%;
+                top: 50%;
+            `;
+            cake.appendChild(slice);
+            
+            setTimeout(() => slice.remove(), 2000);
+            
+            document.getElementById('cakeMessage').style.opacity = '1';
+            
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#ff006e', '#8338ec', '#06ffa5', '#ffd700']
+            });
+        }
+
+        // Add smoke animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes smokeUp {
+                to { transform: translateY(-50px) scale(2); opacity: 0; }
+            }
+            @keyframes sliceOut {
+                0% { transform: translate(-50%, -50%) scale(0); }
+                50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); }
+                100% { transform: translate(100px, 100px) scale(1) rotate(45deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // PHOTO FUNCTIONS
+        async function handlePhotos(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+
+            document.getElementById('photoLoading').style.display = 'block';
+
+            for (let file of files) {
+                try {
+                    const url = await uploadToCloudinary(file, 'image');
+                    photos.push({
+                        url: url,
+                        date: new Date().toISOString()
+                    });
+                } catch (err) {
+                    console.error('Upload failed:', err);
+                    // Fallback to local
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        photos.push({
+                            url: e.target.result,
+                            date: new Date().toISOString(),
+                            local: true
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            localStorage.setItem('birthdayPhotos', JSON.stringify(photos));
+            loadPhotos();
+            document.getElementById('photoLoading').style.display = 'none';
+        }
+
+        function loadPhotos() {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = '';
+            
+            photos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="Memory" onclick="openLightbox('${photo.url}')">
+                    <button class="delete" onclick="deletePhoto(${index})">×</button>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function deletePhoto(index) {
+            photos.splice(index, 1);
+            localStorage.setItem('birthdayPhotos', JSON.stringify(photos));
+            loadPhotos();
+        }
+
+        function openLightbox(url) {
+            document.getElementById('lightboxImg').src = url;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // VIDEO FUNCTIONS
+        async function initCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('previewVideo').srcObject = stream;
+            } catch (err) {
+                console.log('Camera not available');
+            }
+        }
+
         function startRecording() {
             if (!stream) {
                 initCamera().then(() => startRecordingActual());
-            } else {
-                startRecordingActual();
+                return;
             }
+            startRecordingActual();
         }
 
         function startRecordingActual() {
             recordedChunks = [];
             mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
-
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    recordedChunks.push(event.data);
-                }
+            
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
             };
-
+            
             mediaRecorder.onstop = () => {
                 videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
-                const videoUrl = URL.createObjectURL(videoBlob);
+                const url = URL.createObjectURL(videoBlob);
                 
-                const preview = document.getElementById('previewVideo');
+                document.getElementById('previewVideo').classList.add('hidden');
                 const recorded = document.getElementById('recordedVideo');
-                
-                preview.classList.add('hidden');
                 recorded.classList.remove('hidden');
-                recorded.src = videoUrl;
+                recorded.src = url;
                 
-                document.getElementById('publishBtn').classList.remove('hidden');
+                document.getElementById('uploadVideoBtn').classList.remove('hidden');
             };
-
+            
             mediaRecorder.start();
-            document.querySelector('.btn-record').textContent = '⏺️ Recording...';
-            document.querySelector('.btn-record').style.background = '#666';
         }
 
-        // Stop recording
         function stopRecording() {
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 mediaRecorder.stop();
-                document.querySelector('.btn-record').textContent = '🔴 Start Recording';
-                document.querySelector('.btn-record').style.background = '#ff0000';
             }
         }
 
-        // Publish video (simulated - in real scenario, you'd upload to server)
-        function publishVideo() {
+        async function uploadVideo() {
             if (!videoBlob) return;
-
-            const videoUrl = URL.createObjectURL(videoBlob);
-            const authorName = prompt('Enter your name:', 'Friend') || 'Anonymous';
             
-            const videoGrid = document.getElementById('videoGrid');
-            const newCard = document.createElement('div');
-            newCard.className = 'video-card';
-            newCard.innerHTML = `
-                <video controls src="${videoUrl}"></video>
-                <div class="video-info">
-                    <div class="video-author">👤 ${authorName}</div>
-                    <div class="video-date">🎂 Just now • Birthday Wish</div>
-                </div>
-            `;
+            document.getElementById('videoLoading').style.display = 'block';
             
-            videoGrid.insertBefore(newCard, videoGrid.firstChild);
-            
-            // Reset
-            document.getElementById('recordedVideo').classList.add('hidden');
-            document.getElementById('previewVideo').classList.remove('hidden');
-            document.getElementById('publishBtn').classList.add('hidden');
-            
-            // Celebration
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff006e', '#8338ec', '#06ffa5', '#ffd700']
-            });
-            
-            alert('🎉 Your birthday message has been published! Everyone can now see it!');
-        }
-
-        // Cake functions
-        function blowCandle(candle) {
-            candle.classList.add('blown');
-            confetti({
-                particleCount: 30,
-                spread: 50,
-                colors: ['#ffd700', '#ff8c00']
-            });
-        }
-
-        function cutCake() {
-            const cake = document.getElementById('mainCake');
-            cake.classList.add('cut');
-            
-            setTimeout(() => {
-                cake.classList.remove('cut');
-            }, 1000);
-            
-            celebrate();
-        }
-
-        function celebrate() {
-            confetti({
-                particleCount: 200,
-                spread: 100,
-                origin: { y: 0.6 },
-                colors: ['#ff006e', '#8338ec', '#06ffa5', '#ffd700', '#ff1493']
-            });
-            
-            // Play sound if available
-            const msg = new SpeechSynthesisUtterance('Happy Birthday! Have a wonderful day!');
-            msg.rate = 0.9;
-            msg.pitch = 1.1;
-            speechSynthesis.speak(msg);
-        }
-
-        // Love Calculator
-        function calculateLove() {
-            const name1 = document.getElementById('name1').value.trim();
-            const name2 = document.getElementById('name2').value.trim();
-            
-            if (!name1 || !name2) {
-                alert('Please enter both names!');
-                return;
-            }
-            
-            // Calculate score based on names
-            let score = 0;
-            const combined = (name1 + name2).toLowerCase();
-            for (let char of combined) {
-                score += char.charCodeAt(0);
-            }
-            score = (score % 40) + 60; // 60-100 range
-            
-            const resultEl = document.getElementById('loveResult');
-            const msgEl = document.getElementById('loveMessage');
-            
-            resultEl.classList.remove('show');
-            setTimeout(() => {
-                resultEl.textContent = score + '%';
-                resultEl.classList.add('show');
+            try {
+                const url = await uploadToCloudinary(videoBlob, 'video');
+                const author = prompt('আপনার নাম:', 'Friend') || 'Anonymous';
                 
-                let message = '';
-                if (score >= 90) message = '🔥 Perfect Match! Soulmates! 🔥';
-                else if (score >= 80) message = '💖 Great Compatibility! Lovely! 💖';
-                else if (score >= 70) message = '💕 Good Match! Beautiful connection! 💕';
-                else message = '💝 Friendship is the best foundation! 💝';
-                
-                msgEl.textContent = message;
-                
-                confetti({
-                    particleCount: 100,
-                    spread: 80,
-                    colors: ['#ff006e', '#ff1493', '#ffd700']
+                videos.push({
+                    url: url,
+                    author: author,
+                    date: new Date().toISOString()
                 });
-            }, 100);
+                
+                localStorage.setItem('birthdayVideos', JSON.stringify(videos));
+                loadVideos();
+                
+                // Reset
+                document.getElementById('recordedVideo').classList.add('hidden');
+                document.getElementById('previewVideo').classList.remove('hidden');
+                document.getElementById('uploadVideoBtn').classList.add('hidden');
+                document.getElementById('videoLoading').style.display = 'none';
+                
+                confetti({ particleCount: 100, spread: 70 });
+                
+            } catch (err) {
+                alert('আপলোড ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+                document.getElementById('videoLoading').style.display = 'none';
+            }
         }
 
-        // Post wish
-        function postWish() {
-            const name = document.getElementById('wishName').value.trim() || 'Anonymous';
-            const text = document.getElementById('wishText').value.trim();
+        function loadVideos() {
+            const list = document.getElementById('videosList');
+            list.innerHTML = '';
             
-            if (!text) {
-                alert('Please write a message!');
+            videos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <video controls src="${video.url}"></video>
+                    <div class="video-info">
+                        <strong style="color: var(--accent);">👤 ${video.author}</strong>
+                        <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">
+                            🎂 ${new Date(video.date).toLocaleDateString('bn-BD')}
+                        </p>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        // LETTER FUNCTIONS
+        function saveLetter() {
+            const author = document.getElementById('letterAuthor').value.trim() || 'Anonymous';
+            const content = document.getElementById('letterContent').value.trim();
+            
+            if (!content) {
+                alert('চিঠি লিখুন!');
                 return;
             }
             
-            const wall = document.getElementById('messageWall');
-            const newMsg = document.createElement('div');
-            newMsg.className = 'message-item';
-            newMsg.innerHTML = `
-                <div class="message-author">👤 ${name}</div>
-                <div class="message-text">${text}</div>
-            `;
+            letters.push({
+                author: author,
+                content: content,
+                date: new Date().toISOString()
+            });
             
-            wall.insertBefore(newMsg, wall.firstChild);
-            
-            // Clear inputs
-            document.getElementById('wishName').value = '';
-            document.getElementById('wishText').value = '';
+            localStorage.setItem('birthdayLetters', JSON.stringify(letters));
+            loadLetters();
+            clearLetter();
             
             confetti({
                 particleCount: 50,
-                spread: 60,
-                colors: ['#06ffa5', '#00d4ff']
+                colors: ['#ffd700', '#ff69b4']
             });
         }
 
-        // Initialize
-        window.onload = () => {
-            initCamera();
-            
-            // Get name from URL parameter (optional)
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            if (name) {
-                document.getElementById('heroName').textContent = decodeURIComponent(name);
-            }
-        };
+        function clearLetter() {
+            document.getElementById('letterAuthor').value = '';
+            document.getElementById('letterContent').value = '';
+        }
 
-        // Handle page unload
-        window.onbeforeunload = () => {
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-            }
-        };
+        function loadLetters() {
+            const container = document.getElementById('savedLetters');
+            // Keep header
+            const header = container.querySelector('h3');
+            container.innerHTML = '';
+            container.appendChild(header);
+            
+            letters.slice().reverse().forEach(letter => {
+                const item = document.createElement('div');
+                item.className = 'letter-item';
+                item.innerHTML = `
+                    <div class="letter-author">👤 ${letter.author}</div>
+                    <div style="white-space: pre-wrap; line-height: 1.8;">${letter.content}</div>
+                    <div class="letter-date">📝 ${new Date(letter.date).toLocaleString('bn-BD')}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // CLOUDINARY UPLOAD
+        async function uploadToCloudinary(file, type) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+            
+            const resourceType = type === 'video' ? 'video' : 'image';
+            
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            );
+            
+            if (!response.ok) throw new Error('Upload failed');
+            
+            const data = await response.json();
+            return data.secure_url;
+        }
+
+        // Get name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        if (name) {
+            document.getElementById('birthdayName').textContent = decodeURIComponent(name);
+        }
     </script>
+
 </body>
 </html>
