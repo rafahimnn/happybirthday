@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🎂 জন্মদিনের চমক</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -19,15 +20,23 @@
             color: white;
         }
 
-        /* ভিডিও ব্যাকগ্রাউন্ড */
-        .video-bg {
+        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড */
+        .animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             z-index: -2;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .overlay {
@@ -36,8 +45,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(26,0,51,0.8));
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
             z-index: -1;
+        }
+
+        /* ভাসমান পার্টিকেল */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatAround 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.3; transform: scale(1); }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(0.5); opacity: 0; }
         }
 
         /* কাউন্টডাউন স্ক্রিন */
@@ -55,6 +90,8 @@
             z-index: 9999;
             transition: opacity 1s ease;
             padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .countdown-screen.hidden {
@@ -63,59 +100,76 @@
         }
 
         .countdown-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: gold;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #fff;
             margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493; }
+            50% { text-shadow: 0 0 30px #ff1493, 0 0 60px #23d5ab; }
         }
 
         .countdown-box {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 50px;
-            border: 3px solid gold;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: clamp(20px, 5vw, 40px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(255,215,0,0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 215, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            min-width: 300px;
+            gap: clamp(5px, 2vw, 15px);
         }
 
         .count-item {
-            background: rgba(255,255,255,0.1);
-            padding: 25px 15px;
-            border-radius: 30px;
-            border: 2px solid gold;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: clamp(15px, 4vw, 25px) clamp(5px, 2vw, 15px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .count-number {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 800;
-            color: gold;
+            background: linear-gradient(135deg, #ffd700, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: block;
             line-height: 1;
-            text-shadow: 0 0 30px gold;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
         }
 
         .count-label {
-            font-size: 1rem;
+            font-size: clamp(0.7rem, 2vw, 1rem);
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .countdown-message {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             color: #fff;
             margin-top: 20px;
-            text-shadow: 0 0 10px gold;
+            text-shadow: 0 0 10px #ffd700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* মেইন কন্টেন্ট */
@@ -151,37 +205,49 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            background: linear-gradient(90deg, #ffd700, #ff1493, #00ffff);
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab, #ee7752);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            animation: glow 3s infinite;
+            animation: rainbow 5s infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
         }
 
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px gold); }
-            50% { filter: drop-shadow(0 0 40px #ff1493); }
+        @keyframes rainbow {
+            0%, 100% { filter: drop-shadow(0 0 20px #ffd700); }
+            25% { filter: drop-shadow(0 0 30px #ff1493); }
+            50% { filter: drop-shadow(0 0 40px #23d5ab); }
+            75% { filter: drop-shadow(0 0 30px #ee7752); }
         }
 
         .birthday-name {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(4rem, 12vw, 6rem);
-            color: #ffd700;
-            text-shadow: 0 0 40px rgba(255,215,0,0.8);
+            font-size: clamp(3rem, 12vw, 6rem);
+            background: linear-gradient(135deg, #ffd700, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
             margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         /* কেক সেকশন */
         .cake-section {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 60px;
-            border: 3px solid gold;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: clamp(20px, 5vw, 40px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             margin: 40px 0;
             width: 100%;
             max-width: 600px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 215, 0, 0.3);
         }
 
         .cake-container {
@@ -189,66 +255,83 @@
         }
 
         .cake-emoji {
-            font-size: clamp(7rem, 20vw, 10rem);
-            filter: drop-shadow(0 10px 30px gold);
-            animation: float 3s ease-in-out infinite;
+            font-size: clamp(5rem, 20vw, 9rem);
+            filter: drop-shadow(0 20px 40px rgba(255, 215, 0, 0.6));
+            animation: bounce 2s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         .candles-container {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             margin-top: -20px;
-            letter-spacing: 10px;
+            letter-spacing: clamp(5px, 2vw, 10px);
+            animation: flicker 1s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .cake-status {
-            font-size: 1.8rem;
-            color: gold;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: #fff;
             margin: 25px 0;
-            background: rgba(0,0,0,0.3);
-            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 25px);
             border-radius: 50px;
-            border: 2px solid gold;
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            display: inline-block;
+            width: 100%;
         }
 
         .button-group {
             display: flex;
-            gap: 20px;
+            gap: clamp(10px, 3vw, 20px);
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: 15px 40px;
+            padding: clamp(12px, 3vw, 15px) clamp(25px, 6vw, 40px);
             border: none;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #1a1a2e;
-            border: 2px solid white;
-            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1 1 auto;
+            min-width: 140px;
+            justify-content: center;
         }
 
         .action-btn.secondary {
-            background: linear-gradient(45deg, #6c5ce7, #a363d9);
+            background: linear-gradient(135deg, #6c5ce7, #a363d9);
             color: white;
         }
 
         .action-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .action-btn:not(:disabled):hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px gold;
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
         }
 
         /* ফটো অ্যালবাম */
@@ -272,7 +355,9 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
-            border: 3px solid gold;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab);
+            padding: 3px;
         }
 
         .photo-item:hover {
@@ -282,20 +367,22 @@
         .photo-item img {
             width: 100%;
             display: block;
+            border-radius: 17px;
         }
 
         .photo-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 3px;
+            left: 3px;
+            right: 3px;
             padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: gold;
-            font-size: 1.2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: #ffd700;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             font-weight: 600;
             transform: translateY(100%);
             transition: 0.3s;
+            border-radius: 0 0 17px 17px;
         }
 
         .photo-item:hover .photo-overlay {
@@ -317,11 +404,18 @@
         }
 
         .video-card {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 25px;
             overflow: hidden;
-            border: 2px solid gold;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
         }
 
         .video-wrapper {
@@ -340,49 +434,67 @@
         }
 
         .video-info {
-            padding: 20px;
+            padding: clamp(15px, 4vw, 20px);
         }
 
         .video-title {
-            font-size: 1.3rem;
-            color: gold;
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            color: #ffd700;
             margin-bottom: 5px;
+        }
+
+        .video-desc {
+            color: #ddd;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
         /* মেসেজ সেকশন */
         .message-section {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 50px;
-            padding: 60px 30px;
+            padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 30px);
             text-align: center;
             margin: 50px 0;
-            border: 3px solid gold;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
         .message-text {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             line-height: 1.8;
             white-space: pre-line;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
+        /* সেকশন টাইটেল */
         .section-title {
             text-align: center;
-            font-size: clamp(2.5rem, 7vw, 3rem);
+            font-size: clamp(2rem, 7vw, 3rem);
             margin: 60px 0 30px;
-            color: gold;
-            text-shadow: 0 0 20px gold;
+            background: linear-gradient(135deg, #ffd700, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 150px;
+            width: clamp(80px, 15vw, 150px);
             height: 4px;
-            background: linear-gradient(90deg, gold, #ff1493);
+            background: linear-gradient(90deg, #ffd700, #ff1493, #23d5ab);
             margin: 20px auto;
             border-radius: 2px;
+            animation: widthPulse 2s infinite;
+        }
+
+        @keyframes widthPulse {
+            0%, 100% { width: clamp(80px, 15vw, 150px); opacity: 1; }
+            50% { width: clamp(100px, 20vw, 200px); opacity: 0.8; }
         }
 
         /* লাইটবক্স */
@@ -393,7 +505,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -407,8 +519,14 @@
         .lightbox img {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 50px gold;
+            border-radius: 20px;
+            box-shadow: 0 0 50px #ffd700, 0 0 100px #ff1493;
+            animation: lightboxZoom 0.3s;
+        }
+
+        @keyframes lightboxZoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .lightbox .close {
@@ -418,23 +536,31 @@
             font-size: 3rem;
             color: white;
             cursor: pointer;
+            transition: 0.3s;
+            text-shadow: 0 0 20px #ffd700;
+        }
+
+        .lightbox .close:hover {
+            transform: scale(1.2);
+            color: #ffd700;
         }
 
         footer {
             text-align: center;
             padding: 40px;
-            color: #aaa;
-            border-top: 2px solid gold;
+            color: #ddd;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
             margin-top: 50px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
     </style>
 </head>
 <body>
-    <!-- ভিডিও ব্যাকগ্রাউন্ড -->
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
-    </video>
+    <div class="animated-bg"></div>
     <div class="overlay"></div>
+
+    <!-- ভাসমান এলিমেন্টস -->
+    <div class="floating-elements" id="floatingElements"></div>
 
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
@@ -471,7 +597,7 @@
         <div class="container">
             <!-- হিরো সেকশন -->
             <section class="hero">
-                <h1>🎉 শুভ জন্মদিন 🎉</h1>
+                <h1>🎉 Happy Birthday 🎉</h1>
                 <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
                 
                 <!-- কেক সেকশন -->
@@ -528,6 +654,7 @@
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
+                            <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা</p>
                         </div>
                     </div>
                     <div class="video-card">
@@ -538,6 +665,7 @@
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
+                            <p class="video-desc">শুভ জন্মদিন প্রিয়জন</p>
                         </div>
                     </div>
                 </div>
@@ -558,7 +686,7 @@
         </div>
 
         <footer>
-            <p>❤️ তৈরি করেছে ভালোবাসা</p>
+            <p>❤️ তৈরি করেছে অফুরান ভালোবাসা</p>
             <p>© ২০২৫ স্পেশাল ডে</p>
         </footer>
     </div>
@@ -569,14 +697,11 @@
         <img src="" id="lightboxImg" alt="">
     </div>
 
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <script>
         // ------------------ কনফিগারেশন ------------------
         const CONFIG = {
-            birthMonth: 2,        // feb = 2 (জানুয়ারি = 0)
-            birthDay: 15,         // 15 তারিখ
+            birthMonth: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
+            birthDay: 15,         // ১৫ তারিখ
             age: 16,              // ১৬তম জন্মদিন
             name: "প্রিয়জন"      // ডিফল্ট নাম
         };
@@ -588,6 +713,26 @@
             CONFIG.name = decodeURIComponent(nameParam);
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
+
+        // ভাসমান এলিমেন্ট তৈরি
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const elements = ['🎂', '🎈', '🎉', '💖', '✨', '⭐', '🕯️', '🎊'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'float-item';
+                    el.textContent = elements[Math.floor(Math.random() * elements.length)];
+                    el.style.left = Math.random() * 100 + '%';
+                    el.style.animationDelay = Math.random() * 10 + 's';
+                    el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                    container.appendChild(el);
+                    
+                    setTimeout(() => el.remove(), 15000);
+                }, i * 1000);
+            }
+        }
 
         // স্টেট
         let cakeCut = false;
@@ -621,10 +766,10 @@
                 // কনফেটি
                 confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
                 setTimeout(() => {
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 } });
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
                 }, 200);
                 setTimeout(() => {
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 } });
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
                 }, 400);
                 
                 // কেক স্টেট লোড
@@ -709,8 +854,8 @@
             
             // কনফেটি
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 } }), 200);
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 } }), 400);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
         };
 
         // মোমবাতি নেভানো
@@ -743,6 +888,10 @@
         window.closeLightbox = function() {
             document.getElementById('lightbox').classList.remove('active');
         };
+
+        // ভাসমান এলিমেন্ট চালু করা
+        createFloatingElements();
+        setInterval(createFloatingElements, 20000);
 
         // চেক করে দেখি আজ কি জন্মদিন
         if (isBirthdayToday()) {
