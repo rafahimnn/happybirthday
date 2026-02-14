@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 MEGA ULTIMATE BIRTHDAY 2.0 🌟</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --secondary: #8338ec;
+            --accent: #06ffa5;
+            --gold: #ffd700;
+            --hot-pink: #ff1493;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            overflow-x: hidden;
+            color: white;
+            cursor: crosshair;
+        }
+
+        /* Enhanced Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #000, #1a0033, #330066);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 1s;
+        }
+
+        .loader-cake {
+            font-size: 5rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .loader-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes shimmer {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+            100% { filter: brightness(1); }
+        }
+
+        /* Rainbow Cursor Trail */
+        .rainbow-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            filter: blur(8px);
+            animation: fadeTrail 1s forwards;
+        }
+
+        @keyframes fadeTrail {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Main Layout */
+        .main-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Fireworks Canvas */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* 3D Hologram Section */
+        .hologram-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .mega-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--gold), var(--primary), var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: megaGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(255,215,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        @keyframes megaGlow {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(180deg) brightness(1.5); }
+        }
+
+        /* Virtual Cake Section */
+        .cake-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cake-container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .cake-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: cakeFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes cakeFloat {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(180deg); }
+        }
+
+        .cake-layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cake-bottom {
+            width: 300px;
+            height: 100px;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            bottom: 0;
+            border-radius: 20px 20px 40px 40px;
+        }
+
+        .cake-middle {
+            width: 250px;
+            height: 80px;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            bottom: 90px;
+            border-radius: 15px;
+        }
+
+        .cake-top {
+            width: 200px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFF8DC, #F5DEB3);
+            bottom: 160px;
+            border-radius: 10px;
+        }
+
+        .candle {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: linear-gradient(to right, #ff006e, #ff1493);
+            border-radius: 10px;
+            bottom: 220px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .candle:hover {
+            transform: scale(1.1);
+        }
+
+        .candle:nth-child(4) { left: 30%; }
+        .candle:nth-child(5) { left: 50%; transform: translateX(-50%); }
+        .candle:nth-child(6) { right: 30%; }
+
+        .flame {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: radial-gradient(ellipse at bottom, #ffd700, #ff8c00, transparent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s infinite alternate;
+            box-shadow: 0 0 20px #ff8c00, 0 0 40px #ff4500;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+        }
+
+        .flame.extinguished {
+            animation: extinguish 0.5s forwards;
+        }
+
+        @keyframes extinguish {
+            to { transform: translateX(-50%) scale(0); opacity: 0; }
+        }
+
+        .cut-button {
+            margin-top: 50px;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 10px 30px rgba(255,0,110,0.4);
+            transition: all 0.3s;
+        }
+
+        .cut-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255,0,110,0.6);
+        }
+
+        /* Love Calculator */
+        .love-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(255,0,110,0.1), rgba(131,56,236,0.1));
+        }
+
+        .love-calculator {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px rgba(255,0,110,0.3);
+        }
+
+        .love-inputs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .love-input {
+            padding: 15px 25px;
+            border: 2px solid var(--secondary);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .love-heart {
+            font-size: 3rem;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .love-result {
+            font-size: 4rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--gold);
+            text-align: center;
+            margin: 20px 0;
+            opacity: 0;
+            transition: all 1s;
+        }
+
+        .love-result.show {
+            opacity: 1;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            0% { transform: scale(0) rotate(-180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .love-message {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-top: 20px;
+        }
+
+        /* 3D Ferris Wheel */
+        .ferris-section {
+            padding: 80px 20px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ferris-wheel {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            animation: rotateWheel 20s linear infinite;
+        }
+
+        @keyframes rotateWheel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wheel-center {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        .wheel-rim {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(131,56,236,0.5);
+        }
+
+        .cabin {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--hot-pink));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: counterRotate 20s linear infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @keyframes counterRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        /* Video Recorder Section */
+        .recorder-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .recorder-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+        }
+
+        .video-preview {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #recordVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recording-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+            display: none;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .recorder-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .rec-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .rec-start {
+            background: #ff0000;
+            color: white;
+        }
+
+        .rec-stop {
+            background: #333;
+            color: white;
+        }
+
+        .rec-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .recorded-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .video-card video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(255,0,110,0.2));
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .countdown-box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            min-width: 120px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+
+        .countdown-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Face Filter Section */
+        .filter-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .filter-container {
+            position: relative;
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid var(--accent);
+        }
+
+        #filterVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #filterCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .filter-overlay {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .birthday-hat {
+            position: absolute;
+            font-size: 4rem;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        /* Balloon Physics Canvas */
+        #balloon-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: all;
+            z-index: 4;
+        }
+
+        /* Control Panel Enhanced */
+        .mega-control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 25px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 50px rgba(255,215,0,0.3);
+            max-width: 350px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .mega-control-panel h3 {
+            color: var(--gold);
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .control-group:last-child {
+            border-bottom: none;
+        }
+
+        .control-label {
+            display: block;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .mega-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--secondary);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .mega-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-firework {
+            background: linear-gradient(45deg, #ff4500, #ff8c00);
+            color: white;
+        }
+
+        .btn-love {
+            background: linear-gradient(45deg, var(--primary), var(--hot-pink));
+            color: white;
+        }
+
+        .btn-magic {
+            background: linear-gradient(45deg, var(--accent), #00d4ff);
+            color: #000;
+        }
+
+        .mega-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+        }
+
+        /* AR QR Section */
+        .ar-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .ar-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .ar-qr {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .ar-instructions {
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .ar-instructions h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .ar-instructions ol {
+            color: var(--accent);
+            line-height: 2;
+            padding-left: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mega-title { font-size: 2.5rem; }
+            .cake-container { width: 300px; height: 300px; }
+            .cake-bottom { width: 200px; height: 70px; }
+            .cake-middle { width: 170px; height: 60px; bottom: 65px; }
+            .cake-top { width: 140px; height: 50px; bottom: 115px; }
+            .candle { height: 40px; bottom: 160px; }
+            .ferris-wheel { width: 300px; height: 300px; }
+            .filter-container { width: 100%; height: 300px; }
+            .mega-control-panel { left: 10px; right: 10px; max-width: none; }
+            .countdown-box { min-width: 80px; padding: 20px; }
+            .countdown-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-cake">🎂</div>
+        <div class="loader-text">MEGA ULTIMATE BIRTHDAY 2.0</div>
+        <p style="margin-top: 20px; color: var(--accent);">Loading Magic Universe...</p>
+    </div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Balloon Physics Canvas -->
+    <canvas id="balloon-canvas"></canvas>
+
+    <!-- Mega Control Panel -->
+    <div class="mega-control-panel">
+        <h3>🎛️ MEGA CONTROLS</h3>
+        
+        <div class="control-group">
+            <label class="control-label">🎂 Birthday Person</label>
+            <input type="text" class="mega-input" id="megaName" value="বন্ধু" onchange="updateMegaName()">
+            <button class="mega-btn btn-magic" onclick="launchMegaFireworks()">
+                🚀 LAUNCH FIREWORKS
+            </button>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">💕 Love Calculator</label>
+            <input type="text" class="mega-input" id="loveName1" placeholder="Your Name">
+            <input type="text" class="mega-input" id="loveName2" placeholder="Partner Name">
+            <button class="mega-btn btn-love" onclick="calculateLove()">
+                💘 CALCULATE LOVE
+            </button>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">🎮 Quick Actions</label>
+            <button class="mega-btn btn-firework" onclick="startCakeCutting()">
+                🎂 CUT CAKE
+            </button>
+            <button class="mega-btn btn-magic" onclick="activateBalloonParty()">
+                🎈 BALLOON PARTY
+            </button>
+            <button class="mega-btn btn-love" onclick="startFaceFilter()">
+                😊 FACE FILTER
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hologram-section">
+            <h1 class="mega-title">MEGA ULTIMATE<br>BIRTHDAY 2.0</h1>
+            <div id="birthday-name-display" style="font-size: 3rem; color: var(--gold); font-family: 'Dancing Script', cursive; margin-top: 20px;">
+                Happy Birthday বন্ধু! 🎉
+            </div>
+            <p style="margin-top: 30px; color: var(--accent); font-size: 1.2rem;">
+                Click anywhere for fireworks! Move mouse for rainbow trail!
+            </p>
+        </section>
+
+        <!-- Virtual Cake Section -->
+        <section class="cake-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px;">
+                🎂 Virtual Cake Cutting
+            </h2>
+            <div class="cake-container" id="cakeContainer">
+                <div class="cake-3d">
+                    <div class="cake-layer cake-bottom"></div>
+                    <div class="cake-layer cake-middle"></div>
+                    <div class="cake-layer cake-top"></div>
+                    <div class="candle" onclick="extinguishCandle(this)">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" onclick="extinguishCandle(this)">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" onclick="extinguishCandle(this)">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="cut-button" onclick="cutCake()">
+                ✂️ কেক কাটুন (Cut Cake)
+            </button>
+            <p id="cake-message" style="margin-top: 20px; color: var(--accent); font-size: 1.2rem; opacity: 0; transition: all 0.5s;">
+                🎉 কেক কাটা হয়ে গেছে! শুভ জন্মদিন! 🎉
+            </p>
+        </section>
+
+        <!-- Love Calculator Section -->
+        <section class="love-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--primary); margin-bottom: 40px;">
+                💕 Love Compatibility Calculator
+            </h2>
+            <div class="love-calculator">
+                <div class="love-inputs">
+                    <input type="text" class="love-input" id="calcName1" placeholder="Your Name">
+                    <div class="love-heart">❤️</div>
+                    <input type="text" class="love-input" id="calcName2" placeholder="Partner Name">
+                </div>
+                <button class="mega-btn btn-love" onclick="calculateMegaLove()" style="max-width: 300px; margin: 0 auto;">
+                    Calculate Love %
+                </button>
+                <div class="love-result" id="loveResult">0%</div>
+                <div class="love-message" id="loveMessage"></div>
+            </div>
+        </section>
+
+        <!-- 3D Ferris Wheel Section -->
+        <section class="ferris-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--secondary); text-align: center; margin-bottom: 40px;">
+                🎡 Birthday Ferris Wheel
+            </h2>
+            <div class="ferris-wheel" id="ferrisWheel">
+                <div class="wheel-rim"></div>
+                <div class="wheel-center"></div>
+                <!-- Cabins will be added by JS -->
+            </div>
+        </section>
+
+        <!-- Video Recorder Section -->
+        <section class="recorder-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--accent); margin-bottom: 40px;">
+                📹 Record Birthday Message
+            </h2>
+            <div class="recorder-container">
+                <div class="video-preview">
+                    <video id="recordVideo" autoplay playsinline muted></video>
+                    <div class="recording-indicator" id="recIndicator"></div>
+                </div>
+                <div class="recorder-controls">
+                    <button class="rec-btn rec-start" onclick="startRecording()">
+                        🔴 Start Recording
+                    </button>
+                    <button class="rec-btn rec-stop" onclick="stopRecording()">
+                        ⏹️ Stop Recording
+                    </button>
+                </div>
+                <div class="recorded-videos" id="recordedVideos"></div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--gold); margin-bottom: 20px;">
+                ⏳ Next Birthday Countdown
+            </h2>
+            <p style="color: var(--accent); margin-bottom: 30px;">Time remaining until the next celebration!</p>
+            <div class="countdown-container" id="countdownContainer">
+                <div class="countdown-box">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Face Filter Section -->
+        <section class="filter-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--hot-pink); margin-bottom: 40px;">
+                😊 AR Birthday Filters
+            </h2>
+            <div class="filter-container">
+                <video id="filterVideo" autoplay playsinline muted></video>
+                <canvas id="filterCanvas"></canvas>
+                <div id="filterOverlays"></div>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="mega-btn btn-magic" onclick="toggleHatFilter()" style="max-width: 200px; margin: 5px;">
+                    🎩 Birthday Hat
+                </button>
+                <button class="mega-btn btn-love" onclick="toggleCakeFilter()" style="max-width: 200px; margin: 5px;">
+                    🎂 Cake Face
+                </button>
+            </div>
+        </section>
+
+        <!-- AR QR Section -->
+        <section class="ar-section">
+            <h2 class="section-title" style="font-family: 'Orbitron'; font-size: 2.5rem; color: var(--accent); margin-bottom: 40px;">
+                📱 AR Experience
+            </h2>
+            <div class="ar-container">
+                <div class="ar-qr">
+                    <div id="arQRCode"></div>
+                    <p style="color: #333; margin-top: 10px; font-weight: bold;">Scan for 3D Cake!</p>
+                </div>
+                <div class="ar-instructions">
+                    <h3>How to Experience AR:</h3>
+                    <ol>
+                        <li>Open your phone camera</li>
+                        <li>Scan the QR code</li>
+                        <li>Point at any flat surface</li>
+                        <li>Watch the 3D Birthday Cake appear!</li>
+                        <li>Tap to place and interact!</li>
+                    </ol>
+                    <p style="margin-top: 20px; color: var(--primary);">
+                        *Works on iOS 12+ and Android 8+ with ARCore/ARKit
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    initAll();
+                }, 1000);
+            }, 3000);
+        });
+
+        function initAll() {
+            initFireworks();
+            initBalloons();
+            initFerrisWheel();
+            initRecorder();
+            initCountdown();
+            initFaceFilter();
+            generateARQR();
+            initRainbowTrail();
+        }
+
+        // Rainbow Trail Effect
+        function initRainbowTrail() {
+            const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+            let colorIndex = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                const trail = document.createElement('div');
+                trail.className = 'rainbow-trail';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.background = colors[colorIndex];
+                trail.style.boxShadow = `0 0 20px ${colors[colorIndex]}`;
+                document.body.appendChild(trail);
+                
+                colorIndex = (colorIndex + 1) % colors.length;
+                
+                setTimeout(() => trail.remove(), 1000);
+            });
+        }
+
+        // Fireworks System
+        function initFireworks() {
+            const canvas = document.getElementById('fireworks-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let fireworks = [];
+            let particles = [];
+
+            class Firework {
+                constructor(x, y, targetY, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.targetY = targetY;
+                    this.color = color;
+                    this.speed = 3;
+                    this.angle = -Math.PI / 2;
+                    this.velocity = { x: Math.cos(this.angle) * this.speed, y: Math.sin(this.angle) * this.speed };
+                    this.trail = [];
+                }
+
+                update() {
+                    this.trail.push({ x: this.x, y: this.y });
+                    if (this.trail.length > 10) this.trail.shift();
+
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                    this.velocity.y += 0.05; // gravity
+
+                    if (this.y <= this.targetY || this.velocity.y >= 0) {
+                        this.explode();
+                        return false;
+                    }
+                    return true;
+                }
+
+                explode() {
+                    for (let i = 0; i < 100; i++) {
+                        particles.push(new Particle(this.x, this.y, this.color));
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0]?.x || this.x, this.trail[0]?.y || this.y);
+                    for (let point of this.trail) {
+                        ctx.lineTo(point.x, point.y);
+                    }
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            class Particle {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 2;
+                    this.velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.02 + 0.01;
+                }
+
+                update() {
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                    this.velocity.y += 0.1; // gravity
+                    this.velocity.x *= 0.98; // friction
+                    this.velocity.y *= 0.98;
+                    this.alpha -= this.decay;
+                    return this.alpha > 0;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                fireworks = fireworks.filter(fw => {
+                    fw.update();
+                    fw.draw();
+                    return fw.y > fw.targetY && fw.velocity.y < 0;
+                });
+
+                particles = particles.filter(p => {
+                    const alive = p.update();
+                    p.draw();
+                    return alive;
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // Click to launch
+            document.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+                    const colors = ['#ff006e', '#8338ec', '#06ffa5', '#ffd700', '#ff4500', '#00d4ff'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    fireworks.push(new Firework(e.clientX, window.innerHeight, e.clientY, color));
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        function launchMegaFireworks() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight * 0.5;
+                    const colors = ['#ff006e', '#8338ec', '#06ffa5', '#ffd700'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Create firework manually
+                    const canvas = document.getElementById('fireworks-canvas');
+                    const event = new MouseEvent('click', {
+                        clientX: x,
+                        clientY: y
+                    });
+                    canvas.dispatchEvent(event);
+                }, i * 200);
+            }
+        }
+
+        // Balloon Physics
+        function initBalloons() {
+            const canvas = document.getElementById('balloon-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let balloons = [];
+            const colors = ['#ff006e', '#8338ec', '#06ffa5', '#ffd700', '#ff1493', '#00d4ff'];
+
+            class Balloon {
+                constructor(x, y) {
+                    this.x = x || Math.random() * canvas.width;
+                    this.y = y || canvas.height + 100;
+                    this.radius = 30 + Math.random() * 20;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.speed = 1 + Math.random() * 2;
+                    this.sway = Math.random() * 2;
+                    this.swayOffset = Math.random() * Math.PI * 2;
+                    this.popped = false;
+                }
+
+                update() {
+                    this.y -= this.speed;
+                    this.x += Math.sin(this.y * 0.01 + this.swayOffset) * this.sway;
+
+                    // Mouse interaction
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < this.radius + 20 && !this.popped) {
+                        this.pop();
+                    }
+
+                    return this.y > -100 && !this.popped;
+                }
+
+                pop() {
+                    this.popped = true;
+                    confetti({
+                        particleCount: 30,
+                        spread: 60,
+                        origin: { x: this.x / canvas.width, y: this.y / canvas.height },
+                        colors: [this.color]
+                    });
+                }
+
+                draw() {
+                    if (this.popped) return;
+                    
+                    // Balloon body
+                    ctx.beginPath();
+                    ctx.ellipse(this.x, this.y, this.radius, this.radius * 1.2, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    
+                    // Shine
+                    ctx.beginPath();
+                    ctx.ellipse(this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.2, this.radius * 0.3, -0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                    ctx.fill();
+
+                    // String
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y + this.radius * 1.2);
+                    ctx.quadraticCurveTo(
+                        this.x + Math.sin(this.y * 0.05) * 10, 
+                        this.y + this.radius * 1.2 + 30, 
+                        this.x, 
+                        this.y + this.radius * 1.2 + 60
+                    );
+                    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+
+            let mouse = { x: 0, y: 0 };
+            canvas.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            canvas.addEventListener('click', (e) => {
+                balloons.push(new Balloon(e.clientX, e.clientY));
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                balloons = balloons.filter(b => {
+                    b.update();
+                    b.draw();
+                    return b.y > -100 && !b.popped;
+                });
+
+                // Random spawn
+                if (Math.random() < 0.02) {
+                    balloons.push(new Balloon());
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        function activateBalloonParty() {
+            const canvas = document.getElementById('balloon-canvas');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const event = new MouseEvent('click', {
+                        clientX: Math.random() * canvas.width,
+                        clientY: canvas.height
+                    });
+                    canvas.dispatchEvent(event);
+                }, i * 100);
+            }
+        }
+
+        // Virtual Cake Functions
+        function extinguishCandle(candle) {
+            const flame = candle.querySelector('.flame');
+            flame.classList.add('extinguished');
+            
+            // Smoke effect
+            confetti({
+                particleCount: 20,
+                spread: 30,
+                origin: { x: candle.offsetLeft / window.innerWidth, y: 0.3 },
+                colors: ['#888', '#aaa', '#ccc'],
+                shapes: ['circle'],
+                scalar: 0.5
+            });
+        }
+
+        function cutCake() {
+            const cake = document.querySelector('.cake-3d');
+            cake.style.animation = 'none';
+            cake.style.transform = 'rotateX(20deg) scale(0.9)';
+            
+            document.getElementById('cake-message').style.opacity = '1';
+            
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#ff006e', '#8338ec', '#06ffa5', '#ffd700', '#ff1493']
+            });
+
+            // Slice animation
+            setTimeout(() => {
+                cake.style.transition = 'all 1s';
+                cake.style.transform = 'rotateX(0deg) scale(1)';
+            }, 1000);
+        }
+
+        function startCakeCutting() {
+            document.querySelector('.cake-section').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(cutCake, 1000);
+        }
+
+        // Love Calculator
+        function calculateMegaLove() {
+            const name1 = document.getElementById('calcName1').value || 'You';
+            const name2 = document.getElementById('calcName2').value || 'Crush';
+            
+            // Calculate based on names
+            let score = 0;
+            const combined = (name1 + name2).toLowerCase();
+            for (let char of combined) {
+                score += char.charCodeAt(0);
+            }
+            score = (score % 40) + 60; // Between 60-100
+            
+            const resultEl = document.getElementById('loveResult');
+            const messageEl = document.getElementById('loveMessage');
+            
+            resultEl.textContent = '0%';
+            resultEl.classList.add('show');
+            
+            // Count up animation
+            let current = 0;
+            const interval = setInterval(() => {
+                current++;
+                resultEl.textContent = current + '%';
+                if (current >= score) {
+                    clearInterval(interval);
+                    
+                    // Message based on score
+                    let message = '';
+                    if (score >= 90) message = '🔥 Soulmates! Perfect Match! 🔥';
+                    else if (score >= 80) message = '💖 Great Compatibility! Lovely! 💖';
+                    else if (score >= 70) message = '💕 Good Match! Give it a try! 💕';
+                    else message = '💝 Friendship is the best foundation! 💝';
+                    
+                    messageEl.textContent = message;
+                    
+                    confetti({
+                        particleCount: 150,
+                        spread: 100,
+                        colors: ['#ff006e', '#ff1493', '#ffd700'],
+                        shapes: ['heart']
+                    });
+                }
+            }, 20);
+        }
+
+        // Ferris Wheel
+        function initFerrisWheel() {
+            const wheel = document.getElementById('ferrisWheel');
+            const cabins = ['🎁', '🎈', '🎂', '💖', '🌟', '🎉', '🎊', '🎀'];
+            
+            cabins.forEach((emoji, index) => {
+                const angle = (index / cabins.length) * Math.PI * 2;
+                const radius = 150;
+                const x = Math.cos(angle) * radius + 175;
+                const y = Math.sin(angle) * radius + 175;
+                
+                const cabin = document.createElement('div');
+                cabin.className = 'cabin';
+                cabin.textContent = emoji;
+                cabin.style.left = x + 'px';
+                cabin.style.top = y + 'px';
+                wheel.appendChild(cabin);
+            });
+        }
+
+        // Video Recorder
+        let mediaRecorder;
+        let recordedChunks = [];
+        let stream;
+
+        async function initRecorder() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('recordVideo').srcObject = stream;
+            } catch (err) {
+                console.log('Camera not available');
+            }
+        }
+
+        function startRecording() {
+            if (!stream) return;
+            
+            recordedChunks = [];
+            mediaRecorder = new MediaRecorder(stream);
+            
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
+            };
+            
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.innerHTML = `
+                    <video controls src="${url}"></video>
+                    <p style="color: var(--accent); margin-top: 10px;">Birthday Message!</p>
+                `;
+                document.getElementById('recordedVideos').appendChild(videoCard);
+            };
+            
+            mediaRecorder.start();
+            document.getElementById('recIndicator').style.display = 'block';
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+                document.getElementById('recIndicator').style.display = 'none';
+            }
+        }
+
+        // Countdown
+        function initCountdown() {
+            // Set to next birthday (example: December 31)
+            const now = new Date();
+            let nextBirthday = new Date(now.getFullYear(), 11, 31); // Dec 31
+            
+            if (now > nextBirthday) {
+                nextBirthday = new Date(now.getFullYear() + 1, 11, 31);
+            }
+
+            function update() {
+                const diff = nextBirthday - new Date();
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            
+            setInterval(update, 1000);
+            update();
+        }
+
+        // Face Filter (Simplified version without face-api models)
+        let filterStream;
+        let hatFilter = false;
+        let cakeFilter = false;
+
+        async function initFaceFilter() {
+            try {
+                filterStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                document.getElementById('filterVideo').srcObject = filterStream;
+            } catch (err) {
+                console.log('Camera not available for filters');
+            }
+        }
+
+        function startFaceFilter() {
+            document.querySelector('.filter-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleHatFilter() {
+            hatFilter = !hatFilter;
+            updateFilters();
+        }
+
+        function toggleCakeFilter() {
+            cakeFilter = !cakeFilter;
+            updateFilters();
+        }
+
+        function updateFilters() {
+            const overlay = document.getElementById('filterOverlays');
+            overlay.innerHTML = '';
+            
+            if (hatFilter) {
+                const hat = document.createElement('div');
+                hat.className = 'birthday-hat';
+                hat.textContent = '🎩';
+                hat.style.left = '50%';
+                hat.style.top = '20%';
+                hat.style.transform = 'translateX(-50%)';
+                overlay.appendChild(hat);
+            }
+            
+            if (cakeFilter) {
+                const cake = document.createElement('div');
+                cake.className = 'birthday-hat';
+                cake.textContent = '🎂';
+                cake.style.left = '50%';
+                cake.style.top = '60%';
+                cake.style.transform = 'translateX(-50%)';
+                overlay.appendChild(cake);
+            }
+        }
+
+        // AR QR Code
+        function generateARQR() {
+            const arData = encodeURIComponent('https://your-website.com/ar-cake');
+            document.getElementById('arQRCode').innerHTML = 
+                `<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${arData}" alt="AR QR">`;
+        }
+
+        // Update Name
+        function updateMegaName() {
+            const name = document.getElementById('megaName').value;
+            document.getElementById('birthday-name-display').innerHTML = `Happy Birthday ${name}! 🎉`;
+            
+            // Announce
+            const msg = new SpeechSynthesisUtterance(`Happy Birthday ${name}! Enjoy your special day!`);
+            msg.rate = 0.9;
+            msg.pitch = 1.1;
+            speechSynthesis.speak(msg);
+        }
+
+        // Calculate Love from panel
+        function calculateLove() {
+            document.getElementById('calcName1').value = document.getElementById('loveName1').value;
+            document.getElementById('calcName2').value = document.getElementById('loveName2').value;
+            calculateMegaLove();
+            document.querySelector('.love-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
