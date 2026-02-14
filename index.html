@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 শুভ জন্মদিন - বিশেষ চমক</title>
-    <!-- ফন্ট ও ফন্ট অ্যাওসাম -->
+    <title>🎂 জন্মদিনের কেক ও চমক</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- কনফেটি লাইব্রেরি -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -17,13 +15,12 @@
         }
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
             position: relative;
         }
-        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড */
         .gradient-bg {
             position: fixed;
             top: 0;
@@ -34,6 +31,7 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             z-index: -1;
+            opacity: 0.3;
         }
         @keyframes gradient {
             0% { background-position: 0% 50%; }
@@ -47,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #1a1a2e;
+            background: #0f0f1f;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -69,7 +67,7 @@
         }
         /* হিরো সেকশন */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -81,7 +79,7 @@
             font-size: 4rem;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
             margin-bottom: 20px;
-            background: linear-gradient(90deg, gold, pink, #fff);
+            background: linear-gradient(90deg, gold, #ff69b4, #00ffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -92,6 +90,7 @@
             text-shadow: 0 0 30px rgba(255,215,0,0.8);
             margin-bottom: 30px;
         }
+        /* কাউন্টডাউন */
         .countdown {
             display: flex;
             gap: 20px;
@@ -100,11 +99,11 @@
             margin: 30px 0;
         }
         .count-box {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(8px);
             padding: 20px 30px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
             min-width: 100px;
         }
         .count-number {
@@ -119,22 +118,73 @@
             letter-spacing: 2px;
             color: #ddd;
         }
-        .scroll-btn {
-            margin-top: 40px;
-            padding: 15px 40px;
+        /* কেক সেকশন */
+        .cake-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .cake-container.locked {
+            filter: grayscale(0.7) blur(1px);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        .cake-emoji {
+            font-size: 8rem;
+            line-height: 1;
+            transition: 0.3s;
+        }
+        .candles {
+            font-size: 2rem;
+            margin-top: -10px;
+            letter-spacing: 5px;
+        }
+        .cake-status {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: gold;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        .cut-btn {
+            margin-top: 30px;
+            padding: 15px 50px;
             background: linear-gradient(45deg, #ff006e, #ff1493);
             border: none;
             border-radius: 50px;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             box-shadow: 0 10px 20px rgba(255,0,110,0.4);
             transition: 0.3s;
+            border: 2px solid gold;
+            font-weight: 600;
         }
-        .scroll-btn:hover {
+        .cut-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            border-color: gray;
+        }
+        .cut-btn:not(:disabled):hover {
             transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.6);
         }
         /* সেকশন */
         section {
@@ -158,7 +208,7 @@
             margin: 20px auto;
             border-radius: 2px;
         }
-        /* ফটো অ্যালবাম - মেসনরি গ্রিড */
+        /* ফটো অ্যালবাম */
         .photo-album {
             columns: 3;
             column-gap: 20px;
@@ -177,7 +227,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.4s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .photo-item:hover {
             transform: translateY(-10px) scale(1.02);
@@ -196,11 +246,12 @@
             left: 0;
             right: 0;
             padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             transform: translateY(100%);
             transition: 0.3s;
             color: gold;
             font-weight: 600;
+            font-size: 1.2rem;
         }
         .photo-item:hover .photo-overlay {
             transform: translateY(0);
@@ -267,7 +318,6 @@
             margin: 0 auto;
             white-space: pre-line;
         }
-        /* ফুটার */
         footer {
             text-align: center;
             padding: 40px;
@@ -336,7 +386,7 @@
     <!-- লোডার -->
     <div class="loader" id="loader">
         <div class="loader-cake">🎂</div>
-        <p style="margin-top: 20px; color: gold;">চমক তৈরি হচ্ছে...</p>
+        <p style="margin-top: 20px; color: gold;">জন্মদিনের চমক তৈরি হচ্ছে...</p>
     </div>
 
     <!-- লাইটবক্স -->
@@ -350,6 +400,7 @@
         <h1>🎉 শুভ জন্মদিন 🎉</h1>
         <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
         
+        <!-- কাউন্টডাউন (শুধু জন্মদিন না হলে দেখাবে) -->
         <div class="countdown" id="countdown">
             <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">দিন</span></div>
             <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">ঘণ্টা</span></div>
@@ -357,17 +408,25 @@
             <div class="count-box"><span class="count-number" id="secs">00</span><span class="count-label">সেকেন্ড</span></div>
         </div>
 
-        <a href="#photos" class="scroll-btn"><i class="fas fa-camera"></i> স্মৃতিগুলো দেখি</a>
+        <!-- কেক সেকশন -->
+        <div class="cake-section">
+            <div class="cake-container" id="cakeContainer">
+                <div class="cake-emoji" id="cakeEmoji">🎂</div>
+                <div class="candles" id="candles"></div>
+            </div>
+            <div class="cake-status" id="cakeStatus">জন্মদিনের অপেক্ষায়...</div>
+            <button class="cut-btn" id="cutBtn" disabled onclick="cutCake()">🍰 কেক কাটো</button>
+        </div>
     </section>
 
     <!-- ফটো অ্যালবাম -->
     <section id="photos">
         <h2 class="section-title"><i class="fas fa-images"></i> সোনালী স্মৃতি</h2>
         <div class="photo-album" id="photoAlbum">
-            <!-- নমুনা ছবি (আপনার নিজের লিংক বসান) -->
+            <!-- নমুনা ছবি (তোমার নিজের ছবির লিংক বসাও) -->
             <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
                 <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                <div class="photo-overlay">💖 সুন্দর মুহূর্ত</div>
+                <div class="photo-overlay">💖 প্রথম দেখা</div>
             </div>
             <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
                 <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
@@ -377,7 +436,6 @@
                 <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
                 <div class="photo-overlay">💖 হাসি</div>
             </div>
-            <!-- আরো যোগ করুন -->
         </div>
     </section>
 
@@ -393,7 +451,7 @@
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
-                    <p class="video-desc">তোমার জন্য ভালোবাসায় ভরা একটি বার্তা।</p>
+                    <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা তোমার জন্য।</p>
                 </div>
             </div>
             <div class="video-card">
@@ -433,72 +491,165 @@
 
     <script>
         (function() {
+            // ------------------ কনফিগারেশন (এখানে জন্মদিনের তথ্য বসাও) ------------------
+            const CONFIG = {
+                // জন্মদিনের মানুষের নাম (URL-এ ?name=... দিয়ে ওভাররাইড করা যাবে)
+                name: "স্নিগ্ধা", 
+                // জন্মসাল, মাস (০-ভিত্তিতে, তাই জানুয়ারি=০, ফেব্রুয়ারি=১, ...), তারিখ
+                birthYear: 2026,
+                birthMonth: 03,      // 03 = মে (May)
+                birthDay: 15
+            };
+            // -------------------------------------------------------------------------
+
+            // গ্লোবাল ভেরিয়েবল
+            let currentStatus = {
+                isBirthday: false,
+                age: 0,
+                cakeCut: false,
+                nextBirthday: null
+            };
+
+            // ইউআরএল থেকে নাম নেওয়া
+            const urlParams = new URLSearchParams(window.location.search);
+            const nameParam = urlParams.get('name');
+            if (nameParam) {
+                CONFIG.name = decodeURIComponent(nameParam);
+            }
+            document.getElementById('birthdayName').textContent = CONFIG.name;
+
             // লোডার লুকানো
             window.addEventListener('load', function() {
                 setTimeout(function() {
                     document.getElementById('loader').classList.add('hidden');
-                }, 1500); // লোডার দেখানোর পরে সরবে
+                }, 1500);
             });
 
-            // ইউআরএল থেকে নাম নেওয়া
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            if (name) {
-                document.getElementById('birthdayName').textContent = decodeURIComponent(name);
+            // হেল্পার ফাংশন: তারিখ সমান কিনা (শুধু বছর, মাস, দিন চেক)
+            function isSameDate(d1, d2) {
+                return d1.getFullYear() === d2.getFullYear() &&
+                       d1.getMonth() === d2.getMonth() &&
+                       d1.getDate() === d2.getDate();
             }
 
-            // কাউন্টডাউন (একটি উদাহরণ জন্মদিন: ১৫ মে)
-            function startCountdown() {
+            // স্ট্যাটাস আপডেট
+            function updateBirthdayStatus() {
                 const now = new Date();
-                let target = new Date(now.getFullYear(), 4, 15); // ১৫ মে (মাস ০-ভিত্তিতে, তাই ৪ = মে)
-                if (now > target) {
-                    target.setFullYear(now.getFullYear() + 1);
+                const currentYear = now.getFullYear();
+                
+                // চলতি বছরের জন্মদিন
+                const thisYearBirthday = new Date(currentYear, CONFIG.birthMonth, CONFIG.birthDay);
+                // আগামী বছরের জন্মদিন
+                const nextYearBirthday = new Date(currentYear + 1, CONFIG.birthMonth, CONFIG.birthDay);
+                
+                // বের করি পরবর্তী জন্মদিন
+                let nextBirthday;
+                if (now < thisYearBirthday) {
+                    nextBirthday = thisYearBirthday;
+                } else {
+                    nextBirthday = nextYearBirthday;
                 }
+                currentStatus.nextBirthday = nextBirthday;
 
-                function update() {
-                    const diff = target - new Date();
-                    if (diff <= 0) {
-                        // জন্মদিন এসে গেছে!
-                        document.getElementById('days').textContent = '00';
-                        document.getElementById('hours').textContent = '00';
-                        document.getElementById('mins').textContent = '00';
-                        document.getElementById('secs').textContent = '00';
-                        return;
+                // আজ কি জন্মদিন?
+                const isBirthdayToday = isSameDate(now, thisYearBirthday);
+                
+                if (isBirthdayToday) {
+                    // বয়স গণনা: currentYear - birthYear (কারণ আজ জন্মদিন)
+                    currentStatus.age = currentYear - CONFIG.birthYear;
+                    currentStatus.isBirthday = true;
+
+                    // চেক করা যে আজ কেক কাটা হয়েছে কিনা (localStorage)
+                    const todayStr = `${currentYear}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
+                    const cutKey = `cakeCut_${todayStr}`;
+                    if (localStorage.getItem(cutKey) === 'true') {
+                        currentStatus.cakeCut = true;
+                    } else {
+                        currentStatus.cakeCut = false;
                     }
-                    document.getElementById('days').textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-                    document.getElementById('hours').textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-                    document.getElementById('mins').textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-                    document.getElementById('secs').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+                } else {
+                    currentStatus.isBirthday = false;
+                    currentStatus.cakeCut = false;
                 }
-                setInterval(update, 1000);
-                update();
             }
-            startCountdown();
 
-            // কনফেটি
-            function startConfetti() {
+            // কাউন্টডাউন আপডেট
+            function updateCountdown() {
+                const now = new Date();
+                const diff = currentStatus.nextBirthday - now;
+                if (diff <= 0) {
+                    // জন্মদিন চলে এসেছে, স্ট্যাটাস রিফ্রেশ
+                    updateBirthdayStatus();
+                    renderCake();
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+                document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+            }
+
+            // কেক ও বাটনের অবস্থা রেন্ডার
+            function renderCake() {
+                const cakeContainer = document.getElementById('cakeContainer');
+                const cakeEmoji = document.getElementById('cakeEmoji');
+                const candlesDiv = document.getElementById('candles');
+                const cakeStatus = document.getElementById('cakeStatus');
+                const cutBtn = document.getElementById('cutBtn');
+
+                if (currentStatus.isBirthday) {
+                    // জন্মদিন
+                    cakeContainer.classList.remove('locked');
+                    if (currentStatus.cakeCut) {
+                        cakeEmoji.textContent = '🍰'; // কাটা কেক
+                        candlesDiv.innerHTML = ''; // মোমবাতি সরিয়ে দাও
+                        cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
+                        cutBtn.disabled = true;
+                    } else {
+                        cakeEmoji.textContent = '🎂';
+                        // বয়স অনুযায়ী মোমবাতি
+                        const candleCount = currentStatus.age;
+                        let candlesHtml = '';
+                        for (let i = 0; i < candleCount; i++) {
+                            candlesHtml += '🕯️';
+                        }
+                        candlesDiv.innerHTML = candlesHtml;
+                        cakeStatus.textContent = `🎂 ${candleCount} টি মোমবাতি জ্বলছে!`;
+                        cutBtn.disabled = false;
+                    }
+                } else {
+                    // জন্মদিন নয়
+                    cakeContainer.classList.add('locked');
+                    cakeEmoji.textContent = '🎂';
+                    candlesDiv.innerHTML = '🔒';
+                    const next = currentStatus.nextBirthday;
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    cakeStatus.textContent = `পরবর্তী জন্মদিন: ${next.toLocaleDateString('bn-BD', options)}`;
+                    cutBtn.disabled = true;
+                }
+            }
+
+            // কেক কাটার ফাংশন (গ্লোবালি কল করার জন্য)
+            window.cutCake = function() {
+                if (!currentStatus.isBirthday || currentStatus.cakeCut) return;
+
+                // লোকাল স্টোরেজে সেভ
+                const today = new Date();
+                const todayStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
+                localStorage.setItem(`cakeCut_${todayStr}`, 'true');
+
+                currentStatus.cakeCut = true;
+                renderCake();
+
+                // কনফেটি
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
                 setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
-            }
-            startConfetti();
-
-            // ভাসমান হৃদয়
-            function createFloatingHearts() {
-                const container = document.getElementById('heartsContainer');
-                const hearts = ['💖', '💝', '💗', '💓', '💕', '💘', '💞'];
-                setInterval(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
-                    heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                    container.appendChild(heart);
-                    setTimeout(() => heart.remove(), 10000);
-                }, 1500);
-            }
-            createFloatingHearts();
+            };
 
             // লাইটবক্স
             window.openLightbox = function(url) {
@@ -519,6 +670,33 @@
                     }
                 });
             });
+
+            // ভাসমান হৃদয়
+            function createFloatingHearts() {
+                const container = document.getElementById('heartsContainer');
+                const hearts = ['💖', '💝', '💗', '💓', '💕', '💘', '💞'];
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                    heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                    container.appendChild(heart);
+                    setTimeout(() => heart.remove(), 10000);
+                }, 1500);
+            }
+            createFloatingHearts();
+
+            // ইনিশিয়াল স্ট্যাটাস ও ইন্টারভাল
+            updateBirthdayStatus();
+            renderCake();
+            updateCountdown(); // প্রথমবার দেখানোর জন্য
+            setInterval(() => {
+                updateBirthdayStatus();
+                renderCake();
+                updateCountdown();
+            }, 1000);
         })();
     </script>
 </body>
