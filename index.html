@@ -690,7 +690,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:৩২ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:৪০ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -862,7 +862,7 @@
                 });
         });
         
-        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:৩২ PM ----------
+        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:৪০ PM ----------
         const CONFIG = {
             month: new Date().getMonth(),
             day: new Date().getDate(),
@@ -889,7 +889,7 @@
         let analyser = null;
         let blowInterval = null;
         let lastSpokenSecond = null;
-        let audioPlayed = false; // অডিও একবারই বাজবে
+        let audioPlayed = false;
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
         function formatTime(date) {
@@ -920,8 +920,9 @@
                     utterance.rate = 0.9;
                     utterance.pitch = 1;
                     utterance.volume = 1;
-                    window.speechSynthesis.cancel(); // আগের কথা বন্ধ করে নতুন বলবে
+                    window.speechSynthesis.cancel();
                     window.speechSynthesis.speak(utterance);
+                    console.log('Speaking:', numbers[second]);
                 } catch(e) {
                     console.log('Speech error:', e);
                 }
@@ -932,61 +933,67 @@
         function updateCountdown() {
             const now = new Date();
             
-            // আজ রাত ৭:৩২ PM টেস্ট
+            // আজ রাত ৭:৪০ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(19, 32, 0); // ৭:৩২ PM
+            testTime.setHours(19, 40, 0); // ৭:৪০ PM
+            testTime.setSeconds(0);
             
             const diff = testTime - now;
             
+            // কাউন্টডাউন সংখ্যা আপডেট
+            if (diff > 0) {
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+                document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+            }
+            
             // শেষ ১০ সেকেন্ডে কাউন্টডাউন ভয়েস
             if (diff <= 10000 && diff > 0) {
-                const secondsLeft = Math.floor(diff / 1000) + 1;
+                const secondsLeft = Math.ceil(diff / 1000);
                 if (secondsLeft <= 10 && secondsLeft > 0 && lastSpokenSecond !== secondsLeft) {
                     speakNumber(secondsLeft);
                     lastSpokenSecond = secondsLeft;
                 }
             }
             
-            if (diff <= 0) {
-                // ৭:৩২ PM বেজে গেছে - অডিও চালান (একবারই)
-                if (!audioPlayed) {
-                    audioPlayed = true;
-                    
-                    // অডিও চালানোর চেষ্টা
-                    birthdayAudio.play().then(() => {
-                        console.log('অডিও চালু হয়েছে');
-                    }).catch(error => {
-                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
-                        // ইউজার ক্লিক করলে চালানোর জন্য
-                        document.addEventListener('click', function clickOnce() {
-                            birthdayAudio.play();
-                            document.removeEventListener('click', clickOnce);
-                        }, { once: true });
-                    });
-                }
+            // টাইম শেষ হলে
+            if (diff <= 0 && !audioPlayed) {
+                audioPlayed = true;
                 
+                // কাউন্টডাউন স্ক্রিন লুকাও এবং মেইন কন্টেন্ট দেখাও
+                document.getElementById('countdownScreen').classList.add('hide');
+                document.getElementById('mainContent').classList.add('show');
+                
+                // কনফেটি
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                document.getElementById('countdownScreen').classList.add('hide');
-                document.getElementById('mainContent').classList.add('show');
-                
+                // স্টেট লোড এবং কেক রেন্ডার
                 loadState();
                 renderCake();
+                
+                // অডিও চালানোর চেষ্টা
+                birthdayAudio.play().then(() => {
+                    console.log('অডিও চালু হয়েছে');
+                }).catch(error => {
+                    console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                    // ইউজার ক্লিক করলে চালানোর জন্য
+                    document.addEventListener('click', function clickOnce() {
+                        birthdayAudio.play();
+                        document.removeEventListener('click', clickOnce);
+                    }, { once: true });
+                });
+                
+                // মাইক্রোফোন শুরু
                 setTimeout(startMicrophone, 1000);
-                return;
             }
-            
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = '00';
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('mins').textContent = String(mins).padStart(2, '0');
-            document.getElementById('secs').textContent = String(secs).padStart(2, '0');
         }
         
         function loadState() {
@@ -999,7 +1006,6 @@
             
             if (cakeCut) {
                 document.getElementById('contentSections').classList.add('show');
-                // কেক কাটা থাকলে অডিও বন্ধ
                 birthdayAudio.pause();
                 birthdayAudio.currentTime = 0;
             }
@@ -1123,7 +1129,6 @@
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
-            // অডিও বন্ধ করুন - কেক কাটার সাথে সাথেই
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
             
