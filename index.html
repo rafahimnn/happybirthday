@@ -50,7 +50,7 @@
             z-index: -1;
         }
         
-        /* ====== Floating Butterflies & Flowers ====== */
+        /* ====== Floating Butterflies & Flowers (simple) ====== */
         .floating-elements {
             position: fixed;
             top: 0;
@@ -65,29 +65,29 @@
         .float-item {
             position: absolute;
             font-size: 2rem;
-            opacity: 0.6;
-            animation: floatAround 15s infinite linear;
+            opacity: 0.5;
+            animation: simpleFloat 12s infinite ease-in-out;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
         }
         
-        @keyframes floatAround {
+        @keyframes simpleFloat {
             0% {
-                transform: translate(0, 100vh) rotate(0deg) scale(0.5);
+                transform: translate(0, 100vh) rotate(0deg);
                 opacity: 0;
             }
-            10% {
+            20% {
                 opacity: 0.8;
-                transform: translate(10vw, 80vh) rotate(45deg) scale(1);
+                transform: translate(15vw, 80vh) rotate(15deg);
             }
             50% {
-                transform: translate(50vw, 40vh) rotate(180deg) scale(1.2);
+                transform: translate(40vw, 50vh) rotate(30deg);
             }
-            90% {
+            80% {
                 opacity: 0.8;
-                transform: translate(80vw, 20vh) rotate(315deg) scale(1);
+                transform: translate(70vw, 20vh) rotate(15deg);
             }
             100% {
-                transform: translate(100vw, -20vh) rotate(360deg) scale(0.5);
+                transform: translate(90vw, -10vh) rotate(0deg);
                 opacity: 0;
             }
         }
@@ -99,12 +99,12 @@
         
         @keyframes flutter {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
         }
         
         .flower {
             font-size: 1.8rem;
-            animation: spin 10s infinite linear;
+            animation: spin 12s infinite linear;
         }
         
         @keyframes spin {
@@ -533,7 +533,7 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* ====== REASONS SCREEN - Complete cause.html style ====== */
+        /* ====== REASONS SCREEN - Exact copy of cause.html ====== */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -578,7 +578,7 @@
         .reason-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 2rem 1.5rem;
+            padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
             max-width: 500px;
@@ -596,7 +596,7 @@
         }
         
         .reason-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             color: #4a4a4a;
             margin-bottom: 1rem;
@@ -1222,7 +1222,7 @@
         
         @media (max-width: 768px) {
             .reasons-header h1 { font-size: 2.5rem; }
-            .reason-text { font-size: 1.2rem; }
+            .reason-text { font-size: 1.1rem; }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
             .video-grid { grid-template-columns: 1fr; }
@@ -1321,7 +1321,7 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN - Complete cause.html style -->
+    <!-- REASONS SCREEN - Exact cause.html style -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-header">
             <h1>Why You're My Best Friend! 💖</h1>
