@@ -567,7 +567,7 @@
         
         .reasons-container {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             min-height: 300px;
             display: flex;
@@ -578,10 +578,10 @@
         .reason-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 2.5rem 2rem;
+            padding: 2rem 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
-            max-width: 600px;
+            max-width: 500px;
             width: 100%;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
@@ -596,16 +596,16 @@
         }
         
         .reason-text {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: #4a4a4a;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 500;
             word-wrap: break-word;
         }
         
         .reason-emoji {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         
         .gif-overlay {
@@ -645,7 +645,7 @@
             background: linear-gradient(45deg, #ff69b4, #ff99cc);
             border: none;
             border-radius: 50px;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             font-size: 1.2rem;
             color: white;
             cursor: pointer;
@@ -653,7 +653,7 @@
             font-family: 'Comic Neue', cursive;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
             border: 2px solid rgba(255,255,255,0.8);
-            min-width: 220px;
+            min-width: 200px;
             font-weight: 700;
         }
         
@@ -1321,7 +1321,7 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN (cause.html style) -->
+    <!-- REASONS SCREEN - Complete cause.html style -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-header">
             <h1>Why You're My Best Friend! 💖</h1>
@@ -1546,12 +1546,28 @@
         let audioAllowed = false;
         let resetTimer = null;
 
-        // Reasons data
+        // Reasons data - exactly like cause.html
         const reasons = [
-            { text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", emoji: "🌟" },
-            { text: "May your day be filled with love, laughter, and endless joy.", emoji: "💗" },
-            { text: "Wishing you success, happiness, and everything your heart desires.", emoji: "💕" },
-            { text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", emoji: "🌟" }
+            { 
+                text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif"
+            },
+            { 
+                text: "May your day be filled with love, laughter, and endless joy.", 
+                emoji: "💗",
+                gif: "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
+            },
+            { 
+                text: "Wishing you success, happiness, and everything your heart desires.", 
+                emoji: "💕",
+                gif: "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
+            },
+            { 
+                text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif"
+            }
         ];
         
         let currentReasonIndex = 0;
@@ -1896,20 +1912,36 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        // Reasons screen functions
+        // Reasons screen functions - exactly like cause.html
+        function createReasonCard(reason) {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            
+            const text = document.createElement('div');
+            text.className = 'reason-text';
+            text.innerHTML = `${reason.emoji} ${reason.text}`;
+            
+            const emoji = document.createElement('div');
+            emoji.className = 'reason-emoji';
+            emoji.textContent = reason.emoji;
+            
+            const gifOverlay = document.createElement('div');
+            gifOverlay.className = 'gif-overlay';
+            gifOverlay.innerHTML = `<img src="${reason.gif}" alt="Friendship Memory">`;
+            
+            card.appendChild(text);
+            card.appendChild(emoji);
+            card.appendChild(gifOverlay);
+            
+            return card;
+        }
+
         function displayReason() {
             if (isTransitioning) return;
             isTransitioning = true;
 
             if (currentReasonIndex < reasons.length) {
-                const reason = reasons[currentReasonIndex];
-                const card = document.createElement('div');
-                card.className = 'reason-card';
-                card.innerHTML = `
-                    <div class="reason-text">${reason.emoji} ${reason.text}</div>
-                    <div class="reason-emoji">${reason.emoji}</div>
-                `;
-                
+                const card = createReasonCard(reasons[currentReasonIndex]);
                 const container = document.getElementById('reasonsContainer');
                 container.innerHTML = '';
                 container.appendChild(card);
