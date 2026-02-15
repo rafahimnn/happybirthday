@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 জন্মদিনের চমক</title>
+    <title>🎂 জন্মদিনের চমক - Contact</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,7 +15,7 @@
         }
         
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             overflow-x: hidden;
             color: white;
         }
@@ -27,6 +29,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
+            filter: brightness(0.8);
         }
         
         .overlay {
@@ -35,7 +38,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(128,0,128,0.5));
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(128,0,128,0.4));
             z-index: -1;
         }
         
@@ -50,7 +53,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.7);
             z-index: 1000;
             transition: 1s;
             text-align: center;
@@ -316,92 +319,195 @@
             color: white;
         }
         
-        /* কন্ট্যাক্ট বাটন */
-        .contact-section {
-            text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 50px;
-            border: 2px solid gold;
-        }
-        
-        .contact-title {
-            font-size: 30px;
-            color: gold;
-            margin-bottom: 25px;
-        }
-        
-        .contact-buttons {
-            display: flex;
-            gap: 20px;
+        /* কন্ট্যাক্ট পৃষ্ঠার স্টাইল */
+        .contact-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: none;
             justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
         }
         
-        .contact-btn {
-            padding: 15px 30px;
+        .contact-page.show {
+            display: flex;
+        }
+        
+        .contact-container {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px 30px;
+            border-radius: 40px;
+            border: 3px solid gold;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .contact-container h1 {
+            color: gold;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* EmailJS ফর্ম */
+        .contact-form {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid gold;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 30px;
+            border: 2px solid gold;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: none;
+        }
+        
+        .submit-btn {
+            background: gold;
+            color: black;
             border: none;
+            padding: 15px 40px;
             border-radius: 50px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
+            width: 100%;
+            border: 2px solid white;
             transition: 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px gold;
+        }
+        
+        /* কন্ট্যাক্ট অপশন (নিচের অংশ) */
+        .contact-options {
+            text-align: center;
+        }
+        
+        .contact-options h2 {
+            color: gold;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            border: 2px solid gold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-item i {
+            font-size: 24px;
+            color: gold;
+            width: 30px;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            word-break: break-all;
+        }
+        
+        .contact-item a:hover {
+            color: gold;
+        }
+        
+        .close-btn {
+            margin-top: 30px;
+            background: gold;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid white;
+            width: 100%;
+        }
+        
+        .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px gold;
+        }
+        
+        /* হোম পৃষ্ঠায় কন্ট্যাক্ট বাটন */
+        .contact-home-btn {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .contact-page-btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            font-size: 20px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid gold;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            border: 2px solid white;
-            min-width: 160px;
-            justify-content: center;
         }
         
-        .contact-btn.email {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            color: white;
-        }
-        
-        .contact-btn.phone {
-            background: linear-gradient(45deg, #11998e, #38ef7d);
-            color: white;
-        }
-        
-        .contact-btn.whatsapp {
-            background: linear-gradient(45deg, #25d366, #128c7e);
-            color: white;
-        }
-        
-        .contact-btn:hover {
+        .contact-page-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 0 30px gold;
         }
         
-        /* মাইক্রোফোন বাটন */
-        .mic-btn {
-            background: rgba(0,0,0,0.8);
-            color: gold;
-            border: 2px solid gold;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 16px;
-            cursor: pointer;
+        /* Status message */
+        #form-status {
+            text-align: center;
+            font-weight: bold;
             margin-top: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .mic-btn i {
             color: gold;
-            font-size: 20px;
-        }
-        
-        .mic-btn.active {
-            animation: micPulse 1s infinite;
-        }
-        
-        @keyframes micPulse {
-            0%,100% { box-shadow: 0 0 20px gold; }
-            50% { box-shadow: 0 0 40px hotpink; }
         }
         
         /* লাইটবক্স */
@@ -415,7 +521,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            z-index: 3000;
         }
         
         .lightbox.show {
@@ -490,10 +596,12 @@
                 <div class="candles" id="candles"></div>
                 <div class="cake-status" id="cakeStatus"></div>
                 <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 কেক কাটো</button>
-                
-                <!-- মাইক্রোফোন বাটন -->
-                <button class="mic-btn" id="micBtn" onclick="toggleMicrophone()">
-                    <i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান
+            </div>
+            
+            <!-- কন্ট্যাক্ট পৃষ্ঠায় যাওয়ার বাটন -->
+            <div class="contact-home-btn">
+                <button class="contact-page-btn" onclick="openContactPage()">
+                    <i class="fas fa-address-card"></i> যোগাযোগ
                 </button>
             </div>
         </section>
@@ -550,28 +658,80 @@
 🎂 শুভ জন্মদিন 🎂
                 </div>
             </div>
-            
-            <!-- কন্ট্যাক্ট সেকশন -->
-            <div class="contact-section">
-                <h2 class="contact-title">📞 যোগাযোগ করুন</h2>
-                <div class="contact-buttons">
-                    <button class="contact-btn email" onclick="window.location.href='mailto:example@gmail.com'">
-                        <i class="fas fa-envelope"></i> ইমেল
-                    </button>
-                    <button class="contact-btn phone" onclick="window.location.href='tel:+880123456789'">
-                        <i class="fas fa-phone"></i> ফোন
-                    </button>
-                    <button class="contact-btn whatsapp" onclick="window.open('https://wa.me/880123456789')">
-                        <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
-                    </button>
-                </div>
-            </div>
         </div>
         
         <footer>
             <p>❤️ তৈরি করেছে ভালোবাসা</p>
             <p>© ২০২৬ স্পেশাল ডে</p>
         </footer>
+    </div>
+    
+    <!-- কন্ট্যাক্ট পৃষ্ঠা -->
+    <div class="contact-page" id="contactPage">
+        <div class="contact-container">
+            <h1><i class="fas fa-address-card"></i> যোগাযোগ</h1>
+            
+            <!-- EmailJS Form (উপরে) -->
+            <div class="contact-form">
+                <h2 style="color: gold; text-align: center; margin-bottom: 20px;">মেসেজ পাঠান</h2>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">আপনার নাম</label>
+                        <input type="text" id="name" name="from_name" placeholder="আপনার নাম লিখুন" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">আপনার ইমেল</label>
+                        <input type="email" id="email" name="from_email" placeholder="আপনার ইমেল লিখুন" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">বার্তা</label>
+                        <textarea id="message" name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> মেসেজ পাঠান
+                    </button>
+                    
+                    <div id="form-status"></div>
+                </form>
+            </div>
+            
+            <!-- কন্ট্যাক্ট অপশন (নিচে) -->
+            <div class="contact-options">
+                <h2><i class="fas fa-phone-alt"></i> সরাসরি যোগাযোগ</h2>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+8801576964319">+8801576964319</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/8801576964319" target="_blank">WhatsApp</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:rabbiahmedfahim44@gmail.com">rabbiahmedfahim44@gmail.com</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fab fa-facebook"></i>
+                    <a href="https://www.facebook.com/profile.php?id=6155983603427" target="_blank">RA Music</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/rafahimn" target="_blank">RA Music ★</a>
+                </div>
+            </div>
+            
+            <button class="close-btn" onclick="closeContactPage()">
+                <i class="fas fa-times"></i> বন্ধ করুন
+            </button>
+        </div>
     </div>
     
     <!-- লাইটবক্স -->
@@ -581,12 +741,54 @@
     </div>
     
     <script>
+        // ---------- EmailJS initialization with your credentials ----------
+        (function() {
+            emailjs.init("MV90CKf_ZoIgGoU9w"); // Your Public Key
+        })();
+        
+        // ---------- Contact Form Handler ----------
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const statusDiv = document.getElementById('form-status');
+            statusDiv.innerHTML = '📤 পাঠানো হচ্ছে...';
+            statusDiv.style.color = 'gold';
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS - Your Service ID and Template ID
+            emailjs.sendForm('rafahimn', 'rafahimn', this)
+                .then(function() {
+                    statusDiv.innerHTML = '✅ মেসেজ সফলভাবে পাঠানো হয়েছে!';
+                    statusDiv.style.color = '#00ff00';
+                    document.getElementById('contact-form').reset();
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        statusDiv.innerHTML = '';
+                    }, 3000);
+                }, function(error) {
+                    console.error('EmailJS Error:', error);
+                    statusDiv.innerHTML = '❌ মেসেজ পাঠানো যায়নি। আবার চেষ্টা করুন।';
+                    statusDiv.style.color = '#ff4444';
+                })
+                .finally(function() {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+        
         // ---------- কনফিগারেশন ----------
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি = 1
+            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
             day: 15,         // ১৫ তারিখ
             age: 16,         // ১৬ বছর
-            name: "প্রিয়জন"
+            name: "প্রিয়জন",
+            phone: "+8801576964319",
+            email: "rabbiahmedfahim44@gmail.com"
         };
         
         // ইউআরএল থেকে নাম নিন
@@ -605,7 +807,6 @@
         let audioContext = null;
         let analyser = null;
         let blowInterval = null;
-        let micActive = false;
         
         // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
@@ -631,6 +832,10 @@
                 
                 loadState();
                 renderCake();
+                
+                // মাইক্রোফোন স্বয়ংক্রিয় শুরু
+                setTimeout(startMicrophone, 1000);
+                
                 return;
             }
             
@@ -668,7 +873,6 @@
             const candlesDiv = document.getElementById('candles');
             const statusDiv = document.getElementById('cakeStatus');
             const cutBtn = document.getElementById('cutBtn');
-            const micBtn = document.getElementById('micBtn');
             
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
@@ -676,14 +880,12 @@
                 statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
                 cutBtn.style.display = 'none';
-                micBtn.style.display = 'none';
                 stopMicrophone();
                 return;
             }
             
             cakeEmoji.textContent = '🎂';
             cutBtn.style.display = 'block';
-            micBtn.style.display = 'flex';
             
             // মোমবাতি
             let html = '';
@@ -743,23 +945,14 @@
             }
         }
         
-        // ---------- মাইক্রোফোন টগল ----------
-        window.toggleMicrophone = function() {
-            const micBtn = document.getElementById('micBtn');
-            
-            if (micActive) {
-                stopMicrophone();
-                micBtn.classList.remove('active');
-                micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান';
-                micActive = false;
-            } else {
-                startMicrophone();
-            }
-        };
-        
         // ---------- মাইক্রোফোন চালু ----------
         function startMicrophone() {
             if (cakeCut || candlesBlown === totalCandles) return;
+            
+            // চেক করি মাইক্রোফোন আগে থেকে চালু আছে কিনা
+            if (audioStream) {
+                stopMicrophone();
+            }
             
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
@@ -788,20 +981,17 @@
                         }
                         const avg = sum / bufferLength;
                         
-                        // ফুঁ শনাক্ত
+                        // ফুঁ শনাক্ত - থ্রেশহোল্ড 50
                         if (avg > 50) {
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2));
                         }
                     }, 150);
                     
-                    // বাটন আপডেট
-                    const micBtn = document.getElementById('micBtn');
-                    micBtn.classList.add('active');
-                    micBtn.innerHTML = '<i class="fas fa-microphone-alt"></i> ফুঁ দিচ্ছেন...';
-                    micActive = true;
+                    console.log('মাইক্রোফোন চালু হয়েছে');
                 })
                 .catch(err => {
-                    alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! মোমবাতিতে ট্যাপ করে নিভান।');
+                    console.log('মাইক্রোফোন অনুমতি নেই:', err);
+                    // অনুমতি না থাকলেও ট্যাপ করে নেভানো যাবে
                 });
         }
         
@@ -821,11 +1011,6 @@
                 audioContext.close();
                 audioContext = null;
             }
-            
-            const micBtn = document.getElementById('micBtn');
-            micBtn.classList.remove('active');
-            micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান';
-            micActive = false;
         }
         
         // ---------- কেক কাটা ----------
@@ -848,15 +1033,23 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
         
+        // ---------- কন্ট্যাক্ট পৃষ্ঠা খোলা ----------
+        window.openContactPage = function() {
+            document.getElementById('contactPage').classList.add('show');
+        };
+        
+        window.closeContactPage = function() {
+            document.getElementById('contactPage').classList.remove('show');
+        };
+        
         // ---------- লাইটবক্স ----------
         window.openLightbox = function(url) {
             document.getElementById('lightboxImg').src = url;
             document.getElementById('lightbox').classList.add('show');
         };
         
-        // ---------- কনফেটি লাইব্রেরি ----------
+        // ---------- কনফেটি ফাংশন ----------
         function confetti(options) {
-            // সিম্পল কনফেটি
             if (typeof window.confetti === 'function') {
                 window.confetti(options);
             }
@@ -870,6 +1063,9 @@
             loadState();
             renderCake();
             confetti({ particleCount: 100, spread: 70 });
+            
+            // মাইক্রোফোন স্বয়ংক্রিয় শুরু
+            setTimeout(startMicrophone, 1000);
         } else {
             setInterval(updateCountdown, 1000);
             updateCountdown();
