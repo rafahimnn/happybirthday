@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 Birthday Surprise - Complete Journey</title>
+    <title>🎂 Birthday Surprise - 15 February</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@700&family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -22,7 +22,6 @@
             min-height: 100vh;
         }
         
-        /* ========== VIDEO BACKGROUND ========== */
         .video-bg {
             position: fixed;
             top: 0;
@@ -50,7 +49,6 @@
             z-index: -1;
         }
         
-        /* ========== CUSTOM HEART CURSOR ========== */
         .custom-cursor {
             width: 30px;
             height: 30px;
@@ -67,7 +65,6 @@
             filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
         }
         
-        /* ========== FLOATING HEARTS & SPARKLES ========== */
         .floating-hearts {
             position: fixed;
             width: 100%;
@@ -121,7 +118,6 @@
             100% { transform: translateY(-50px); }
         }
         
-        /* ========== BUTTONS (Play & Contact) ========== */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
@@ -190,7 +186,6 @@
             50% { transform: scale(1.1); opacity: 0.9; }
         }
         
-        /* ========== COUNTDOWN SCREEN ========== */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -262,7 +257,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         
-        /* ========== GREETING SCREEN (Page 1) ========== */
         .greeting-screen {
             position: fixed;
             top: 0;
@@ -330,7 +324,6 @@
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
         
-        /* ========== CAKE SCREEN (Page 2) ========== */
         .cake-screen {
             position: fixed;
             top: 0;
@@ -441,7 +434,6 @@
             box-shadow: 0 0 25px gold;
         }
         
-        /* ========== STORYLINE BUTTON (After Cake) ========== */
         .storyline-btn-container {
             margin-top: 30px;
             text-align: center;
@@ -473,7 +465,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* ========== MEMORY GALLERY SCREEN (Page 3) ========== */
         .memory-screen {
             position: fixed;
             top: 0;
@@ -587,7 +578,6 @@
             color: #666;
         }
         
-        /* Video Section */
         .video-section {
             max-width: 800px;
             margin: 3rem auto;
@@ -619,7 +609,6 @@
             object-fit: cover;
         }
         
-        /* Letter Section */
         .letter-section {
             max-width: 800px;
             margin: 3rem auto;
@@ -669,7 +658,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
         
-        /* ========== CONTACT PAGE ========== */
         .contact-page {
             position: fixed;
             top: 0;
@@ -862,7 +850,6 @@
             font-size: 14px;
         }
         
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .memory-header h1 { font-size: 2.5rem; }
             .memory-container { grid-template-columns: 1fr; }
@@ -932,7 +919,7 @@
                 <span class="count-label">Secs</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 15 Feb 12:00 AM!</div>
     </div>
 
     <!-- GREETING SCREEN (Page 1) -->
@@ -1089,11 +1076,11 @@
                 });
         });
 
-        // Configuration
+        // ========== CONFIGURATION - BIRTHDAY 15 FEBRUARY ==========
         const CONFIG = {
-            month: 1,        // February
-            day: 15,         // 15th
-            age: 16,         // 16 years
+            month: 1,        // February (0 = January, 1 = February)
+            day: 15,         // 15th February
+            age: 16,         // 16 years old
             name: "Priya"
         };
 
