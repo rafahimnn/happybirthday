@@ -172,7 +172,7 @@
             padding: 15px;
         }
 
-        /* হিরো সেকশন */
+        /* হিরো সেকশন - শুরুতে শুধু কেক থাকবে */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -327,6 +327,21 @@
         .action-btn:not(:disabled):hover {
             transform: scale(1.03);
             box-shadow: 0 12px 30px #FFE66D;
+        }
+
+        /* কন্টেন্ট সেকশন - শুরুতে লুকানো থাকবে */
+        .content-sections {
+            display: none;
+        }
+
+        .content-sections.visible {
+            display: block;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ফটো অ্যালবাম - ৬টি ছবি */
@@ -641,7 +656,7 @@
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
         <div class="container">
-            <!-- হিরো সেকশন -->
+            <!-- হিরো সেকশন - শুধু কেক -->
             <section class="hero">
                 <h1>🎉 Happy Birthday 🎉</h1>
                 <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
@@ -662,78 +677,81 @@
                 </div>
             </section>
 
-            <!-- ফটো অ্যালবাম - ৬টি ছবি -->
-            <section>
-                <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
-                <div class="photo-album">
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 প্রথম দেখা</div>
+            <!-- কন্টেন্ট সেকশন - কেক কাটার পর দেখাবে -->
+            <div class="content-sections" id="contentSections">
+                <!-- ফটো অ্যালবাম - ৬টি ছবি -->
+                <section>
+                    <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
+                    <div class="photo-album">
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 প্রথম দেখা</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 একসাথে</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 হাসি</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 ভালোবাসা</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 কেক কাটা</div>
+                        </div>
+                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                            <div class="photo-overlay">💖 উপহার</div>
+                        </div>
                     </div>
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 একসাথে</div>
-                    </div>
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 হাসি</div>
-                    </div>
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 ভালোবাসা</div>
-                    </div>
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 কেক কাটা</div>
-                    </div>
-                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                        <div class="photo-overlay">💖 উপহার</div>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- ভিডিও গ্যালারি -->
-            <section>
-                <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও শুভেচ্ছা</h2>
-                <div class="video-gallery">
-                    <div class="video-card">
-                        <div class="video-wrapper">
-                            <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
-                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            </video>
+                <!-- ভিডিও গ্যালারি -->
+                <section>
+                    <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও শুভেচ্ছা</h2>
+                    <div class="video-gallery">
+                        <div class="video-card">
+                            <div class="video-wrapper">
+                                <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
+                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
+                                <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা</p>
+                            </div>
                         </div>
-                        <div class="video-info">
-                            <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
-                            <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা</p>
+                        <div class="video-card">
+                            <div class="video-wrapper">
+                                <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
+                                    <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="video-info">
+                                <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
+                                <p class="video-desc">শুভ জন্মদিন প্রিয়জন</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="video-card">
-                        <div class="video-wrapper">
-                            <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="video-info">
-                            <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
-                            <p class="video-desc">শুভ জন্মদিন প্রিয়জন</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- মেসেজ সেকশন -->
-            <section>
-                <div class="message-section">
-                    <h2 class="section-title" style="margin-bottom: 15px;">💌 ভালোবাসার কথা</h2>
-                    <p class="message-text">
+                <!-- মেসেজ সেকশন -->
+                <section>
+                    <div class="message-section">
+                        <h2 class="section-title" style="margin-bottom: 15px;">💌 ভালোবাসার কথা</h2>
+                        <p class="message-text">
 আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
 তোমার জীবন হোক আনন্দে ভরপুর। 💝
 
 🎂 শুভ জন্মদিন 🎂
-                    </p>
-                </div>
-            </section>
+                        </p>
+                    </div>
+                </section>
+            </div>
         </div>
 
         <footer>
@@ -797,21 +815,18 @@
             const diff = birthday - now;
             
             if (diff <= 0) {
-                // জন্মদিন এসে গেছে!
+                // জন্মদিন এসে গেছে - শুধু কেক দেখাও
                 if (!confettiShown) {
                     confettiShown = true;
-                    // কনফেটি
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-                    setTimeout(() => {
-                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] });
-                    }, 200);
-                    setTimeout(() => {
-                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] });
-                    }, 400);
+                    // ছোট কনফেটি
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
                 }
                 
                 document.getElementById('countdownScreen').classList.add('hidden');
                 document.getElementById('mainContent').classList.add('visible');
+                
+                // কন্টেন্ট সেকশন লুকানো থাকবে (কেক কাটার আগে)
+                document.getElementById('contentSections').classList.remove('visible');
                 
                 // কেক স্টেট লোড
                 loadCakeState();
@@ -854,6 +869,11 @@
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
             cakeCut = localStorage.getItem(`cakeCut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`candlesBlown_${dateStr}`) || '0');
+            
+            // যদি আগেই কেক কাটা হয়ে থাকে তাহলে কন্টেন্ট দেখাও
+            if (cakeCut) {
+                document.getElementById('contentSections').classList.add('visible');
+            }
         }
 
         // কেক রেন্ডার
@@ -867,7 +887,7 @@
                 cakeEmoji.textContent = '🍰';
                 candlesGrid.innerHTML = '';
                 cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
-                cutBtn.disabled = true;
+                cutBtn.style.display = 'none'; // কেক কাটার বাটন লুকাও
                 
                 // মাইক্রোফোন বন্ধ করো
                 stopMicrophone();
@@ -875,6 +895,7 @@
             }
             
             cakeEmoji.textContent = '🎂';
+            cutBtn.style.display = 'inline-flex'; // বাটন দেখাও
             
             // মোমবাতি তৈরি
             let candlesHtml = '';
@@ -985,7 +1006,7 @@
                         let average = sum / bufferLength;
                         
                         // যদি ফুঁর লেভেল বেশি হয়
-                        if (average > 70) { // থ্রেশহোল্ড একটু কমালাম
+                        if (average > 70) {
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2)); // 2-3টি মোমবাতি নেভাও
                         }
                     }, 150);
@@ -1072,10 +1093,13 @@
             
             renderCake();
             
+            // কন্টেন্ট সেকশন দেখাও
+            document.getElementById('contentSections').classList.add('visible');
+            
             // কনফেটি
-            confetti({ particleCount: 120, spread: 60, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] }), 200);
-            setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] }), 400);
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] }), 400);
         };
 
         // লাইটবক্স
@@ -1090,12 +1114,22 @@
 
         // চেক করে দেখি আজ কি জন্মদিন
         if (isBirthdayToday()) {
-            // জন্মদিন হলে সরাসরি কন্টেন্ট দেখাও
+            // জন্মদিন হলে সরাসরি কন্টেন্ট দেখাও (শুধু কেক)
             document.getElementById('countdownScreen').classList.add('hidden');
             document.getElementById('mainContent').classList.add('visible');
+            
+            // কন্টেন্ট সেকশন লুকানো থাকবে
+            document.getElementById('contentSections').classList.remove('visible');
+            
             loadCakeState();
             renderCake();
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            
+            // যদি আগেই কেক কাটা থাকে তাহলে কন্টেন্ট দেখাও
+            if (cakeCut) {
+                document.getElementById('contentSections').classList.add('visible');
+            }
+            
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
             
             // মাইক্রোফোন পারমিশন চাও (যদি মোমবাতি বাকি থাকে)
             setTimeout(() => {
