@@ -192,7 +192,7 @@
             50% { transform: scale(1.1); opacity: 0.9; }
         }
         
-        /* Countdown Screen - Updated with soft gradient */
+        /* Countdown Screen */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -467,6 +467,146 @@
         }
         
         .cake-next-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
+        }
+        
+        /* Reasons Screen (cause.html style) */
+        .reasons-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            z-index: 750;
+            padding: 80px 20px 40px;
+        }
+        
+        .reasons-screen.show {
+            display: flex;
+        }
+        
+        .reasons-header h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3rem;
+            color: #ff69b4;
+            text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .reasons-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 20px;
+        }
+        
+        .reason-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        
+        .reason-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .reason-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .reason-emoji {
+            font-size: 2rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gif-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        
+        .reason-card:hover .gif-overlay {
+            opacity: 1;
+        }
+        
+        .gif-overlay img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        
+        .reasons-next-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
+            transition: 0.3s;
+            border: 2px solid white;
+            max-width: 300px;
+        }
+        
+        .reasons-next-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
@@ -1015,6 +1155,8 @@
         }
         
         @media (max-width: 768px) {
+            .reasons-header h1 { font-size: 2.5rem; }
+            .reasons-container { grid-template-columns: 1fr; }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
             .video-grid { grid-template-columns: 1fr; }
@@ -1068,7 +1210,7 @@
         <img src="" id="lightboxImg">
     </div>
 
-    <!-- COUNTDOWN SCREEN (Updated background) -->
+    <!-- COUNTDOWN SCREEN -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
@@ -1092,14 +1234,14 @@
         <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
 
-    <!-- GREETING SCREEN (Page 1) -->
+    <!-- GREETING SCREEN -->
     <div class="greeting-screen" id="greetingScreen">
         <h1>Happy Birthday Priya</h1>
         <div class="greeting-text" id="greetingText"></div>
         <button class="enter-btn" onclick="goToCakeScreen()">Click to enter your world 💕</button>
     </div>
 
-    <!-- CAKE SCREEN (Page 2) -->
+    <!-- CAKE SCREEN -->
     <div class="cake-screen" id="cakeScreen">
         <div class="cake-container">
             <div class="cake-emoji" id="cakeEmoji">🎂</div>
@@ -1110,7 +1252,53 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- PHOTO ALBUM SCREEN (Page 3) -->
+    <!-- REASONS SCREEN (cause.html style) -->
+    <div class="reasons-screen" id="reasonsScreen">
+        <div class="reasons-header">
+            <h1>Why You're My Best Friend! 💖</h1>
+        </div>
+        <div class="reasons-container">
+            <div class="reason-card">
+                <div>
+                    <div class="reason-text">🌟 You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.</div>
+                    <div class="reason-emoji">🌟</div>
+                </div>
+                <div class="gif-overlay">
+                    <img src="https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif" alt="GIF">
+                </div>
+            </div>
+            <div class="reason-card">
+                <div>
+                    <div class="reason-text">💗 May your day be filled with love, laughter, and endless joy.</div>
+                    <div class="reason-emoji">💗</div>
+                </div>
+                <div class="gif-overlay">
+                    <img src="https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif" alt="GIF">
+                </div>
+            </div>
+            <div class="reason-card">
+                <div>
+                    <div class="reason-text">💕 Wishing you success, happiness, and everything your heart desires.</div>
+                    <div class="reason-emoji">💕</div>
+                </div>
+                <div class="gif-overlay">
+                    <img src="https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif" alt="GIF">
+                </div>
+            </div>
+            <div class="reason-card">
+                <div>
+                    <div class="reason-text">🌟 Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳</div>
+                    <div class="reason-emoji">🌟</div>
+                </div>
+                <div class="gif-overlay">
+                    <img src="https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif" alt="GIF">
+                </div>
+            </div>
+        </div>
+        <button class="reasons-next-btn" onclick="goToPhotoScreen()">Next: Our Memories 📸</button>
+    </div>
+
+    <!-- PHOTO ALBUM SCREEN -->
     <div class="photo-screen" id="photoScreen">
         <div class="photo-header">
             <h1>Our Beautiful Moments Together</h1>
@@ -1135,10 +1323,10 @@
             </div>
         </div>
 
-        <button class="photo-next-btn" onclick="goToVideoScreen()">Enter Storyline 💫</button>
+        <button class="photo-next-btn" onclick="goToVideoScreen()">Next: Video Message 🎥</button>
     </div>
 
-    <!-- VIDEO SCREEN (Page 4) -->
+    <!-- VIDEO SCREEN -->
     <div class="video-screen" id="videoScreen">
         <h2>A Special Video Message</h2>
         <div class="video-container">
@@ -1164,7 +1352,7 @@
         </div>
     </div>
 
-    <!-- LETTER SCREEN (Page 5) -->
+    <!-- LETTER SCREEN -->
     <div class="letter-screen" id="letterScreen">
         <div class="letter-container">
             <h2>A Letter for You 💌</h2>
@@ -1317,6 +1505,7 @@
             document.getElementById('countdownScreen').classList.add('hide');
             document.getElementById('greetingScreen').classList.remove('show');
             document.getElementById('cakeScreen').classList.remove('show');
+            document.getElementById('reasonsScreen').classList.remove('show');
             document.getElementById('photoScreen').classList.remove('show');
             document.getElementById('videoScreen').classList.remove('show');
             document.getElementById('letterScreen').classList.remove('show');
@@ -1328,6 +1517,8 @@
                 document.getElementById('greetingScreen').classList.add('show');
             } else if (screen === 'cake') {
                 document.getElementById('cakeScreen').classList.add('show');
+            } else if (screen === 'reasons') {
+                document.getElementById('reasonsScreen').classList.add('show');
             } else if (screen === 'photo') {
                 document.getElementById('photoScreen').classList.add('show');
             } else if (screen === 'video') {
@@ -1522,8 +1713,8 @@
                 const nextBtn = document.createElement('button');
                 nextBtn.id = 'cakeNextBtn';
                 nextBtn.className = 'cake-next-btn';
-                nextBtn.textContent = 'Enter Storyline 💫';
-                nextBtn.onclick = goToPhotoScreen;
+                nextBtn.textContent = 'Enter your storyline 💫';
+                nextBtn.onclick = goToReasonsScreen;
                 document.getElementById('cakeScreen').appendChild(nextBtn);
             }
         }
@@ -1668,7 +1859,7 @@
         };
 
         // Navigation functions
-        window.goToPhotoScreen = function() {
+        window.goToReasonsScreen = function() {
             // Stop birthday audio when entering storyline
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
@@ -1678,6 +1869,18 @@
                 duration: 1,
                 onComplete: () => {
                     document.getElementById('cakeScreen').classList.remove('show');
+                    document.getElementById('reasonsScreen').classList.add('show');
+                    updateHistory('reasons');
+                }
+            });
+        };
+
+        window.goToPhotoScreen = function() {
+            gsap.to('#reasonsScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('reasonsScreen').classList.remove('show');
                     document.getElementById('photoScreen').classList.add('show');
                     updateHistory('photo');
                 }
