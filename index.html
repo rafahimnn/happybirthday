@@ -653,12 +653,12 @@
 <body>
     <!-- ⭐ অডিও ফাইল লিংক - আপনি এখানে পরিবর্তন করতে পারবেন ⭐ -->
     
-    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও (এই লিংক পরিবর্তন করুন) -->
+    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown-10sec.mp3" type="audio/mpeg">
     </audio>
     
-    <!-- জন্মদিনের অডিও (এই লিংক পরিবর্তন করুন) -->
+    <!-- জন্মদিনের অডিও -->
     <audio id="birthdayWish" preload="auto" loop>
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
@@ -678,7 +678,7 @@
     
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
-        <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
+        <h1 class="countdown-title">⏰ টেস্ট কাউন্টডাউন</h1>
         <div class="countdown-box">
             <div class="count-item">
                 <span class="count-number" id="days">00</span>
@@ -697,7 +697,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 ১৬ ফেব্রুয়ারি চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:১০ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -867,7 +867,7 @@
                 });
         });
         
-        // ---------- কনফিগারেশন - ১৬ ফেব্রুয়ারি ----------
+        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:১০ PM ----------
         const CONFIG = {
             month: 1,        // ফেব্রুয়ারি = 1
             day: 16,         // ১৬ তারিখ
@@ -912,29 +912,28 @@
             return `${hours}:${minutesStr} ${ampm}`;
         }
         
-        // ---------- কাউন্টডাউন ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:১০ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
-            const currentYear = now.getFullYear();
             
-            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
+            // আজ রাত ৮:১০ PM টেস্ট
+            const testTime = new Date();
+            testTime.setHours(20, 10, 0); // ৮:১০ PM
+            testTime.setSeconds(0);
+            testTime.setMilliseconds(0);
             
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
-            }
-            
-            const diff = birthday - now;
+            const diff = testTime - now;
             
             // কাউন্টডাউন সংখ্যা আপডেট
             if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const mins = Math.floor((diff / (1000 * 60)) % 60);
-                const secs = Math.floor((diff / 1000) % 60);
+                const totalSeconds = Math.floor(diff / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
                 
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('days').textContent = '00';
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('mins').textContent = String(mins).padStart(2, '0');
                 document.getElementById('secs').textContent = String(secs).padStart(2, '0');
