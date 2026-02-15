@@ -519,7 +519,7 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* ====== REASONS SCREEN - Fixed size and working button ====== */
+        /* ====== REASONS SCREEN - Exact copy of cause.html ====== */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -541,62 +541,97 @@
             display: flex;
         }
         
-        .reasons-container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        
-        .reasons-header h2 {
+        .reasons-header h1 {
             font-family: 'Bubblegum Sans', cursive;
-            font-size: 2.5rem;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
             color: #ff69b4;
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
+            animation: bounce 1s ease infinite;
             text-align: center;
         }
         
-        .reason-item {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #4a4a4a;
-            margin-bottom: 20px;
-            padding-left: 30px;
+        .reasons-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .reason-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
             position: relative;
-            text-align: left;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
-        .reason-item::before {
-            content: '•';
-            color: #ff69b4;
-            font-size: 2rem;
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
+        }
+        
+        .reason-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+        
+        .reason-emoji {
+            font-size: 2.5rem;
+        }
+        
+        .gif-overlay {
             position: absolute;
+            top: 0;
             left: 0;
-            top: -5px;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
         }
         
-        .reason-item .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            display: inline-block;
+        .reason-card:hover .gif-overlay {
+            opacity: 1;
         }
         
-        .reasons-footer {
-            text-align: center;
-            margin-top: 30px;
+        .gif-overlay img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
         }
         
-        .storyline-btn {
+        .reason-counter {
+            font-size: 1rem;
+            color: #ff69b4;
+            margin: 20px 0 15px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        
+        .reasons-btn {
             background: linear-gradient(45deg, #ff69b4, #ff99cc);
             border: none;
             border-radius: 50px;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             font-size: 1.2rem;
             color: white;
             cursor: pointer;
@@ -604,13 +639,28 @@
             font-family: 'Comic Neue', cursive;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
             border: 2px solid rgba(255,255,255,0.8);
-            font-weight: 700;
             min-width: 200px;
+            font-weight: 700;
         }
         
-        .storyline-btn:hover {
+        .reasons-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+        }
+        
+        .reasons-btn.story-mode {
+            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
+            transform: scale(1.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .reasons-btn.story-mode:hover {
+            transform: scale(1.2);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.2); }
         }
         
         /* Photo Album Screen */
@@ -1157,8 +1207,8 @@
         }
         
         @media (max-width: 768px) {
-            .reasons-header h2 { font-size: 2rem; }
-            .reason-item { font-size: 1.1rem; }
+            .reasons-header h1 { font-size: 2.5rem; }
+            .reason-text { font-size: 1.1rem; }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
             .video-grid { grid-template-columns: 1fr; }
@@ -1257,28 +1307,16 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN - Fixed size and working button -->
+    <!-- REASONS SCREEN - Exact copy of cause.html -->
     <div class="reasons-screen" id="reasonsScreen">
-        <div class="reasons-container">
-            <div class="reasons-header">
-                <h2>Why You're My Best Friend! 💖</h2>
-            </div>
-            <div class="reason-item">
-                <span class="emoji">🌟</span> You’re such a kind and wonderful person, and I feel lucky to share such a good bond with you. ❤️
-            </div>
-            <div class="reason-item">
-                <span class="emoji">💗</span> May your day be filled with love, laughter, and endless joy. ❤️
-            </div>
-            <div class="reason-item">
-                <span class="emoji">💕</span> Wishing you success, happiness, and everything your heart desires. 🌸
-            </div>
-            <div class="reason-item">
-                <span class="emoji">🌟</span> Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🌟
-            </div>
-            <div class="reasons-footer">
-                <button class="storyline-btn" onclick="goToPhotoScreen()">Enter Our Storyline 💫</button>
-            </div>
+        <div class="reasons-header">
+            <h1>Why You're My Best Friend! 💖</h1>
         </div>
+        <div class="reasons-container" id="reasonsContainer">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+        <div class="reason-counter" id="reasonCounter">Reason 1 of 4</div>
+        <button class="reasons-btn" id="reasonsBtn" onclick="handleReasonClick()">Click Here... 💕</button>
     </div>
 
     <!-- PHOTO ALBUM SCREEN -->
@@ -1494,6 +1532,33 @@
         let audioAllowed = false;
         let resetTimer = null;
 
+        // Reasons data - exactly like cause.html
+        const reasons = [
+            { 
+                text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif"
+            },
+            { 
+                text: "May your day be filled with love, laughter, and endless joy.", 
+                emoji: "💗",
+                gif: "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
+            },
+            { 
+                text: "Wishing you success, happiness, and everything your heart desires.", 
+                emoji: "💕",
+                gif: "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
+            },
+            { 
+                text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif"
+            }
+        ];
+        
+        let currentReasonIndex = 0;
+        let isTransitioning = false;
+
         // History management
         let historyStack = ['countdown'];
         
@@ -1612,6 +1677,7 @@
                 confettiShown = false;
                 cakeCut = false;
                 candlesBlown = 0;
+                currentReasonIndex = 0;
                 historyStack = ['countdown'];
                 showScreen('countdown');
                 updateCountdown();
@@ -1832,10 +1898,83 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        // Navigation functions - WORKING BUTTON
+        // Reasons screen functions - exactly like cause.html
+        function createReasonCard(reason) {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            
+            const text = document.createElement('div');
+            text.className = 'reason-text';
+            text.innerHTML = `${reason.emoji} ${reason.text}`;
+            
+            const emoji = document.createElement('div');
+            emoji.className = 'reason-emoji';
+            emoji.textContent = reason.emoji;
+            
+            const gifOverlay = document.createElement('div');
+            gifOverlay.className = 'gif-overlay';
+            gifOverlay.innerHTML = `<img src="${reason.gif}" alt="Friendship Memory">`;
+            
+            card.appendChild(text);
+            card.appendChild(emoji);
+            card.appendChild(gifOverlay);
+            
+            return card;
+        }
+
+        function displayReason() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            if (currentReasonIndex < reasons.length) {
+                const card = createReasonCard(reasons[currentReasonIndex]);
+                const container = document.getElementById('reasonsContainer');
+                container.innerHTML = '';
+                container.appendChild(card);
+                
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    ease: "back.out"
+                });
+
+                document.getElementById('reasonCounter').textContent = `Reason ${currentReasonIndex + 1} of ${reasons.length}`;
+                currentReasonIndex++;
+
+                if (currentReasonIndex === reasons.length) {
+                    const btn = document.getElementById('reasonsBtn');
+                    btn.textContent = "You're the BESTEST ! 💖";
+                    btn.classList.add('story-mode');
+                }
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            } else {
+                goToPhotoScreen();
+            }
+        }
+
+        window.handleReasonClick = function() {
+            const btn = document.getElementById('reasonsBtn');
+            gsap.to(btn, {
+                scale: 0.9,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1
+            });
+            displayReason();
+        };
+
+        // Navigation functions
         window.goToReasonsScreen = function() {
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
+            currentReasonIndex = 0;
+            document.getElementById('reasonsBtn').textContent = "Click Here... 💕";
+            document.getElementById('reasonsBtn').classList.remove('story-mode');
+            document.getElementById('reasonsContainer').innerHTML = '';
             
             gsap.to('#cakeScreen', {
                 opacity: 0,
@@ -1844,15 +1983,21 @@
                     document.getElementById('cakeScreen').classList.remove('show');
                     document.getElementById('reasonsScreen').classList.add('show');
                     updateHistory('reasons');
+                    displayReason(); // Show first reason immediately
                 }
             });
         };
 
         window.goToPhotoScreen = function() {
-            // Directly hide reasons and show photo screen
-            document.getElementById('reasonsScreen').classList.remove('show');
-            document.getElementById('photoScreen').classList.add('show');
-            updateHistory('photo');
+            gsap.to('#reasonsScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('reasonsScreen').classList.remove('show');
+                    document.getElementById('photoScreen').classList.add('show');
+                    updateHistory('photo');
+                }
+            });
         };
 
         window.goToVideoScreen = function() {
