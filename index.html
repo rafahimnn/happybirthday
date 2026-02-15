@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:৩০ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:৪৫ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -891,16 +891,22 @@
         let countdownFinished = false;
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
+        let audioAllowed = false; // ইউজার ইন্টারঅ্যাকশনের পর অডিও চালানোর অনুমতি
         
-        // ---------- কাউন্টডাউন (টেস্ট ৯:৩০ PM) ----------
+        // ইউজার ক্লিক করলে অডিও অনুমতি দিন
+        document.addEventListener('click', function() {
+            audioAllowed = true;
+        }, { once: true });
+        
+        // ---------- কাউন্টডাউন (টেস্ট ৯:৪৫ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৯:৩০ PM টেস্ট
+            // আজ রাত ৯:৪৫ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(21, 30, 0); // ৯:৩০ PM
+            testTime.setHours(21, 45, 0); // ৯:৪৫ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
@@ -925,20 +931,13 @@
             }
             
             // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে (১১ সেকেন্ড থেকে শুরু)
-            if (diff <= 11000 && diff > 0 && !countdownAudioPlayed) {
-                // অডিও চালানোর চেষ্টা
-                let playPromise = countdownAudio.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        console.log('কাউন্টডাউন অডিও চালু হয়েছে');
-                        countdownAudioPlayed = true;
-                    }).catch(error => {
-                        console.log('কাউন্টডাউন অডিও বাজেনি:', error);
-                        // অডিও না বাজলেও ফ্ল্যাগ true করে দিই যাতে বারবার চেষ্টা না করে
-                        countdownAudioPlayed = true;
-                    });
-                }
+            if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
+                countdownAudio.play().then(() => {
+                    console.log('কাউন্টডাউন অডিও চালু হয়েছে');
+                    countdownAudioPlayed = true;
+                }).catch(error => {
+                    console.log('কাউন্টডাউন অডিও বাজেনি:', error);
+                });
             }
             
             // টাইম শেষ হলে
@@ -962,24 +961,14 @@
                 // স্টেট লোড (কেক কাটা না থাকলে পুরো কেক দেখাবে)
                 loadState();
                 
-                // জন্মদিনের অডিও চালাও
-                if (!birthdayAudioPlayed) {
-                    let playPromise = birthdayAudio.play();
-                    
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            console.log('জন্মদিনের অডিও চালু হয়েছে');
-                            birthdayAudioPlayed = true;
-                        }).catch(error => {
-                            console.log('অটোপ্লে ব্লক হয়েছে:', error);
-                            // ইউজার ক্লিক করলে চালানোর জন্য
-                            const clickHandler = function() {
-                                birthdayAudio.play();
-                                document.removeEventListener('click', clickHandler);
-                            };
-                            document.addEventListener('click', clickHandler, { once: true });
-                        });
-                    }
+                // জন্মদিনের অডিও চালাও (ইউজার ইন্টারঅ্যাকশন থাকলে)
+                if (!birthdayAudioPlayed && audioAllowed) {
+                    birthdayAudio.play().then(() => {
+                        console.log('জন্মদিনের অডিও চালু হয়েছে');
+                        birthdayAudioPlayed = true;
+                    }).catch(error => {
+                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                    });
                 }
                 
                 // মাইক্রোফোন শুরু
