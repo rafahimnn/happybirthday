@@ -645,9 +645,9 @@
     </style>
 </head>
 <body>
-    <!-- ⭐ অডিও ফাইল লিংক - আপনি এখানে পরিবর্তন করতে পারবেন ⭐ -->
+    <!-- ⭐ অডিও ফাইল লিংক - আপনার দেওয়া লিংক বসানো হয়েছে ⭐ -->
     
-    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
+    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও (আপনার দেওয়া লিংক) -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/%F0%9F%94%A5%20FIRE%20_%20FURY%20%F0%9F%94%A5%2010%20Second%20Countdown%20with%20VOICE%2C%20Fire%20and%20Giant%20Explosion!%20V3.mp3" type="audio/mpeg">
     </audio>
@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:২০ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:২৬ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -861,7 +861,7 @@
                 });
         });
         
-        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:২০ PM ----------
+        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:২৬ PM ----------
         const CONFIG = {
             month: 1,        // ফেব্রুয়ারি = 1
             day: 16,         // ১৬ তারিখ
@@ -889,6 +889,7 @@
         let analyser = null;
         let blowInterval = null;
         let countdownFinished = false;
+        let countdownAudioPlayed = false;
         let birthdayAudioPlayed = false;
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
@@ -905,15 +906,15 @@
             return `${hours}:${minutesStr} ${ampm}`;
         }
         
-        // ---------- কাউন্টডাউন (টেস্ট ৮:২০ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:২৬ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৮:২০ PM টেস্ট
+            // আজ রাত ৮:২৬ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(20, 20, 0); // ৮:২০ PM
+            testTime.setHours(20, 26, 0); // ৮:২৬ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
@@ -937,9 +938,23 @@
                 document.getElementById('secs').textContent = '00';
             }
             
+            // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে
+            if (diff <= 10000 && diff > 0 && !countdownAudioPlayed) {
+                countdownAudio.play().then(() => {
+                    console.log('কাউন্টডাউন অডিও চালু হয়েছে');
+                    countdownAudioPlayed = true;
+                }).catch(error => {
+                    console.log('কাউন্টডাউন অডিও বাজেনি:', error);
+                });
+            }
+            
             // টাইম শেষ হলে
             if (diff <= 0 && !countdownFinished) {
                 countdownFinished = true;
+                
+                // কাউন্টডাউন অডিও বন্ধ করো
+                countdownAudio.pause();
+                countdownAudio.currentTime = 0;
                 
                 // কাউন্টডাউন স্ক্রিন লুকাও এবং মেইন কন্টেন্ট দেখাও
                 document.getElementById('countdownScreen').classList.add('hide');
@@ -1157,6 +1172,7 @@
         
         window.addEventListener('beforeunload', function() {
             stopMicrophone();
+            countdownAudio.pause();
             birthdayAudio.pause();
         });
     </script>
