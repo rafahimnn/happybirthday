@@ -48,7 +48,7 @@
             z-index: -1;
         }
         
-        /* কন্ট্যাক্ট ফ্লোটিং বাটন - ছোট */
+        /* কন্ট্যাক্ট ফ্লোটিং বাটন */
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
@@ -447,7 +447,6 @@
             text-align: center;
         }
         
-        /* ফর্ম স্টাইল - ছোট ও সুন্দর */
         .form-group {
             margin-bottom: 15px;
         }
@@ -518,7 +517,6 @@
             font-size: 14px;
         }
         
-        /* সোশ্যাল মিডিয়া বাটন - ছোট */
         .social-buttons {
             margin-top: 25px;
             display: flex;
@@ -639,52 +637,34 @@
             font-size: 14px;
         }
         
-        /* মোবাইল ফ্রেন্ডলি */
         @media (max-width: 480px) {
             .count-item {
                 min-width: 60px;
                 padding: 8px 10px;
             }
-            
-            .count-number {
-                font-size: 24px;
-            }
-            
-            .count-label {
-                font-size: 10px;
-            }
-            
-            .cake-status {
-                font-size: 14px;
-            }
-            
-            .cut-btn {
-                font-size: 18px;
-                padding: 8px 20px;
-            }
-            
-            .message-text {
-                font-size: 18px;
-            }
-            
-            .contact-container {
-                padding: 25px 15px;
-            }
-            
-            .contact-container h2 {
-                font-size: 22px;
-            }
+            .count-number { font-size: 24px; }
+            .count-label { font-size: 10px; }
+            .cake-status { font-size: 14px; }
+            .cut-btn { font-size: 18px; }
+            .message-text { font-size: 18px; }
         }
     </style>
 </head>
 <body>
+    <!-- অডিও এলিমেন্ট - শুধু আপনার অডিওর জন্য -->
+    <!-- GitHub আপলোড করার পর এখানে লিংক বসাবেন -->
+    <audio id="birthdayWish" preload="auto">
+        <!-- এই লাইনটা পরিবর্তন করবেন: -->
+        <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- ভিডিও ব্যাকগ্রাউন্ড -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     
-    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন - ছোট -->
+    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
@@ -717,12 +697,10 @@
     
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
-        <!-- হিরো সেকশন -->
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
             <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
             
-            <!-- কেক সেকশন -->
             <div class="cake-section">
                 <div class="cake-emoji" id="cakeEmoji">🎂</div>
                 <div class="candles" id="candles"></div>
@@ -731,9 +709,7 @@
             </div>
         </section>
         
-        <!-- কন্টেন্ট সেকশন (কেক কাটার পর দেখাবে) -->
         <div class="content-sections" id="contentSections">
-            <!-- ফটো অ্যালবাম -->
             <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
             <div class="photo-album">
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
@@ -756,7 +732,6 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
                 <div class="video-card">
@@ -773,7 +748,6 @@
                 </div>
             </div>
             
-            <!-- মেসেজ সেকশন -->
             <div class="message-section">
                 <h2 class="section-title">💌 ভালোবাসার কথা</h2>
                 <div class="message-text">
@@ -796,7 +770,6 @@
         <div class="contact-container">
             <h2><i class="fas fa-envelope"></i> যোগাযোগ করুন</h2>
             
-            <!-- EmailJS Form - ছোট ও সুন্দর -->
             <form id="contact-form">
                 <div class="form-group">
                     <label for="name">আপনার নাম</label>
@@ -820,7 +793,6 @@
                 <div id="form-status"></div>
             </form>
             
-            <!-- সোশ্যাল মিডিয়া বাটন - ছোট -->
             <div class="social-buttons">
                 <a href="https://www.facebook.com/rafahimn" target="_blank" class="social-btn facebook">
                     <i class="fab fa-facebook-f"></i>
@@ -882,9 +854,9 @@
                 });
         });
         
-        // Configuration - তারিখ ১৫ সেট করা হয়েছে
+        // Configuration
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
+            month: 1,        // ফেব্রুয়ারি = 1
             day: 15,         // ১৫ তারিখ
             age: 16,         // ১৬ বছর
             name: "প্রিয়জন"
@@ -896,7 +868,10 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
         
-        // State variables
+        // ---------- অডিও এলিমেন্ট ----------
+        const birthdayAudio = document.getElementById('birthdayWish');
+        
+        // ---------- State variables ----------
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -906,7 +881,7 @@
         let analyser = null;
         let blowInterval = null;
         
-        // Countdown function (রিয়েল টাইম)
+        // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
             const now = new Date();
             const currentYear = now.getFullYear();
@@ -919,6 +894,16 @@
             const diff = birthday - now;
             
             if (diff <= 0) {
+                // জন্মদিন এসেছে - অডিও চালান
+                birthdayAudio.play().catch(error => {
+                    console.log('অটোপ্লে ব্লক হয়েছে', error);
+                    // ইউজার ক্লিক করলে চালানোর জন্য
+                    document.addEventListener('click', function clickOnce() {
+                        birthdayAudio.play();
+                        document.removeEventListener('click', clickOnce);
+                    }, { once: true });
+                });
+                
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
@@ -1012,13 +997,11 @@
             candlesBlown = index + 1;
             saveState();
             renderCake();
-            
             confetti({ particleCount: 5, spread: 30, colors: ['#aaaaaa'] });
         };
         
         function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
-            
             const newBlown = Math.min(candlesBlown + count, totalCandles);
             if (newBlown > candlesBlown) {
                 candlesBlown = newBlown;
@@ -1072,6 +1055,10 @@
         
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
+            
+            // অডিও বন্ধ করুন (ঐচ্ছিক - যদি চান)
+            birthdayAudio.pause();
+            birthdayAudio.currentTime = 0;
             
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
