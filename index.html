@@ -351,7 +351,7 @@
             object-fit: cover;
         }
         
-        /* ভিডিও গ্যালারি - আপনার নতুন ভিডিও যোগ করা হয়েছে */
+        /* ভিডিও গ্যালারি - এখন ২টি ভিডিও */
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
@@ -690,7 +690,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:১২ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:২১ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -731,10 +731,10 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি - আপনার Cloudinary ভিডিও যোগ করা হয়েছে -->
+            <!-- ভিডিও গ্যালারি - এখন ২টি ভিডিও -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
-                <!-- আপনার নতুন Cloudinary ভিডিও -->
+                <!-- আপনার Cloudinary ভিডিও -->
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="https://res.cloudinary.com/dpctt0wao/image/upload/v1771160623/sample-thumbnail.jpg">
@@ -744,7 +744,7 @@
                     <div class="video-info">জানে না তু - অফিসিয়াল মিউজিক ভিডিও</div>
                 </div>
                 
-                <!-- আগের ভিডিও -->
+                <!-- দ্বিতীয় ভিডিও -->
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
@@ -752,15 +752,6 @@
                         </video>
                     </div>
                     <div class="video-info">প্রথম শুভেচ্ছা</div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                            <source src="https://www.w3schools.com/html/movie.mp4">
-                        </video>
-                    </div>
-                    <div class="video-info">বিশেষ বার্তা</div>
                 </div>
             </div>
             
@@ -871,10 +862,10 @@
                 });
         });
         
-        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:১২ PM ----------
+        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:২১ PM ----------
         const now = new Date();
         const testDate = new Date();
-        testDate.setHours(19, 12, 0); // ৭:১২ PM (19 ঘন্টা = 7 PM)
+        testDate.setHours(19, 21, 0); // ৭:২১ PM (19 ঘন্টা = 7 PM)
         
         const CONFIG = {
             month: testDate.getMonth(),  // আজকের মাস
@@ -901,6 +892,7 @@
         let audioContext = null;
         let analyser = null;
         let blowInterval = null;
+        let lastSpokenSecond = null; // কাউন্টডাউন ভয়েসের জন্য
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
         function formatTime(date) {
@@ -916,18 +908,40 @@
             return `${hours}:${minutesStr} ${ampm}`;
         }
         
+        // ---------- কাউন্টডাউন ভয়েস ফাংশন ----------
+        function speakNumber(second) {
+            const numbers = ['শূন্য', 'এক', 'দুই', 'তিন', 'চার', 'পাঁচ', 'ছয়', 'সাত', 'আট', 'নয়', 'দশ'];
+            if (second >= 1 && second <= 10) {
+                const utterance = new SpeechSynthesisUtterance(numbers[second]);
+                utterance.lang = 'bn-BD';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+        
         // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
             const now = new Date();
             
-            // আজ রাত ৭:১২ PM টেস্ট
+            // আজ রাত ৭:২১ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(19, 12, 0); // ৭:১২ PM
+            testTime.setHours(19, 21, 0); // ৭:২১ PM
             
             const diff = testTime - now;
             
+            // শেষ ১০ সেকেন্ডে কাউন্টডাউন ভয়েস
+            if (diff <= 10000 && diff > 0) {
+                const secondsLeft = Math.floor(diff / 1000) + 1;
+                if (secondsLeft <= 10 && secondsLeft > 0) {
+                    if (lastSpokenSecond !== secondsLeft) {
+                        speakNumber(secondsLeft);
+                        lastSpokenSecond = secondsLeft;
+                    }
+                }
+            }
+            
             if (diff <= 0) {
-                // ৭:১২ PM বেজে গেছে - অডিও চালান
+                // ৭:২১ PM বেজে গেছে - অডিও চালান
                 birthdayAudio.play().catch(error => {
                     console.log('অটোপ্লে ব্লক হয়েছে', error);
                     // ইউজার ক্লিক করলে চালানোর জন্য
