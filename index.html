@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        /* আগের সব CSS ঠিক থাকবে */
+        /* আগের সব CSS ঠিক থাকবে - শুধু নিচের অংশটি নিশ্চিত করুন */
         * {
             margin: 0;
             padding: 0;
@@ -571,7 +571,6 @@
             50% { transform: scale(1.1); }
         }
         
-        /* Photo Album Screen */
         .photo-screen {
             position: fixed;
             top: 0;
@@ -1193,7 +1192,6 @@
             <div class="cake-status" id="cakeStatus"></div>
             <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
         </div>
-        <!-- Next button will be added dynamically after cake cut -->
     </div>
 
     <!-- REASONS SCREEN (cause.html style with click button) -->
@@ -1233,7 +1231,7 @@
             </div>
         </div>
 
-        <button class="photo-next-btn" onclick="goToVideoScreen()">Next: Video Message 🎥</button>
+        <button class="photo-next-btn" onclick="goToVideoScreen()">Enter Again Your Storylane 💫 🎥</button>
     </div>
 
     <!-- VIDEO SCREEN -->
@@ -1781,7 +1779,6 @@
                     isTransitioning = false;
                 }, 500);
             } else {
-                // All reasons shown, go to photo screen
                 goToPhotoScreen();
             }
         }
@@ -1813,7 +1810,7 @@
                     document.getElementById('cakeScreen').classList.remove('show');
                     document.getElementById('reasonsScreen').classList.add('show');
                     updateHistory('reasons');
-                    displayReason(); // Show first reason immediately
+                    displayReason();
                 }
             });
         };
