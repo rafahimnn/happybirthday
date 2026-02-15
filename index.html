@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 জন্মদিনের চমক</title>
+    <title>🎂 জন্মদিনের চমক - ১৬ ফেব্রুয়ারি</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- EmailJS Library -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -52,7 +52,7 @@
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 80px; /* প্লে বাটনের জন্য জায়গা রাখা */
             z-index: 9999;
         }
         
@@ -68,7 +68,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid white;
             transition: 0.3s;
-            animation: floatPulse 2s infinite;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,7 +78,42 @@
             box-shadow: 0 0 30px gold;
         }
         
-        @keyframes floatPulse {
+        /* প্লে বাটন (ছোট আইকন) */
+        .play-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .play-float-btn button {
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            color: black;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .play-float-btn button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #00ff88;
+        }
+        
+        .play-float-btn.hide {
+            display: none;
+        }
+        
+        @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
@@ -663,6 +697,13 @@
     </video>
     <div class="overlay"></div>
     
+    <!-- প্লে বাটন (ছোট আইকন) -->
+    <div class="play-float-btn" id="playBtn">
+        <button onclick="startAudio(event)">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
+    
     <!-- কন্ট্যাক্ট ফ্লোটিং বাটন -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
@@ -672,7 +713,7 @@
     
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
-        <h1 class="countdown-title">⏰ টেস্ট কাউন্টডাউন</h1>
+        <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
         <div class="countdown-box">
             <div class="count-item">
                 <span class="count-number" id="days">00</span>
@@ -691,7 +732,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:৪৫ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 ১৬ ফেব্রুয়ারি রাত ১২টায় চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -861,9 +902,9 @@
                 });
         });
         
-        // ---------- কনফিগারেশন ----------
+        // ---------- রিয়েল কনফিগারেশন - ১৬ ফেব্রুয়ারি, ১২:০০ AM ----------
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি = 1
+            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
             day: 16,         // ১৬ তারিখ
             age: 16,         // ১৬ বছর
             name: "প্রিয়জন"
@@ -891,35 +932,87 @@
         let countdownFinished = false;
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
-        let audioAllowed = false; // ইউজার ইন্টারঅ্যাকশনের পর অডিও চালানোর অনুমতি
+        let audioAllowed = false; // ইউজার প্রথম ক্লিক করলে true হবে
         
-        // ইউজার ক্লিক করলে অডিও অনুমতি দিন
-        document.addEventListener('click', function() {
+        // ---------- প্রথম ক্লিক শনাক্ত করার জন্য ইভেন্ট লিসনার ----------
+        function handleFirstClick() {
+            if (!audioAllowed) {
+                startAudio();
+            }
+        }
+        
+        // ডকুমেন্টে প্রথম ক্লিকের জন্য ইভেন্ট লিসনার যোগ করুন (একবার)
+        document.addEventListener('click', handleFirstClick, { once: true });
+        
+        // ---------- অডিও এবং মাইক্রোফোন চালু করার ফাংশন ----------
+        window.startAudio = function(event) {
+            // যদি ইভেন্ট থেকে কল হয় এবং এটি প্লে বাটন থেকে হয়, তাহলে event propagation বন্ধ করুন
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            if (audioAllowed) return; // ইতিমধ্যে চালু থাকলে কিছু করবেন না
             audioAllowed = true;
-        }, { once: true });
+            
+            // প্লে বাটন লুকান (যদি থাকে)
+            const playBtn = document.getElementById('playBtn');
+            if (playBtn) {
+                playBtn.classList.add('hide');
+            }
+            
+            // প্রথম ক্লিক ইভেন্ট লিসনার সরিয়ে দিন (যদি আগে না সরানো হয়)
+            document.removeEventListener('click', handleFirstClick);
+            
+            // যদি কাউন্টডাউন শেষ হয়ে থাকে, জন্মদিনের অডিও চালাও
+            if (countdownFinished && !birthdayAudioPlayed) {
+                birthdayAudio.play().then(() => {
+                    birthdayAudioPlayed = true;
+                }).catch(e => console.log('অডিও বাজেনি:', e));
+            }
+            
+            // যদি শেষ ১০ সেকেন্ডে থাকে, কাউন্টডাউন অডিও চালাও
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
+            }
+            const diff = birthday - now;
+            if (diff <= 11000 && diff > 0 && !countdownAudioPlayed) {
+                countdownAudio.play().then(() => {
+                    countdownAudioPlayed = true;
+                }).catch(e => console.log('কাউন্টডাউন অডিও বাজেনি:', e));
+            }
+            
+            // মাইক্রোফোন শুরু
+            setTimeout(startMicrophone, 1000);
+        };
         
-        // ---------- কাউন্টডাউন (টেস্ট ৯:৪৫ PM) ----------
+        // ---------- কাউন্টডাউন (রিয়েল টাইম) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
+            const currentYear = now.getFullYear();
             
-            // আজ রাত ৯:৪৫ PM টেস্ট
-            const testTime = new Date();
-            testTime.setHours(21, 45, 0); // ৯:৪৫ PM
-            testTime.setSeconds(0);
-            testTime.setMilliseconds(0);
+            // চলতি বছরের জন্মদিন (১৬ ফেব্রুয়ারি, রাত ১২:০০ AM)
+            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
             
-            const diff = testTime - now;
+            // যদি আজকের পর হয়ে যায়, তাহলে পরের বছর
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
+            }
+            
+            const diff = birthday - now;
             
             // কাউন্টডাউন সংখ্যা আপডেট
             if (diff > 0) {
-                const totalSeconds = Math.floor(diff / 1000);
-                const hours = Math.floor(totalSeconds / 3600);
-                const mins = Math.floor((totalSeconds % 3600) / 60);
-                const secs = totalSeconds % 60;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const mins = Math.floor((diff / (1000 * 60)) % 60);
+                const secs = Math.floor((diff / 1000) % 60);
                 
-                document.getElementById('days').textContent = '00';
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('mins').textContent = String(mins).padStart(2, '0');
                 document.getElementById('secs').textContent = String(secs).padStart(2, '0');
@@ -930,7 +1023,7 @@
                 document.getElementById('secs').textContent = '00';
             }
             
-            // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে (১১ সেকেন্ড থেকে শুরু)
+            // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে (১১ সেকেন্ড থেকে শুরু) - শুধু audioAllowed হলে
             if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                 countdownAudio.play().then(() => {
                     console.log('কাউন্টডাউন অডিও চালু হয়েছে');
@@ -961,7 +1054,7 @@
                 // স্টেট লোড (কেক কাটা না থাকলে পুরো কেক দেখাবে)
                 loadState();
                 
-                // জন্মদিনের অডিও চালাও (ইউজার ইন্টারঅ্যাকশন থাকলে)
+                // জন্মদিনের অডিও চালাও - শুধু audioAllowed হলে
                 if (!birthdayAudioPlayed && audioAllowed) {
                     birthdayAudio.play().then(() => {
                         console.log('জন্মদিনের অডিও চালু হয়েছে');
@@ -971,8 +1064,10 @@
                     });
                 }
                 
-                // মাইক্রোফোন শুরু
-                setTimeout(startMicrophone, 1000);
+                // মাইক্রোফোন শুরু - শুধু audioAllowed হলে
+                if (audioAllowed) {
+                    setTimeout(startMicrophone, 1000);
+                }
             }
         }
         
