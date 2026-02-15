@@ -690,7 +690,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:৪০ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:৫০ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -862,7 +862,7 @@
                 });
         });
         
-        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:৪০ PM ----------
+        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:৫০ PM ----------
         const CONFIG = {
             month: new Date().getMonth(),
             day: new Date().getDate(),
@@ -890,6 +890,7 @@
         let blowInterval = null;
         let lastSpokenSecond = null;
         let audioPlayed = false;
+        let countdownFinished = false;
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
         function formatTime(date) {
@@ -931,20 +932,24 @@
         
         // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
+            if (countdownFinished) return;
+            
             const now = new Date();
             
-            // আজ রাত ৭:৪০ PM টেস্ট
+            // আজ রাত ৭:৫০ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(19, 40, 0); // ৭:৪০ PM
+            testTime.setHours(19, 50, 0); // ৭:৫০ PM
             testTime.setSeconds(0);
+            testTime.setMilliseconds(0);
             
             const diff = testTime - now;
             
             // কাউন্টডাউন সংখ্যা আপডেট
             if (diff > 0) {
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                const totalSeconds = Math.floor(diff / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
                 
                 document.getElementById('days').textContent = '00';
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
@@ -962,8 +967,8 @@
             }
             
             // টাইম শেষ হলে
-            if (diff <= 0 && !audioPlayed) {
-                audioPlayed = true;
+            if (diff <= 0 && !countdownFinished) {
+                countdownFinished = true;
                 
                 // কাউন্টডাউন স্ক্রিন লুকাও এবং মেইন কন্টেন্ট দেখাও
                 document.getElementById('countdownScreen').classList.add('hide');
@@ -975,21 +980,22 @@
                     confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                // স্টেট লোড এবং কেক রেন্ডার
+                // স্টেট লোড এবং কেক রেন্ডার (কেক কাটা না থাকলে পুরো কেক দেখাবে)
                 loadState();
-                renderCake();
                 
-                // অডিও চালানোর চেষ্টা
-                birthdayAudio.play().then(() => {
-                    console.log('অডিও চালু হয়েছে');
-                }).catch(error => {
-                    console.log('অটোপ্লে ব্লক হয়েছে:', error);
-                    // ইউজার ক্লিক করলে চালানোর জন্য
-                    document.addEventListener('click', function clickOnce() {
-                        birthdayAudio.play();
-                        document.removeEventListener('click', clickOnce);
-                    }, { once: true });
-                });
+                // অডিও চালানোর চেষ্টা (একবারই)
+                if (!audioPlayed) {
+                    audioPlayed = true;
+                    birthdayAudio.play().then(() => {
+                        console.log('অডিও চালু হয়েছে');
+                    }).catch(error => {
+                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                        document.addEventListener('click', function clickOnce() {
+                            birthdayAudio.play();
+                            document.removeEventListener('click', clickOnce);
+                        }, { once: true });
+                    });
+                }
                 
                 // মাইক্রোফোন শুরু
                 setTimeout(startMicrophone, 1000);
@@ -1001,8 +1007,13 @@
             const month = String(CONFIG.month + 1).padStart(2, '0');
             const day = String(CONFIG.day).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
+            
+            // লোকাল স্টোরেজ থেকে স্টেট লোড
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
+            
+            // কেক রেন্ডার
+            renderCake();
             
             if (cakeCut) {
                 document.getElementById('contentSections').classList.add('show');
