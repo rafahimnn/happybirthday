@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 জন্মদিনের চমক - ১৬ ফেব্রুয়ারি</title>
+    <title>🎂 Birthday Surprise - 16 February</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- EmailJS Library -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <style>
         * {
@@ -21,7 +20,6 @@
             min-height: 100vh;
         }
         
-        /* ভিডিও ব্যাকগ্রাউন্ড */
         .video-bg {
             position: fixed;
             top: 0;
@@ -49,11 +47,10 @@
             z-index: -1;
         }
         
-        /* প্লে বাটন (ডান দিকে, কন্ট্যাক্ট বাটনের বামে) - ছোট */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
-            right: 90px; /* কন্ট্যাক্ট বাটনের বামে */
+            right: 90px;
             z-index: 9999;
         }
         
@@ -84,7 +81,6 @@
             display: none;
         }
         
-        /* কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) - ছোট */
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
@@ -119,7 +115,6 @@
             50% { transform: scale(1.1); }
         }
         
-        /* কাউন্টডাউন স্ক্রিন */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -190,7 +185,6 @@
             text-shadow: 0 0 8px gold;
         }
         
-        /* মেইন কন্টেন্ট */
         .main-content {
             min-height: 100vh;
             padding: 15px;
@@ -202,7 +196,6 @@
             display: block;
         }
         
-        /* হিরো সেকশন */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -242,7 +235,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* কেক সেকশন */
         .cake-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -336,7 +328,6 @@
             box-shadow: 0 0 25px gold;
         }
         
-        /* কন্টেন্ট সেকশন */
         .content-sections {
             display: none;
             margin-top: 40px;
@@ -446,7 +437,6 @@
             white-space: pre-line;
         }
         
-        /* কন্ট্যাক্ট পৃষ্ঠা */
         .contact-page {
             position: fixed;
             top: 0;
@@ -675,7 +665,6 @@
     </style>
 </head>
 <body>
-    <!-- অডিও ফাইল লিংক -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown.mp3" type="audio/mpeg">
     </audio>
@@ -684,51 +673,46 @@
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ভিডিও ব্যাকগ্রাউন্ড -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     
-    <!-- প্লে বাটন (ডান দিকে, কন্ট্যাক্ট বাটনের বামে) -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
     
-    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
         </button>
     </div>
     
-    <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
-        <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
+        <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
             <div class="count-item">
                 <span class="count-number" id="days">00</span>
-                <span class="count-label">দিন</span>
+                <span class="count-label">Days</span>
             </div>
             <div class="count-item">
                 <span class="count-number" id="hours">00</span>
-                <span class="count-label">ঘণ্টা</span>
+                <span class="count-label">Hours</span>
             </div>
             <div class="count-item">
                 <span class="count-number" id="mins">00</span>
-                <span class="count-label">মিনিট</span>
+                <span class="count-label">Mins</span>
             </div>
             <div class="count-item">
                 <span class="count-number" id="secs">00</span>
-                <span class="count-label">সেকেন্ড</span>
+                <span class="count-label">Secs</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 ১৬ ফেব্রুয়ারি রাত ১২টায় চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
     
-    <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
@@ -738,14 +722,13 @@
                 <div class="cake-emoji" id="cakeEmoji">🎂</div>
                 <div class="candles" id="candles"></div>
                 <div class="cake-status" id="cakeStatus"></div>
-                <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 কেক কাটো</button>
+                <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
             </div>
         </section>
         
         <div class="content-sections" id="contentSections">
-            <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
+            <h2 class="section-title">📸 Photo Album</h2>
             <div class="photo-album">
-                <!-- ছবিগুলো আপনার ইচ্ছামতো পরিবর্তন করুন -->
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
                     <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
@@ -766,7 +749,7 @@
                 </div>
             </div>
             
-            <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
+            <h2 class="section-title">🎥 Video Messages</h2>
             <div class="video-gallery">
                 <div class="video-card">
                     <div class="video-wrapper">
@@ -774,7 +757,7 @@
                             <source src="https://www.w3schools.com/html/mov_bbb.mp4">
                         </video>
                     </div>
-                    <div class="video-info">প্রথম শুভেচ্ছা</div>
+                    <div class="video-info">First Wish</div>
                 </div>
                 
                 <div class="video-card">
@@ -783,12 +766,12 @@
                             <source src="https://www.w3schools.com/html/movie.mp4">
                         </video>
                     </div>
-                    <div class="video-info">বিশেষ বার্তা</div>
+                    <div class="video-info">Special Message</div>
                 </div>
             </div>
             
             <div class="message-section">
-                <h2 class="section-title">💌 ভালোবাসার কথা</h2>
+                <h2 class="section-title">💌 A Special Message</h2>
                 <div class="message-text">
 আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
 তোমার জীবন হোক আনন্দে ভরপুর। 💝
@@ -799,34 +782,33 @@
         </div>
         
         <footer>
-            <p>❤️ তৈরি করেছে ভালোবাসা</p>
-            <p>© ২০২৬ স্পেশাল ডে</p>
+            <p>❤️ Made with Love</p>
+            <p>© 2026 Special Day</p>
         </footer>
     </div>
     
-    <!-- কন্ট্যাক্ট পৃষ্ঠা -->
     <div class="contact-page" id="contactPage">
         <div class="contact-container">
-            <h2><i class="fas fa-envelope"></i> যোগাযোগ করুন</h2>
+            <h2><i class="fas fa-envelope"></i> Contact</h2>
             
             <form id="contact-form">
                 <div class="form-group">
-                    <label for="name">আপনার নাম</label>
-                    <input type="text" id="name" name="from_name" placeholder="আপনার নাম লিখুন" required>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="from_name" placeholder="Enter your name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">আপনার ইমেল</label>
-                    <input type="email" id="email" name="from_email" placeholder="আপনার ইমেল লিখুন" required>
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="from_email" placeholder="Enter your email" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">বার্তা</label>
-                    <textarea id="message" name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> মেসেজ পাঠান
+                    <i class="fas fa-paper-plane"></i> Send Message
                 </button>
                 
                 <div id="form-status"></div>
@@ -847,7 +829,7 @@
             </div>
             
             <button class="close-contact-btn" onclick="closeContactPage()">
-                <i class="fas fa-times"></i> বন্ধ করুন
+                <i class="fas fa-times"></i> Close
             </button>
         </div>
     </div>
@@ -858,7 +840,6 @@
     </div>
     
     <script>
-        // EmailJS initialization
         (function() {
             emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
@@ -867,22 +848,22 @@
             event.preventDefault();
             
             const statusDiv = document.getElementById('form-status');
-            statusDiv.innerHTML = '📤 পাঠানো হচ্ছে...';
+            statusDiv.innerHTML = '📤 Sending...';
             
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
             emailjs.sendForm('rafahimn', 'rafahimn', this)
                 .then(function() {
-                    statusDiv.innerHTML = '✅ মেসেজ পাঠানো হয়েছে!';
+                    statusDiv.innerHTML = '✅ Message sent successfully!';
                     statusDiv.style.color = '#00ff00';
                     document.getElementById('contact-form').reset();
                     setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
                 }, function(error) {
                     console.error('EmailJS Error:', error);
-                    statusDiv.innerHTML = '❌ পাঠানো যায়নি';
+                    statusDiv.innerHTML = '❌ Failed to send';
                     statusDiv.style.color = '#ff4444';
                 })
                 .finally(function() {
@@ -891,11 +872,10 @@
                 });
         });
         
-        // কনফিগারেশন
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি
-            day: 16,         // ১৬ তারিখ
-            age: 16,         // ১৬ বছর
+            month: 1,
+            day: 16,
+            age: 16,
             name: "প্রিয়জন"
         };
         
@@ -905,11 +885,9 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
         
-        // অডিও এলিমেন্ট
         const countdownAudio = document.getElementById('countdownAudio');
         const birthdayAudio = document.getElementById('birthdayWish');
         
-        // State variables
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -921,31 +899,26 @@
         let countdownFinished = false;
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
-        let audioAllowed = false; // ইউজার ক্লিক করলে true হবে
+        let audioAllowed = false;
         
-        // পুরো পৃষ্ঠায় ক্লিক ইভেন্ট - প্রথম ক্লিকেই অডিও চালু হবে
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
                 enableAudio();
             }
         });
         
-        // অডিও চালু করার ফাংশন
         function enableAudio() {
-            if (audioAllowed) return; // একবার চালু হয়ে গেলে আর হবে না
+            if (audioAllowed) return;
             audioAllowed = true;
             
-            // প্লে বাটন লুকাও
             document.getElementById('playBtn').classList.add('hide');
             
-            // যদি কাউন্টডাউন শেষ হয়ে থাকে, জন্মদিনের অডিও চালাও
             if (countdownFinished && !birthdayAudioPlayed) {
                 birthdayAudio.play().then(() => {
                     birthdayAudioPlayed = true;
-                }).catch(e => console.log('অডিও বাজেনি:', e));
+                }).catch(e => console.log('Audio play failed:', e));
             }
             
-            // যদি শেষ ১০ সেকেন্ডে থাকে, কাউন্টডাউন অডিও চালাও
             const now = new Date();
             const currentYear = now.getFullYear();
             let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
@@ -956,22 +929,19 @@
             if (diff <= 11000 && diff > 0 && !countdownAudioPlayed) {
                 countdownAudio.play().then(() => {
                     countdownAudioPlayed = true;
-                }).catch(e => console.log('কাউন্টডাউন অডিও বাজেনি:', e));
+                }).catch(e => console.log('Countdown audio failed:', e));
             }
             
-            // মাইক্রোফোন শুরু
             setTimeout(startMicrophone, 1000);
         }
         
-        // প্লে বাটনের জন্য আলাদা হ্যান্ডলার
         window.startAudio = function(event) {
             if (event) {
-                event.stopPropagation(); // ইভেন্ট ডুপ্লিকেশন ঠেকাতে
+                event.stopPropagation();
             }
             enableAudio();
         };
         
-        // কাউন্টডাউন আপডেট
         function updateCountdown() {
             if (countdownFinished) return;
             
@@ -1003,16 +973,14 @@
                 document.getElementById('secs').textContent = '00';
             }
             
-            // শেষ ১১ সেকেন্ডে কাউন্টডাউন অডিও (শুধু যদি audioAllowed true হয়)
             if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                 countdownAudio.play().then(() => {
                     countdownAudioPlayed = true;
                 }).catch(error => {
-                    console.log('কাউন্টডাউন অডিও বাজেনি:', error);
+                    console.log('Countdown audio failed:', error);
                 });
             }
             
-            // টাইম শেষ হলে
             if (diff <= 0 && !countdownFinished) {
                 countdownFinished = true;
                 
@@ -1029,12 +997,11 @@
                 
                 loadState();
                 
-                // জন্মদিনের অডিও (শুধু যদি audioAllowed true হয়)
                 if (!birthdayAudioPlayed && audioAllowed) {
                     birthdayAudio.play().then(() => {
                         birthdayAudioPlayed = true;
                     }).catch(error => {
-                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                        console.log('Autoplay blocked:', error);
                     });
                 }
                 
@@ -1079,7 +1046,7 @@
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
                 candlesDiv.innerHTML = '';
-                statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
+                statusDiv.textContent = '🎉 Cake cut! Happy Birthday! 🎉';
                 cutBtn.style.display = 'none';
                 stopMicrophone();
                 return;
@@ -1097,12 +1064,12 @@
             candlesDiv.innerHTML = candlesHtml;
             
             if (candlesBlown === totalCandles) {
-                statusDiv.textContent = '🎉 সব মোমবাতি নিভেছে! এখন কেক কাটো';
+                statusDiv.textContent = '🎉 All candles blown! Now cut the cake';
                 cutBtn.disabled = false;
                 stopMicrophone();
             } else {
                 const remaining = totalCandles - candlesBlown;
-                statusDiv.textContent = `${remaining}টি মোমবাতি জ্বলছে - ফুঁ দাও বা ট্যাপ করো`;
+                statusDiv.textContent = `${remaining} candles burning - Blow or tap`;
                 cutBtn.disabled = true;
             }
         }
@@ -1219,7 +1186,6 @@
             }
         }
         
-        // কাউন্টডাউন শুরু করুন - প্রথমবার সাথে সাথেই কল
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
