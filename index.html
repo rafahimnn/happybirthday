@@ -232,21 +232,25 @@
             50% { transform: translateY(-8px); }
         }
         
+        /* মোমবাতির জন্য ফিক্স - মোবাইলে দেখাবে */
         .candles {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 5px;
-            margin: 15px 0;
-            font-size: clamp(24px, 6vw, 36px);
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0;
+            min-height: 60px;
         }
         
         .candle {
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
             animation: flicker 0.5s infinite alternate;
             display: inline-block;
-            padding: 2px;
+            font-size: clamp(24px, 7vw, 36px);
+            filter: drop-shadow(0 0 8px gold);
+            line-height: 1;
         }
         
         .candle.blown {
@@ -257,28 +261,29 @@
         }
         
         @keyframes flicker {
-            from { transform: scale(1); opacity: 1; }
-            to { transform: scale(1.1); opacity: 0.9; }
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0.8; transform: scale(1.1); }
         }
         
         .cake-status {
-            font-size: 16px;
+            font-size: clamp(14px, 4vw, 18px);
             color: gold;
-            margin: 15px 0;
-            padding: 10px;
+            margin: 20px 0;
+            padding: 12px;
             border: 2px solid gold;
-            border-radius: 30px;
+            border-radius: 40px;
             background: rgba(0,0,0,0.3);
             backdrop-filter: blur(5px);
+            line-height: 1.5;
         }
         
         .cut-btn {
             background: linear-gradient(45deg, gold, red);
             color: black;
-            font-size: 20px;
-            padding: 10px 25px;
+            font-size: clamp(18px, 5vw, 22px);
+            padding: 12px 25px;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
@@ -308,10 +313,10 @@
         }
         
         .section-title {
-            font-size: 24px;
+            font-size: clamp(20px, 6vw, 28px);
             color: gold;
             text-align: center;
-            margin: 30px 0 15px;
+            margin: 30px 0 20px;
             text-shadow: 0 0 8px gold;
         }
         
@@ -319,7 +324,7 @@
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
         
         @media (min-width: 768px) {
@@ -402,11 +407,12 @@
         }
         
         .message-text {
-            font-size: 20px;
+            font-size: clamp(18px, 5vw, 24px);
             font-family: cursive;
-            line-height: 1.5;
+            line-height: 1.6;
             text-align: center;
             color: white;
+            white-space: pre-line;
         }
         
         /* কন্ট্যাক্ট পৃষ্ঠা */
@@ -636,18 +642,6 @@
             margin-top: 30px;
             font-size: 14px;
         }
-        
-        @media (max-width: 480px) {
-            .count-item {
-                min-width: 60px;
-                padding: 8px 10px;
-            }
-            .count-number { font-size: 24px; }
-            .count-label { font-size: 10px; }
-            .cake-status { font-size: 14px; }
-            .cut-btn { font-size: 18px; }
-            .message-text { font-size: 18px; }
-        }
     </style>
 </head>
 <body>
@@ -655,7 +649,7 @@
     
     <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
-        <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown-10sec.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/%F0%9F%94%A5%20FIRE%20_%20FURY%20%F0%9F%94%A5%2010%20Second%20Countdown%20with%20VOICE%2C%20Fire%20and%20Giant%20Explosion!%20V3.mp3" type="audio/mpeg">
     </audio>
     
     <!-- জন্মদিনের অডিও -->
@@ -697,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:১০ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:২০ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -867,7 +861,7 @@
                 });
         });
         
-        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:১০ PM ----------
+        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:২০ PM ----------
         const CONFIG = {
             month: 1,        // ফেব্রুয়ারি = 1
             day: 16,         // ১৬ তারিখ
@@ -895,7 +889,6 @@
         let analyser = null;
         let blowInterval = null;
         let countdownFinished = false;
-        let countdownAudioPlayed = false;
         let birthdayAudioPlayed = false;
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
@@ -912,15 +905,15 @@
             return `${hours}:${minutesStr} ${ampm}`;
         }
         
-        // ---------- কাউন্টডাউন (টেস্ট ৮:১০ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:২০ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৮:১০ PM টেস্ট
+            // আজ রাত ৮:২০ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(20, 10, 0); // ৮:১০ PM
+            testTime.setHours(20, 20, 0); // ৮:২০ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
@@ -937,25 +930,16 @@
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('mins').textContent = String(mins).padStart(2, '0');
                 document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-            }
-            
-            // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে
-            if (diff <= 10000 && diff > 0 && !countdownAudioPlayed) {
-                countdownAudio.play().then(() => {
-                    console.log('কাউন্টডাউন অডিও চালু হয়েছে');
-                    countdownAudioPlayed = true;
-                }).catch(error => {
-                    console.log('কাউন্টডাউন অডিও বাজেনি:', error);
-                });
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('mins').textContent = '00';
+                document.getElementById('secs').textContent = '00';
             }
             
             // টাইম শেষ হলে
             if (diff <= 0 && !countdownFinished) {
                 countdownFinished = true;
-                
-                // কাউন্টডাউন অডিও বন্ধ করো
-                countdownAudio.pause();
-                countdownAudio.currentTime = 0;
                 
                 // কাউন্টডাউন স্ক্রিন লুকাও এবং মেইন কন্টেন্ট দেখাও
                 document.getElementById('countdownScreen').classList.add('hide');
@@ -977,6 +961,7 @@
                         birthdayAudioPlayed = true;
                     }).catch(error => {
                         console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                        // ইউজার ক্লিক করলে চালানোর জন্য
                         document.addEventListener('click', function clickOnce() {
                             birthdayAudio.play();
                             document.removeEventListener('click', clickOnce);
@@ -1034,12 +1019,13 @@
             cutBtn.style.display = 'block';
             cutBtn.disabled = true;
             
-            let html = '';
+            // মোমবাতি তৈরি
+            let candlesHtml = '';
             for (let i = 0; i < totalCandles; i++) {
                 const blown = i < candlesBlown ? 'blown' : '';
-                html += `<span class="candle ${blown}" onclick="blowCandle(${i})">🕯️</span>`;
+                candlesHtml += `<span class="candle ${blown}" onclick="blowCandle(${i})">🕯️</span>`;
             }
-            candlesDiv.innerHTML = html;
+            candlesDiv.innerHTML = candlesHtml;
             
             if (candlesBlown === totalCandles) {
                 statusDiv.textContent = '🎉 সব মোমবাতি নিভেছে! এখন কেক কাটো';
@@ -1171,7 +1157,6 @@
         
         window.addEventListener('beforeunload', function() {
             stopMicrophone();
-            countdownAudio.pause();
             birthdayAudio.pause();
         });
     </script>
