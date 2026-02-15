@@ -20,23 +20,15 @@
             color: white;
         }
 
-        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড */
-        .animated-bg {
+        /* ভিডিও ব্যাকগ্রাউন্ড */
+        .video-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            object-fit: cover;
             z-index: -2;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .overlay {
@@ -45,34 +37,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(26,0,51,0.7));
+            backdrop-filter: blur(3px);
             z-index: -1;
-        }
-
-        /* ভাসমান পার্টিকেল */
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .float-item {
-            position: absolute;
-            font-size: 2rem;
-            animation: floatAround 15s infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes floatAround {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
-            10% { opacity: 0.3; transform: scale(1); }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) rotate(360deg) scale(0.5); opacity: 0; }
         }
 
         /* কাউন্টডাউন স্ক্রিন */
@@ -90,8 +57,8 @@
             z-index: 9999;
             transition: opacity 1s ease;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
         }
 
         .countdown-screen.hidden {
@@ -100,7 +67,7 @@
         }
 
         .countdown-title {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: #fff;
             margin-bottom: 30px;
             text-transform: uppercase;
@@ -115,55 +82,53 @@
         }
 
         .countdown-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: clamp(25px, 5vw, 40px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
             margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.3);
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: clamp(5px, 2vw, 15px);
+            gap: clamp(10px, 2vw, 20px);
         }
 
         .count-item {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.1);
             padding: clamp(15px, 4vw, 25px) clamp(5px, 2vw, 15px);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+            border: 2px solid gold;
         }
 
         .count-number {
-            font-size: clamp(2rem, 8vw, 4rem);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, #ffd700, #ff1493);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
             line-height: 1;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+            filter: drop-shadow(0 0 20px gold);
         }
 
         .count-label {
-            font-size: clamp(0.7rem, 2vw, 1rem);
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .countdown-message {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: #fff;
             margin-top: 20px;
-            text-shadow: 0 0 10px #ffd700;
+            text-shadow: 0 0 10px gold;
             animation: pulse 2s infinite;
         }
 
@@ -205,25 +170,24 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab, #ee7752);
+            font-size: clamp(3rem, 10vw, 5rem);
+            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
+            filter: drop-shadow(0 0 30px gold);
             animation: rainbow 5s infinite;
-            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
         }
 
         @keyframes rainbow {
             0%, 100% { filter: drop-shadow(0 0 20px #ffd700); }
-            25% { filter: drop-shadow(0 0 30px #ff1493); }
-            50% { filter: drop-shadow(0 0 40px #23d5ab); }
-            75% { filter: drop-shadow(0 0 30px #ee7752); }
+            33% { filter: drop-shadow(0 0 30px #ff1493); }
+            66% { filter: drop-shadow(0 0 40px #23d5ab); }
         }
 
         .birthday-name {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(3rem, 12vw, 6rem);
+            font-size: clamp(3.5rem, 12vw, 6rem);
             background: linear-gradient(135deg, #ffd700, #fff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -239,60 +203,75 @@
 
         /* কেক সেকশন */
         .cake-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: clamp(25px, 5vw, 40px);
+            border-radius: 50px;
+            border: 3px solid gold;
             margin: 40px 0;
             width: 100%;
-            max-width: 600px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 215, 0, 0.3);
+            max-width: 650px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
         .cake-container {
             text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cake-container.blow-area {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .cake-emoji {
-            font-size: clamp(5rem, 20vw, 9rem);
-            filter: drop-shadow(0 20px 40px rgba(255, 215, 0, 0.6));
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            font-size: clamp(6rem, 20vw, 10rem);
+            filter: drop-shadow(0 20px 40px gold);
+            transition: 0.3s;
         }
 
         .candles-container {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-size: clamp(2rem, 6vw, 2.8rem);
             margin-top: -20px;
-            letter-spacing: clamp(5px, 2vw, 10px);
-            animation: flicker 1s infinite;
+            letter-spacing: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .candle {
+            display: inline-block;
+            animation: flicker 0.5s infinite alternate;
+            font-size: inherit;
         }
 
         @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0.9; transform: scale(1.1); }
         }
 
         .cake-status {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: #fff;
             margin: 25px 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 25px);
+            background: rgba(0, 0, 0, 0.6);
+            padding: clamp(12px, 3vw, 15px) clamp(20px, 4vw, 25px);
             border-radius: 50px;
-            border: 2px solid rgba(255, 215, 0, 0.6);
+            border: 2px solid gold;
             display: inline-block;
             width: 100%;
         }
 
         .button-group {
             display: flex;
-            gap: clamp(10px, 3vw, 20px);
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -301,25 +280,19 @@
             padding: clamp(12px, 3vw, 15px) clamp(25px, 6vw, 40px);
             border: none;
             border-radius: 50px;
-            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #1a1a2e;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 2px solid white;
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            flex: 1 1 auto;
-            min-width: 140px;
+            gap: 10px;
+            min-width: 160px;
             justify-content: center;
-        }
-
-        .action-btn.secondary {
-            background: linear-gradient(135deg, #6c5ce7, #a363d9);
-            color: white;
         }
 
         .action-btn:disabled {
@@ -331,58 +304,77 @@
 
         .action-btn:not(:disabled):hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 15px 40px gold;
         }
 
-        /* ফটো অ্যালবাম */
+        .mic-btn {
+            background: linear-gradient(135deg, #6c5ce7, #a363d9);
+            color: white;
+            min-width: 180px;
+        }
+
+        .mic-btn i {
+            font-size: 1.3rem;
+        }
+
+        .mic-btn.active {
+            animation: micPulse 1s infinite;
+        }
+
+        @keyframes micPulse {
+            0%, 100% { box-shadow: 0 0 20px #6c5ce7; }
+            50% { box-shadow: 0 0 40px #a363d9; }
+        }
+
+        /* ফটো অ্যালবাম - ৬টি ছবি */
         .photo-album {
-            columns: 2;
-            column-gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             margin: 50px 0;
         }
 
         @media (min-width: 768px) {
             .photo-album {
-                columns: 3;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
         .photo-item {
-            break-inside: avoid;
-            margin-bottom: 15px;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
-            border: 3px solid transparent;
-            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab);
-            padding: 3px;
+            aspect-ratio: 3/4;
+            border: 3px solid gold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .photo-item:hover {
             transform: translateY(-10px) scale(1.02);
+            border-color: #ff1493;
         }
 
         .photo-item img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            border-radius: 17px;
         }
 
         .photo-overlay {
             position: absolute;
-            bottom: 3px;
-            left: 3px;
-            right: 3px;
-            padding: 20px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            color: #ffd700;
-            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: gold;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             font-weight: 600;
             transform: translateY(100%);
             transition: 0.3s;
-            border-radius: 0 0 17px 17px;
         }
 
         .photo-item:hover .photo-overlay {
@@ -404,17 +396,17 @@
         }
 
         .video-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
             border-radius: 25px;
             overflow: hidden;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            border: 2px solid gold;
             transition: 0.3s;
         }
 
         .video-card:hover {
             transform: translateY(-10px);
-            border-color: #ffd700;
+            border-color: #ff1493;
             box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
         }
 
@@ -434,12 +426,12 @@
         }
 
         .video-info {
-            padding: clamp(15px, 4vw, 20px);
+            padding: 15px;
         }
 
         .video-title {
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            color: #ffd700;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: gold;
             margin-bottom: 5px;
         }
 
@@ -450,14 +442,14 @@
 
         /* মেসেজ সেকশন */
         .message-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 30px);
             text-align: center;
             margin: 50px 0;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 3px solid gold;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
         .message-text {
@@ -473,28 +465,22 @@
         /* সেকশন টাইটেল */
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 7vw, 3rem);
+            font-size: clamp(2rem, 7vw, 2.8rem);
             margin: 60px 0 30px;
             background: linear-gradient(135deg, #ffd700, #ff1493);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+            filter: drop-shadow(0 0 20px gold);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: clamp(80px, 15vw, 150px);
+            width: clamp(80px, 15vw, 120px);
             height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ff1493, #23d5ab);
+            background: linear-gradient(90deg, #ffd700, #ff1493);
             margin: 20px auto;
             border-radius: 2px;
-            animation: widthPulse 2s infinite;
-        }
-
-        @keyframes widthPulse {
-            0%, 100% { width: clamp(80px, 15vw, 150px); opacity: 1; }
-            50% { width: clamp(100px, 20vw, 200px); opacity: 0.8; }
         }
 
         /* লাইটবক্স */
@@ -520,11 +506,11 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 20px;
-            box-shadow: 0 0 50px #ffd700, 0 0 100px #ff1493;
-            animation: lightboxZoom 0.3s;
+            box-shadow: 0 0 50px gold;
+            animation: zoom 0.3s;
         }
 
-        @keyframes lightboxZoom {
+        @keyframes zoom {
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
@@ -537,30 +523,29 @@
             color: white;
             cursor: pointer;
             transition: 0.3s;
-            text-shadow: 0 0 20px #ffd700;
+            text-shadow: 0 0 20px gold;
         }
 
         .lightbox .close:hover {
             transform: scale(1.2);
-            color: #ffd700;
+            color: gold;
         }
 
         footer {
             text-align: center;
             padding: 40px;
             color: #ddd;
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            border-top: 2px solid gold;
             margin-top: 50px;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg"></div>
+    <!-- ভিডিও ব্যাকগ্রাউন্ড -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
+    </video>
     <div class="overlay"></div>
-
-    <!-- ভাসমান এলিমেন্টস -->
-    <div class="floating-elements" id="floatingElements"></div>
 
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
@@ -602,24 +587,24 @@
                 
                 <!-- কেক সেকশন -->
                 <div class="cake-section">
-                    <div class="cake-container">
+                    <div class="cake-container" id="cakeContainer" onclick="handleCandleClick()">
                         <div class="cake-emoji" id="cakeEmoji">🎂</div>
                         <div class="candles-container" id="candlesContainer"></div>
                     </div>
                     <div class="cake-status" id="cakeStatus"></div>
                     
                     <div class="button-group">
-                        <button class="action-btn" id="cutBtn" onclick="cutCake()">
-                            <i class="fas fa-utensils"></i> কেক কাটো
+                        <button class="action-btn mic-btn" id="micBtn" onclick="startMicrophone()">
+                            <i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)
                         </button>
-                        <button class="action-btn secondary" id="blowBtn" onclick="blowCandles()">
-                            <i class="fas fa-wind"></i> ফুঁ দাও
+                        <button class="action-btn" id="cutBtn" onclick="cutCake()" disabled>
+                            <i class="fas fa-utensils"></i> কেক কাটো
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- ফটো অ্যালবাম -->
+            <!-- ফটো অ্যালবাম - ৬টি ছবি -->
             <section>
                 <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
                 <div class="photo-album">
@@ -638,6 +623,14 @@
                     <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
                         <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
                         <div class="photo-overlay">💖 ভালোবাসা</div>
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                        <div class="photo-overlay">💖 কেক কাটা</div>
+                    </div>
+                    <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
+                        <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
+                        <div class="photo-overlay">💖 উপহার</div>
                     </div>
                 </div>
             </section>
@@ -714,29 +707,14 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
 
-        // ভাসমান এলিমেন্ট তৈরি
-        function createFloatingElements() {
-            const container = document.getElementById('floatingElements');
-            const elements = ['🎂', '🎈', '🎉', '💖', '✨', '⭐', '🕯️', '🎊'];
-            
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const el = document.createElement('div');
-                    el.className = 'float-item';
-                    el.textContent = elements[Math.floor(Math.random() * elements.length)];
-                    el.style.left = Math.random() * 100 + '%';
-                    el.style.animationDelay = Math.random() * 10 + 's';
-                    el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                    container.appendChild(el);
-                    
-                    setTimeout(() => el.remove(), 15000);
-                }, i * 1000);
-            }
-        }
-
         // স্টেট
         let cakeCut = false;
         let candlesBlown = false;
+        let confettiShown = false;
+        let mediaRecorder;
+        let audioContext;
+        let analyser;
+        let microphone;
 
         // আজ কি জন্মদিন?
         function isBirthdayToday() {
@@ -760,17 +738,20 @@
             
             if (diff <= 0) {
                 // জন্মদিন এসে গেছে!
+                if (!confettiShown) {
+                    confettiShown = true;
+                    // কনফেটি
+                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+                    setTimeout(() => {
+                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
+                    }, 200);
+                    setTimeout(() => {
+                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
+                    }, 400);
+                }
+                
                 document.getElementById('countdownScreen').classList.add('hidden');
                 document.getElementById('mainContent').classList.add('visible');
-                
-                // কনফেটি
-                confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-                setTimeout(() => {
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
-                }, 200);
-                setTimeout(() => {
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
-                }, 400);
                 
                 // কেক স্টেট লোড
                 loadCakeState();
@@ -790,8 +771,10 @@
 
             // মেসেজ আপডেট
             const msg = document.getElementById('countdownMessage');
-            if (days === 0 && hours < 24) {
-                msg.innerHTML = '🎉 কালকে বড় দিন! 🎉';
+            if (days === 0 && hours === 0 && mins === 0 && secs === 0) {
+                msg.innerHTML = '🎉 আজকের দিন! অপেক্ষা শেষ 🎉';
+            } else if (days === 0 && hours < 24) {
+                msg.innerHTML = '🎉 আজ রাত ১২টায় চমক! 🎉';
             } else {
                 msg.innerHTML = '🎂 স্পেশাল ডে আসছে 🎂';
             }
@@ -800,7 +783,9 @@
         // কেক স্টেট লোড
         function loadCakeState() {
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
+            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
+            const day = String(CONFIG.birthDay).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
             cakeCut = localStorage.getItem(`cakeCut_${dateStr}`) === 'true';
             candlesBlown = localStorage.getItem(`candlesBlown_${dateStr}`) === 'true';
         }
@@ -811,51 +796,101 @@
             const candlesContainer = document.getElementById('candlesContainer');
             const cakeStatus = document.getElementById('cakeStatus');
             const cutBtn = document.getElementById('cutBtn');
-            const blowBtn = document.getElementById('blowBtn');
+            const micBtn = document.getElementById('micBtn');
 
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
                 candlesContainer.innerHTML = '';
                 cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
-                blowBtn.disabled = true;
+                micBtn.disabled = true;
             } else {
                 cakeEmoji.textContent = '🎂';
                 
                 if (candlesBlown) {
                     candlesContainer.innerHTML = '💨';
-                    cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে';
-                    blowBtn.disabled = true;
+                    cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে! এখন কেক কাটো';
+                    micBtn.disabled = true;
                     cutBtn.disabled = false;
                 } else {
                     let candles = '';
                     for (let i = 0; i < CONFIG.age; i++) {
-                        candles += '🕯️';
+                        candles += '<span class="candle">🕯️</span>';
                     }
                     candlesContainer.innerHTML = candles;
-                    cakeStatus.textContent = `${CONFIG.age}টি মোমবাতি জ্বলছে`;
-                    blowBtn.disabled = false;
-                    cutBtn.disabled = false;
+                    cakeStatus.textContent = `${CONFIG.age}টি মোমবাতি জ্বলছে - ফুঁ দাও অথবা মোমবাতিতে ট্যাপ করো`;
+                    micBtn.disabled = false;
+                    cutBtn.disabled = true;
                 }
             }
         }
 
-        // কেক কাটা
-        window.cutCake = function() {
-            if (!isBirthdayToday() || cakeCut) return;
+        // মোমবাতিতে ক্লিক করলে
+        window.handleCandleClick = function() {
+            if (!isBirthdayToday() || cakeCut || candlesBlown) return;
+            
+            // ৫০% চান্সে নিভবে
+            if (Math.random() > 0.5) {
+                blowCandles();
+            } else {
+                document.getElementById('cakeContainer').classList.add('blow-area');
+                setTimeout(() => {
+                    document.getElementById('cakeContainer').classList.remove('blow-area');
+                }, 500);
+            }
+        };
 
-            const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
-            
-            cakeCut = true;
-            localStorage.setItem(`cakeCut_${dateStr}`, 'true');
-            
-            renderCake();
-            
-            // কনফেটি
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
+        // মাইক্রোফোন স্টার্ট
+        window.startMicrophone = function() {
+            if (!isBirthdayToday() || cakeCut || candlesBlown) return;
+
+            const micBtn = document.getElementById('micBtn');
+            micBtn.innerHTML = '<i class="fas fa-microphone-alt"></i> ফুঁ দাও...';
+            micBtn.classList.add('active');
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    microphone = audioContext.createMediaStreamSource(stream);
+                    microphone.connect(analyser);
+                    analyser.fftSize = 256;
+                    
+                    const bufferLength = analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+                    
+                    // চেক করা হচ্ছে ফুঁর জন্য
+                    const checkBlow = setInterval(() => {
+                        analyser.getByteFrequencyData(dataArray);
+                        let sum = 0;
+                        for (let i = 0; i < bufferLength; i++) {
+                            sum += dataArray[i];
+                        }
+                        let average = sum / bufferLength;
+                        
+                        // যদি ফুঁর লেভেল বেশি হয়
+                        if (average > 80) {
+                            clearInterval(checkBlow);
+                            stream.getTracks().forEach(track => track.stop());
+                            micBtn.classList.remove('active');
+                            micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
+                            blowCandles();
+                        }
+                    }, 100);
+                    
+                    // ১০ সেকেন্ড পর বন্ধ
+                    setTimeout(() => {
+                        clearInterval(checkBlow);
+                        stream.getTracks().forEach(track => track.stop());
+                        micBtn.classList.remove('active');
+                        micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
+                    }, 10000);
+                })
+                .catch(err => {
+                    alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! মোমবাতিতে ট্যাপ করে নিভাও।');
+                    micBtn.classList.remove('active');
+                    micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
+                });
         };
 
         // মোমবাতি নেভানো
@@ -863,7 +898,9 @@
             if (!isBirthdayToday() || cakeCut || candlesBlown) return;
 
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.birthMonth}-${CONFIG.birthDay}`;
+            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
+            const day = String(CONFIG.birthDay).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
             
             candlesBlown = true;
             localStorage.setItem(`candlesBlown_${dateStr}`, 'true');
@@ -879,6 +916,26 @@
             });
         };
 
+        // কেক কাটা
+        window.cutCake = function() {
+            if (!isBirthdayToday() || cakeCut) return;
+
+            const today = new Date();
+            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
+            const day = String(CONFIG.birthDay).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
+            
+            cakeCut = true;
+            localStorage.setItem(`cakeCut_${dateStr}`, 'true');
+            
+            renderCake();
+            
+            // কনফেটি
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
+        };
+
         // লাইটবক্স
         window.openLightbox = function(url) {
             document.getElementById('lightboxImg').src = url;
@@ -888,10 +945,6 @@
         window.closeLightbox = function() {
             document.getElementById('lightbox').classList.remove('active');
         };
-
-        // ভাসমান এলিমেন্ট চালু করা
-        createFloatingElements();
-        setInterval(createFloatingElements, 20000);
 
         // চেক করে দেখি আজ কি জন্মদিন
         if (isBirthdayToday()) {
