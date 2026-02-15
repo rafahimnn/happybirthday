@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:৩৬ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:৪৪ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -861,7 +861,7 @@
                 });
         });
         
-        // ---------- কনফিগারেশন - ১৬ ফেব্রুয়ারি ----------
+        // ---------- কনফিগারেশন ----------
         const CONFIG = {
             month: 1,        // ফেব্রুয়ারি = 1
             day: 16,         // ১৬ তারিখ
@@ -892,15 +892,15 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         
-        // ---------- কাউন্টডাউন (টেস্ট ৮:৩৬ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:৪৪ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৮:৩৬ PM টেস্ট
+            // আজ রাত ৮:৪৪ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(20, 36, 0); // ৮:৩৬ PM
+            testTime.setHours(20, 44, 0); // ৮:৪৪ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
@@ -926,14 +926,19 @@
             
             // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে
             if (diff <= 10000 && diff > 0 && !countdownAudioPlayed) {
-                countdownAudio.play().then(() => {
-                    console.log('কাউন্টডাউন অডিও চালু হয়েছে');
-                    countdownAudioPlayed = true;
-                }).catch(error => {
-                    console.log('কাউন্টডাউন অডিও বাজেনি:', error);
-                    // অডিও না বাজলেও কাউন্টডাউন চলবে
-                    countdownAudioPlayed = true; // বারবার চেষ্টা না করার জন্য
-                });
+                // অডিও চালানোর চেষ্টা
+                let playPromise = countdownAudio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('কাউন্টডাউন অডিও চালু হয়েছে');
+                        countdownAudioPlayed = true;
+                    }).catch(error => {
+                        console.log('কাউন্টডাউন অডিও বাজেনি:', error);
+                        // অডিও না বাজলেও ফ্ল্যাগ true করে দিই যাতে বারবার চেষ্টা না করে
+                        countdownAudioPlayed = true;
+                    });
+                }
             }
             
             // টাইম শেষ হলে
@@ -959,18 +964,22 @@
                 
                 // জন্মদিনের অডিও চালাও
                 if (!birthdayAudioPlayed) {
-                    birthdayAudio.play().then(() => {
-                        console.log('জন্মদিনের অডিও চালু হয়েছে');
-                        birthdayAudioPlayed = true;
-                    }).catch(error => {
-                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
-                        // ইউজার ক্লিক করলে চালানোর জন্য
-                        const clickHandler = function() {
-                            birthdayAudio.play();
-                            document.removeEventListener('click', clickHandler);
-                        };
-                        document.addEventListener('click', clickHandler, { once: true });
-                    });
+                    let playPromise = birthdayAudio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            console.log('জন্মদিনের অডিও চালু হয়েছে');
+                            birthdayAudioPlayed = true;
+                        }).catch(error => {
+                            console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                            // ইউজার ক্লিক করলে চালানোর জন্য
+                            const clickHandler = function() {
+                                birthdayAudio.play();
+                                document.removeEventListener('click', clickHandler);
+                            };
+                            document.addEventListener('click', clickHandler, { once: true });
+                        });
+                    }
                 }
                 
                 // মাইক্রোফোন শুরু
