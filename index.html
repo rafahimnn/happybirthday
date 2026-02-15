@@ -351,7 +351,7 @@
             object-fit: cover;
         }
         
-        /* ভিডিও গ্যালারি */
+        /* ভিডিও গ্যালারি - আপনার নতুন ভিডিও যোগ করা হয়েছে */
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
@@ -671,7 +671,7 @@
     
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
-        <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
+        <h1 class="countdown-title">⏰ টেস্ট কাউন্টডাউন</h1>
         <div class="countdown-box">
             <div class="count-item">
                 <span class="count-number" id="days">00</span>
@@ -690,7 +690,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 স্পেশাল ডে আসছে 🎂</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:১২ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -731,9 +731,20 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি -->
+            <!-- ভিডিও গ্যালারি - আপনার Cloudinary ভিডিও যোগ করা হয়েছে -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
+                <!-- আপনার নতুন Cloudinary ভিডিও -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://res.cloudinary.com/dpctt0wao/image/upload/v1771160623/sample-thumbnail.jpg">
+                            <source src="https://res.cloudinary.com/dpctt0wao/video/upload/v1771160623/Jaane_Na_Tu_Official_Music_Video___Bhoomi___Almost_Loved_-_EP___UR_Debut___Latest_Hindi_Indie_Song_xxijba.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-info">জানে না তু - অফিসিয়াল মিউজিক ভিডিও</div>
+                </div>
+                
+                <!-- আগের ভিডিও -->
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
@@ -742,6 +753,7 @@
                     </div>
                     <div class="video-info">প্রথম শুভেচ্ছা</div>
                 </div>
+                
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
@@ -859,11 +871,15 @@
                 });
         });
         
-        // ---------- কনফিগারেশন ----------
+        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:১২ PM ----------
+        const now = new Date();
+        const testDate = new Date();
+        testDate.setHours(19, 12, 0); // ৭:১২ PM (19 ঘন্টা = 7 PM)
+        
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি
-            day: 15,         // ১৫ তারিখ
-            age: 16,         // ১৬ বছর
+            month: testDate.getMonth(),  // আজকের মাস
+            day: testDate.getDate(),      // আজকের তারিখ
+            age: 16,                      // ১৬ বছর
             name: "প্রিয়জন"
         };
         
@@ -903,19 +919,22 @@
         // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
             const now = new Date();
-            const currentYear = now.getFullYear();
             
-            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day);
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day);
-            }
+            // আজ রাত ৭:১২ PM টেস্ট
+            const testTime = new Date();
+            testTime.setHours(19, 12, 0); // ৭:১২ PM
             
-            const diff = birthday - now;
+            const diff = testTime - now;
             
             if (diff <= 0) {
-                // জন্মদিন এসেছে - অডিও চালান
+                // ৭:১২ PM বেজে গেছে - অডিও চালান
                 birthdayAudio.play().catch(error => {
                     console.log('অটোপ্লে ব্লক হয়েছে', error);
+                    // ইউজার ক্লিক করলে চালানোর জন্য
+                    document.addEventListener('click', function clickOnce() {
+                        birthdayAudio.play();
+                        document.removeEventListener('click', clickOnce);
+                    }, { once: true });
                 });
                 
                 if (!confettiShown) {
@@ -932,20 +951,14 @@
                 return;
             }
             
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / (1000 * 60)) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
             
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('days').textContent = '00';
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-            
-            if (days === 0) {
-                const timeStr = formatTime(birthday);
-                document.getElementById('countdownMessage').innerHTML = `🎉 আজ রাত ${timeStr} এ চমক! 🎉`;
-            }
         }
         
         function loadState() {
@@ -1114,18 +1127,9 @@
             }
         }
         
-        const today = new Date();
-        if (today.getMonth() === CONFIG.month && today.getDate() === CONFIG.day) {
-            document.getElementById('countdownScreen').classList.add('hide');
-            document.getElementById('mainContent').classList.add('show');
-            loadState();
-            renderCake();
-            confetti({ particleCount: 100, spread: 70 });
-            setTimeout(startMicrophone, 1000);
-        } else {
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-        }
+        // টেস্ট কাউন্টডাউন শুরু করুন
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
         
         window.addEventListener('beforeunload', stopMicrophone);
     </script>
