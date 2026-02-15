@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 Birthday Surprise - 16 February</title>
+    <title>🎂 Birthday Surprise - Complete Journey</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@700&family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -14,12 +16,13 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             overflow-x: hidden;
-            color: white;
+            color: #4a4a4a;
             min-height: 100vh;
         }
         
+        /* ========== VIDEO BACKGROUND ========== */
         .video-bg {
             position: fixed;
             top: 0;
@@ -43,10 +46,82 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(128,0,128,0.4));
+            background: linear-gradient(135deg, rgba(255,192,203,0.3), rgba(147,112,219,0.3));
             z-index: -1;
         }
         
+        /* ========== CUSTOM HEART CURSOR ========== */
+        .custom-cursor {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+        
+        .custom-cursor svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+        }
+        
+        /* ========== FLOATING HEARTS & SPARKLES ========== */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .heart-float {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 105, 180, 0.6);
+            animation: floatHeart var(--float-duration, 6s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes floatHeart {
+            0% { transform: translate(0, 100vh) rotate(0deg); }
+            100% { transform: translate(var(--translate-x, 0), -100vh) rotate(360deg); }
+        }
+        
+        .magic-sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .magic-sparkles::before,
+        .magic-sparkles::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, white 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: sparkleLayer 8s linear infinite;
+            opacity: 0.5;
+        }
+        
+        .magic-sparkles::after {
+            animation-delay: -4s;
+            transform: rotate(45deg);
+        }
+        
+        @keyframes sparkleLayer {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50px); }
+        }
+        
+        /* ========== BUTTONS (Play & Contact) ========== */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
@@ -55,26 +130,26 @@
         }
         
         .play-float-btn button {
-            background: linear-gradient(135deg, #00ff88, #00ccff);
-            color: black;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #4a4a4a;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 2px solid white;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: pulse 2s infinite;
+            animation: softPulse 2s infinite;
         }
         
         .play-float-btn button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #00ff88;
+            transform: scale(1.15);
+            box-shadow: 0 0 30px #ff69b4;
         }
         
         .play-float-btn.hide {
@@ -89,16 +164,16 @@
         }
         
         .contact-float-btn button {
-            background: linear-gradient(135deg, gold, #ff6b6b);
-            color: black;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: #4a4a4a;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 2px solid white;
+            box-shadow: 0 5px 20px rgba(147, 112, 219, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             transition: 0.3s;
             display: flex;
             align-items: center;
@@ -106,15 +181,16 @@
         }
         
         .contact-float-btn button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px gold;
+            transform: scale(1.15);
+            box-shadow: 0 0 30px #9370db;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.9; }
         }
         
+        /* ========== COUNTDOWN SCREEN ========== */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -125,7 +201,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.7);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             transition: 1s;
             text-align: center;
@@ -139,15 +216,11 @@
         
         .countdown-title {
             font-size: clamp(24px, 5vw, 40px);
-            color: gold;
+            color: #fff;
             margin-bottom: 20px;
-            text-shadow: 0 0 15px red;
-            animation: glow 2s infinite;
-        }
-        
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 15px gold, 0 0 30px red; }
-            50% { text-shadow: 0 0 30px gold, 0 0 45px hotpink; }
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .countdown-box {
@@ -159,104 +232,147 @@
         }
         
         .count-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.2);
             padding: 12px 15px;
-            border-radius: 15px;
+            border-radius: 20px;
             min-width: 70px;
-            border: 2px solid gold;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(5px);
         }
         
         .count-number {
             font-size: clamp(28px, 6vw, 40px);
-            font-weight: bold;
-            color: gold;
+            font-weight: 800;
+            color: #fff;
             display: block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         .count-label {
             font-size: 12px;
-            color: white;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
         }
         
         .countdown-message {
             font-size: clamp(16px, 4vw, 24px);
-            color: white;
-            text-shadow: 0 0 8px gold;
+            color: #fff;
+            margin-top: 20px;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         
-        .main-content {
-            min-height: 100vh;
-            padding: 15px;
-            display: none;
-            position: relative;
-        }
-        
-        .main-content.show {
-            display: block;
-        }
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: clamp(32px, 8vw, 60px);
-            background: linear-gradient(45deg, gold, hotpink, cyan);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px gold);
-            animation: rainbow 5s infinite;
-        }
-        
-        @keyframes rainbow {
-            0%, 100% { filter: drop-shadow(0 0 15px gold); }
-            33% { filter: drop-shadow(0 0 25px hotpink); }
-            66% { filter: drop-shadow(0 0 30px cyan); }
-        }
-        
-        .birthday-name {
-            font-size: clamp(32px, 10vw, 70px);
-            font-family: 'Dancing Script', cursive;
-            color: gold;
-            text-shadow: 0 0 25px gold;
-            margin-bottom: 25px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .cake-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 25px 15px;
-            border-radius: 40px;
-            border: 3px solid gold;
-            max-width: 500px;
+        /* ========== GREETING SCREEN (Page 1) ========== */
+        .greeting-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin: 0 auto;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(-45deg, #fee9f7, #e8f5fe, #fef2e8, #f0ffe8);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 900;
+            padding: 20px;
+            text-align: center;
         }
         
-        .cake-emoji {
-            font-size: clamp(70px, 18vw, 100px);
-            text-align: center;
-            filter: drop-shadow(0 0 25px gold);
-            animation: bounce 2s infinite;
+        .greeting-screen.show {
+            display: flex;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .greeting-screen h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            margin-bottom: 2rem;
+            animation: bounce 1s ease infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .greeting-text {
+            font-size: 1.5rem;
+            color: #8a2be2;
+            margin-bottom: 3rem;
+            min-height: 2em;
+        }
+        
+        .enter-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #ff69b4, #ff99cc);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+        }
+        
+        /* ========== CAKE SCREEN (Page 2) ========== */
+        .cake-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            z-index: 800;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .cake-screen.show {
+            display: flex;
+        }
+        
+        .cake-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .cake-emoji {
+            font-size: clamp(80px, 18vw, 110px);
+            text-align: center;
+            filter: drop-shadow(0 10px 20px rgba(255,105,180,0.4));
+            animation: softBounce 2s infinite;
+        }
+        
+        @keyframes softBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .candles {
@@ -274,9 +390,8 @@
             transition: 0.2s;
             animation: flicker 0.5s infinite alternate;
             display: inline-block;
-            font-size: clamp(28px, 8vw, 42px);
+            font-size: clamp(30px, 8vw, 42px);
             filter: drop-shadow(0 0 8px gold);
-            line-height: 1;
         }
         
         .candle.blown {
@@ -293,14 +408,12 @@
         
         .cake-status {
             font-size: clamp(16px, 4vw, 20px);
-            color: gold;
+            color: white;
             margin: 20px 0;
             padding: 12px;
-            border: 2px solid gold;
             border-radius: 40px;
             background: rgba(0,0,0,0.3);
             backdrop-filter: blur(5px);
-            line-height: 1.5;
         }
         
         .cut-btn {
@@ -328,115 +441,235 @@
             box-shadow: 0 0 25px gold;
         }
         
-        .content-sections {
-            display: none;
-            margin-top: 40px;
+        /* ========== STORYLINE BUTTON (After Cake) ========== */
+        .storyline-btn-container {
+            margin-top: 30px;
+            text-align: center;
         }
         
-        .content-sections.show {
+        .storyline-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            animation: float 3s infinite ease-in-out;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        .storyline-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* ========== MEMORY GALLERY SCREEN (Page 3) ========== */
+        .memory-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            z-index: 700;
+            padding: 80px 20px 40px;
+        }
+        
+        .memory-screen.show {
             display: block;
         }
         
-        .section-title {
-            font-size: clamp(24px, 6vw, 32px);
-            color: gold;
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .memory-header {
             text-align: center;
-            margin: 40px 0 20px;
-            text-shadow: 0 0 8px gold;
+            margin-bottom: 2rem;
         }
         
-        .photo-album {
+        .memory-header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInScale 2s ease;
+        }
+        
+        .memory-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            line-height: 1.6;
+        }
+        
+        .memory-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
         }
         
-        @media (min-width: 768px) {
-            .photo-album {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-            }
-        }
-        
-        .photo-item {
-            aspect-ratio: 3/4;
-            border-radius: 15px;
+        .memory-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
             overflow: hidden;
-            border: 2px solid gold;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
         }
         
-        .photo-item:hover {
-            transform: scale(1.03);
-            border-color: hotpink;
-            box-shadow: 0 0 25px gold;
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
-        .photo-item img {
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        
+        .memory-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .memory-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: transform 0.5s ease;
+        }
+        
+        .memory-card:hover .memory-img {
+            transform: scale(1.05);
+        }
+        
+        .memory-date {
+            font-family: 'Dancing Script', cursive;
+            color: #ff69b4;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .memory-caption {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #666;
+        }
+        
+        /* Video Section */
+        .video-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
+        .video-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff69b4;
+            margin-bottom: 1.5rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .video-gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        
-        @media (min-width: 768px) {
-            .video-gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-        
-        .video-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid gold;
-            transition: 0.3s;
-        }
-        
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-        }
-        
-        .video-card video {
-            width: 100%;
-            aspect-ratio: 16/9;
-        }
-        
-        .video-info {
-            padding: 12px;
-            color: gold;
-            font-size: 16px;
-        }
-        
-        .message-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            padding: 30px 20px;
-            border-radius: 40px;
-            border: 3px solid gold;
-            margin: 40px 0;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-        }
-        
-        .message-text {
-            font-size: clamp(20px, 5vw, 28px);
-            font-family: cursive;
-            line-height: 1.6;
+        /* Letter Section */
+        .letter-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
             text-align: center;
-            color: white;
-            white-space: pre-line;
         }
         
+        .letter-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff69b4;
+            margin-bottom: 1rem;
+        }
+        
+        .letter-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+        }
+        
+        .goodbye-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .goodbye-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* ========== CONTACT PAGE ========== */
         .contact-page {
             position: fixed;
             top: 0;
@@ -621,40 +854,6 @@
             transform: scale(1.03);
         }
         
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 11000;
-            padding: 15px;
-        }
-        
-        .lightbox.show {
-            display: flex;
-        }
-        
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 15px;
-            border: 3px solid gold;
-        }
-        
-        .lightbox .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 40px;
-            color: white;
-            cursor: pointer;
-        }
-        
         footer {
             text-align: center;
             padding: 25px;
@@ -662,9 +861,17 @@
             margin-top: 30px;
             font-size: 14px;
         }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .memory-header h1 { font-size: 2.5rem; }
+            .memory-container { grid-template-columns: 1fr; }
+            .letter-section { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
+    <!-- Audio Files -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown.mp3" type="audio/mpeg">
     </audio>
@@ -673,23 +880,38 @@
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Video Background -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
-    
+
+    <!-- Floating Hearts & Sparkles -->
+    <div class="magic-sparkles"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Custom Heart Cursor -->
+    <div class="custom-cursor">
+        <svg viewBox="0 0 24 24">
+            <path fill="#ff69b4" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+    </div>
+
+    <!-- Play Button -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
-    
+
+    <!-- Contact Button -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
         </button>
     </div>
-    
+
+    <!-- COUNTDOWN SCREEN (Initial) -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
@@ -712,81 +934,79 @@
         </div>
         <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
-    
-    <div class="main-content" id="mainContent">
-        <section class="hero">
-            <h1>🎉 Happy Birthday 🎉</h1>
-            <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
-            
-            <div class="cake-section">
-                <div class="cake-emoji" id="cakeEmoji">🎂</div>
-                <div class="candles" id="candles"></div>
-                <div class="cake-status" id="cakeStatus"></div>
-                <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
-            </div>
-        </section>
-        
-        <div class="content-sections" id="contentSections">
-            <h2 class="section-title">📸 Photo Album</h2>
-            <div class="photo-album">
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
-                </div>
-            </div>
-            
-            <h2 class="section-title">🎥 Video Messages</h2>
-            <div class="video-gallery">
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4">
-                        </video>
-                    </div>
-                    <div class="video-info">First Wish</div>
-                </div>
-                
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                            <source src="https://www.w3schools.com/html/movie.mp4">
-                        </video>
-                    </div>
-                    <div class="video-info">Special Message</div>
-                </div>
-            </div>
-            
-            <div class="message-section">
-                <h2 class="section-title">💌 A Special Message</h2>
-                <div class="message-text">
-আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
-তোমার জীবন হোক আনন্দে ভরপুর। 💝
 
-🎂 শুভ জন্মদিন 🎂
-                </div>
-            </div>
+    <!-- GREETING SCREEN (Page 1) -->
+    <div class="greeting-screen" id="greetingScreen">
+        <h1>Happy Birthday Priya</h1>
+        <div class="greeting-text" id="greetingText"></div>
+        <button class="enter-btn" onclick="goToCakeScreen()">Click to enter your world 💕</button>
+    </div>
+
+    <!-- CAKE SCREEN (Page 2) -->
+    <div class="cake-screen" id="cakeScreen">
+        <div class="cake-container">
+            <div class="cake-emoji" id="cakeEmoji">🎂</div>
+            <div class="candles" id="candles"></div>
+            <div class="cake-status" id="cakeStatus"></div>
+            <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
         </div>
         
-        <footer>
-            <p>❤️ Made with Love</p>
-            <p>© 2026 Special Day</p>
-        </footer>
+        <!-- Storyline Button (hidden initially) -->
+        <div class="storyline-btn-container" id="storylineBtnContainer" style="display: none;">
+            <button class="storyline-btn" onclick="goToMemoryScreen()">Enter Storyline 💫</button>
+        </div>
     </div>
-    
+
+    <!-- MEMORY GALLERY SCREEN (Page 3) -->
+    <div class="memory-screen" id="memoryScreen">
+        <div class="memory-header">
+            <h1>Our Beautiful Moments Together</h1>
+            <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
+        </div>
+
+        <div class="memory-container">
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop" alt="Memory 1" class="memory-img">
+                <div class="memory-date">Her Smile Says It All</div>
+                <div class="memory-caption">You’re truly one of the sweetest girls I know, and I feel lucky to have a sis like you.❤️</div>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop" alt="Memory 2" class="memory-img">
+                <div class="memory-date">Together Vibes</div>
+                <div class="memory-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
+            </div>
+            <div class="memory-card">
+                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop" alt="Memory 3" class="memory-img">
+                <div class="memory-date">Pretty Soul</div>
+                <div class="memory-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <h2>A Special Video Message</h2>
+            <div class="video-wrapper">
+                <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- Letter Section -->
+        <div class="letter-section">
+            <h2>A Letter for You 💌</h2>
+            <div class="letter-content">
+                <p>Every laugh, every chat, and every moment we've shared has been truly special.💫</p>
+                <p>I'm so grateful for the bond we have, and for the positivity you always bring into my life.</p>
+                <p>On your birthday, I just wish for endless happiness, love, and success to come your way.🌸</p>
+                <p>You deserve all the joy in the world—keep shining and spreading your beautiful energy.✨</p>
+                <p>Until We Meet Again 💝</p>
+            </div>
+            <button class="goodbye-btn" onclick="closeWebsite()">Until We Meet Again 💝</button>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
     <div class="contact-page" id="contactPage">
         <div class="contact-container">
             <h2><i class="fas fa-envelope"></i> Contact</h2>
@@ -833,17 +1053,14 @@
             </button>
         </div>
     </div>
-    
-    <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
-        <span class="close" onclick="event.stopPropagation(); this.parentElement.classList.remove('show')">&times;</span>
-        <img src="" id="lightboxImg">
-    </div>
-    
+
     <script>
+        // EmailJS initialization
         (function() {
             emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
-        
+
+        // Contact form handler
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -871,23 +1088,25 @@
                     submitBtn.disabled = false;
                 });
         });
-        
+
+        // Configuration
         const CONFIG = {
-            month: 1,
-            day: 16,
-            age: 16,
-            name: "প্রিয়জন"
+            month: 1,        // February
+            day: 16,         // 16th
+            age: 16,         // 16 years
+            name: "Priya"
         };
-        
+
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('name')) {
             CONFIG.name = decodeURIComponent(urlParams.get('name'));
         }
-        document.getElementById('birthdayName').textContent = CONFIG.name;
-        
+
+        // Audio elements
         const countdownAudio = document.getElementById('countdownAudio');
         const birthdayAudio = document.getElementById('birthdayWish');
-        
+
+        // State variables
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -900,13 +1119,55 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         let audioAllowed = false;
-        
+
+        // Floating hearts generator
+        function createFloatingHeart() {
+            const container = document.getElementById('floatingHearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.textContent = ['💖', '💝', '💗', '💓', '💕'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.setProperty('--float-duration', (Math.random() * 4 + 4) + 's');
+            heart.style.setProperty('--delay', Math.random() * 3 + 's');
+            heart.style.setProperty('--translate-x', (Math.random() * 60 - 30) + 'px');
+            container.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        // Start floating hearts
+        setInterval(createFloatingHeart, 800);
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX - 15,
+                y: e.clientY - 15,
+                duration: 0.2
+            });
+        });
+
+        // Typing effect for greeting
+        const greetingText = "Hey You Know What! You're the most adorable human i ever met! 💖";
+        const greetingElement = document.getElementById('greetingText');
+        let charIndex = 0;
+
+        function typeGreeting() {
+            if (charIndex < greetingText.length) {
+                greetingElement.textContent += greetingText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeGreeting, 100);
+            }
+        }
+
+        // Global click to enable audio
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
                 enableAudio();
             }
         });
-        
+
         function enableAudio() {
             if (audioAllowed) return;
             audioAllowed = true;
@@ -916,7 +1177,7 @@
             if (countdownFinished && !birthdayAudioPlayed) {
                 birthdayAudio.play().then(() => {
                     birthdayAudioPlayed = true;
-                }).catch(e => console.log('Audio play failed:', e));
+                }).catch(e => console.log('Audio failed:', e));
             }
             
             const now = new Date();
@@ -934,14 +1195,13 @@
             
             setTimeout(startMicrophone, 1000);
         }
-        
+
         window.startAudio = function(event) {
-            if (event) {
-                event.stopPropagation();
-            }
+            if (event) event.stopPropagation();
             enableAudio();
         };
-        
+
+        // Countdown update
         function updateCountdown() {
             if (countdownFinished) return;
             
@@ -988,30 +1248,36 @@
                 countdownAudio.currentTime = 0;
                 
                 document.getElementById('countdownScreen').classList.add('hide');
-                document.getElementById('mainContent').classList.add('show');
+                document.getElementById('greetingScreen').classList.add('show');
                 
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                loadState();
-                
-                if (!birthdayAudioPlayed && audioAllowed) {
-                    birthdayAudio.play().then(() => {
-                        birthdayAudioPlayed = true;
-                    }).catch(error => {
-                        console.log('Autoplay blocked:', error);
-                    });
-                }
+                typeGreeting();
                 
                 if (audioAllowed) {
                     setTimeout(startMicrophone, 1000);
                 }
             }
         }
-        
-        function loadState() {
+
+        // Go to Cake Screen
+        window.goToCakeScreen = function() {
+            gsap.to('#greetingScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('greetingScreen').classList.remove('show');
+                    document.getElementById('cakeScreen').classList.add('show');
+                    loadCakeState();
+                }
+            });
+        };
+
+        // Load cake state
+        function loadCakeState() {
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
             const day = String(CONFIG.day).padStart(2, '0');
@@ -1023,12 +1289,10 @@
             renderCake();
             
             if (cakeCut) {
-                document.getElementById('contentSections').classList.add('show');
-                birthdayAudio.pause();
-                birthdayAudio.currentTime = 0;
+                document.getElementById('storylineBtnContainer').style.display = 'block';
             }
         }
-        
+
         function saveState() {
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
@@ -1036,7 +1300,7 @@
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
             localStorage.setItem(`blown_${dateStr}`, candlesBlown.toString());
         }
-        
+
         function renderCake() {
             const cakeEmoji = document.getElementById('cakeEmoji');
             const candlesDiv = document.getElementById('candles');
@@ -1049,6 +1313,7 @@
                 statusDiv.textContent = '🎉 Cake cut! Happy Birthday! 🎉';
                 cutBtn.style.display = 'none';
                 stopMicrophone();
+                document.getElementById('storylineBtnContainer').style.display = 'block';
                 return;
             }
             
@@ -1073,7 +1338,7 @@
                 cutBtn.disabled = true;
             }
         }
-        
+
         window.blowCandle = function(index) {
             if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
             
@@ -1082,7 +1347,7 @@
             renderCake();
             confetti({ particleCount: 5, spread: 30, colors: ['#aaaaaa'] });
         };
-        
+
         function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
             const newBlown = Math.min(candlesBlown + count, totalCandles);
@@ -1093,7 +1358,7 @@
                 confetti({ particleCount: 8 * count, spread: 40, colors: ['#aaaaaa'] });
             }
         }
-        
+
         function startMicrophone() {
             if (cakeCut || candlesBlown === totalCandles) return;
             
@@ -1128,7 +1393,7 @@
                 })
                 .catch(() => {});
         }
-        
+
         function stopMicrophone() {
             if (blowInterval) {
                 clearInterval(blowInterval);
@@ -1143,7 +1408,7 @@
                 audioContext = null;
             }
         }
-        
+
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
@@ -1160,42 +1425,59 @@
             
             stopMicrophone();
             renderCake();
-            document.getElementById('contentSections').classList.add('show');
+            document.getElementById('storylineBtnContainer').style.display = 'block';
             
             confetti({ particleCount: 150, spread: 80 });
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
-        
+
+        window.goToMemoryScreen = function() {
+            gsap.to('#cakeScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('cakeScreen').classList.remove('show');
+                    document.getElementById('memoryScreen').classList.add('show');
+                }
+            });
+        };
+
+        window.closeWebsite = function() {
+            gsap.to('body', {
+                opacity: 0,
+                duration: 2,
+                onComplete: () => {
+                    window.close();
+                }
+            });
+        };
+
         window.openContactPage = function() {
             document.getElementById('contactPage').classList.add('show');
         };
-        
+
         window.closeContactPage = function() {
             document.getElementById('contactPage').classList.remove('show');
         };
-        
-        window.openLightbox = function(url) {
-            document.getElementById('lightboxImg').src = url;
-            document.getElementById('lightbox').classList.add('show');
-        };
-        
+
         function confetti(options) {
             if (typeof window.confetti === 'function') {
                 window.confetti(options);
             }
         }
-        
+
+        // Start countdown
         updateCountdown();
         setInterval(updateCountdown, 1000);
-        
+
         window.addEventListener('beforeunload', function() {
             stopMicrophone();
             countdownAudio.pause();
             birthdayAudio.pause();
         });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </body>
 </html>
