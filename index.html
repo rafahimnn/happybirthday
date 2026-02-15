@@ -15,7 +15,7 @@
         }
         
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             color: white;
         }
@@ -48,11 +48,11 @@
             z-index: -1;
         }
         
-        /* কন্ট্যাক্ট ফ্লোটিং বাটন */
+        /* কন্ট্যাক্ট ফ্লোটিং বাটন - ছোট */
         .contact-float-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             z-index: 9999;
         }
         
@@ -60,20 +60,23 @@
             background: linear-gradient(135deg, gold, #ff6b6b);
             color: black;
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid white;
             transition: 0.3s;
             animation: floatPulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .contact-float-btn button:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 40px gold;
+            box-shadow: 0 0 30px gold;
         }
         
         @keyframes floatPulse {
@@ -105,57 +108,57 @@
         }
         
         .countdown-title {
-            font-size: clamp(30px, 6vw, 50px);
+            font-size: clamp(24px, 5vw, 40px);
             color: gold;
-            margin-bottom: 30px;
-            text-shadow: 0 0 20px red;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px red;
             animation: glow 2s infinite;
         }
         
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px gold, 0 0 40px red; }
-            50% { text-shadow: 0 0 40px gold, 0 0 60px hotpink; }
+            0%, 100% { text-shadow: 0 0 15px gold, 0 0 30px red; }
+            50% { text-shadow: 0 0 30px gold, 0 0 45px hotpink; }
         }
         
         .countdown-box {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .count-item {
             background: rgba(255,255,255,0.1);
-            padding: 15px 20px;
-            border-radius: 20px;
-            min-width: 80px;
+            padding: 12px 15px;
+            border-radius: 15px;
+            min-width: 70px;
             border: 2px solid gold;
             backdrop-filter: blur(5px);
         }
         
         .count-number {
-            font-size: clamp(35px, 8vw, 50px);
+            font-size: clamp(28px, 6vw, 40px);
             font-weight: bold;
             color: gold;
             display: block;
         }
         
         .count-label {
-            font-size: 14px;
+            font-size: 12px;
             color: white;
         }
         
         .countdown-message {
-            font-size: clamp(20px, 5vw, 30px);
+            font-size: clamp(16px, 4vw, 24px);
             color: white;
-            text-shadow: 0 0 10px gold;
+            text-shadow: 0 0 8px gold;
         }
         
         /* মেইন কন্টেন্ট */
         .main-content {
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             display: none;
             position: relative;
         }
@@ -175,67 +178,67 @@
         }
         
         .hero h1 {
-            font-size: clamp(40px, 10vw, 70px);
+            font-size: clamp(32px, 8vw, 60px);
             background: linear-gradient(45deg, gold, hotpink, cyan);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px gold);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px gold);
             animation: rainbow 5s infinite;
         }
         
         @keyframes rainbow {
-            0%, 100% { filter: drop-shadow(0 0 20px gold); }
-            33% { filter: drop-shadow(0 0 30px hotpink); }
-            66% { filter: drop-shadow(0 0 40px cyan); }
+            0%, 100% { filter: drop-shadow(0 0 15px gold); }
+            33% { filter: drop-shadow(0 0 25px hotpink); }
+            66% { filter: drop-shadow(0 0 30px cyan); }
         }
         
         .birthday-name {
-            font-size: clamp(40px, 12vw, 80px);
+            font-size: clamp(32px, 10vw, 70px);
             font-family: 'Dancing Script', cursive;
             color: gold;
-            text-shadow: 0 0 30px gold;
-            margin-bottom: 30px;
+            text-shadow: 0 0 25px gold;
+            margin-bottom: 25px;
             animation: float 3s ease-in-out infinite;
         }
         
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
         
         /* কেক সেকশন */
         .cake-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 50px;
+            padding: 25px 15px;
+            border-radius: 40px;
             border: 3px solid gold;
-            max-width: 550px;
+            max-width: 500px;
             width: 100%;
             margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
         
         .cake-emoji {
-            font-size: clamp(80px, 20vw, 120px);
+            font-size: clamp(70px, 18vw, 100px);
             text-align: center;
-            filter: drop-shadow(0 0 30px gold);
+            filter: drop-shadow(0 0 25px gold);
             animation: bounce 2s infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
         
         .candles {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
-            margin: 20px 0;
-            font-size: clamp(30px, 8vw, 45px);
+            gap: 5px;
+            margin: 15px 0;
+            font-size: clamp(24px, 6vw, 36px);
         }
         
         .candle {
@@ -243,6 +246,7 @@
             transition: 0.3s;
             animation: flicker 0.5s infinite alternate;
             display: inline-block;
+            padding: 2px;
         }
         
         .candle.blown {
@@ -258,12 +262,12 @@
         }
         
         .cake-status {
-            font-size: 18px;
+            font-size: 16px;
             color: gold;
-            margin: 20px 0;
-            padding: 12px;
+            margin: 15px 0;
+            padding: 10px;
             border: 2px solid gold;
-            border-radius: 40px;
+            border-radius: 30px;
             background: rgba(0,0,0,0.3);
             backdrop-filter: blur(5px);
         }
@@ -271,16 +275,16 @@
         .cut-btn {
             background: linear-gradient(45deg, gold, red);
             color: black;
-            font-size: 24px;
-            padding: 12px 30px;
+            font-size: 20px;
+            padding: 10px 25px;
             border: none;
-            border-radius: 40px;
+            border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
             border: 2px solid white;
             width: 100%;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
         }
         
         .cut-btn:disabled {
@@ -290,13 +294,13 @@
         
         .cut-btn:not(:disabled):hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px gold;
+            box-shadow: 0 0 25px gold;
         }
         
         /* কন্টেন্ট সেকশন */
         .content-sections {
             display: none;
-            margin-top: 50px;
+            margin-top: 40px;
         }
         
         .content-sections.show {
@@ -304,40 +308,41 @@
         }
         
         .section-title {
-            font-size: 30px;
+            font-size: 24px;
             color: gold;
             text-align: center;
-            margin: 40px 0 20px;
-            text-shadow: 0 0 10px gold;
+            margin: 30px 0 15px;
+            text-shadow: 0 0 8px gold;
         }
         
         /* ফটো অ্যালবাম */
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 10px;
         }
         
         @media (min-width: 768px) {
             .photo-album {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
         }
         
         .photo-item {
             aspect-ratio: 3/4;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            border: 3px solid gold;
+            border: 2px solid gold;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
         }
         
         .photo-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             border-color: hotpink;
-            box-shadow: 0 0 30px gold;
+            box-shadow: 0 0 25px gold;
         }
         
         .photo-item img {
@@ -350,27 +355,28 @@
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
         }
         
         @media (min-width: 768px) {
             .video-gallery {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
         }
         
         .video-card {
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
             overflow: hidden;
             border: 2px solid gold;
             transition: 0.3s;
         }
         
         .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
         }
         
         .video-card video {
@@ -379,25 +385,26 @@
         }
         
         .video-info {
-            padding: 15px;
+            padding: 12px;
             color: gold;
+            font-size: 14px;
         }
         
         /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 40px;
+            backdrop-filter: blur(8px);
+            padding: 25px 15px;
+            border-radius: 30px;
             border: 3px solid gold;
-            margin: 40px 0;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+            margin: 30px 0;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
         }
         
         .message-text {
-            font-size: 24px;
+            font-size: 20px;
             font-family: cursive;
-            line-height: 1.6;
+            line-height: 1.5;
             text-align: center;
             color: white;
         }
@@ -414,7 +421,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
         }
         
@@ -424,59 +431,62 @@
         
         .contact-container {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 40px 30px;
-            border-radius: 40px;
+            padding: 30px 20px;
+            border-radius: 30px;
             border: 3px solid gold;
-            max-width: 500px;
+            max-width: 450px;
             width: 100%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
         }
         
         .contact-container h2 {
             color: gold;
-            font-size: 28px;
-            margin-bottom: 30px;
+            font-size: 24px;
+            margin-bottom: 25px;
             text-align: center;
         }
         
+        /* ফর্ম স্টাইল - ছোট ও সুন্দর */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
             color: white;
-            margin-bottom: 8px;
-            font-size: 16px;
+            margin-bottom: 5px;
+            font-size: 14px;
             font-weight: 500;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 15px 20px;
-            border-radius: 30px;
+            padding: 12px 15px;
+            border-radius: 25px;
             border: 2px solid gold;
             background: rgba(255,255,255,0.15);
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             outline: none;
             transition: 0.3s;
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
-            box-shadow: 0 0 20px gold;
+            box-shadow: 0 0 15px gold;
+            background: rgba(255,255,255,0.25);
         }
         
         .form-group input::placeholder,
         .form-group textarea::placeholder {
             color: rgba(255,255,255,0.6);
+            font-size: 13px;
         }
         
         .form-group textarea {
-            height: 120px;
+            height: 100px;
             resize: none;
         }
         
@@ -484,52 +494,56 @@
             background: gold;
             color: black;
             border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 18px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
             border: 2px solid white;
             transition: 0.3s;
+            margin-top: 5px;
         }
         
         .submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px gold;
+            transform: scale(1.03);
+            box-shadow: 0 0 25px gold;
         }
         
         #form-status {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 12px;
             font-weight: bold;
             color: gold;
+            font-size: 14px;
         }
         
+        /* সোশ্যাল মিডিয়া বাটন - ছোট */
         .social-buttons {
-            margin-top: 30px;
+            margin-top: 25px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
         
         .social-btn {
             display: flex;
             align-items: center;
-            padding: 15px 25px;
-            border-radius: 60px;
+            padding: 12px 20px;
+            border-radius: 40px;
             border: 2px solid gold;
             color: white;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             transition: 0.3s;
             background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
         }
         
         .social-btn i {
-            font-size: 24px;
-            width: 40px;
+            font-size: 20px;
+            width: 35px;
             color: gold;
         }
         
@@ -537,10 +551,21 @@
             flex: 1;
         }
         
+        .social-btn .arrow {
+            color: gold;
+            opacity: 0;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        
         .social-btn:hover {
-            transform: translateX(10px);
+            transform: translateX(8px);
             background: rgba(255,255,255,0.2);
-            box-shadow: 0 0 30px gold;
+            box-shadow: 0 0 25px gold;
+        }
+        
+        .social-btn:hover .arrow {
+            opacity: 1;
         }
         
         .social-btn.facebook {
@@ -552,13 +577,13 @@
         }
         
         .close-contact-btn {
-            margin-top: 30px;
+            margin-top: 25px;
             background: transparent;
             color: white;
             border: 2px solid gold;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 16px;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
@@ -568,8 +593,10 @@
         .close-contact-btn:hover {
             background: gold;
             color: black;
+            transform: scale(1.03);
         }
         
+        /* লাইটবক্স */
         .lightbox {
             position: fixed;
             top: 0;
@@ -581,6 +608,7 @@
             justify-content: center;
             align-items: center;
             z-index: 11000;
+            padding: 15px;
         }
         
         .lightbox.show {
@@ -590,36 +618,75 @@
         .lightbox img {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 20px;
+            border-radius: 15px;
             border: 3px solid gold;
         }
         
         .lightbox .close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 50px;
+            top: 15px;
+            right: 20px;
+            font-size: 40px;
             color: white;
             cursor: pointer;
         }
         
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 25px;
             border-top: 2px solid gold;
-            margin-top: 40px;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        
+        /* মোবাইল ফ্রেন্ডলি */
+        @media (max-width: 480px) {
+            .count-item {
+                min-width: 60px;
+                padding: 8px 10px;
+            }
+            
+            .count-number {
+                font-size: 24px;
+            }
+            
+            .count-label {
+                font-size: 10px;
+            }
+            
+            .cake-status {
+                font-size: 14px;
+            }
+            
+            .cut-btn {
+                font-size: 18px;
+                padding: 8px 20px;
+            }
+            
+            .message-text {
+                font-size: 18px;
+            }
+            
+            .contact-container {
+                padding: 25px 15px;
+            }
+            
+            .contact-container h2 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
-    <video class="video-bg" autoplay muted loop>
+    <!-- ভিডিও ব্যাকগ্রাউন্ড -->
+    <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     
-    <!-- কন্ট্যাক্ট বাটন সবসময় দেখা যাবে -->
+    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন - ছোট -->
     <div class="contact-float-btn">
-        <button onclick="openContactPage()">
+        <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
         </button>
     </div>
@@ -650,10 +717,12 @@
     
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
+        <!-- হিরো সেকশন -->
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
             <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
             
+            <!-- কেক সেকশন -->
             <div class="cake-section">
                 <div class="cake-emoji" id="cakeEmoji">🎂</div>
                 <div class="candles" id="candles"></div>
@@ -662,29 +731,32 @@
             </div>
         </section>
         
+        <!-- কন্টেন্ট সেকশন (কেক কাটার পর দেখাবে) -->
         <div class="content-sections" id="contentSections">
+            <!-- ফটো অ্যালবাম -->
             <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
             <div class="photo-album">
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
-                    <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
             </div>
             
+            <!-- ভিডিও গ্যালারি -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
                 <div class="video-card">
@@ -701,6 +773,7 @@
                 </div>
             </div>
             
+            <!-- মেসেজ সেকশন -->
             <div class="message-section">
                 <h2 class="section-title">💌 ভালোবাসার কথা</h2>
                 <div class="message-text">
@@ -723,6 +796,7 @@
         <div class="contact-container">
             <h2><i class="fas fa-envelope"></i> যোগাযোগ করুন</h2>
             
+            <!-- EmailJS Form - ছোট ও সুন্দর -->
             <form id="contact-form">
                 <div class="form-group">
                     <label for="name">আপনার নাম</label>
@@ -746,6 +820,7 @@
                 <div id="form-status"></div>
             </form>
             
+            <!-- সোশ্যাল মিডিয়া বাটন - ছোট -->
             <div class="social-buttons">
                 <a href="https://www.facebook.com/rafahimn" target="_blank" class="social-btn facebook">
                     <i class="fab fa-facebook-f"></i>
@@ -766,6 +841,7 @@
         </div>
     </div>
     
+    <!-- লাইটবক্স -->
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
         <span class="close" onclick="event.stopPropagation(); this.parentElement.classList.remove('show')">&times;</span>
         <img src="" id="lightboxImg">
@@ -796,6 +872,7 @@
                     document.getElementById('contact-form').reset();
                     setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
                 }, function(error) {
+                    console.error('EmailJS Error:', error);
                     statusDiv.innerHTML = '❌ পাঠানো যায়নি';
                     statusDiv.style.color = '#ff4444';
                 })
@@ -805,10 +882,10 @@
                 });
         });
         
-        // Configuration
+        // Configuration - তারিখ ১৫ সেট করা হয়েছে
         const CONFIG = {
-            month: 2,        // মার্চ = 2
-            day: 16,         // ১৬ তারিখ
+            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
+            day: 15,         // ১৫ তারিখ
             age: 16,         // ১৬ বছর
             name: "প্রিয়জন"
         };
