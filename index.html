@@ -519,7 +519,7 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* ====== REASONS SCREEN - Exact copy of cause.html ====== */
+        /* ====== REASONS SCREEN - Fixed text wrapping ====== */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -553,7 +553,7 @@
         
         .reasons-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 1000px; /* Increased width to fit long text in one line */
             margin: 0 auto;
             min-height: 300px;
             display: flex;
@@ -567,7 +567,7 @@
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
-            max-width: 500px;
+            max-width: 950px; /* Increased width */
             width: 100%;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
@@ -583,11 +583,14 @@
         
         .reason-text {
             font-size: 1.2rem;
-            line-height: 1.6;
+            line-height: 1.4; /* Reduced line height for single line */
             color: #4a4a4a;
             margin-bottom: 1rem;
             font-weight: 500;
-            word-wrap: break-word;
+            white-space: nowrap; /* Prevents text from wrapping */
+            overflow: visible; /* Shows all text */
+            text-overflow: clip; /* No ellipsis */
+            max-width: 100%;
         }
         
         .reason-emoji {
@@ -1208,7 +1211,10 @@
         
         @media (max-width: 768px) {
             .reasons-header h1 { font-size: 2.5rem; }
-            .reason-text { font-size: 1.1rem; }
+            .reason-text { 
+                font-size: 1rem; 
+                white-space: normal; /* Allow wrapping on mobile if needed */
+            }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
             .video-grid { grid-template-columns: 1fr; }
@@ -1307,7 +1313,7 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN - Exact copy of cause.html -->
+    <!-- REASONS SCREEN - Exact copy of cause.html with fixed text -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-header">
             <h1>Why You're My Best Friend! 💖</h1>
