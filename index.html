@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -691,7 +692,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:১১ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:২২ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -892,15 +893,15 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         
-        // ---------- কাউন্টডাউন (টেস্ট ৯:১১ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৯:২২ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৯:১১ PM টেস্ট
+            // আজ রাত ৯:২২ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(21, 11, 0); // ৯:১১ PM
+            testTime.setHours(21, 22, 0); // ৯:২২ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
