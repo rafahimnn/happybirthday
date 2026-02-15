@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 Birthday Surprise - 15 February</title>
+    <title>🎂 Birthday Surprise - 16 February</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@700&family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -450,13 +450,142 @@
             box-shadow: 0 0 25px gold;
         }
         
-        .storyline-btn-container {
-            margin-top: 30px;
+        .cake-next-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
+            transition: 0.3s;
+            display: inline-block;
+            border: 2px solid white;
+        }
+        
+        .cake-next-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
+        }
+        
+        /* Reasons Screen */
+        .reasons-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            background: linear-gradient(-45deg, #fee9f7, #e8f5fe, #fef2e8, #f0ffe8);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 700;
+            padding: 40px 20px;
+        }
+        
+        .reasons-screen.show {
+            display: block;
+        }
+        
+        .reasons-header h2 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.5rem;
+            color: #d4145a;
+            text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
             text-align: center;
         }
         
-        .storyline-btn {
-            display: inline-block;
+        .reasons-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .reason-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        
+        .reason-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .reason-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .reason-emoji {
+            font-size: 2rem;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+        
+        .gif-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        
+        .reason-card:hover .gif-overlay {
+            opacity: 1;
+        }
+        
+        .gif-overlay img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        
+        .reasons-next-btn {
+            display: block;
+            margin: 30px auto;
             padding: 1rem 2rem;
             font-size: 1.2rem;
             background: linear-gradient(45deg, #9b6dff, #ff6dc7);
@@ -464,23 +593,15 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-            animation: float 3s infinite ease-in-out;
-            font-family: 'Comic Neue', cursive;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
+            transition: 0.3s;
+            border: 2px solid white;
         }
         
-        .storyline-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .reasons-next-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
         /* Memory Gallery Screen */
@@ -497,7 +618,7 @@
             background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
             background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
-            z-index: 700;
+            z-index: 600;
             padding: 80px 20px 40px;
         }
         
@@ -517,6 +638,7 @@
             color: #b0306e;
             text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
             margin-bottom: 1rem;
+            text-align: center;
         }
         
         .memory-header p {
@@ -527,6 +649,7 @@
             color: #2c3e50;
             font-weight: 600;
             text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+            text-align: center;
         }
         
         .memory-container {
@@ -596,6 +719,12 @@
             font-weight: 500;
         }
         
+        .video-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
         .video-section h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
@@ -648,9 +777,13 @@
             text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
         }
         
+        .memory-footer {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
         .goodbye-btn {
             display: inline-block;
-            margin-top: 2rem;
             padding: 1rem 2rem;
             font-size: 1.2rem;
             background: linear-gradient(45deg, #ff69b4, #da70d6);
@@ -664,6 +797,7 @@
             animation: float 3s infinite ease-in-out;
             font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            border: 2px solid white;
         }
         
         .goodbye-btn:hover {
@@ -867,7 +1001,13 @@
             color: #4a4a4a;
         }
         
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
         @media (max-width: 768px) {
+            .reasons-container { grid-template-columns: 1fr; }
             .memory-header h1 { font-size: 2.5rem; }
             .memory-container { grid-template-columns: 1fr; }
             .letter-section { padding: 1.5rem; }
@@ -915,7 +1055,7 @@
         </button>
     </div>
 
-    <!-- COUNTDOWN SCREEN (Initial) -->
+    <!-- COUNTDOWN SCREEN -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
@@ -936,17 +1076,17 @@
                 <span class="count-label">Secs</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 15 Feb 12:00 AM!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
 
-    <!-- GREETING SCREEN (Page 1) -->
+    <!-- GREETING SCREEN -->
     <div class="greeting-screen" id="greetingScreen">
         <h1>Happy Birthday Priya</h1>
         <div class="greeting-text" id="greetingText"></div>
         <button class="enter-btn" onclick="goToCakeScreen()">Click to enter your world 💕</button>
     </div>
 
-    <!-- CAKE SCREEN (Page 2) -->
+    <!-- CAKE SCREEN -->
     <div class="cake-screen" id="cakeScreen">
         <div class="cake-container">
             <div class="cake-emoji" id="cakeEmoji">🎂</div>
@@ -954,14 +1094,18 @@
             <div class="cake-status" id="cakeStatus"></div>
             <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
         </div>
-        
-        <!-- Storyline Button (hidden initially) -->
-        <div class="storyline-btn-container" id="storylineBtnContainer" style="display: none;">
-            <button class="storyline-btn" onclick="goToMemoryScreen()">Enter Storyline 💫</button>
-        </div>
     </div>
 
-    <!-- MEMORY GALLERY SCREEN (Page 3) -->
+    <!-- REASONS SCREEN -->
+    <div class="reasons-screen" id="reasonsScreen">
+        <div class="reasons-header">
+            <h2>Why You're My Best Friend! 💖</h2>
+        </div>
+        <div class="reasons-container" id="reasonsContainer"></div>
+        <button class="reasons-next-btn" onclick="goToMemoryScreen()">Enter Storyline 💫</button>
+    </div>
+
+    <!-- MEMORY SCREEN -->
     <div class="memory-screen" id="memoryScreen">
         <div class="memory-header">
             <h1>Our Beautiful Moments Together</h1>
@@ -1093,13 +1237,37 @@
                 });
         });
 
-        // ========== CONFIGURATION - BIRTHDAY 15 FEBRUARY ==========
+        // ========== CONFIGURATION - BIRTHDAY 16 FEBRUARY ==========
         const CONFIG = {
             month: 1,        // February (0 = January, 1 = February)
-            day: 15,         // 15th February
+            day: 16,         // 16th February
             age: 16,         // 16 years old
             name: "Priya"
         };
+
+        // Reasons data
+        const reasons = [
+            { 
+                text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif" // Replace with your GIF URLs
+            },
+            { 
+                text: "May your day be filled with love, laughter, and endless joy.", 
+                emoji: "💗",
+                gif: "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
+            },
+            { 
+                text: "Wishing you success, happiness, and everything your heart desires.", 
+                emoji: "💕",
+                gif: "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
+            },
+            { 
+                text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", 
+                emoji: "🌟",
+                gif: "https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif"
+            }
+        ];
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('name')) {
@@ -1123,7 +1291,7 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         let audioAllowed = false;
-        let resetTimer = null; // Timer for auto-reset after 24 hours
+        let resetTimer = null;
 
         // Floating hearts generator
         function createFloatingHeart() {
@@ -1139,8 +1307,6 @@
             
             setTimeout(() => heart.remove(), 8000);
         }
-
-        // Start floating hearts
         setInterval(createFloatingHeart, 800);
 
         // Custom cursor
@@ -1153,7 +1319,7 @@
             });
         });
 
-        // Typing effect for greeting
+        // Typing effect
         const greetingText = "Hey You Know What! You're the most adorable human i ever met! 💖";
         const greetingElement = document.getElementById('greetingText');
         let charIndex = 0;
@@ -1166,7 +1332,7 @@
             }
         }
 
-        // Global click to enable audio
+        // Global click for audio
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
                 enableAudio();
@@ -1206,38 +1372,30 @@
             enableAudio();
         };
 
-        // Function to reset to countdown screen after 24 hours
+        // Schedule auto-reset after 24 hours
         function scheduleAutoReset() {
-            // Clear any existing timer
             if (resetTimer) clearTimeout(resetTimer);
-            
-            // Set timer for 24 hours (86400000 ms)
             resetTimer = setTimeout(() => {
-                // Reset all states
                 countdownFinished = false;
                 birthdayAudioPlayed = false;
                 countdownAudioPlayed = false;
                 confettiShown = false;
                 cakeCut = false;
                 candlesBlown = 0;
-                // Hide all screens and show countdown
                 document.getElementById('greetingScreen').classList.remove('show');
                 document.getElementById('cakeScreen').classList.remove('show');
+                document.getElementById('reasonsScreen').classList.remove('show');
                 document.getElementById('memoryScreen').classList.remove('show');
                 document.getElementById('countdownScreen').classList.remove('hide');
-                // Restart countdown update
                 updateCountdown();
-            }, 86400000); // 24 hours
+            }, 86400000);
         }
 
-        // ========== UPDATED COUNTDOWN FUNCTION ==========
+        // Countdown update
         function updateCountdown() {
             const now = new Date();
-            
-            // Check if today is birthday (any time of the day)
             const isBirthdayToday = (now.getMonth() === CONFIG.month && now.getDate() === CONFIG.day);
             
-            // If it's birthday and we haven't finished countdown yet
             if (isBirthdayToday && !countdownFinished) {
                 countdownFinished = true;
                 
@@ -1258,18 +1416,14 @@
                     setTimeout(startMicrophone, 1000);
                 }
 
-                // Schedule auto-reset after 24 hours
                 scheduleAutoReset();
-                
-                return; // Stop further countdown processing
+                return;
             }
             
-            // If not birthday, show countdown to next birthday
             if (!countdownFinished) {
                 const currentYear = now.getFullYear();
                 let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
                 
-                // If we're past this year's birthday, set to next year
                 if (now > birthday) {
                     birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
                 }
@@ -1288,7 +1442,6 @@
                     document.getElementById('secs').textContent = String(secs).padStart(2, '0');
                 }
                 
-                // Countdown audio in last 11 seconds
                 if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                     countdownAudio.play().then(() => {
                         countdownAudioPlayed = true;
@@ -1324,8 +1477,21 @@
             
             renderCake();
             
+            // If cake already cut, show next button
             if (cakeCut) {
-                document.getElementById('storylineBtnContainer').style.display = 'block';
+                showCakeNextButton();
+            }
+        }
+
+        function showCakeNextButton() {
+            // Check if button already exists
+            if (!document.getElementById('cakeNextBtn')) {
+                const nextBtn = document.createElement('button');
+                nextBtn.id = 'cakeNextBtn';
+                nextBtn.className = 'cake-next-btn';
+                nextBtn.textContent = 'Enter Storyline 💫';
+                nextBtn.onclick = goToReasonsScreen;
+                document.getElementById('cakeScreen').appendChild(nextBtn);
             }
         }
 
@@ -1349,7 +1515,7 @@
                 statusDiv.textContent = '🎉 Cake cut! Happy Birthday! 🎉';
                 cutBtn.style.display = 'none';
                 stopMicrophone();
-                document.getElementById('storylineBtnContainer').style.display = 'block';
+                showCakeNextButton();
                 return;
             }
             
@@ -1461,30 +1627,71 @@
             
             stopMicrophone();
             renderCake();
-            document.getElementById('storylineBtnContainer').style.display = 'block';
             
             confetti({ particleCount: 150, spread: 80 });
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        window.goToMemoryScreen = function() {
+        // Go to Reasons Screen
+        window.goToReasonsScreen = function() {
             gsap.to('#cakeScreen', {
                 opacity: 0,
                 duration: 1,
                 onComplete: () => {
                     document.getElementById('cakeScreen').classList.remove('show');
+                    document.getElementById('reasonsScreen').classList.add('show');
+                    renderReasons();
+                }
+            });
+        };
+
+        // Render reasons cards
+        function renderReasons() {
+            const container = document.getElementById('reasonsContainer');
+            container.innerHTML = '';
+            reasons.forEach((reason, index) => {
+                const card = document.createElement('div');
+                card.className = 'reason-card';
+                card.innerHTML = `
+                    <div class="reason-text">${reason.emoji} ${reason.text}</div>
+                    <div class="reason-emoji">${reason.emoji}</div>
+                    <div class="gif-overlay">
+                        <img src="${reason.gif}" alt="GIF">
+                    </div>
+                `;
+                container.appendChild(card);
+                
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    delay: index * 0.2,
+                    ease: "back.out"
+                });
+            });
+        }
+
+        // Go to Memory Screen
+        window.goToMemoryScreen = function() {
+            gsap.to('#reasonsScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('reasonsScreen').classList.remove('show');
                     document.getElementById('memoryScreen').classList.add('show');
                 }
             });
         };
 
+        // Close website (or show letter)
         window.closeWebsite = function() {
+            // You can make this scroll to letter or close
             gsap.to('body', {
                 opacity: 0,
                 duration: 2,
                 onComplete: () => {
-                    window.close();
+                    window.close(); // May not work in all browsers
                 }
             });
         };
