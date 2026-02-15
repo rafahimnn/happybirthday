@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🎂 জন্মদিনের চমক</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
-
+        
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             color: white;
-            min-height: 100vh;
         }
-
+        
         /* ভিডিও ব্যাকগ্রাউন্ড */
         .video-bg {
             position: fixed;
@@ -31,31 +26,18 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(0.8) contrast(1.1);
-            animation: slowZoom 20s infinite alternate;
         }
-
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); }
-        }
-
+        
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(255, 215, 0, 0.2) 0%,
-                rgba(255, 105, 180, 0.2) 25%,
-                rgba(0, 255, 255, 0.2) 50%,
-                rgba(255, 182, 193, 0.2) 75%,
-                rgba(255, 215, 0, 0.2) 100%);
-            backdrop-filter: blur(3px);
+            background: linear-gradient(45deg, rgba(0,0,0,0.6), rgba(139,0,139,0.5));
             z-index: -1;
         }
-
+        
         /* কাউন্টডাউন স্ক্রিন */
         .countdown-screen {
             position: fixed;
@@ -67,111 +49,70 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            transition: 1s;
             text-align: center;
-            z-index: 9999;
-            transition: opacity 1s ease;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
         }
-
-        .countdown-screen.hidden {
+        
+        .countdown-screen.hide {
             opacity: 0;
-            pointer-events: none;
+            visibility: hidden;
         }
-
+        
         .countdown-title {
-            font-size: clamp(1.8rem, 6vw, 3rem);
-            color: #FFD700;
+            font-size: 40px;
+            color: gold;
             margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px #FF1493, 0 0 40px #00FFFF;
-            animation: glow 2s infinite;
+            text-shadow: 0 0 20px red;
         }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px #FFD700, 0 0 40px #FF1493; }
-            50% { text-shadow: 0 0 40px #00FFFF, 0 0 60px #FF1493; }
-        }
-
+        
         .countdown-box {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            padding: clamp(25px, 5vw, 40px);
-            border-radius: 40px;
-            border: 2px solid #FFD700;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.3);
-            width: 100%;
-            max-width: 700px;
         }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: clamp(10px, 2vw, 20px);
-        }
-
+        
         .count-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: clamp(15px, 4vw, 25px) 5px;
-            border-radius: 25px;
-            border: 2px solid #FFD700;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            min-width: 100px;
+            border: 2px solid gold;
         }
-
+        
         .count-number {
-            font-size: clamp(2.5rem, 9vw, 4.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFD700, #FF1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 50px;
+            font-weight: bold;
+            color: gold;
             display: block;
-            line-height: 1;
-            filter: drop-shadow(0 0 20px #FFD700);
         }
-
+        
         .count-label {
-            font-size: clamp(0.8rem, 2.5vw, 1rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 16px;
+            color: white;
         }
-
+        
         .countdown-message {
-            font-size: clamp(1.3rem, 4.5vw, 2rem);
-            color: #fff;
-            margin-top: 20px;
-            text-shadow: 0 0 10px #FFD700;
-            animation: pulse 2s infinite;
+            font-size: 30px;
+            color: white;
+            text-shadow: 0 0 10px gold;
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
+        
         /* মেইন কন্টেন্ট */
         .main-content {
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            pointer-events: none;
             min-height: 100vh;
-        }
-
-        .main-content.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
             padding: 20px;
+            display: none;
         }
-
+        
+        .main-content.show {
+            display: block;
+        }
+        
         /* হিরো সেকশন */
         .hero {
             min-height: 100vh;
@@ -180,783 +121,573 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
         }
-
+        
         .hero h1 {
-            font-size: clamp(3rem, 11vw, 5rem);
-            background: linear-gradient(135deg, #FFD700, #FF1493, #00FFFF, #FF69B4);
+            font-size: 60px;
+            background: linear-gradient(45deg, gold, pink, cyan);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px #FFD700);
-            animation: rainbow 5s infinite;
         }
-
-        @keyframes rainbow {
-            0%, 100% { filter: drop-shadow(0 0 20px #FFD700); }
-            25% { filter: drop-shadow(0 0 30px #FF1493); }
-            50% { filter: drop-shadow(0 0 40px #00FFFF); }
-            75% { filter: drop-shadow(0 0 30px #FF69B4); }
-        }
-
+        
         .birthday-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(3.5rem, 13vw, 6rem);
-            background: linear-gradient(135deg, #FFD700, #FFFFFF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            font-size: 70px;
+            font-family: cursive;
+            color: gold;
+            text-shadow: 0 0 30px gold;
             margin-bottom: 30px;
-            animation: float 3s ease-in-out infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
+        
         /* কেক সেকশন */
         .cake-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: clamp(25px, 5vw, 40px);
-            border-radius: 50px;
-            border: 3px solid #FFD700;
-            margin: 40px 0;
-            width: 100%;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 60px;
+            border: 3px solid gold;
             max-width: 600px;
-            box-shadow: 0 30px 60px rgba(255, 20, 147, 0.2), inset 0 0 50px rgba(255, 215, 0, 0.2);
+            width: 100%;
+            margin: 0 auto;
         }
-
-        .cake-container {
+        
+        .cake-emoji {
+            font-size: 120px;
             text-align: center;
+            filter: drop-shadow(0 0 30px gold);
         }
-
-        .candles-grid {
+        
+        .candles {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
             margin: 20px 0;
-            padding: 10px;
+            font-size: 40px;
         }
-
-        .candle-item {
-            font-size: clamp(2rem, 6vw, 2.5rem);
+        
+        .candle {
             cursor: pointer;
-            transition: 0.2s;
-            animation: flicker 0.5s infinite alternate;
-            padding: 5px;
-            user-select: none;
-            color: #FFD700;
-            text-shadow: 0 0 15px #FF1493;
+            transition: 0.3s;
+            animation: flicker 1s infinite;
         }
-
-        .candle-item:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px #FFD700);
-        }
-
-        .candle-item.blown {
-            opacity: 0.2;
-            animation: none;
+        
+        .candle.blown {
+            opacity: 0.3;
             filter: grayscale(1);
-            cursor: default;
             pointer-events: none;
         }
-
+        
         @keyframes flicker {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0.8; transform: scale(1.05); }
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
-
-        .cake-emoji {
-            font-size: clamp(6rem, 22vw, 9rem);
-            filter: drop-shadow(0 20px 40px #FFD700);
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
-
+        
         .cake-status {
-            font-size: clamp(1.2rem, 4.5vw, 1.6rem);
-            color: #fff;
+            font-size: 24px;
+            color: gold;
             margin: 20px 0;
-            background: rgba(0, 0, 0, 0.3);
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            padding: 15px;
+            border: 2px solid gold;
             border-radius: 50px;
-            border: 2px solid #FFD700;
-            display: inline-block;
-            width: 100%;
+            background: rgba(0,0,0,0.3);
         }
-
-        .button-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            padding: clamp(12px, 3.5vw, 15px) clamp(30px, 7vw, 50px);
+        
+        .cut-btn {
+            background: linear-gradient(45deg, gold, red);
+            color: black;
+            font-size: 28px;
+            padding: 15px 40px;
             border: none;
             border-radius: 50px;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            background: linear-gradient(135deg, #FFD700, #FF1493);
-            color: #1a1a2e;
-            border: 2px solid #FFFFFF;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 180px;
-            justify-content: center;
+            border: 2px solid white;
+            width: 100%;
         }
-
-        .action-btn:disabled {
-            opacity: 0.4;
-            cursor: default;
-            transform: none;
-            box-shadow: none;
-            pointer-events: none;
+        
+        .cut-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
-
-        .action-btn:not(:disabled):hover {
+        
+        .cut-btn:not(:disabled):hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px #FFD700;
+            box-shadow: 0 0 30px gold;
         }
-
+        
         /* কন্টেন্ট সেকশন - শুরুতে লুকানো */
         .content-sections {
             display: none;
             margin-top: 50px;
         }
-
-        .content-sections.visible {
+        
+        .content-sections.show {
             display: block;
-            animation: fadeIn 1s;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* ফটো অ্যালবাম */
+        .section-title {
+            font-size: 40px;
+            color: gold;
+            text-align: center;
+            margin: 50px 0 30px;
         }
-
-        /* ফটো অ্যালবাম - ৬টি ছবি */
+        
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin: 50px 0;
         }
-
+        
         @media (min-width: 768px) {
             .photo-album {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
             }
         }
-
+        
         .photo-item {
-            position: relative;
+            aspect-ratio: 3/4;
             border-radius: 20px;
             overflow: hidden;
+            border: 3px solid gold;
             cursor: pointer;
             transition: 0.3s;
-            aspect-ratio: 3/4;
-            border: 3px solid #FFD700;
-            background: linear-gradient(135deg, #FF1493, #00FFFF, #FF69B4);
-            padding: 3px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-
+        
         .photo-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #FF1493;
+            transform: scale(1.05);
+            border-color: red;
         }
-
+        
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            border-radius: 17px;
         }
-
-        .photo-overlay {
-            position: absolute;
-            bottom: 3px;
-            left: 3px;
-            right: 3px;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            color: #FFD700;
-            font-size: clamp(0.9rem, 2.8vw, 1.1rem);
-            font-weight: 600;
-            transform: translateY(100%);
-            transition: 0.3s;
-            border-radius: 0 0 17px 17px;
-        }
-
-        .photo-item:hover .photo-overlay {
-            transform: translateY(0);
-        }
-
+        
         /* ভিডিও গ্যালারি */
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
-            margin: 50px 0;
         }
-
+        
         @media (min-width: 768px) {
             .video-gallery {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
             }
         }
-
+        
         .video-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
             overflow: hidden;
-            border: 2px solid #FFD700;
-            transition: 0.3s;
+            border: 2px solid gold;
         }
-
-        .video-card:hover {
-            transform: translateY(-10px);
-            border-color: #FF1493;
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-top: 56.25%;
-            background: #000;
-        }
-
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
+        
+        .video-card video {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            aspect-ratio: 16/9;
         }
-
+        
         .video-info {
             padding: 15px;
         }
-
+        
         .video-title {
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            color: #FFD700;
-            margin-bottom: 5px;
+            font-size: 20px;
+            color: gold;
         }
-
-        .video-desc {
-            color: #ddd;
-            font-size: clamp(0.9rem, 2.8vw, 1rem);
-        }
-
+        
         /* মেসেজ সেকশন */
         .message-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 30px);
-            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 40px;
+            border: 3px solid gold;
             margin: 50px 0;
-            border: 3px solid #FFD700;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
-
+        
         .message-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+            font-size: 30px;
+            font-family: cursive;
             line-height: 1.8;
-            white-space: pre-line;
-            background: linear-gradient(135deg, #FFFFFF, #FFD700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* সেকশন টাইটেল */
-        .section-title {
             text-align: center;
-            font-size: clamp(2rem, 7.5vw, 2.8rem);
-            margin: 60px 0 30px;
-            background: linear-gradient(135deg, #FFD700, #FF1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+            color: white;
         }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: clamp(80px, 16vw, 120px);
-            height: 4px;
-            background: linear-gradient(90deg, #FFD700, #FF1493, #00FFFF);
-            margin: 20px auto;
-            border-radius: 2px;
-            animation: widthPulse 2s infinite;
-        }
-
-        @keyframes widthPulse {
-            0%, 100% { width: clamp(80px, 16vw, 120px); opacity: 1; }
-            50% { width: clamp(100px, 20vw, 150px); opacity: 0.8; }
-        }
-
+        
         /* লাইটবক্স */
         .lightbox {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10000;
+            background: rgba(0,0,0,0.9);
+            display: none;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            z-index: 2000;
         }
-
-        .lightbox.active {
+        
+        .lightbox.show {
             display: flex;
         }
-
+        
         .lightbox img {
             max-width: 90%;
             max-height: 90%;
             border-radius: 20px;
-            box-shadow: 0 0 50px #FFD700, 0 0 100px #FF1493;
-            animation: zoom 0.3s;
+            border: 3px solid gold;
         }
-
-        @keyframes zoom {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
+        
         .lightbox .close {
             position: absolute;
             top: 20px;
             right: 30px;
-            font-size: 3rem;
+            font-size: 50px;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
-            text-shadow: 0 0 20px #FFD700;
         }
-
-        .lightbox .close:hover {
-            transform: scale(1.2);
-            color: #FFD700;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #ddd;
-            border-top: 2px solid #FFD700;
-            margin-top: 50px;
-            font-size: clamp(0.9rem, 2.8vw, 1rem);
-        }
-
-        /* মাইক্রোফোন পারমিশন ইন্ডিকেটর */
+        
+        /* মাইক্রোফোন পারমিশন */
         .mic-permission {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            background: black;
             padding: 15px 25px;
             border-radius: 50px;
-            border: 2px solid #FFD700;
+            border: 2px solid gold;
             display: flex;
-            align-items: center;
             gap: 15px;
-            z-index: 100;
-            animation: slideIn 0.5s;
-            max-width: 90%;
+            align-items: center;
+            z-index: 1500;
         }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-
-        .mic-permission i {
-            color: #FFD700;
-            font-size: 1.3rem;
-        }
-
-        .mic-permission span {
-            color: white;
-            font-size: 1rem;
-        }
-
+        
         .mic-permission button {
-            background: #FFD700;
+            background: gold;
             border: none;
             padding: 8px 20px;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
-            color: #1a1a2e;
-            font-size: 1rem;
         }
-
-        .mic-permission button:hover {
-            background: #FF1493;
-            color: white;
-        }
-
-        .mic-permission button:last-child {
-            background: transparent;
-            color: white;
-            border: 1px solid white;
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid gold;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
     <!-- ভিডিও ব্যাকগ্রাউন্ড -->
-    <video class="video-bg" autoplay muted loop playsinline>
+    <video class="video-bg" autoplay muted loop>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-blurred-background-with-lights-439-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
-
+    
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
-        <div class="countdown-title">⏰ জন্মদিন আসতে বাকি</div>
-        
-        <div class="countdown-box">
-            <div class="countdown" id="countdown">
-                <div class="count-item">
-                    <span class="count-number" id="days">00</span>
-                    <span class="count-label">দিন</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-number" id="hours">00</span>
-                    <span class="count-label">ঘণ্টা</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-number" id="mins">00</span>
-                    <span class="count-label">মিনিট</span>
-                </div>
-                <div class="count-item">
-                    <span class="count-number" id="secs">00</span>
-                    <span class="count-label">সেকেন্ড</span>
-                </div>
+        <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
+        <div class="countdown-box" id="countdown">
+            <div class="count-item">
+                <span class="count-number" id="days">00</span>
+                <span class="count-label">দিন</span>
+            </div>
+            <div class="count-item">
+                <span class="count-number" id="hours">00</span>
+                <span class="count-label">ঘণ্টা</span>
+            </div>
+            <div class="count-item">
+                <span class="count-number" id="mins">00</span>
+                <span class="count-label">মিনিট</span>
+            </div>
+            <div class="count-item">
+                <span class="count-number" id="secs">00</span>
+                <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        
-        <div class="countdown-message" id="countdownMessage">
-            🎂 স্পেশাল ডে আসছে 🎂
-        </div>
+        <div class="countdown-message" id="countdownMessage">🎂 স্পেশাল ডে আসছে 🎂</div>
     </div>
-
+    
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
-        <div class="container">
-            <!-- হিরো সেকশন - শুধু কেক -->
-            <section class="hero">
-                <h1>🎉 Happy Birthday 🎉</h1>
-                <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
-                
-                <!-- কেক সেকশন -->
-                <div class="cake-section">
-                    <div class="cake-container">
-                        <div class="cake-emoji" id="cakeEmoji">🎂</div>
-                        <div class="candles-grid" id="candlesGrid"></div>
-                    </div>
-                    <div class="cake-status" id="cakeStatus"></div>
-                    
-                    <div class="button-group">
-                        <button class="action-btn" id="cutBtn" onclick="cutCake()" disabled>
-                            <i class="fas fa-utensils"></i> কেক কাটো
-                        </button>
+        <!-- হিরো সেকশন - শুধু কেক -->
+        <section class="hero">
+            <h1>🎉 Happy Birthday 🎉</h1>
+            <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
+            
+            <!-- কেক সেকশন -->
+            <div class="cake-section">
+                <div class="cake-emoji" id="cakeEmoji">🎂</div>
+                <div class="candles" id="candles"></div>
+                <div class="cake-status" id="cakeStatus"></div>
+                <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 কেক কাটো</button>
+            </div>
+        </section>
+        
+        <!-- কন্টেন্ট সেকশন - কেক কাটার পর দেখাবে -->
+        <div class="content-sections" id="contentSections">
+            <!-- ফটো অ্যালবাম -->
+            <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
+            <div class="photo-album">
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+                <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" loading="lazy">
+                </div>
+            </div>
+            
+            <!-- ভিডিও গ্যালারি -->
+            <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
+            <div class="video-gallery">
+                <div class="video-card">
+                    <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4">
+                    </video>
+                    <div class="video-info">
+                        <div class="video-title">🎥 প্রথম শুভেচ্ছা</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- কন্টেন্ট সেকশন - কেক কাটার পর দেখাবে -->
-            <div class="content-sections" id="contentSections">
-                <!-- ফটো অ্যালবাম - ৬টি ছবি -->
-                <section>
-                    <h2 class="section-title"><i class="fas fa-images"></i> স্মৃতির ভুবন</h2>
-                    <div class="photo-album">
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 প্রথম দেখা</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 একসাথে</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 হাসি</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 ভালোবাসা</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 কেক কাটা</div>
-                        </div>
-                        <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop')">
-                            <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=400&h=600&fit=crop&q=80" alt="Memory" loading="lazy">
-                            <div class="photo-overlay">💖 উপহার</div>
-                        </div>
+                <div class="video-card">
+                    <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
+                        <source src="https://www.w3schools.com/html/movie.mp4">
+                    </video>
+                    <div class="video-info">
+                        <div class="video-title">🎥 বিশেষ বার্তা</div>
                     </div>
-                </section>
-
-                <!-- ভিডিও গ্যালারি -->
-                <section>
-                    <h2 class="section-title"><i class="fas fa-video"></i> ভিডিও শুভেচ্ছা</h2>
-                    <div class="video-gallery">
-                        <div class="video-card">
-                            <div class="video-wrapper">
-                                <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
-                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-info">
-                                <h3 class="video-title">🎥 প্রথম শুভেচ্ছা</h3>
-                                <p class="video-desc">ভালোবাসায় ভরা একটি বার্তা</p>
-                            </div>
-                        </div>
-                        <div class="video-card">
-                            <div class="video-wrapper">
-                                <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
-                                    <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-info">
-                                <h3 class="video-title">🎥 বিশেষ বার্তা</h3>
-                                <p class="video-desc">শুভ জন্মদিন প্রিয়জন</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- মেসেজ সেকশন -->
-                <section>
-                    <div class="message-section">
-                        <h2 class="section-title" style="margin-bottom: 20px;">💌 ভালোবাসার কথা</h2>
-                        <p class="message-text">
+                </div>
+            </div>
+            
+            <!-- মেসেজ সেকশন -->
+            <div class="message-section">
+                <h2 class="section-title">💌 ভালোবাসার কথা</h2>
+                <div class="message-text">
 আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
 তোমার জীবন হোক আনন্দে ভরপুর। 💝
 
 🎂 শুভ জন্মদিন 🎂
-                        </p>
-                    </div>
-                </section>
+                </div>
             </div>
         </div>
-
+        
         <footer>
-            <p>❤️ তৈরি করেছে অফুরান ভালোবাসা</p>
+            <p>❤️ তৈরি করেছে ভালোবাসা</p>
             <p>© ২০২৬ স্পেশাল ডে</p>
         </footer>
     </div>
-
+    
     <!-- লাইটবক্স -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="close">&times;</span>
-        <img src="" id="lightboxImg" alt="">
+    <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
+        <span class="close" onclick="event.stopPropagation(); this.parentElement.classList.remove('show')">&times;</span>
+        <img src="" id="lightboxImg">
     </div>
-
+    
     <script>
-        // ------------------ কনফিগারেশন ------------------
+        // ---------- কনফিগারেশন ----------
         const CONFIG = {
-            birthMonth: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
-            birthDay: 15,         // ১৫ তারিখ
-            age: 16,              // ১৬তম জন্মদিন
-            name: "প্রিয়জন"      // ডিফল্ট নাম
+            month: 1,        // ফেব্রুয়ারি = 1
+            day: 15,         // ১৫ তারিখ
+            age: 16,         // ১৬ বছর
+            name: "প্রিয়জন"
         };
-
-        // URL থেকে নাম নেওয়া
+        
+        // ইউআরএল থেকে নাম নাও
         const urlParams = new URLSearchParams(window.location.search);
-        const nameParam = urlParams.get('name');
-        if (nameParam) {
-            CONFIG.name = decodeURIComponent(nameParam);
+        if (urlParams.get('name')) {
+            CONFIG.name = decodeURIComponent(urlParams.get('name'));
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
-
-        // স্টেট
+        
+        // ---------- ভেরিয়েবল ----------
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
         let confettiShown = false;
-        let mediaStream = null;
+        let audioStream = null;
         let audioContext = null;
         let analyser = null;
-        let checkBlowInterval = null;
-
-        // আজ কি জন্মদিন?
-        function isBirthdayToday() {
-            const today = new Date();
-            return today.getMonth() === CONFIG.birthMonth && 
-                   today.getDate() === CONFIG.birthDay;
-        }
-
+        let blowInterval = null;
+        
+        // ---------- ফাংশন ----------
+        
         // কাউন্টডাউন আপডেট
         function updateCountdown() {
             const now = new Date();
             const currentYear = now.getFullYear();
             
-            let birthday = new Date(currentYear, CONFIG.birthMonth, CONFIG.birthDay, 0, 0, 0);
-            
+            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day);
             if (now > birthday) {
-                birthday = new Date(currentYear + 1, CONFIG.birthMonth, CONFIG.birthDay, 0, 0, 0);
+                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day);
             }
             
             const diff = birthday - now;
             
             if (diff <= 0) {
-                // জন্মদিন এসে গেছে!
+                // জন্মদিন এসেছে
                 if (!confettiShown) {
                     confettiShown = true;
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                    confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                document.getElementById('countdownScreen').classList.add('hidden');
-                document.getElementById('mainContent').classList.add('visible');
+                document.getElementById('countdownScreen').classList.add('hide');
+                document.getElementById('mainContent').classList.add('show');
                 
-                // কেক স্টেট লোড
-                loadCakeState();
+                loadState();
                 renderCake();
                 
-                // মাইক্রোফোন পারমিশন চাও
-                setTimeout(requestMicrophone, 1500);
-                
+                setTimeout(requestMic, 2000);
                 return;
             }
             
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            
             document.getElementById('days').textContent = String(days).padStart(2, '0');
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-
-            const msg = document.getElementById('countdownMessage');
-            if (days === 0 && hours < 24) {
-                msg.innerHTML = '🎉 কাল রাত ১২টায় চমক! 🎉';
-            } else {
-                msg.innerHTML = '🎂 স্পেশাল ডে আসছে 🎂';
-            }
-        }
-
-        // কেক স্টেট লোড
-        function loadCakeState() {
-            const today = new Date();
-            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
-            const day = String(CONFIG.birthDay).padStart(2, '0');
-            const dateStr = `${today.getFullYear()}-${month}-${day}`;
-            cakeCut = localStorage.getItem(`cakeCut_${dateStr}`) === 'true';
-            candlesBlown = parseInt(localStorage.getItem(`candlesBlown_${dateStr}`) || '0');
             
-            // কেক কাটা থাকলে কন্টেন্ট দেখাও
-            if (cakeCut) {
-                document.getElementById('contentSections').classList.add('visible');
+            if (days === 0) {
+                document.getElementById('countdownMessage').innerHTML = '🎉 কাল রাত ১২টায় চমক! 🎉';
             }
         }
-
+        
+        // স্টেট লোড
+        function loadState() {
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
+            
+            cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
+            candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
+            
+            if (cakeCut) {
+                document.getElementById('contentSections').classList.add('show');
+            }
+        }
+        
         // কেক রেন্ডার
         function renderCake() {
             const cakeEmoji = document.getElementById('cakeEmoji');
-            const candlesGrid = document.getElementById('candlesGrid');
-            const cakeStatus = document.getElementById('cakeStatus');
+            const candlesDiv = document.getElementById('candles');
+            const statusDiv = document.getElementById('cakeStatus');
             const cutBtn = document.getElementById('cutBtn');
-
+            
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
-                candlesGrid.innerHTML = '';
-                cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
+                candlesDiv.innerHTML = '';
+                statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
+                cutBtn.disabled = true;
                 cutBtn.style.display = 'none';
-                stopMicrophone();
+                stopMic();
                 return;
             }
             
             cakeEmoji.textContent = '🎂';
-            cutBtn.style.display = 'inline-flex';
+            cutBtn.style.display = 'block';
             
-            let candlesHtml = '';
+            // মোমবাতি দেখাও
+            let html = '';
             for (let i = 0; i < totalCandles; i++) {
-                const isBlown = i < candlesBlown;
-                candlesHtml += `<div class="candle-item ${isBlown ? 'blown' : ''}" onclick="blowCandle(${i})">🕯️</div>`;
+                const blown = i < candlesBlown ? 'blown' : '';
+                html += `<span class="candle ${blown}" onclick="blowCandle(${i})">🕯️</span>`;
             }
-            candlesGrid.innerHTML = candlesHtml;
+            candlesDiv.innerHTML = html;
             
             if (candlesBlown === totalCandles) {
-                cakeStatus.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
+                statusDiv.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
                 cutBtn.disabled = false;
-                stopMicrophone();
+                stopMic();
             } else {
-                cakeStatus.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে - ফুঁ দাও বা ট্যাপ করো`;
+                statusDiv.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে`;
                 cutBtn.disabled = true;
             }
         }
-
-        // মাইক্রোফোন বন্ধ
-        function stopMicrophone() {
-            if (checkBlowInterval) {
-                clearInterval(checkBlowInterval);
-                checkBlowInterval = null;
-            }
-            if (mediaStream) {
-                mediaStream.getTracks().forEach(track => track.stop());
-                mediaStream = null;
-            }
-            if (audioContext) {
-                audioContext.close();
-                audioContext = null;
-            }
-            document.getElementById('micPermission')?.remove();
+        
+        // স্টেট সেভ
+        function saveState() {
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
+            localStorage.setItem(`blown_${dateStr}`, candlesBlown);
         }
-
-        // মাইক্রোফোন অনুরোধ
-        function requestMicrophone() {
+        
+        // মোমবাতি নেভাও (ট্যাপ)
+        window.blowCandle = function(index) {
+            if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
+            
+            candlesBlown = index + 1;
+            saveState();
+            renderCake();
+            
+            confetti({
+                particleCount: 5,
+                spread: 30,
+                colors: ['#aaa']
+            });
+        };
+        
+        // একসাথে একাধিক মোমবাতি নেভাও
+        function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
             
-            const micDiv = document.createElement('div');
-            micDiv.className = 'mic-permission';
-            micDiv.id = 'micPermission';
-            micDiv.innerHTML = `
-                <i class="fas fa-microphone"></i>
-                <span>মাইক্রোফোন অনুমতি দিন (ফুঁ দিতে)</span>
-                <button onclick="enableMicrophone()">অনুমতি দিন</button>
+            const newBlown = Math.min(candlesBlown + count, totalCandles);
+            if (newBlown > candlesBlown) {
+                candlesBlown = newBlown;
+                saveState();
+                renderCake();
+                
+                confetti({
+                    particleCount: 10 * count,
+                    spread: 50,
+                    colors: ['#aaa']
+                });
+            }
+        }
+        
+        // মাইক্রোফোন চাও
+        function requestMic() {
+            if (cakeCut || candlesBlown === totalCandles) return;
+            
+            const div = document.createElement('div');
+            div.className = 'mic-permission';
+            div.id = 'micDiv';
+            div.innerHTML = `
+                <span>🎤 মাইক্রোফোন অনুমতি দিন</span>
+                <button onclick="enableMic()">অনুমতি দিন</button>
                 <button onclick="this.parentElement.remove()">বাদ দিন</button>
             `;
-            document.body.appendChild(micDiv);
+            document.body.appendChild(div);
         }
-
+        
         // মাইক্রোফোন চালু
-        window.enableMicrophone = function() {
-            document.getElementById('micPermission')?.remove();
+        window.enableMic = function() {
+            document.getElementById('micDiv')?.remove();
             
             if (cakeCut || candlesBlown === totalCandles) return;
             
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
-                    mediaStream = stream;
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    audioStream = stream;
+                    audioContext = new AudioContext();
                     analyser = audioContext.createAnalyser();
                     const source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyser);
@@ -965,11 +696,11 @@
                     const bufferLength = analyser.frequencyBinCount;
                     const dataArray = new Uint8Array(bufferLength);
                     
-                    if (checkBlowInterval) clearInterval(checkBlowInterval);
+                    if (blowInterval) clearInterval(blowInterval);
                     
-                    checkBlowInterval = setInterval(() => {
+                    blowInterval = setInterval(() => {
                         if (cakeCut || candlesBlown === totalCandles) {
-                            stopMicrophone();
+                            stopMic();
                             return;
                         }
                         
@@ -978,88 +709,75 @@
                         for (let i = 0; i < bufferLength; i++) {
                             sum += dataArray[i];
                         }
-                        let avg = sum / bufferLength;
+                        const avg = sum / bufferLength;
                         
-                        if (avg > 70) {
-                            let count = 2 + Math.floor(Math.random() * 2);
-                            let newBlown = Math.min(candlesBlown + count, totalCandles);
-                            if (newBlown > candlesBlown) {
-                                candlesBlown = newBlown;
-                                saveCandlesState();
-                                renderCake();
-                                confetti({ particleCount: 5 * count, spread: 40, colors: ['#aaa'] });
-                            }
+                        if (avg > 60) {
+                            blowMultipleCandles(2 + Math.floor(Math.random() * 2));
                         }
                     }, 150);
                 })
-                .catch(() => alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! ট্যাপ করে নিভাও।'));
+                .catch(() => {
+                    alert('মাইক্রোফোন নেই! মোমবাতিতে ট্যাপ করুন');
+                });
         };
-
-        // মোমবাতি নেভানো (ট্যাপ)
-        window.blowCandle = function(index) {
-            if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
-            
-            candlesBlown = index + 1;
-            saveCandlesState();
-            renderCake();
-            confetti({ particleCount: 3, spread: 20, colors: ['#aaa'] });
-        };
-
-        // স্টেট সেভ
-        function saveCandlesState() {
-            const today = new Date();
-            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
-            const day = String(CONFIG.birthDay).padStart(2, '0');
-            const dateStr = `${today.getFullYear()}-${month}-${day}`;
-            localStorage.setItem(`candlesBlown_${dateStr}`, candlesBlown);
+        
+        // মাইক্রোফোন বন্ধ
+        function stopMic() {
+            if (blowInterval) {
+                clearInterval(blowInterval);
+                blowInterval = null;
+            }
+            if (audioStream) {
+                audioStream.getTracks().forEach(t => t.stop());
+                audioStream = null;
+            }
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+            document.getElementById('micDiv')?.remove();
         }
-
+        
         // কেক কাটা
         window.cutCake = function() {
-            if (!isBirthdayToday() || cakeCut || candlesBlown !== totalCandles) return;
-
+            if (cakeCut || candlesBlown !== totalCandles) return;
+            
             const today = new Date();
-            const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
-            const day = String(CONFIG.birthDay).padStart(2, '0');
-            const dateStr = `${today.getFullYear()}-${month}-${day}`;
+            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
             
             cakeCut = true;
-            localStorage.setItem(`cakeCut_${dateStr}`, 'true');
+            localStorage.setItem(`cut_${dateStr}`, 'true');
             
-            stopMicrophone();
+            stopMic();
             renderCake();
-            document.getElementById('contentSections').classList.add('visible');
+            document.getElementById('contentSections').classList.add('show');
             
-            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFD700', '#FF1493'] }), 200);
+            confetti({ particleCount: 200, spread: 100 });
+            setTimeout(() => confetti({ particleCount: 150, spread: 80, colors: ['gold', 'pink'] }), 200);
         };
-
+        
         // লাইটবক্স
         window.openLightbox = function(url) {
             document.getElementById('lightboxImg').src = url;
-            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox').classList.add('show');
         };
-
-        window.closeLightbox = function() {
-            document.getElementById('lightbox').classList.remove('active');
-        };
-
-        // স্টার্টআপ
-        if (isBirthdayToday()) {
-            document.getElementById('countdownScreen').classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
-            loadCakeState();
+        
+        // চেক করো আজ জন্মদিন কিনা
+        const today = new Date();
+        if (today.getMonth() === CONFIG.month && today.getDate() === CONFIG.day) {
+            document.getElementById('countdownScreen').classList.add('hide');
+            document.getElementById('mainContent').classList.add('show');
+            loadState();
             renderCake();
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => {
-                if (!cakeCut && candlesBlown < totalCandles) requestMicrophone();
-            }, 1500);
+            confetti({ particleCount: 100, spread: 70 });
+            setTimeout(requestMic, 2000);
         } else {
             setInterval(updateCountdown, 1000);
             updateCountdown();
         }
-
-        window.addEventListener('beforeunload', stopMicrophone);
+        
+        // পৃষ্ঠা ছাড়ার সময় মাইক্রোফোন বন্ধ
+        window.addEventListener('beforeunload', stopMic);
     </script>
 </body>
 </html>
