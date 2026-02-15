@@ -29,6 +29,13 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
+            filter: brightness(0.9) contrast(1.1);
+            animation: slowZoom 20s infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
 
         .overlay {
@@ -37,9 +44,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(26,0,51,0.7));
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.2) 0%,
+                rgba(78, 205, 196, 0.2) 25%,
+                rgba(69, 183, 209, 0.2) 50%,
+                rgba(150, 206, 180, 0.2) 75%,
+                rgba(255, 107, 107, 0.2) 100%);
             backdrop-filter: blur(3px);
             z-index: -1;
+        }
+
+        /* স্পার্কল ইফেক্ট */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFE66D;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
         }
 
         /* কাউন্টডাউন স্ক্রিন */
@@ -57,8 +94,8 @@
             z-index: 9999;
             transition: opacity 1s ease;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
         }
 
         .countdown-screen.hidden {
@@ -67,28 +104,28 @@
         }
 
         .countdown-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: #fff;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            color: #FFE66D;
             margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 5px;
-            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493;
+            text-shadow: 0 0 20px #FF6B6B, 0 0 40px #4ECDC4;
             animation: glow 2s infinite;
         }
 
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493; }
-            50% { text-shadow: 0 0 30px #ff1493, 0 0 60px #23d5ab; }
+            0%, 100% { text-shadow: 0 0 20px #FFE66D, 0 0 40px #FF6B6B; }
+            50% { text-shadow: 0 0 40px #4ECDC4, 0 0 60px #45B7D1; }
         }
 
         .countdown-box {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(78, 205, 196, 0.1);
             backdrop-filter: blur(10px);
             padding: clamp(25px, 5vw, 40px);
             border-radius: 40px;
-            border: 2px solid rgba(255, 215, 0, 0.5);
+            border: 2px solid #FFE66D;
             margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 230, 109, 0.3);
             width: 100%;
             max-width: 700px;
         }
@@ -103,18 +140,18 @@
             background: rgba(255, 255, 255, 0.1);
             padding: clamp(15px, 4vw, 25px) clamp(5px, 2vw, 15px);
             border-radius: 25px;
-            border: 2px solid gold;
+            border: 2px solid #FFE66D;
         }
 
         .count-number {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
-            background: linear-gradient(135deg, #ffd700, #ff1493);
+            background: linear-gradient(135deg, #FFE66D, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
             line-height: 1;
-            filter: drop-shadow(0 0 20px gold);
+            filter: drop-shadow(0 0 20px #FFE66D);
         }
 
         .count-label {
@@ -128,7 +165,7 @@
             font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: #fff;
             margin-top: 20px;
-            text-shadow: 0 0 10px gold;
+            text-shadow: 0 0 10px #FFE66D;
             animation: pulse 2s infinite;
         }
 
@@ -171,27 +208,28 @@
 
         .hero h1 {
             font-size: clamp(3rem, 10vw, 5rem);
-            background: linear-gradient(135deg, #ffd700, #ff1493, #23d5ab);
+            background: linear-gradient(135deg, #FFE66D, #FF6B6B, #4ECDC4, #45B7D1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px gold);
+            filter: drop-shadow(0 0 30px #FFE66D);
             animation: rainbow 5s infinite;
         }
 
         @keyframes rainbow {
-            0%, 100% { filter: drop-shadow(0 0 20px #ffd700); }
-            33% { filter: drop-shadow(0 0 30px #ff1493); }
-            66% { filter: drop-shadow(0 0 40px #23d5ab); }
+            0%, 100% { filter: drop-shadow(0 0 20px #FFE66D); }
+            25% { filter: drop-shadow(0 0 30px #FF6B6B); }
+            50% { filter: drop-shadow(0 0 40px #4ECDC4); }
+            75% { filter: drop-shadow(0 0 30px #45B7D1); }
         }
 
         .birthday-name {
             font-family: 'Dancing Script', cursive;
             font-size: clamp(3.5rem, 12vw, 6rem);
-            background: linear-gradient(135deg, #ffd700, #fff);
+            background: linear-gradient(135deg, #FFE66D, #FFFFFF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            text-shadow: 0 0 40px rgba(255, 230, 109, 0.8);
             margin-bottom: 30px;
             animation: float 3s ease-in-out infinite;
         }
@@ -203,53 +241,51 @@
 
         /* কেক সেকশন */
         .cake-section {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: clamp(25px, 5vw, 40px);
             border-radius: 50px;
-            border: 3px solid gold;
+            border: 3px solid #FFE66D;
             margin: 40px 0;
             width: 100%;
             max-width: 650px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(255, 107, 107, 0.3), inset 0 0 50px rgba(78, 205, 196, 0.3);
         }
 
         .cake-container {
             text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
         }
 
-        .cake-container.blow-area {
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .cake-emoji {
-            font-size: clamp(6rem, 20vw, 10rem);
-            filter: drop-shadow(0 20px 40px gold);
-            transition: 0.3s;
-        }
-
-        .candles-container {
-            font-size: clamp(2rem, 6vw, 2.8rem);
-            margin-top: -20px;
-            letter-spacing: 10px;
+        .candles-grid {
             display: flex;
-            justify-content: center;
-            gap: 5px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 10px;
         }
 
-        .candle {
-            display: inline-block;
+        .candle-item {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            cursor: pointer;
+            transition: 0.2s;
             animation: flicker 0.5s infinite alternate;
-            font-size: inherit;
+            padding: 5px;
+            user-select: none;
+            color: #FFE66D;
+            text-shadow: 0 0 20px #FF6B6B;
+        }
+
+        .candle-item:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px #FFE66D);
+        }
+
+        .candle-item.blown {
+            opacity: 0.3;
+            animation: none;
+            filter: grayscale(1);
+            cursor: not-allowed;
         }
 
         @keyframes flicker {
@@ -257,14 +293,21 @@
             to { opacity: 0.9; transform: scale(1.1); }
         }
 
+        .cake-emoji {
+            font-size: clamp(6rem, 20vw, 10rem);
+            filter: drop-shadow(0 20px 40px #FFE66D);
+            transition: 0.3s;
+            margin-bottom: 10px;
+        }
+
         .cake-status {
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             color: #fff;
-            margin: 25px 0;
-            background: rgba(0, 0, 0, 0.6);
-            padding: clamp(12px, 3vw, 15px) clamp(20px, 4vw, 25px);
+            margin: 20px 0;
+            background: rgba(69, 183, 209, 0.2);
+            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
             border-radius: 50px;
-            border: 2px solid gold;
+            border: 2px solid #FFE66D;
             display: inline-block;
             width: 100%;
         }
@@ -277,21 +320,21 @@
         }
 
         .action-btn {
-            padding: clamp(12px, 3vw, 15px) clamp(25px, 6vw, 40px);
+            padding: clamp(12px, 3vw, 15px) clamp(30px, 6vw, 50px);
             border: none;
             border-radius: 50px;
             font-size: clamp(1.1rem, 3.5vw, 1.3rem);
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #1a1a2e;
-            border: 2px solid white;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #FFE66D, #FF6B6B);
+            color: #2C3E50;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 10px 30px rgba(255, 230, 109, 0.4);
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            min-width: 160px;
+            min-width: 180px;
             justify-content: center;
         }
 
@@ -304,26 +347,7 @@
 
         .action-btn:not(:disabled):hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 40px gold;
-        }
-
-        .mic-btn {
-            background: linear-gradient(135deg, #6c5ce7, #a363d9);
-            color: white;
-            min-width: 180px;
-        }
-
-        .mic-btn i {
-            font-size: 1.3rem;
-        }
-
-        .mic-btn.active {
-            animation: micPulse 1s infinite;
-        }
-
-        @keyframes micPulse {
-            0%, 100% { box-shadow: 0 0 20px #6c5ce7; }
-            50% { box-shadow: 0 0 40px #a363d9; }
+            box-shadow: 0 15px 40px #FFE66D;
         }
 
         /* ফটো অ্যালবাম - ৬টি ছবি */
@@ -347,13 +371,15 @@
             cursor: pointer;
             transition: 0.3s;
             aspect-ratio: 3/4;
-            border: 3px solid gold;
+            border: 3px solid #FFE66D;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
+            padding: 3px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .photo-item:hover {
             transform: translateY(-10px) scale(1.02);
-            border-color: #ff1493;
+            border-color: #FF6B6B;
         }
 
         .photo-item img {
@@ -361,20 +387,22 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            border-radius: 17px;
         }
 
         .photo-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 3px;
+            left: 3px;
+            right: 3px;
             padding: 15px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            color: gold;
+            background: linear-gradient(transparent, rgba(44, 62, 80, 0.9));
+            color: #FFE66D;
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             font-weight: 600;
             transform: translateY(100%);
             transition: 0.3s;
+            border-radius: 0 0 17px 17px;
         }
 
         .photo-item:hover .photo-overlay {
@@ -396,18 +424,18 @@
         }
 
         .video-card {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(78, 205, 196, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 25px;
             overflow: hidden;
-            border: 2px solid gold;
+            border: 2px solid #FFE66D;
             transition: 0.3s;
         }
 
         .video-card:hover {
             transform: translateY(-10px);
-            border-color: #ff1493;
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+            border-color: #FF6B6B;
+            box-shadow: 0 20px 40px rgba(255, 230, 109, 0.3);
         }
 
         .video-wrapper {
@@ -431,7 +459,7 @@
 
         .video-title {
             font-size: clamp(1.1rem, 3vw, 1.3rem);
-            color: gold;
+            color: #FFE66D;
             margin-bottom: 5px;
         }
 
@@ -442,13 +470,13 @@
 
         /* মেসেজ সেকশন */
         .message-section {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 107, 107, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 30px);
             text-align: center;
             margin: 50px 0;
-            border: 3px solid gold;
+            border: 3px solid #FFE66D;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
@@ -457,7 +485,7 @@
             font-size: clamp(1.5rem, 5vw, 2.5rem);
             line-height: 1.8;
             white-space: pre-line;
-            background: linear-gradient(135deg, #fff, #ffd700);
+            background: linear-gradient(135deg, #FFFFFF, #FFE66D);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -467,10 +495,10 @@
             text-align: center;
             font-size: clamp(2rem, 7vw, 2.8rem);
             margin: 60px 0 30px;
-            background: linear-gradient(135deg, #ffd700, #ff1493);
+            background: linear-gradient(135deg, #FFE66D, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px gold);
+            filter: drop-shadow(0 0 20px rgba(255, 230, 109, 0.5));
         }
 
         .section-title::after {
@@ -478,7 +506,7 @@
             display: block;
             width: clamp(80px, 15vw, 120px);
             height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ff1493);
+            background: linear-gradient(90deg, #FFE66D, #FF6B6B, #4ECDC4);
             margin: 20px auto;
             border-radius: 2px;
         }
@@ -506,7 +534,7 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 20px;
-            box-shadow: 0 0 50px gold;
+            box-shadow: 0 0 50px #FFE66D, 0 0 100px #FF6B6B;
             animation: zoom 0.3s;
         }
 
@@ -523,20 +551,66 @@
             color: white;
             cursor: pointer;
             transition: 0.3s;
-            text-shadow: 0 0 20px gold;
+            text-shadow: 0 0 20px #FFE66D;
         }
 
         .lightbox .close:hover {
             transform: scale(1.2);
-            color: gold;
+            color: #FFE66D;
         }
 
         footer {
             text-align: center;
             padding: 40px;
-            color: #ddd;
-            border-top: 2px solid gold;
+            color: #FFFFFF;
+            border-top: 2px solid #FFE66D;
             margin-top: 50px;
+        }
+
+        /* মাইক্রোফোন পারমিশন ইন্ডিকেটর */
+        .mic-permission {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 2px solid #FFE66D;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .mic-permission i {
+            color: #FFE66D;
+            font-size: 1.3rem;
+        }
+
+        .mic-permission span {
+            color: white;
+        }
+
+        .mic-permission button {
+            background: #FFE66D;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #2C3E50;
+        }
+
+        .mic-permission button:hover {
+            background: #FF6B6B;
+            color: white;
         }
     </style>
 </head>
@@ -546,6 +620,9 @@
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
+
+    <!-- স্পার্কল ইফেক্ট -->
+    <div class="sparkles" id="sparkles"></div>
 
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
@@ -587,16 +664,13 @@
                 
                 <!-- কেক সেকশন -->
                 <div class="cake-section">
-                    <div class="cake-container" id="cakeContainer" onclick="handleCandleClick()">
+                    <div class="cake-container">
                         <div class="cake-emoji" id="cakeEmoji">🎂</div>
-                        <div class="candles-container" id="candlesContainer"></div>
+                        <div class="candles-grid" id="candlesGrid"></div>
                     </div>
                     <div class="cake-status" id="cakeStatus"></div>
                     
                     <div class="button-group">
-                        <button class="action-btn mic-btn" id="micBtn" onclick="startMicrophone()">
-                            <i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)
-                        </button>
                         <button class="action-btn" id="cutBtn" onclick="cutCake()" disabled>
                             <i class="fas fa-utensils"></i> কেক কাটো
                         </button>
@@ -680,7 +754,7 @@
 
         <footer>
             <p>❤️ তৈরি করেছে অফুরান ভালোবাসা</p>
-            <p>© ২০২৫ স্পেশাল ডে</p>
+            <p>© ২০২৬ স্পেশাল ডে</p>
         </footer>
     </div>
 
@@ -693,11 +767,11 @@
     <script>
         // ------------------ কনফিগারেশন ------------------
         const CONFIG = {
-    birthMonth: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
-    birthDay: 16,         // ১৬ তারিখ
-    age: 16,              // ১৬তম জন্মদিন
-    name: "প্রিয়জন"      // নাম (URL-এ ?name=... দিয়ে বদলাবে)
-};
+            birthMonth: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
+            birthDay: 15,         // ১৫ তারিখ
+            age: 16,              // ১৬তম জন্মদিন
+            name: "প্রিয়জন"      // ডিফল্ট নাম
+        };
 
         // URL থেকে নাম নেওয়া
         const urlParams = new URLSearchParams(window.location.search);
@@ -707,14 +781,34 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
 
+        // স্পার্কল ইফেক্ট
+        function createSparkles() {
+            const container = document.getElementById('sparkles');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    sparkle.style.animationDelay = Math.random() * 3 + 's';
+                    sparkle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    container.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 3000);
+                }, i * 200);
+            }
+        }
+        
+        // প্রতি ৫ সেকেন্ড পর স্পার্কল
+        setInterval(createSparkles, 5000);
+        createSparkles();
+
         // স্টেট
         let cakeCut = false;
-        let candlesBlown = false;
+        let candlesBlown = 0; // কতগুলো মোমবাতি নিভেছে
+        let totalCandles = CONFIG.age;
         let confettiShown = false;
-        let mediaRecorder;
-        let audioContext;
-        let analyser;
-        let microphone;
+        let micEnabled = false;
 
         // আজ কি জন্মদিন?
         function isBirthdayToday() {
@@ -743,10 +837,10 @@
                     // কনফেটি
                     confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
                     setTimeout(() => {
-                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] });
+                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] });
                     }, 200);
                     setTimeout(() => {
-                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] });
+                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] });
                     }, 400);
                 }
                 
@@ -756,6 +850,10 @@
                 // কেক স্টেট লোড
                 loadCakeState();
                 renderCake();
+                
+                // মাইক্রোফোন পারমিশন চাও
+                setTimeout(requestMicrophone, 1000);
+                
                 return;
             }
             
@@ -787,72 +885,71 @@
             const day = String(CONFIG.birthDay).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
             cakeCut = localStorage.getItem(`cakeCut_${dateStr}`) === 'true';
-            candlesBlown = localStorage.getItem(`candlesBlown_${dateStr}`) === 'true';
+            candlesBlown = parseInt(localStorage.getItem(`candlesBlown_${dateStr}`) || '0');
         }
 
         // কেক রেন্ডার
         function renderCake() {
             const cakeEmoji = document.getElementById('cakeEmoji');
-            const candlesContainer = document.getElementById('candlesContainer');
+            const candlesGrid = document.getElementById('candlesGrid');
             const cakeStatus = document.getElementById('cakeStatus');
             const cutBtn = document.getElementById('cutBtn');
-            const micBtn = document.getElementById('micBtn');
 
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
-                candlesContainer.innerHTML = '';
+                candlesGrid.innerHTML = '';
                 cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
-                micBtn.disabled = true;
+                return;
+            }
+            
+            cakeEmoji.textContent = '🎂';
+            
+            // মোমবাতি তৈরি
+            let candlesHtml = '';
+            for (let i = 0; i < totalCandles; i++) {
+                const isBlown = i < candlesBlown;
+                candlesHtml += `<div class="candle-item ${isBlown ? 'blown' : ''}" data-index="${i}" onclick="blowCandle(${i})">🕯️</div>`;
+            }
+            candlesGrid.innerHTML = candlesHtml;
+            
+            if (candlesBlown === totalCandles) {
+                cakeStatus.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
+                cutBtn.disabled = false;
             } else {
-                cakeEmoji.textContent = '🎂';
-                
-                if (candlesBlown) {
-                    candlesContainer.innerHTML = '💨';
-                    cakeStatus.textContent = '😶 মোমবাতি নিভে গেছে! এখন কেক কাটো';
-                    micBtn.disabled = true;
-                    cutBtn.disabled = false;
-                } else {
-                    let candles = '';
-                    for (let i = 0; i < CONFIG.age; i++) {
-                        candles += '<span class="candle">🕯️</span>';
-                    }
-                    candlesContainer.innerHTML = candles;
-                    cakeStatus.textContent = `${CONFIG.age}টি মোমবাতি জ্বলছে - ফুঁ দাও অথবা মোমবাতিতে ট্যাপ করো`;
-                    micBtn.disabled = false;
-                    cutBtn.disabled = true;
-                }
+                cakeStatus.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে - ফুঁ দাও বা মোমবাতিতে ট্যাপ করো`;
+                cutBtn.disabled = true;
             }
         }
 
-        // মোমবাতিতে ক্লিক করলে
-        window.handleCandleClick = function() {
-            if (!isBirthdayToday() || cakeCut || candlesBlown) return;
-            
-            // ৫০% চান্সে নিভবে
-            if (Math.random() > 0.5) {
-                blowCandles();
-            } else {
-                document.getElementById('cakeContainer').classList.add('blow-area');
-                setTimeout(() => {
-                    document.getElementById('cakeContainer').classList.remove('blow-area');
-                }, 500);
-            }
+        // মাইক্রোফোন অনুরোধ
+        function requestMicrophone() {
+            const micDiv = document.createElement('div');
+            micDiv.className = 'mic-permission';
+            micDiv.id = 'micPermission';
+            micDiv.innerHTML = `
+                <i class="fas fa-microphone"></i>
+                <span>মাইক্রোফোন অনুমতি দিন (ফুঁ দিয়ে মোমবাতি নেভানোর জন্য)</span>
+                <button onclick="enableMicrophone()">অনুমতি দিন</button>
+                <button onclick="closeMicPermission()" style="background:transparent; color:white; border:1px solid white;">বাদ দিন</button>
+            `;
+            document.body.appendChild(micDiv);
+        }
+
+        window.closeMicPermission = function() {
+            document.getElementById('micPermission')?.remove();
         };
 
-        // মাইক্রোফোন স্টার্ট
-        window.startMicrophone = function() {
-            if (!isBirthdayToday() || cakeCut || candlesBlown) return;
-
-            const micBtn = document.getElementById('micBtn');
-            micBtn.innerHTML = '<i class="fas fa-microphone-alt"></i> ফুঁ দাও...';
-            micBtn.classList.add('active');
-
+        // মাইক্রোফোন চালু
+        window.enableMicrophone = function() {
+            document.getElementById('micPermission')?.remove();
+            
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioContext.createAnalyser();
-                    microphone = audioContext.createMediaStreamSource(stream);
+                    micEnabled = true;
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const analyser = audioContext.createAnalyser();
+                    const microphone = audioContext.createMediaStreamSource(stream);
                     microphone.connect(analyser);
                     analyser.fftSize = 256;
                     
@@ -861,6 +958,11 @@
                     
                     // চেক করা হচ্ছে ফুঁর জন্য
                     const checkBlow = setInterval(() => {
+                        if (cakeCut || candlesBlown === totalCandles) {
+                            clearInterval(checkBlow);
+                            return;
+                        }
+                        
                         analyser.getByteFrequencyData(dataArray);
                         let sum = 0;
                         for (let i = 0; i < bufferLength; i++) {
@@ -870,55 +972,74 @@
                         
                         // যদি ফুঁর লেভেল বেশি হয়
                         if (average > 80) {
-                            clearInterval(checkBlow);
-                            stream.getTracks().forEach(track => track.stop());
-                            micBtn.classList.remove('active');
-                            micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
-                            blowCandles();
+                            blowMultipleCandles(2 + Math.floor(Math.random() * 2)); // 2-3টি মোমবাতি নেভাও
                         }
-                    }, 100);
+                    }, 200);
                     
-                    // ১০ সেকেন্ড পর বন্ধ
+                    // ১ মিনিট পর বন্ধ
                     setTimeout(() => {
                         clearInterval(checkBlow);
                         stream.getTracks().forEach(track => track.stop());
-                        micBtn.classList.remove('active');
-                        micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
-                    }, 10000);
+                    }, 60000);
                 })
                 .catch(err => {
                     alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! মোমবাতিতে ট্যাপ করে নিভাও।');
-                    micBtn.classList.remove('active');
-                    micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দাও (মাইক)';
                 });
         };
 
-        // মোমবাতি নেভানো
-        window.blowCandles = function() {
-            if (!isBirthdayToday() || cakeCut || candlesBlown) return;
+        // একাধিক মোমবাতি নেভানো
+        window.blowMultipleCandles = function(count) {
+            if (cakeCut || candlesBlown === totalCandles) return;
+            
+            let newBlown = Math.min(candlesBlown + count, totalCandles);
+            
+            if (newBlown > candlesBlown) {
+                candlesBlown = newBlown;
+                saveCandlesState();
+                renderCake();
+                
+                // স্মোক ইফেক্ট
+                confetti({
+                    particleCount: 10 * count,
+                    spread: 60,
+                    colors: ['#aaaaaa', '#cccccc'],
+                    startVelocity: 15
+                });
+            }
+        };
 
+        // একটি মোমবাতি নেভানো (ট্যাপ করে)
+        window.blowCandle = function(index) {
+            if (cakeCut || candlesBlown === totalCandles) return;
+            
+            // শুধু জ্বলন্ত মোমবাতি নেভানো যাবে
+            if (index >= candlesBlown) {
+                candlesBlown = index + 1;
+                saveCandlesState();
+                renderCake();
+                
+                // স্মোক ইফেক্ট
+                confetti({
+                    particleCount: 5,
+                    spread: 40,
+                    colors: ['#aaaaaa'],
+                    startVelocity: 10
+                });
+            }
+        };
+
+        // মোমবাতির স্টেট সেভ
+        function saveCandlesState() {
             const today = new Date();
             const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
             const day = String(CONFIG.birthDay).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
-            
-            candlesBlown = true;
-            localStorage.setItem(`candlesBlown_${dateStr}`, 'true');
-            
-            renderCake();
-            
-            // স্মোক ইফেক্ট
-            confetti({
-                particleCount: 30,
-                spread: 80,
-                colors: ['#aaaaaa', '#cccccc'],
-                startVelocity: 20
-            });
-        };
+            localStorage.setItem(`candlesBlown_${dateStr}`, candlesBlown.toString());
+        }
 
         // কেক কাটা
         window.cutCake = function() {
-            if (!isBirthdayToday() || cakeCut) return;
+            if (!isBirthdayToday() || cakeCut || candlesBlown !== totalCandles) return;
 
             const today = new Date();
             const month = String(CONFIG.birthMonth + 1).padStart(2, '0');
@@ -932,8 +1053,8 @@
             
             // কনফেটি
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#ffd700', '#ff1493'] }), 200);
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#23d5ab', '#ee7752'] }), 400);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] }), 400);
         };
 
         // লাইটবক্স
@@ -954,6 +1075,9 @@
             loadCakeState();
             renderCake();
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+            
+            // মাইক্রোফোন পারমিশন চাও
+            setTimeout(requestMicrophone, 2000);
         } else {
             // না হলে কাউন্টডাউন চালাও
             setInterval(updateCountdown, 1000);
