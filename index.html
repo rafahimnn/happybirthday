@@ -203,7 +203,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6); /* Darker overlay for better text contrast */
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(8px);
             z-index: 1000;
             transition: 1s;
@@ -297,7 +297,7 @@
         .greeting-screen h1 {
             font-family: 'Bubblegum Sans', cursive;
             font-size: clamp(3rem, 10vw, 4.5rem);
-            color: #ff1493; /* Darker pink for contrast */
+            color: #d4145a;
             text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
             margin-bottom: 2rem;
             animation: bounce 1s ease infinite;
@@ -310,7 +310,7 @@
         
         .greeting-text {
             font-size: 1.5rem;
-            color: #4a0082; /* Dark purple for contrast */
+            color: #4b0082;
             margin-bottom: 3rem;
             min-height: 2em;
             text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
@@ -348,7 +348,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.6); /* Dark overlay for better text contrast */
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(10px);
             z-index: 800;
             padding: 20px;
@@ -514,7 +514,7 @@
         .memory-header h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
-            color: #b0306e; /* Darker pink for contrast */
+            color: #b0306e;
             text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
             margin-bottom: 1rem;
         }
@@ -524,7 +524,7 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             line-height: 1.6;
-            color: #2c3e50; /* Dark blue-gray for readability */
+            color: #2c3e50;
             font-weight: 600;
             text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
         }
@@ -583,7 +583,7 @@
         
         .memory-date {
             font-family: 'Dancing Script', cursive;
-            color: #c71585; /* Darker pink */
+            color: #c71585;
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
@@ -1230,47 +1230,15 @@
             }, 86400000); // 24 hours
         }
 
-        // Countdown update
+        // ========== UPDATED COUNTDOWN FUNCTION ==========
         function updateCountdown() {
-            if (countdownFinished) return;
-            
             const now = new Date();
-            const currentYear = now.getFullYear();
             
-            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
+            // Check if today is birthday (any time of the day)
+            const isBirthdayToday = (now.getMonth() === CONFIG.month && now.getDate() === CONFIG.day);
             
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
-            }
-            
-            const diff = birthday - now;
-            
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const mins = Math.floor((diff / (1000 * 60)) % 60);
-                const secs = Math.floor((diff / 1000) % 60);
-                
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('mins').textContent = String(mins).padStart(2, '0');
-                document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-            } else {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('mins').textContent = '00';
-                document.getElementById('secs').textContent = '00';
-            }
-            
-            if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
-                countdownAudio.play().then(() => {
-                    countdownAudioPlayed = true;
-                }).catch(error => {
-                    console.log('Countdown audio failed:', error);
-                });
-            }
-            
-            if (diff <= 0 && !countdownFinished) {
+            // If it's birthday and we haven't finished countdown yet
+            if (isBirthdayToday && !countdownFinished) {
                 countdownFinished = true;
                 
                 countdownAudio.pause();
@@ -1292,6 +1260,42 @@
 
                 // Schedule auto-reset after 24 hours
                 scheduleAutoReset();
+                
+                return; // Stop further countdown processing
+            }
+            
+            // If not birthday, show countdown to next birthday
+            if (!countdownFinished) {
+                const currentYear = now.getFullYear();
+                let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
+                
+                // If we're past this year's birthday, set to next year
+                if (now > birthday) {
+                    birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
+                }
+                
+                const diff = birthday - now;
+                
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const mins = Math.floor((diff / (1000 * 60)) % 60);
+                    const secs = Math.floor((diff / 1000) % 60);
+                    
+                    document.getElementById('days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+                    document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+                }
+                
+                // Countdown audio in last 11 seconds
+                if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
+                    countdownAudio.play().then(() => {
+                        countdownAudioPlayed = true;
+                    }).catch(error => {
+                        console.log('Countdown audio failed:', error);
+                    });
+                }
             }
         }
 
