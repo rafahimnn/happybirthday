@@ -124,10 +124,44 @@
             min-height: 100vh;
             padding: 20px;
             display: none;
+            position: relative;
         }
         
         .main-content.show {
             display: block;
+        }
+        
+        /* কন্ট্যাক্ট বাটন - ডান পাশে ছোট */
+        .contact-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1500;
+        }
+        
+        .contact-float-btn button {
+            background: linear-gradient(135deg, gold, #ff6b6b);
+            color: black;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            transition: 0.3s;
+            animation: floatPulse 2s infinite;
+        }
+        
+        .contact-float-btn button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px gold;
+        }
+        
+        @keyframes floatPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         /* হিরো সেকশন */
@@ -393,27 +427,20 @@
             padding: 40px 30px;
             border-radius: 40px;
             border: 3px solid gold;
-            max-width: 550px;
+            max-width: 500px;
             width: 100%;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
-            position: relative;
         }
         
-        .contact-container h1 {
+        .contact-container h2 {
             color: gold;
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 30px;
             text-align: center;
         }
         
-        /* EmailJS ফর্ম */
-        .contact-form {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid gold;
-        }
-        
+        /* EmailJS ফর্ম - সুন্দর ডিজাইন */
         .form-group {
             margin-bottom: 20px;
         }
@@ -423,15 +450,16 @@
             color: white;
             margin-bottom: 8px;
             font-size: 16px;
+            font-weight: 500;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
+            padding: 15px 20px;
             border-radius: 30px;
             border: 2px solid gold;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             color: white;
             font-size: 16px;
             outline: none;
@@ -441,11 +469,13 @@
         .form-group input:focus,
         .form-group textarea:focus {
             box-shadow: 0 0 20px gold;
+            background: rgba(255,255,255,0.25);
         }
         
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
         }
         
         .form-group textarea {
@@ -465,7 +495,7 @@
             width: 100%;
             border: 2px solid white;
             transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            margin-top: 10px;
         }
         
         .submit-btn:hover {
@@ -480,145 +510,81 @@
             color: gold;
         }
         
-        /* কন্ট্যাক্ট বাটন - সুন্দর ডিজাইন */
-        .contact-buttons {
+        /* সোশ্যাল মিডিয়া বাটন */
+        .social-buttons {
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin: 30px 0;
         }
         
-        .contact-btn {
+        .social-btn {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 18px 25px;
+            padding: 15px 25px;
             border-radius: 60px;
             border: 2px solid gold;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
             color: white;
             text-decoration: none;
             font-size: 18px;
             font-weight: 500;
             transition: 0.3s;
-            cursor: pointer;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
         }
         
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .contact-btn:hover::before {
-            left: 100%;
-        }
-        
-        .contact-btn:hover {
-            transform: translateX(10px);
-            background: rgba(255,255,255,0.2);
-            box-shadow: 0 0 30px gold;
-            border-color: white;
-        }
-        
-        .contact-btn i {
-            font-size: 28px;
+        .social-btn i {
+            font-size: 24px;
+            width: 40px;
             color: gold;
-            width: 45px;
-            text-align: center;
-            filter: drop-shadow(0 0 10px gold);
         }
         
-        .contact-btn span {
+        .social-btn span {
             flex: 1;
-            font-weight: 600;
         }
         
-        .contact-btn .arrow {
-            font-size: 22px;
+        .social-btn .arrow {
             color: gold;
             opacity: 0;
             transition: 0.3s;
-            transform: translateX(-10px);
         }
         
-        .contact-btn:hover .arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        /* বিশেষ রঙের বাটন */
-        .contact-btn.facebook {
-            background: linear-gradient(45deg, #1877f2, #0d5ab9);
-        }
-        
-        .contact-btn.instagram {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
-        }
-        
-        /* ক্লোজ বাটন */
-        .close-btn {
-            margin-top: 30px;
-            background: gold;
-            color: black;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 2px solid white;
-            width: 100%;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        .close-btn:hover {
-            transform: scale(1.05);
+        .social-btn:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.2);
             box-shadow: 0 0 30px gold;
         }
         
-        /* হোম পৃষ্ঠায় কন্ট্যাক্ট বাটন */
-        .contact-home-btn {
-            text-align: center;
-            margin: 30px 0;
+        .social-btn:hover .arrow {
+            opacity: 1;
         }
         
-        .contact-page-btn {
-            background: linear-gradient(45deg, gold, red);
-            color: black;
-            font-size: 24px;
-            padding: 15px 50px;
-            border: none;
-            border-radius: 60px;
+        .social-btn.facebook {
+            background: linear-gradient(45deg, #1877f2, #0d5ab9);
+        }
+        
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
+        }
+        
+        .close-contact-btn {
+            margin-top: 30px;
+            background: transparent;
+            color: white;
+            border: 2px solid gold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            width: 100%;
             transition: 0.3s;
-            border: 2px solid white;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: pulse 2s infinite;
         }
         
-        .contact-page-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 40px gold;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .close-contact-btn:hover {
+            background: gold;
+            color: black;
+            transform: scale(1.05);
         }
         
         /* লাইটবক্স */
@@ -702,6 +668,13 @@
     
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
+        <!-- কন্ট্যাক্ট ফ্লোটিং বাটন (ডান পাশে ছোট) -->
+        <div class="contact-float-btn">
+            <button onclick="openContactPage()">
+                <i class="fas fa-comment"></i>
+            </button>
+        </div>
+        
         <!-- হিরো সেকশন -->
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
@@ -713,13 +686,6 @@
                 <div class="candles" id="candles"></div>
                 <div class="cake-status" id="cakeStatus"></div>
                 <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 কেক কাটো</button>
-            </div>
-            
-            <!-- কন্ট্যাক্ট পৃষ্ঠায় যাওয়ার বাটন -->
-            <div class="contact-home-btn">
-                <button class="contact-page-btn" onclick="openContactPage()">
-                    <i class="fas fa-address-card"></i> যোগাযোগ
-                </button>
             </div>
         </section>
         
@@ -786,51 +752,48 @@
     <!-- কন্ট্যাক্ট পৃষ্ঠা -->
     <div class="contact-page" id="contactPage">
         <div class="contact-container">
-            <h1><i class="fas fa-address-card"></i> যোগাযোগ করুন</h1>
+            <h2><i class="fas fa-envelope"></i> যোগাযোগ করুন</h2>
             
             <!-- EmailJS Form -->
-            <div class="contact-form">
-                <h2 style="color: gold; text-align: center; margin-bottom: 20px;">📧 মেসেজ পাঠান</h2>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name">আপনার নাম</label>
-                        <input type="text" id="name" name="from_name" placeholder="আপনার নাম লিখুন" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">আপনার ইমেল</label>
-                        <input type="email" id="email" name="from_email" placeholder="আপনার ইমেল লিখুন" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">বার্তা</label>
-                        <textarea id="message" name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> মেসেজ পাঠান
-                    </button>
-                    
-                    <div id="form-status"></div>
-                </form>
-            </div>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">আপনার নাম</label>
+                    <input type="text" id="name" name="from_name" placeholder="আপনার নাম লিখুন" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">আপনার ইমেল</label>
+                    <input type="email" id="email" name="from_email" placeholder="আপনার ইমেল লিখুন" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">বার্তা</label>
+                    <textarea id="message" name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> মেসেজ পাঠান
+                </button>
+                
+                <div id="form-status"></div>
+            </form>
             
-            <!-- সোশ্যাল মিডিয়া বাটন - শুধু Facebook ও Instagram -->
-            <div class="contact-buttons">
-                <a href="https://www.facebook.com/rafahimn" target="_blank" class="contact-btn facebook">
+            <!-- সোশ্যাল মিডিয়া বাটন -->
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/rafahimn" target="_blank" class="social-btn facebook">
                     <i class="fab fa-facebook-f"></i>
                     <span>Facebook</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
                 
-                <a href="https://www.instagram.com/rafahimn" target="_blank" class="contact-btn instagram">
+                <a href="https://www.instagram.com/rafahimn" target="_blank" class="social-btn instagram">
                     <i class="fab fa-instagram"></i>
                     <span>Instagram</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
             </div>
             
-            <button class="close-btn" onclick="closeContactPage()">
+            <button class="close-contact-btn" onclick="closeContactPage()">
                 <i class="fas fa-times"></i> বন্ধ করুন
             </button>
         </div>
@@ -843,9 +806,9 @@
     </div>
     
     <script>
-        // ---------- EmailJS initialization with your credentials ----------
+        // ---------- EmailJS initialization ----------
         (function() {
-            emailjs.init("MV90CKf_ZoIgGoU9w"); // Your Public Key
+            emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
         
         // ---------- Contact Form Handler ----------
@@ -854,17 +817,15 @@
             
             const statusDiv = document.getElementById('form-status');
             statusDiv.innerHTML = '📤 পাঠানো হচ্ছে...';
-            statusDiv.style.color = 'gold';
             
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
             submitBtn.disabled = true;
             
-            // Send email using EmailJS - Your Service ID and Template ID
             emailjs.sendForm('rafahimn', 'rafahimn', this)
                 .then(function() {
-                    statusDiv.innerHTML = '✅ মেসেজ সফলভাবে পাঠানো হয়েছে!';
+                    statusDiv.innerHTML = '✅ মেসেজ পাঠানো হয়েছে!';
                     statusDiv.style.color = '#00ff00';
                     document.getElementById('contact-form').reset();
                     
@@ -872,8 +833,7 @@
                         statusDiv.innerHTML = '';
                     }, 3000);
                 }, function(error) {
-                    console.error('EmailJS Error:', error);
-                    statusDiv.innerHTML = '❌ মেসেজ পাঠানো যায়নি। আবার চেষ্টা করুন।';
+                    statusDiv.innerHTML = '❌ পাঠানো যায়নি';
                     statusDiv.style.color = '#ff4444';
                 })
                 .finally(function() {
@@ -884,13 +844,12 @@
         
         // ---------- কনফিগারেশন ----------
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
-            day: 15,         // ১৫ তারিখ
-            age: 16,         // ১৬ বছর
+            month: 1,
+            day: 15,
+            age: 16,
             name: "প্রিয়জন"
         };
         
-        // ইউআরএল থেকে নাম নিন
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('name')) {
             CONFIG.name = decodeURIComponent(urlParams.get('name'));
@@ -920,7 +879,6 @@
             const diff = birthday - now;
             
             if (diff <= 0) {
-                // জন্মদিন এসেছে
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
@@ -931,10 +889,7 @@
                 
                 loadState();
                 renderCake();
-                
-                // মাইক্রোফোন স্বয়ংক্রিয় শুরু
                 setTimeout(startMicrophone, 1000);
-                
                 return;
             }
             
@@ -947,17 +902,11 @@
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-            
-            if (days === 0) {
-                document.getElementById('countdownMessage').innerHTML = '🎉 কাল রাত ১২টায় চমক! 🎉';
-            }
         }
         
-        // ---------- স্টেট লোড ----------
         function loadState() {
             const today = new Date();
             const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
-            
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
             
@@ -966,7 +915,6 @@
             }
         }
         
-        // ---------- কেক রেন্ডার ----------
         function renderCake() {
             const cakeEmoji = document.getElementById('cakeEmoji');
             const candlesDiv = document.getElementById('candles');
@@ -976,8 +924,7 @@
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
                 candlesDiv.innerHTML = '';
-                statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
-                cutBtn.disabled = true;
+                statusDiv.textContent = '🎉 কেক কাটা হয়েছে!';
                 cutBtn.style.display = 'none';
                 stopMicrophone();
                 return;
@@ -986,7 +933,6 @@
             cakeEmoji.textContent = '🎂';
             cutBtn.style.display = 'block';
             
-            // মোমবাতি
             let html = '';
             for (let i = 0; i < totalCandles; i++) {
                 const blown = i < candlesBlown ? 'blown' : '';
@@ -995,7 +941,7 @@
             candlesDiv.innerHTML = html;
             
             if (candlesBlown === totalCandles) {
-                statusDiv.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
+                statusDiv.textContent = '🎉 সব মোমবাতি নিভেছে! কেক কাটো';
                 cutBtn.disabled = false;
                 stopMicrophone();
             } else {
@@ -1004,67 +950,42 @@
             }
         }
         
-        // ---------- স্টেট সেভ ----------
         function saveState() {
             const today = new Date();
             const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
             localStorage.setItem(`blown_${dateStr}`, candlesBlown);
         }
         
-        // ---------- ট্যাপ করে মোমবাতি নেভানো ----------
         window.blowCandle = function(index) {
             if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
-            
             candlesBlown = index + 1;
             saveState();
             renderCake();
-            
-            confetti({
-                particleCount: 5,
-                spread: 30,
-                colors: ['#aaa']
-            });
         };
         
-        // ---------- ফুঁ দিয়ে মোমবাতি নেভানো ----------
         function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
-            
             const newBlown = Math.min(candlesBlown + count, totalCandles);
             if (newBlown > candlesBlown) {
                 candlesBlown = newBlown;
                 saveState();
                 renderCake();
-                
-                confetti({
-                    particleCount: 8 * count,
-                    spread: 40,
-                    colors: ['#aaa']
-                });
             }
         }
         
-        // ---------- মাইক্রোফোন চালু ----------
         function startMicrophone() {
             if (cakeCut || candlesBlown === totalCandles) return;
-            
-            if (audioStream) {
-                stopMicrophone();
-            }
             
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     audioStream = stream;
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    audioContext = new AudioContext();
                     analyser = audioContext.createAnalyser();
                     const source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyser);
                     analyser.fftSize = 256;
                     
-                    const bufferLength = analyser.frequencyBinCount;
-                    const dataArray = new Uint8Array(bufferLength);
-                    
-                    if (blowInterval) clearInterval(blowInterval);
+                    const dataArray = new Uint8Array(analyser.frequencyBinCount);
                     
                     blowInterval = setInterval(() => {
                         if (cakeCut || candlesBlown === totalCandles) {
@@ -1074,48 +995,31 @@
                         
                         analyser.getByteFrequencyData(dataArray);
                         let sum = 0;
-                        for (let i = 0; i < bufferLength; i++) {
-                            sum += dataArray[i];
-                        }
-                        const avg = sum / bufferLength;
+                        for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+                        const avg = sum / dataArray.length;
                         
                         if (avg > 50) {
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2));
                         }
                     }, 150);
-                    
-                    console.log('মাইক্রোফোন চালু হয়েছে');
                 })
-                .catch(err => {
-                    console.log('মাইক্রোফোন অনুমতি নেই:', err);
-                });
+                .catch(() => {});
         }
         
-        // ---------- মাইক্রোফোন বন্ধ ----------
         function stopMicrophone() {
-            if (blowInterval) {
-                clearInterval(blowInterval);
-                blowInterval = null;
-            }
-            
-            if (audioStream) {
-                audioStream.getTracks().forEach(t => t.stop());
-                audioStream = null;
-            }
-            
-            if (audioContext) {
-                audioContext.close();
-                audioContext = null;
-            }
+            if (blowInterval) clearInterval(blowInterval);
+            if (audioStream) audioStream.getTracks().forEach(t => t.stop());
+            if (audioContext) audioContext.close();
+            blowInterval = null;
+            audioStream = null;
+            audioContext = null;
         }
         
-        // ---------- কেক কাটা ----------
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
             const today = new Date();
             const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
-            
             cakeCut = true;
             localStorage.setItem(`cut_${dateStr}`, 'true');
             
@@ -1124,11 +1028,8 @@
             document.getElementById('contentSections').classList.add('show');
             
             confetti({ particleCount: 150, spread: 80 });
-            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
-            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
         
-        // ---------- কন্ট্যাক্ট পৃষ্ঠা ----------
         window.openContactPage = function() {
             document.getElementById('contactPage').classList.add('show');
         };
@@ -1137,20 +1038,11 @@
             document.getElementById('contactPage').classList.remove('show');
         };
         
-        // ---------- লাইটবক্স ----------
         window.openLightbox = function(url) {
             document.getElementById('lightboxImg').src = url;
             document.getElementById('lightbox').classList.add('show');
         };
         
-        // ---------- কনফেটি ----------
-        function confetti(options) {
-            if (typeof window.confetti === 'function') {
-                window.confetti(options);
-            }
-        }
-        
-        // ---------- চেক করো আজ জন্মদিন কিনা ----------
         const today = new Date();
         if (today.getMonth() === CONFIG.month && today.getDate() === CONFIG.day) {
             document.getElementById('countdownScreen').classList.add('hide');
@@ -1167,7 +1059,6 @@
         window.addEventListener('beforeunload', stopMicrophone);
     </script>
     
-    <!-- কনফেটি লাইব্রেরি -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </body>
 </html>
