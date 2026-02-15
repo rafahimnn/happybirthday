@@ -48,6 +48,39 @@
             z-index: -1;
         }
         
+        /* কন্ট্যাক্ট ফ্লোটিং বাটন */
+        .contact-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+        
+        .contact-float-btn button {
+            background: linear-gradient(135deg, gold, #ff6b6b);
+            color: black;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            transition: 0.3s;
+            animation: floatPulse 2s infinite;
+        }
+        
+        .contact-float-btn button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px gold;
+        }
+        
+        @keyframes floatPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
         /* কাউন্টডাউন স্ক্রিন */
         .countdown-screen {
             position: fixed;
@@ -129,39 +162,6 @@
         
         .main-content.show {
             display: block;
-        }
-        
-        /* কন্ট্যাক্ট বাটন - ডান পাশে ছোট */
-        .contact-float-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1500;
-        }
-        
-        .contact-float-btn button {
-            background: linear-gradient(135deg, gold, #ff6b6b);
-            color: black;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid white;
-            transition: 0.3s;
-            animation: floatPulse 2s infinite;
-        }
-        
-        .contact-float-btn button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 40px gold;
-        }
-        
-        @keyframes floatPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
         
         /* হিরো সেকশন */
@@ -402,15 +402,15 @@
             color: white;
         }
         
-        /* কন্ট্যাক্ট পৃষ্ঠার স্টাইল */
+        /* কন্ট্যাক্ট পৃষ্ঠা */
         .contact-page {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
             display: none;
             justify-content: center;
             align-items: center;
@@ -440,7 +440,6 @@
             text-align: center;
         }
         
-        /* EmailJS ফর্ম - সুন্দর ডিজাইন */
         .form-group {
             margin-bottom: 20px;
         }
@@ -469,13 +468,11 @@
         .form-group input:focus,
         .form-group textarea:focus {
             box-shadow: 0 0 20px gold;
-            background: rgba(255,255,255,0.25);
         }
         
         .form-group input::placeholder,
         .form-group textarea::placeholder {
             color: rgba(255,255,255,0.6);
-            font-size: 14px;
         }
         
         .form-group textarea {
@@ -495,7 +492,6 @@
             width: 100%;
             border: 2px solid white;
             transition: 0.3s;
-            margin-top: 10px;
         }
         
         .submit-btn:hover {
@@ -510,7 +506,6 @@
             color: gold;
         }
         
-        /* সোশ্যাল মিডিয়া বাটন */
         .social-buttons {
             margin-top: 30px;
             display: flex;
@@ -530,7 +525,6 @@
             font-weight: 500;
             transition: 0.3s;
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
         }
         
         .social-btn i {
@@ -543,20 +537,10 @@
             flex: 1;
         }
         
-        .social-btn .arrow {
-            color: gold;
-            opacity: 0;
-            transition: 0.3s;
-        }
-        
         .social-btn:hover {
             transform: translateX(10px);
             background: rgba(255,255,255,0.2);
             box-shadow: 0 0 30px gold;
-        }
-        
-        .social-btn:hover .arrow {
-            opacity: 1;
         }
         
         .social-btn.facebook {
@@ -584,10 +568,8 @@
         .close-contact-btn:hover {
             background: gold;
             color: black;
-            transform: scale(1.05);
         }
         
-        /* লাইটবক্স */
         .lightbox {
             position: fixed;
             top: 0;
@@ -598,7 +580,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 3000;
+            z-index: 11000;
         }
         
         .lightbox.show {
@@ -619,12 +601,6 @@
             font-size: 50px;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        
-        .lightbox .close:hover {
-            color: gold;
-            transform: scale(1.2);
         }
         
         footer {
@@ -636,11 +612,17 @@
     </style>
 </head>
 <body>
-    <!-- ভিডিও ব্যাকগ্রাউন্ড -->
     <video class="video-bg" autoplay muted loop>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
+    
+    <!-- কন্ট্যাক্ট বাটন সবসময় দেখা যাবে -->
+    <div class="contact-float-btn">
+        <button onclick="openContactPage()">
+            <i class="fas fa-comment"></i>
+        </button>
+    </div>
     
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
@@ -668,19 +650,10 @@
     
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
-        <!-- কন্ট্যাক্ট ফ্লোটিং বাটন (ডান পাশে ছোট) -->
-        <div class="contact-float-btn">
-            <button onclick="openContactPage()">
-                <i class="fas fa-comment"></i>
-            </button>
-        </div>
-        
-        <!-- হিরো সেকশন -->
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
             <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
             
-            <!-- কেক সেকশন -->
             <div class="cake-section">
                 <div class="cake-emoji" id="cakeEmoji">🎂</div>
                 <div class="candles" id="candles"></div>
@@ -689,9 +662,7 @@
             </div>
         </section>
         
-        <!-- কন্টেন্ট সেকশন (কেক কাটার পর দেখাবে) -->
         <div class="content-sections" id="contentSections">
-            <!-- ফটো অ্যালবাম -->
             <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
             <div class="photo-album">
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
@@ -714,7 +685,6 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
                 <div class="video-card">
@@ -731,7 +701,6 @@
                 </div>
             </div>
             
-            <!-- মেসেজ সেকশন -->
             <div class="message-section">
                 <h2 class="section-title">💌 ভালোবাসার কথা</h2>
                 <div class="message-text">
@@ -754,7 +723,6 @@
         <div class="contact-container">
             <h2><i class="fas fa-envelope"></i> যোগাযোগ করুন</h2>
             
-            <!-- EmailJS Form -->
             <form id="contact-form">
                 <div class="form-group">
                     <label for="name">আপনার নাম</label>
@@ -778,7 +746,6 @@
                 <div id="form-status"></div>
             </form>
             
-            <!-- সোশ্যাল মিডিয়া বাটন -->
             <div class="social-buttons">
                 <a href="https://www.facebook.com/rafahimn" target="_blank" class="social-btn facebook">
                     <i class="fab fa-facebook-f"></i>
@@ -799,19 +766,18 @@
         </div>
     </div>
     
-    <!-- লাইটবক্স -->
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
         <span class="close" onclick="event.stopPropagation(); this.parentElement.classList.remove('show')">&times;</span>
         <img src="" id="lightboxImg">
     </div>
     
     <script>
-        // ---------- EmailJS initialization ----------
+        // EmailJS initialization
         (function() {
             emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
         
-        // ---------- Contact Form Handler ----------
+        // Contact Form Handler
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -828,10 +794,7 @@
                     statusDiv.innerHTML = '✅ মেসেজ পাঠানো হয়েছে!';
                     statusDiv.style.color = '#00ff00';
                     document.getElementById('contact-form').reset();
-                    
-                    setTimeout(() => {
-                        statusDiv.innerHTML = '';
-                    }, 3000);
+                    setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
                 }, function(error) {
                     statusDiv.innerHTML = '❌ পাঠানো যায়নি';
                     statusDiv.style.color = '#ff4444';
@@ -842,11 +805,11 @@
                 });
         });
         
-        // ---------- কনফিগারেশন ----------
+        // Configuration
         const CONFIG = {
-            month: 2,
-            day: 16,
-            age: 16,
+            month: 2,        // মার্চ = 2
+            day: 16,         // ১৬ তারিখ
+            age: 16,         // ১৬ বছর
             name: "প্রিয়জন"
         };
         
@@ -856,7 +819,7 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
         
-        // ---------- ভেরিয়েবল ----------
+        // State variables
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -866,7 +829,7 @@
         let analyser = null;
         let blowInterval = null;
         
-        // ---------- কাউন্টডাউন ----------
+        // Countdown function (রিয়েল টাইম)
         function updateCountdown() {
             const now = new Date();
             const currentYear = now.getFullYear();
@@ -902,17 +865,31 @@
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('mins').textContent = String(mins).padStart(2, '0');
             document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+            
+            if (days === 0) {
+                document.getElementById('countdownMessage').innerHTML = '🎉 কাল রাত ১২টায় চমক! 🎉';
+            }
         }
         
         function loadState() {
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
+            const month = String(CONFIG.month + 1).padStart(2, '0');
+            const day = String(CONFIG.day).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
             
             if (cakeCut) {
                 document.getElementById('contentSections').classList.add('show');
             }
+        }
+        
+        function saveState() {
+            const today = new Date();
+            const month = String(CONFIG.month + 1).padStart(2, '0');
+            const day = String(CONFIG.day).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
+            localStorage.setItem(`blown_${dateStr}`, candlesBlown.toString());
         }
         
         function renderCake() {
@@ -924,7 +901,7 @@
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
                 candlesDiv.innerHTML = '';
-                statusDiv.textContent = '🎉 কেক কাটা হয়েছে!';
+                statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.style.display = 'none';
                 stopMicrophone();
                 return;
@@ -932,6 +909,7 @@
             
             cakeEmoji.textContent = '🎂';
             cutBtn.style.display = 'block';
+            cutBtn.disabled = true;
             
             let html = '';
             for (let i = 0; i < totalCandles; i++) {
@@ -941,35 +919,35 @@
             candlesDiv.innerHTML = html;
             
             if (candlesBlown === totalCandles) {
-                statusDiv.textContent = '🎉 সব মোমবাতি নিভেছে! কেক কাটো';
+                statusDiv.textContent = '🎉 সব মোমবাতি নিভেছে! এখন কেক কাটো';
                 cutBtn.disabled = false;
                 stopMicrophone();
             } else {
-                statusDiv.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে`;
+                const remaining = totalCandles - candlesBlown;
+                statusDiv.textContent = `${remaining}টি মোমবাতি জ্বলছে - ফুঁ দাও বা ট্যাপ করো`;
                 cutBtn.disabled = true;
             }
         }
         
-        function saveState() {
-            const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
-            localStorage.setItem(`blown_${dateStr}`, candlesBlown);
-        }
-        
         window.blowCandle = function(index) {
             if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
+            
             candlesBlown = index + 1;
             saveState();
             renderCake();
+            
+            confetti({ particleCount: 5, spread: 30, colors: ['#aaaaaa'] });
         };
         
         function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
+            
             const newBlown = Math.min(candlesBlown + count, totalCandles);
             if (newBlown > candlesBlown) {
                 candlesBlown = newBlown;
                 saveState();
                 renderCake();
+                confetti({ particleCount: 8 * count, spread: 40, colors: ['#aaaaaa'] });
             }
         }
         
@@ -979,7 +957,7 @@
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     audioStream = stream;
-                    audioContext = new AudioContext();
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
                     analyser = audioContext.createAnalyser();
                     const source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyser);
@@ -1009,7 +987,7 @@
         function stopMicrophone() {
             if (blowInterval) clearInterval(blowInterval);
             if (audioStream) audioStream.getTracks().forEach(t => t.stop());
-            if (audioContext) audioContext.close();
+            if (audioContext && audioContext.state !== 'closed') audioContext.close();
             blowInterval = null;
             audioStream = null;
             audioContext = null;
@@ -1019,7 +997,10 @@
             if (cakeCut || candlesBlown !== totalCandles) return;
             
             const today = new Date();
-            const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
+            const month = String(CONFIG.month + 1).padStart(2, '0');
+            const day = String(CONFIG.day).padStart(2, '0');
+            const dateStr = `${today.getFullYear()}-${month}-${day}`;
+            
             cakeCut = true;
             localStorage.setItem(`cut_${dateStr}`, 'true');
             
@@ -1028,6 +1009,8 @@
             document.getElementById('contentSections').classList.add('show');
             
             confetti({ particleCount: 150, spread: 80 });
+            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
         
         window.openContactPage = function() {
@@ -1042,6 +1025,12 @@
             document.getElementById('lightboxImg').src = url;
             document.getElementById('lightbox').classList.add('show');
         };
+        
+        function confetti(options) {
+            if (typeof window.confetti === 'function') {
+                window.confetti(options);
+            }
+        }
         
         const today = new Date();
         if (today.getMonth() === CONFIG.month && today.getDate() === CONFIG.day) {
