@@ -351,7 +351,7 @@
             object-fit: cover;
         }
         
-        /* ভিডিও গ্যালারি - এখন ২টি ভিডিও */
+        /* ভিডিও গ্যালারি - ২টি ভিডিও */
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
@@ -651,7 +651,7 @@
     </style>
 </head>
 <body>
-    <!-- অডিও এলিমেন্ট - আপনার দেওয়া লিংক -->
+    <!-- অডিও এলিমেন্ট -->
     <audio id="birthdayWish" preload="auto" loop>
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
@@ -690,7 +690,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:২১ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৭:৩২ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -731,10 +731,10 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি - এখন ২টি ভিডিও -->
+            <!-- ভিডিও গ্যালারি - ২টি ভিডিও -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
-                <!-- আপনার Cloudinary ভিডিও -->
+                <!-- Cloudinary ভিডিও -->
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="https://res.cloudinary.com/dpctt0wao/image/upload/v1771160623/sample-thumbnail.jpg">
@@ -862,15 +862,11 @@
                 });
         });
         
-        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:২১ PM ----------
-        const now = new Date();
-        const testDate = new Date();
-        testDate.setHours(19, 21, 0); // ৭:২১ PM (19 ঘন্টা = 7 PM)
-        
+        // ---------- টেস্ট কনফিগারেশন - আজ রাত ৭:৩২ PM ----------
         const CONFIG = {
-            month: testDate.getMonth(),  // আজকের মাস
-            day: testDate.getDate(),      // আজকের তারিখ
-            age: 16,                      // ১৬ বছর
+            month: new Date().getMonth(),
+            day: new Date().getDate(),
+            age: 16,
             name: "প্রিয়জন"
         };
         
@@ -892,7 +888,8 @@
         let audioContext = null;
         let analyser = null;
         let blowInterval = null;
-        let lastSpokenSecond = null; // কাউন্টডাউন ভয়েসের জন্য
+        let lastSpokenSecond = null;
+        let audioPlayed = false; // অডিও একবারই বাজবে
         
         // ---------- টাইম ফরম্যাট ফাংশন ----------
         function formatTime(date) {
@@ -901,7 +898,7 @@
             const ampm = hours >= 12 ? 'PM' : 'AM';
             
             hours = hours % 12;
-            hours = hours ? hours : 12; // 0 কে 12 দেখাবে
+            hours = hours ? hours : 12;
             
             const minutesStr = minutes < 10 ? '0' + minutes : minutes;
             
@@ -910,12 +907,24 @@
         
         // ---------- কাউন্টডাউন ভয়েস ফাংশন ----------
         function speakNumber(second) {
+            if (!window.speechSynthesis) {
+                console.log('Speech synthesis not supported');
+                return;
+            }
+            
             const numbers = ['শূন্য', 'এক', 'দুই', 'তিন', 'চার', 'পাঁচ', 'ছয়', 'সাত', 'আট', 'নয়', 'দশ'];
             if (second >= 1 && second <= 10) {
-                const utterance = new SpeechSynthesisUtterance(numbers[second]);
-                utterance.lang = 'bn-BD';
-                utterance.rate = 0.8;
-                window.speechSynthesis.speak(utterance);
+                try {
+                    const utterance = new SpeechSynthesisUtterance(numbers[second]);
+                    utterance.lang = 'bn-BD';
+                    utterance.rate = 0.9;
+                    utterance.pitch = 1;
+                    utterance.volume = 1;
+                    window.speechSynthesis.cancel(); // আগের কথা বন্ধ করে নতুন বলবে
+                    window.speechSynthesis.speak(utterance);
+                } catch(e) {
+                    console.log('Speech error:', e);
+                }
             }
         }
         
@@ -923,33 +932,38 @@
         function updateCountdown() {
             const now = new Date();
             
-            // আজ রাত ৭:২১ PM টেস্ট
+            // আজ রাত ৭:৩২ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(19, 21, 0); // ৭:২১ PM
+            testTime.setHours(19, 32, 0); // ৭:৩২ PM
             
             const diff = testTime - now;
             
             // শেষ ১০ সেকেন্ডে কাউন্টডাউন ভয়েস
             if (diff <= 10000 && diff > 0) {
                 const secondsLeft = Math.floor(diff / 1000) + 1;
-                if (secondsLeft <= 10 && secondsLeft > 0) {
-                    if (lastSpokenSecond !== secondsLeft) {
-                        speakNumber(secondsLeft);
-                        lastSpokenSecond = secondsLeft;
-                    }
+                if (secondsLeft <= 10 && secondsLeft > 0 && lastSpokenSecond !== secondsLeft) {
+                    speakNumber(secondsLeft);
+                    lastSpokenSecond = secondsLeft;
                 }
             }
             
             if (diff <= 0) {
-                // ৭:২১ PM বেজে গেছে - অডিও চালান
-                birthdayAudio.play().catch(error => {
-                    console.log('অটোপ্লে ব্লক হয়েছে', error);
-                    // ইউজার ক্লিক করলে চালানোর জন্য
-                    document.addEventListener('click', function clickOnce() {
-                        birthdayAudio.play();
-                        document.removeEventListener('click', clickOnce);
-                    }, { once: true });
-                });
+                // ৭:৩২ PM বেজে গেছে - অডিও চালান (একবারই)
+                if (!audioPlayed) {
+                    audioPlayed = true;
+                    
+                    // অডিও চালানোর চেষ্টা
+                    birthdayAudio.play().then(() => {
+                        console.log('অডিও চালু হয়েছে');
+                    }).catch(error => {
+                        console.log('অটোপ্লে ব্লক হয়েছে:', error);
+                        // ইউজার ক্লিক করলে চালানোর জন্য
+                        document.addEventListener('click', function clickOnce() {
+                            birthdayAudio.play();
+                            document.removeEventListener('click', clickOnce);
+                        }, { once: true });
+                    });
+                }
                 
                 if (!confettiShown) {
                     confettiShown = true;
@@ -1070,6 +1084,8 @@
                     
                     const dataArray = new Uint8Array(analyser.frequencyBinCount);
                     
+                    if (blowInterval) clearInterval(blowInterval);
+                    
                     blowInterval = setInterval(() => {
                         if (cakeCut || candlesBlown === totalCandles) {
                             stopMicrophone();
@@ -1090,12 +1106,18 @@
         }
         
         function stopMicrophone() {
-            if (blowInterval) clearInterval(blowInterval);
-            if (audioStream) audioStream.getTracks().forEach(t => t.stop());
-            if (audioContext && audioContext.state !== 'closed') audioContext.close();
-            blowInterval = null;
-            audioStream = null;
-            audioContext = null;
+            if (blowInterval) {
+                clearInterval(blowInterval);
+                blowInterval = null;
+            }
+            if (audioStream) {
+                audioStream.getTracks().forEach(t => t.stop());
+                audioStream = null;
+            }
+            if (audioContext && audioContext.state !== 'closed') {
+                audioContext.close();
+                audioContext = null;
+            }
         }
         
         window.cutCake = function() {
@@ -1145,7 +1167,12 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        window.addEventListener('beforeunload', stopMicrophone);
+        window.addEventListener('beforeunload', function() {
+            stopMicrophone();
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+        });
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
