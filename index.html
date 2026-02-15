@@ -18,6 +18,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             color: white;
+            min-height: 100vh;
         }
         
         /* ভিডিও ব্যাকগ্রাউন্ড */
@@ -48,11 +49,11 @@
             z-index: -1;
         }
         
-        /* কন্ট্যাক্ট ফ্লোটিং বাটন */
+        /* কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) */
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
-            right: 80px; /* প্লে বাটনের জন্য জায়গা রাখা */
+            right: 20px;
             z-index: 9999;
         }
         
@@ -78,11 +79,11 @@
             box-shadow: 0 0 30px gold;
         }
         
-        /* প্লে বাটন (ছোট আইকন) */
+        /* প্লে বাটন (বাম দিকে) */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             z-index: 9999;
         }
         
@@ -266,7 +267,6 @@
             50% { transform: translateY(-8px); }
         }
         
-        /* মোমবাতির জন্য */
         .candles {
             display: flex;
             flex-wrap: wrap;
@@ -354,7 +354,6 @@
             text-shadow: 0 0 8px gold;
         }
         
-        /* ফটো অ্যালবাম - ৬টি ছবি */
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -390,7 +389,6 @@
             object-fit: cover;
         }
         
-        /* ভিডিও গ্যালারি - ২টি ভিডিও */
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
@@ -429,7 +427,6 @@
             font-size: 16px;
         }
         
-        /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(8px);
@@ -634,7 +631,6 @@
             transform: scale(1.03);
         }
         
-        /* লাইটবক্স */
         .lightbox {
             position: fixed;
             top: 0;
@@ -680,13 +676,10 @@
 </head>
 <body>
     <!-- অডিও ফাইল লিংক -->
-    
-    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown.mp3" type="audio/mpeg">
     </audio>
     
-    <!-- জন্মদিনের অডিও -->
     <audio id="birthdayWish" preload="auto" loop>
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
@@ -697,14 +690,14 @@
     </video>
     <div class="overlay"></div>
     
-    <!-- প্লে বাটন (ছোট আইকন) -->
+    <!-- প্লে বাটন (বাম দিকে) -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
     
-    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন -->
+    <!-- কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
@@ -750,9 +743,9 @@
         </section>
         
         <div class="content-sections" id="contentSections">
-            <!-- ফটো অ্যালবাম - ৬টি ছবি -->
             <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
             <div class="photo-album">
+                <!-- ছবিগুলো আপনার ইচ্ছামতো পরিবর্তন করুন -->
                 <div class="photo-item" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop')">
                     <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" loading="lazy" alt="Memory">
                 </div>
@@ -773,7 +766,6 @@
                 </div>
             </div>
             
-            <!-- ভিডিও গ্যালারি - ২টি ভিডিও -->
             <h2 class="section-title">🎥 ভিডিও শুভেচ্ছা</h2>
             <div class="video-gallery">
                 <div class="video-card">
@@ -795,7 +787,6 @@
                 </div>
             </div>
             
-            <!-- মেসেজ সেকশন -->
             <div class="message-section">
                 <h2 class="section-title">💌 ভালোবাসার কথা</h2>
                 <div class="message-text">
@@ -861,7 +852,6 @@
         </div>
     </div>
     
-    <!-- লাইটবক্স -->
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
         <span class="close" onclick="event.stopPropagation(); this.parentElement.classList.remove('show')">&times;</span>
         <img src="" id="lightboxImg">
@@ -873,7 +863,6 @@
             emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
         
-        // Contact Form Handler
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -902,9 +891,9 @@
                 });
         });
         
-        // ---------- রিয়েল কনফিগারেশন - ১৬ ফেব্রুয়ারি, ১২:০০ AM ----------
+        // কনফিগারেশন
         const CONFIG = {
-            month: 1,        // ফেব্রুয়ারি = 1 (জানুয়ারি = 0)
+            month: 1,        // ফেব্রুয়ারি
             day: 16,         // ১৬ তারিখ
             age: 16,         // ১৬ বছর
             name: "প্রিয়জন"
@@ -916,11 +905,11 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
         
-        // ---------- অডিও এলিমেন্ট ----------
+        // অডিও এলিমেন্ট
         const countdownAudio = document.getElementById('countdownAudio');
         const birthdayAudio = document.getElementById('birthdayWish');
         
-        // ---------- State variables ----------
+        // State variables
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -932,38 +921,24 @@
         let countdownFinished = false;
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
-        let audioAllowed = false; // ইউজার প্রথম ক্লিক করলে true হবে
+        let audioAllowed = false; // ইউজার ক্লিক করলে true হবে
         
-        // ---------- প্রথম ক্লিক শনাক্ত করার জন্য ইভেন্ট লিসনার ----------
-        function handleFirstClick() {
+        // পুরো পৃষ্ঠায় ক্লিক ইভেন্ট - প্রথম ক্লিকেই অডিও চালু হবে
+        document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
-                startAudio();
+                enableAudio();
             }
-        }
+        });
         
-        // ডকুমেন্টে প্রথম ক্লিকের জন্য ইভেন্ট লিসনার যোগ করুন (একবার)
-        document.addEventListener('click', handleFirstClick, { once: true });
-        
-        // ---------- অডিও এবং মাইক্রোফোন চালু করার ফাংশন ----------
-        window.startAudio = function(event) {
-            // যদি ইভেন্ট থেকে কল হয় এবং এটি প্লে বাটন থেকে হয়, তাহলে event propagation বন্ধ করুন
-            if (event) {
-                event.stopPropagation();
-            }
-            
-            if (audioAllowed) return; // ইতিমধ্যে চালু থাকলে কিছু করবেন না
+        // অডিও চালু করার ফাংশন
+        function enableAudio() {
+            if (audioAllowed) return; // একবার চালু হয়ে গেলে আর হবে না
             audioAllowed = true;
             
-            // প্লে বাটন লুকান (যদি থাকে)
-            const playBtn = document.getElementById('playBtn');
-            if (playBtn) {
-                playBtn.classList.add('hide');
-            }
+            // প্লে বাটন লুকাও
+            document.getElementById('playBtn').classList.add('hide');
             
-            // প্রথম ক্লিক ইভেন্ট লিসনার সরিয়ে দিন (যদি আগে না সরানো হয়)
-            document.removeEventListener('click', handleFirstClick);
-            
-            // যদি কাউন্টডাউন শেষ হয়ে থাকে, জন্মদিনের অডিও চালাও
+            // যদি কাউন্টডাউন শেষ হয়ে থাকে, জন্মদিনের অডিও চালাও
             if (countdownFinished && !birthdayAudioPlayed) {
                 birthdayAudio.play().then(() => {
                     birthdayAudioPlayed = true;
@@ -986,26 +961,31 @@
             
             // মাইক্রোফোন শুরু
             setTimeout(startMicrophone, 1000);
+        }
+        
+        // প্লে বাটনের জন্য আলাদা হ্যান্ডলার
+        window.startAudio = function(event) {
+            if (event) {
+                event.stopPropagation(); // ইভেন্ট ডুপ্লিকেশন ঠেকাতে
+            }
+            enableAudio();
         };
         
-        // ---------- কাউন্টডাউন (রিয়েল টাইম) ----------
+        // কাউন্টডাউন আপডেট
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             const currentYear = now.getFullYear();
             
-            // চলতি বছরের জন্মদিন (১৬ ফেব্রুয়ারি, রাত ১২:০০ AM)
             let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
             
-            // যদি আজকের পর হয়ে যায়, তাহলে পরের বছর
             if (now > birthday) {
                 birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
             }
             
             const diff = birthday - now;
             
-            // কাউন্টডাউন সংখ্যা আপডেট
             if (diff > 0) {
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -1023,10 +1003,9 @@
                 document.getElementById('secs').textContent = '00';
             }
             
-            // শেষ ১০ সেকেন্ডে কাউন্টডাউন অডিও বাজবে (১১ সেকেন্ড থেকে শুরু) - শুধু audioAllowed হলে
+            // শেষ ১১ সেকেন্ডে কাউন্টডাউন অডিও (শুধু যদি audioAllowed true হয়)
             if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                 countdownAudio.play().then(() => {
-                    console.log('কাউন্টডাউন অডিও চালু হয়েছে');
                     countdownAudioPlayed = true;
                 }).catch(error => {
                     console.log('কাউন্টডাউন অডিও বাজেনি:', error);
@@ -1037,34 +1016,28 @@
             if (diff <= 0 && !countdownFinished) {
                 countdownFinished = true;
                 
-                // কাউন্টডাউন অডিও বন্ধ করো
                 countdownAudio.pause();
                 countdownAudio.currentTime = 0;
                 
-                // কাউন্টডাউন স্ক্রিন লুকাও এবং মেইন কন্টেন্ট দেখাও
                 document.getElementById('countdownScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
                 
-                // কনফেটি
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                // স্টেট লোড (কেক কাটা না থাকলে পুরো কেক দেখাবে)
                 loadState();
                 
-                // জন্মদিনের অডিও চালাও - শুধু audioAllowed হলে
+                // জন্মদিনের অডিও (শুধু যদি audioAllowed true হয়)
                 if (!birthdayAudioPlayed && audioAllowed) {
                     birthdayAudio.play().then(() => {
-                        console.log('জন্মদিনের অডিও চালু হয়েছে');
                         birthdayAudioPlayed = true;
                     }).catch(error => {
                         console.log('অটোপ্লে ব্লক হয়েছে:', error);
                     });
                 }
                 
-                // মাইক্রোফোন শুরু - শুধু audioAllowed হলে
                 if (audioAllowed) {
                     setTimeout(startMicrophone, 1000);
                 }
@@ -1077,11 +1050,9 @@
             const day = String(CONFIG.day).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
             
-            // লোকাল স্টোরেজ থেকে স্টেট লোড
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
             
-            // কেক রেন্ডার
             renderCake();
             
             if (cakeCut) {
@@ -1118,7 +1089,6 @@
             cutBtn.style.display = 'block';
             cutBtn.disabled = true;
             
-            // মোমবাতি তৈরি
             let candlesHtml = '';
             for (let i = 0; i < totalCandles; i++) {
                 const blown = i < candlesBlown ? 'blown' : '';
@@ -1210,7 +1180,6 @@
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
-            // জন্মদিনের অডিও বন্ধ করো
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
             
