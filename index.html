@@ -519,7 +519,7 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* ====== REASONS SCREEN - List style (like image) ====== */
+        /* ====== REASONS SCREEN - Fixed size and working button ====== */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -553,7 +553,7 @@
             border: 1px solid rgba(255,255,255,0.5);
         }
         
-        .reasons-header {
+        .reasons-header h2 {
             font-family: 'Bubblegum Sans', cursive;
             font-size: 2.5rem;
             color: #ff69b4;
@@ -1157,7 +1157,7 @@
         }
         
         @media (max-width: 768px) {
-            .reasons-header { font-size: 2rem; }
+            .reasons-header h2 { font-size: 2rem; }
             .reason-item { font-size: 1.1rem; }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
@@ -1257,7 +1257,7 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN - List style (like image) -->
+    <!-- REASONS SCREEN - Fixed size and working button -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-container">
             <div class="reasons-header">
@@ -1832,7 +1832,7 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        // Navigation functions
+        // Navigation functions - WORKING BUTTON
         window.goToReasonsScreen = function() {
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
@@ -1849,15 +1849,10 @@
         };
 
         window.goToPhotoScreen = function() {
-            gsap.to('#reasonsScreen', {
-                opacity: 0,
-                duration: 1,
-                onComplete: () => {
-                    document.getElementById('reasonsScreen').classList.remove('show');
-                    document.getElementById('photoScreen').classList.add('show');
-                    updateHistory('photo');
-                }
-            });
+            // Directly hide reasons and show photo screen
+            document.getElementById('reasonsScreen').classList.remove('show');
+            document.getElementById('photoScreen').classList.add('show');
+            updateHistory('photo');
         };
 
         window.goToVideoScreen = function() {
