@@ -49,41 +49,11 @@
             z-index: -1;
         }
         
-        /* কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) */
-        .contact-float-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-        
-        .contact-float-btn button {
-            background: linear-gradient(135deg, gold, #ff6b6b);
-            color: black;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 2px solid white;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .contact-float-btn button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px gold;
-        }
-        
-        /* প্লে বাটন (বাম দিকে) */
+        /* প্লে বাটন (ডান দিকে, কন্ট্যাক্ট বাটনের বামে) - ছোট */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            right: 90px; /* কন্ট্যাক্ট বাটনের বামে */
             z-index: 9999;
         }
         
@@ -91,10 +61,10 @@
             background: linear-gradient(135deg, #00ff88, #00ccff);
             color: black;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid white;
@@ -112,6 +82,36 @@
         
         .play-float-btn.hide {
             display: none;
+        }
+        
+        /* কন্ট্যাক্ট ফ্লোটিং বাটন (ডান দিকে) - ছোট */
+        .contact-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .contact-float-btn button {
+            background: linear-gradient(135deg, gold, #ff6b6b);
+            color: black;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-float-btn button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px gold;
         }
         
         @keyframes pulse {
@@ -690,7 +690,7 @@
     </video>
     <div class="overlay"></div>
     
-    <!-- প্লে বাটন (বাম দিকে) -->
+    <!-- প্লে বাটন (ডান দিকে, কন্ট্যাক্ট বাটনের বামে) -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
