@@ -232,7 +232,7 @@
             50% { transform: translateY(-8px); }
         }
         
-        /* মোমবাতির জন্য ফিক্স - মোবাইলে দেখাবে */
+        /* মোমবাতির জন্য - সব জায়গায় দেখাবে */
         .candles {
             display: flex;
             flex-wrap: wrap;
@@ -240,7 +240,7 @@
             align-items: center;
             gap: 8px;
             margin: 20px 0;
-            min-height: 60px;
+            min-height: 80px;
         }
         
         .candle {
@@ -248,7 +248,7 @@
             transition: 0.2s;
             animation: flicker 0.5s infinite alternate;
             display: inline-block;
-            font-size: clamp(24px, 7vw, 36px);
+            font-size: clamp(28px, 8vw, 42px);
             filter: drop-shadow(0 0 8px gold);
             line-height: 1;
         }
@@ -266,7 +266,7 @@
         }
         
         .cake-status {
-            font-size: clamp(14px, 4vw, 18px);
+            font-size: clamp(16px, 4vw, 20px);
             color: gold;
             margin: 20px 0;
             padding: 12px;
@@ -280,7 +280,7 @@
         .cut-btn {
             background: linear-gradient(45deg, gold, red);
             color: black;
-            font-size: clamp(18px, 5vw, 22px);
+            font-size: clamp(20px, 5vw, 24px);
             padding: 12px 25px;
             border: none;
             border-radius: 40px;
@@ -313,10 +313,10 @@
         }
         
         .section-title {
-            font-size: clamp(20px, 6vw, 28px);
+            font-size: clamp(24px, 6vw, 32px);
             color: gold;
             text-align: center;
-            margin: 30px 0 20px;
+            margin: 40px 0 20px;
             text-shadow: 0 0 8px gold;
         }
         
@@ -392,22 +392,22 @@
         .video-info {
             padding: 12px;
             color: gold;
-            font-size: 14px;
+            font-size: 16px;
         }
         
         /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(8px);
-            padding: 25px 15px;
-            border-radius: 30px;
+            padding: 30px 20px;
+            border-radius: 40px;
             border: 3px solid gold;
-            margin: 30px 0;
+            margin: 40px 0;
             box-shadow: 0 15px 25px rgba(0,0,0,0.3);
         }
         
         .message-text {
-            font-size: clamp(18px, 5vw, 24px);
+            font-size: clamp(20px, 5vw, 28px);
             font-family: cursive;
             line-height: 1.6;
             text-align: center;
@@ -645,9 +645,9 @@
     </style>
 </head>
 <body>
-    <!-- ⭐ অডিও ফাইল লিংক - আপনার দেওয়া লিংক বসানো হয়েছে ⭐ -->
+    <!-- অডিও ফাইল লিংক - আপনার দেওয়া লিংক -->
     
-    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও (আপনার দেওয়া লিংক) -->
+    <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/%F0%9F%94%A5%20FIRE%20_%20FURY%20%F0%9F%94%A5%2010%20Second%20Countdown%20with%20VOICE%2C%20Fire%20and%20Giant%20Explosion!%20V3.mp3" type="audio/mpeg">
     </audio>
@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:২৬ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:৩৬ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -861,7 +861,7 @@
                 });
         });
         
-        // ---------- কনফিগারেশন - টেস্টের জন্য ৮:২৬ PM ----------
+        // ---------- কনফিগারেশন - ১৬ ফেব্রুয়ারি ----------
         const CONFIG = {
             month: 1,        // ফেব্রুয়ারি = 1
             day: 16,         // ১৬ তারিখ
@@ -889,32 +889,18 @@
         let analyser = null;
         let blowInterval = null;
         let countdownFinished = false;
-        let countdownAudioPlayed = false;
         let birthdayAudioPlayed = false;
+        let countdownAudioPlayed = false;
         
-        // ---------- টাইম ফরম্যাট ফাংশন ----------
-        function formatTime(date) {
-            let hours = date.getHours();
-            const minutes = date.getMinutes();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            
-            hours = hours % 12;
-            hours = hours ? hours : 12;
-            
-            const minutesStr = minutes < 10 ? '0' + minutes : minutes;
-            
-            return `${hours}:${minutesStr} ${ampm}`;
-        }
-        
-        // ---------- কাউন্টডাউন (টেস্ট ৮:২৬ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:৩৬ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৮:২৬ PM টেস্ট
+            // আজ রাত ৮:৩৬ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(20, 26, 0); // ৮:২৬ PM
+            testTime.setHours(20, 36, 0); // ৮:৩৬ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
@@ -945,6 +931,8 @@
                     countdownAudioPlayed = true;
                 }).catch(error => {
                     console.log('কাউন্টডাউন অডিও বাজেনি:', error);
+                    // অডিও না বাজলেও কাউন্টডাউন চলবে
+                    countdownAudioPlayed = true; // বারবার চেষ্টা না করার জন্য
                 });
             }
             
@@ -966,7 +954,7 @@
                     confetti({ particleCount: 100, spread: 70 });
                 }
                 
-                // স্টেট লোড এবং কেক রেন্ডার
+                // স্টেট লোড (কেক কাটা না থাকলে পুরো কেক দেখাবে)
                 loadState();
                 
                 // জন্মদিনের অডিও চালাও
@@ -977,10 +965,11 @@
                     }).catch(error => {
                         console.log('অটোপ্লে ব্লক হয়েছে:', error);
                         // ইউজার ক্লিক করলে চালানোর জন্য
-                        document.addEventListener('click', function clickOnce() {
+                        const clickHandler = function() {
                             birthdayAudio.play();
-                            document.removeEventListener('click', clickOnce);
-                        }, { once: true });
+                            document.removeEventListener('click', clickHandler);
+                        };
+                        document.addEventListener('click', clickHandler, { once: true });
                     });
                 }
                 
@@ -995,9 +984,11 @@
             const day = String(CONFIG.day).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
             
+            // লোকাল স্টোরেজ থেকে স্টেট লোড
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
             
+            // কেক রেন্ডার
             renderCake();
             
             if (cakeCut) {
