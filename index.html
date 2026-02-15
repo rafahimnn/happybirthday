@@ -192,7 +192,7 @@
             50% { transform: scale(1.1); opacity: 0.9; }
         }
         
-        /* Countdown Screen */
+        /* Countdown Screen - Updated with soft gradient */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -203,7 +203,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, rgba(255,209,220,0.4), rgba(230,230,250,0.4));
             backdrop-filter: blur(8px);
             z-index: 1000;
             transition: 1s;
@@ -220,7 +220,7 @@
             font-size: clamp(24px, 5vw, 40px);
             color: #fff;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -234,11 +234,11 @@
         }
         
         .count-item {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             padding: 12px 15px;
             border-radius: 20px;
             min-width: 70px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(5px);
         }
         
@@ -247,14 +247,14 @@
             font-weight: 800;
             color: #fff;
             display: block;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
         
         .count-label {
             font-size: 12px;
             color: rgba(255,255,255,0.95);
             letter-spacing: 1px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
         }
         
         .countdown-message {
@@ -262,7 +262,7 @@
             color: #fff;
             margin-top: 20px;
             font-weight: 400;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
         
         /* Greeting Screen */
@@ -348,7 +348,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.6);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             z-index: 800;
             padding: 20px;
@@ -1068,7 +1068,7 @@
         <img src="" id="lightboxImg">
     </div>
 
-    <!-- COUNTDOWN SCREEN -->
+    <!-- COUNTDOWN SCREEN (Updated background) -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
@@ -1265,7 +1265,7 @@
         // ========== CONFIGURATION - BIRTHDAY 16 FEBRUARY ==========
         const CONFIG = {
             month: 1,        // February (0 = January, 1 = February)
-            day: 17,         // 17th February
+            day: 16,         // 16th February
             age: 16,         // 16 years old
             name: "Priya"
         };
@@ -1669,7 +1669,7 @@
 
         // Navigation functions
         window.goToPhotoScreen = function() {
-            // Ensure audio is stopped
+            // Stop birthday audio when entering storyline
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
             
