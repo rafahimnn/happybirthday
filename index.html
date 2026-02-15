@@ -645,11 +645,11 @@
     </style>
 </head>
 <body>
-    <!-- অডিও ফাইল লিংক - আপনার দেওয়া লিংক -->
+    <!-- ⭐ অডিও ফাইল লিংক - আপনার নতুন লিংক ⭐ -->
     
     <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
-        <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/%F0%9F%94%A5%20FIRE%20_%20FURY%20%F0%9F%94%A5%2010%20Second%20Countdown%20with%20VOICE%2C%20Fire%20and%20Giant%20Explosion!%20V3.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown.mp3" type="audio/mpeg">
     </audio>
     
     <!-- জন্মদিনের অডিও -->
@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:৪৪ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৮:৫৮ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -892,15 +892,15 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         
-        // ---------- কাউন্টডাউন (টেস্ট ৮:৪৪ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৮:৫৮ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৮:৪৪ PM টেস্ট
+            // আজ রাত ৮:৫৮ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(20, 44, 0); // ৮:৪৪ PM
+            testTime.setHours(20, 58, 0); // ৮:৫৮ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
