@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
+        /* আগের সব CSS ঠিক থাকবে */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +23,6 @@
             min-height: 100vh;
         }
         
-        /* Video Background */
         .video-bg {
             position: fixed;
             top: 0;
@@ -50,7 +50,6 @@
             z-index: -1;
         }
         
-        /* Custom Heart Cursor */
         .custom-cursor {
             width: 30px;
             height: 30px;
@@ -67,7 +66,6 @@
             filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
         }
         
-        /* Floating Hearts */
         .floating-hearts {
             position: fixed;
             width: 100%;
@@ -89,7 +87,6 @@
             100% { transform: translate(var(--translate-x, 0), -100vh) rotate(360deg); }
         }
         
-        /* Sparkle Effect */
         .magic-sparkles {
             position: fixed;
             top: 0;
@@ -122,7 +119,6 @@
             100% { transform: translateY(-50px); }
         }
         
-        /* Contact Button (visible on all screens) */
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
@@ -152,7 +148,6 @@
             box-shadow: 0 0 30px #9370db;
         }
         
-        /* Play Button (only on countdown screen) */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
@@ -192,7 +187,6 @@
             50% { transform: scale(1.1); opacity: 0.9; }
         }
         
-        /* Countdown Screen */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -265,7 +259,6 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
         
-        /* Greeting Screen */
         .greeting-screen {
             position: fixed;
             top: 0;
@@ -337,7 +330,6 @@
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
         
-        /* Cake Screen */
         .cake-screen {
             position: fixed;
             top: 0;
@@ -471,7 +463,7 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* Reasons Screen (cause.html style) */
+        /* Reasons Screen */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -481,12 +473,12 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            overflow-y: auto;
+            justify-content: center;
             background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
             background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
             z-index: 750;
-            padding: 80px 20px 40px;
+            padding: 20px;
         }
         
         .reasons-screen.show {
@@ -503,95 +495,53 @@
         }
         
         .reasons-container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: 600px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
         }
         
         .reason-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
             padding: 2rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transition: transform 0.3s;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
         
         .reason-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .reason-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-        
-        .reason-card:hover::before {
-            transform: translateX(100%);
+            transform: scale(1.02);
         }
         
         .reason-text {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             line-height: 1.6;
             color: #4a4a4a;
+            margin-bottom: 1rem;
             font-weight: 500;
-            position: relative;
-            z-index: 2;
         }
         
         .reason-emoji {
-            font-size: 2rem;
+            font-size: 3rem;
+        }
+        
+        .reason-counter {
+            font-size: 1rem;
+            color: #ff69b4;
             margin-top: 1rem;
-            position: relative;
-            z-index: 2;
+            opacity: 0.8;
         }
         
-        .gif-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1;
-        }
-        
-        .reason-card:hover .gif-overlay {
-            opacity: 1;
-        }
-        
-        .gif-overlay img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 10px;
-        }
-        
-        .reasons-next-btn {
-            display: block;
-            margin: 30px auto;
+        .reasons-btn {
+            margin-top: 30px;
             padding: 12px 30px;
             background: linear-gradient(45deg, #9b6dff, #ff6dc7);
             border: none;
@@ -603,12 +553,22 @@
             box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
             transition: 0.3s;
             border: 2px solid white;
-            max-width: 300px;
+            min-width: 200px;
         }
         
-        .reasons-next-btn:hover {
+        .reasons-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
+        }
+        
+        .reasons-btn.story-mode {
+            background: linear-gradient(45deg, #ff69b4, #ff99cc);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         /* Photo Album Screen */
@@ -631,12 +591,6 @@
         
         .photo-screen.show {
             display: block;
-        }
-        
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .photo-header h1 {
@@ -750,7 +704,6 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* Video Screen */
         .video-screen {
             position: fixed;
             top: 0;
@@ -852,7 +805,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* Letter Screen */
         .letter-screen {
             position: fixed;
             top: 0;
@@ -916,7 +868,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -958,7 +909,6 @@
             color: #ff69b4;
         }
         
-        /* Contact Page */
         .contact-page {
             position: fixed;
             top: 0;
@@ -1156,7 +1106,7 @@
         
         @media (max-width: 768px) {
             .reasons-header h1 { font-size: 2.5rem; }
-            .reasons-container { grid-template-columns: 1fr; }
+            .reason-text { font-size: 1.2rem; }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
             .video-grid { grid-template-columns: 1fr; }
@@ -1173,38 +1123,32 @@
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Video Background -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
 
-    <!-- Floating Hearts & Sparkles -->
     <div class="magic-sparkles"></div>
     <div class="floating-hearts" id="floatingHearts"></div>
 
-    <!-- Custom Heart Cursor -->
     <div class="custom-cursor">
         <svg viewBox="0 0 24 24">
             <path fill="#ff69b4" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
     </div>
 
-    <!-- Play Button (only on countdown screen) -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
 
-    <!-- Contact Button (always visible) -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
         </button>
     </div>
 
-    <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="close" onclick="closeLightbox(event)">&times;</span>
         <img src="" id="lightboxImg">
@@ -1252,50 +1196,16 @@
         <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN (cause.html style) -->
+    <!-- REASONS SCREEN (cause.html style with click button) -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-header">
             <h1>Why You're My Best Friend! 💖</h1>
         </div>
-        <div class="reasons-container">
-            <div class="reason-card">
-                <div>
-                    <div class="reason-text">🌟 You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.</div>
-                    <div class="reason-emoji">🌟</div>
-                </div>
-                <div class="gif-overlay">
-                    <img src="https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif" alt="GIF">
-                </div>
-            </div>
-            <div class="reason-card">
-                <div>
-                    <div class="reason-text">💗 May your day be filled with love, laughter, and endless joy.</div>
-                    <div class="reason-emoji">💗</div>
-                </div>
-                <div class="gif-overlay">
-                    <img src="https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif" alt="GIF">
-                </div>
-            </div>
-            <div class="reason-card">
-                <div>
-                    <div class="reason-text">💕 Wishing you success, happiness, and everything your heart desires.</div>
-                    <div class="reason-emoji">💕</div>
-                </div>
-                <div class="gif-overlay">
-                    <img src="https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif" alt="GIF">
-                </div>
-            </div>
-            <div class="reason-card">
-                <div>
-                    <div class="reason-text">🌟 Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳</div>
-                    <div class="reason-emoji">🌟</div>
-                </div>
-                <div class="gif-overlay">
-                    <img src="https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif" alt="GIF">
-                </div>
-            </div>
+        <div class="reasons-container" id="reasonsContainer">
+            <!-- Card will be dynamically inserted here -->
         </div>
-        <button class="reasons-next-btn" onclick="goToPhotoScreen()">Next: Our Memories 📸</button>
+        <div class="reason-counter" id="reasonCounter">Reason 1 of 4</div>
+        <button class="reasons-btn" id="reasonsBtn" onclick="handleReasonClick()">Click Here... 💕</button>
     </div>
 
     <!-- PHOTO ALBUM SCREEN -->
@@ -1482,7 +1392,18 @@
         let audioAllowed = false;
         let resetTimer = null;
 
-        // History management for back button
+        // Reasons data
+        const reasons = [
+            { text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", emoji: "🌟" },
+            { text: "May your day be filled with love, laughter, and endless joy.", emoji: "💗" },
+            { text: "Wishing you success, happiness, and everything your heart desires.", emoji: "💕" },
+            { text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", emoji: "🌟" }
+        ];
+        
+        let currentReasonIndex = 0;
+        let isTransitioning = false;
+
+        // History management
         let historyStack = ['countdown'];
         
         function updateHistory(screen) {
@@ -1510,7 +1431,6 @@
             document.getElementById('videoScreen').classList.remove('show');
             document.getElementById('letterScreen').classList.remove('show');
             
-            // Show requested screen
             if (screen === 'countdown') {
                 document.getElementById('countdownScreen').classList.remove('hide');
             } else if (screen === 'greeting') {
@@ -1528,7 +1448,7 @@
             }
         }
 
-        // Floating hearts generator
+        // Floating hearts
         function createFloatingHeart() {
             const container = document.getElementById('floatingHearts');
             const heart = document.createElement('div');
@@ -1539,7 +1459,6 @@
             heart.style.setProperty('--delay', Math.random() * 3 + 's');
             heart.style.setProperty('--translate-x', (Math.random() * 60 - 30) + 'px');
             container.appendChild(heart);
-            
             setTimeout(() => heart.remove(), 8000);
         }
         setInterval(createFloatingHeart, 800);
@@ -1567,7 +1486,7 @@
             }
         }
 
-        // Global click to enable audio (only for countdown)
+        // Audio permission
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
                 audioAllowed = true;
@@ -1581,7 +1500,7 @@
             document.getElementById('playBtn').classList.add('hide');
         };
 
-        // Lightbox functions
+        // Lightbox
         window.openLightbox = function(src) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('lightbox').classList.add('show');
@@ -1593,7 +1512,7 @@
             }
         };
 
-        // Schedule auto-reset after 24 hours
+        // Auto reset
         function scheduleAutoReset() {
             if (resetTimer) clearTimeout(resetTimer);
             resetTimer = setTimeout(() => {
@@ -1603,6 +1522,7 @@
                 confettiShown = false;
                 cakeCut = false;
                 candlesBlown = 0;
+                currentReasonIndex = 0;
                 historyStack = ['countdown'];
                 showScreen('countdown');
                 updateCountdown();
@@ -1616,22 +1536,17 @@
             
             if (isBirthdayToday && !countdownFinished) {
                 countdownFinished = true;
-                
                 countdownAudio.pause();
                 countdownAudio.currentTime = 0;
-                
                 document.getElementById('countdownScreen').classList.add('hide');
                 document.getElementById('greetingScreen').classList.add('show');
                 historyStack = ['greeting'];
                 history.replaceState({ screen: 'greeting' }, '', '#greeting');
-                
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
                 }
-                
                 typeGreeting();
-                
                 scheduleAutoReset();
                 return;
             }
@@ -1639,45 +1554,33 @@
             if (!countdownFinished) {
                 const currentYear = now.getFullYear();
                 let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
-                
                 if (now > birthday) {
                     birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
                 }
-                
                 const diff = birthday - now;
                 
                 if (diff > 0) {
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                    const mins = Math.floor((diff / (1000 * 60)) % 60);
-                    const secs = Math.floor((diff / 1000) % 60);
-                    
-                    document.getElementById('days').textContent = String(days).padStart(2, '0');
-                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                    document.getElementById('mins').textContent = String(mins).padStart(2, '0');
-                    document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+                    document.getElementById('days').textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+                    document.getElementById('mins').textContent = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+                    document.getElementById('secs').textContent = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
                 }
                 
-                // Countdown audio in last 11 seconds
                 if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                     countdownAudio.play().then(() => {
                         countdownAudioPlayed = true;
-                    }).catch(error => {
-                        console.log('Countdown audio failed:', error);
-                    });
+                    }).catch(error => {});
                 }
             }
         }
 
-        // Go to Cake Screen (and start birthday audio)
+        // Go to Cake Screen
         window.goToCakeScreen = function() {
-            // Start birthday audio (only if not already playing)
             if (!birthdayAudioPlayed) {
                 birthdayAudio.play().then(() => {
                     birthdayAudioPlayed = true;
-                }).catch(e => console.log('Birthday audio failed:', e));
+                }).catch(e => {});
             }
-
             gsap.to('#greetingScreen', {
                 opacity: 0,
                 duration: 1,
@@ -1690,22 +1593,16 @@
             });
         };
 
-        // Load cake state
+        // Cake functions
         function loadCakeState() {
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
             const day = String(CONFIG.day).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
-            
             cakeCut = localStorage.getItem(`cut_${dateStr}`) === 'true';
             candlesBlown = parseInt(localStorage.getItem(`blown_${dateStr}`) || '0');
-            
             renderCake();
-            
-            // If cake already cut, show next button
-            if (cakeCut) {
-                showCakeNextButton();
-            }
+            if (cakeCut) showCakeNextButton();
         }
 
         function showCakeNextButton() {
@@ -1767,7 +1664,6 @@
 
         window.blowCandle = function(index) {
             if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
-            
             candlesBlown = index + 1;
             saveState();
             renderCake();
@@ -1787,7 +1683,6 @@
 
         function startMicrophone() {
             if (cakeCut || candlesBlown === totalCandles) return;
-            
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     audioStream = stream;
@@ -1796,22 +1691,18 @@
                     const source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyser);
                     analyser.fftSize = 256;
-                    
                     const dataArray = new Uint8Array(analyser.frequencyBinCount);
                     
                     if (blowInterval) clearInterval(blowInterval);
-                    
                     blowInterval = setInterval(() => {
                         if (cakeCut || candlesBlown === totalCandles) {
                             stopMicrophone();
                             return;
                         }
-                        
                         analyser.getByteFrequencyData(dataArray);
                         let sum = 0;
                         for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
                         const avg = sum / dataArray.length;
-                        
                         if (avg > 50) {
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2));
                         }
@@ -1837,32 +1728,83 @@
 
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
-            
-            // Stop birthday audio
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
-            
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
             const day = String(CONFIG.day).padStart(2, '0');
             const dateStr = `${today.getFullYear()}-${month}-${day}`;
-            
             cakeCut = true;
             localStorage.setItem(`cut_${dateStr}`, 'true');
-            
             stopMicrophone();
             renderCake();
-            
             confetti({ particleCount: 150, spread: 80 });
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
+        // Reasons screen functions
+        function displayReason() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            if (currentReasonIndex < reasons.length) {
+                const reason = reasons[currentReasonIndex];
+                const card = document.createElement('div');
+                card.className = 'reason-card';
+                card.innerHTML = `
+                    <div class="reason-text">${reason.emoji} ${reason.text}</div>
+                    <div class="reason-emoji">${reason.emoji}</div>
+                `;
+                
+                const container = document.getElementById('reasonsContainer');
+                container.innerHTML = '';
+                container.appendChild(card);
+                
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    ease: "back.out"
+                });
+
+                document.getElementById('reasonCounter').textContent = `Reason ${currentReasonIndex + 1} of ${reasons.length}`;
+                currentReasonIndex++;
+
+                if (currentReasonIndex === reasons.length) {
+                    const btn = document.getElementById('reasonsBtn');
+                    btn.textContent = "You're the BESTEST ! 💖";
+                    btn.classList.add('story-mode');
+                }
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            } else {
+                // All reasons shown, go to photo screen
+                goToPhotoScreen();
+            }
+        }
+
+        window.handleReasonClick = function() {
+            const btn = document.getElementById('reasonsBtn');
+            gsap.to(btn, {
+                scale: 0.9,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1
+            });
+            displayReason();
+        };
+
         // Navigation functions
         window.goToReasonsScreen = function() {
-            // Stop birthday audio when entering storyline
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
+            currentReasonIndex = 0;
+            document.getElementById('reasonsBtn').textContent = "Click Here... 💕";
+            document.getElementById('reasonsBtn').classList.remove('story-mode');
+            document.getElementById('reasonsContainer').innerHTML = '';
             
             gsap.to('#cakeScreen', {
                 opacity: 0,
@@ -1871,6 +1813,7 @@
                     document.getElementById('cakeScreen').classList.remove('show');
                     document.getElementById('reasonsScreen').classList.add('show');
                     updateHistory('reasons');
+                    displayReason(); // Show first reason immediately
                 }
             });
         };
@@ -1919,7 +1862,6 @@
                     document.getElementById('letterScreen').classList.remove('show');
                     document.getElementById('greetingScreen').classList.add('show');
                     updateHistory('greeting');
-                    // Restart typing effect if needed
                     greetingElement.textContent = '';
                     charIndex = 0;
                     typeGreeting();
@@ -1927,7 +1869,7 @@
             });
         };
 
-        // Contact page functions
+        // Contact page
         window.openContactPage = function() {
             document.getElementById('contactPage').classList.add('show');
         };
