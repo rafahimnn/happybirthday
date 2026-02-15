@@ -122,7 +122,37 @@
             100% { transform: translateY(-50px); }
         }
         
-        /* Play Button */
+        /* Contact Button (visible on all screens) */
+        .contact-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .contact-float-btn button {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: #4a4a4a;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(147, 112, 219, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-float-btn button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px #9370db;
+        }
+        
+        /* Play Button (only on countdown screen) */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
@@ -155,36 +185,6 @@
         
         .play-float-btn.hide {
             display: none;
-        }
-        
-        /* Contact Button */
-        .contact-float-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-        
-        .contact-float-btn button {
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-            color: #4a4a4a;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(147, 112, 219, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .contact-float-btn button:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 30px #9370db;
         }
         
         @keyframes softPulse {
@@ -471,141 +471,8 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* Reasons Screen */
-        .reasons-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            overflow-y: auto;
-            background: linear-gradient(-45deg, #fee9f7, #e8f5fe, #fef2e8, #f0ffe8);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            z-index: 700;
-            padding: 40px 20px;
-        }
-        
-        .reasons-screen.show {
-            display: block;
-        }
-        
-        .reasons-header h2 {
-            font-family: 'Bubblegum Sans', cursive;
-            font-size: 2.5rem;
-            color: #d4145a;
-            text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .reasons-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        
-        .reason-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .reason-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .reason-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-        
-        .reason-card:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .reason-text {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #4a4a4a;
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .reason-emoji {
-            font-size: 2rem;
-            margin-top: 0.5rem;
-            text-align: right;
-        }
-        
-        .gif-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1;
-        }
-        
-        .reason-card:hover .gif-overlay {
-            opacity: 1;
-        }
-        
-        .gif-overlay img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 10px;
-        }
-        
-        .reasons-next-btn {
-            display: block;
-            margin: 30px auto;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
-            transition: 0.3s;
-            border: 2px solid white;
-        }
-        
-        .reasons-next-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
-        }
-        
-        /* Memory Gallery Screen */
-        .memory-screen {
+        /* Photo Album Screen */
+        .photo-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -618,11 +485,11 @@
             background: linear-gradient(135deg, #ffd1dc 0%, #e6e6fa 25%, #ffefd5 50%, #e6e6fa 75%, #ffd1dc 100%);
             background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
-            z-index: 600;
+            z-index: 700;
             padding: 80px 20px 40px;
         }
         
-        .memory-screen.show {
+        .photo-screen.show {
             display: block;
         }
         
@@ -632,7 +499,7 @@
             100% { background-position: 0% 50%; }
         }
         
-        .memory-header h1 {
+        .photo-header h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
             color: #b0306e;
@@ -641,7 +508,7 @@
             text-align: center;
         }
         
-        .memory-header p {
+        .photo-header p {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto 2rem;
@@ -652,7 +519,7 @@
             text-align: center;
         }
         
-        .memory-container {
+        .photo-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
@@ -660,7 +527,7 @@
             gap: 2rem;
         }
         
-        .memory-card {
+        .photo-card {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             padding: 1.5rem;
@@ -670,12 +537,12 @@
             overflow: hidden;
         }
         
-        .memory-card:hover {
+        .photo-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
-        .memory-card::before {
+        .photo-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -687,11 +554,11 @@
             transition: 0.5s;
         }
         
-        .memory-card:hover::before {
+        .photo-card:hover::before {
             transform: translateX(100%);
         }
         
-        .memory-img {
+        .photo-img {
             width: 100%;
             height: 250px;
             object-fit: cover;
@@ -700,11 +567,11 @@
             transition: transform 0.5s ease;
         }
         
-        .memory-card:hover .memory-img {
+        .photo-card:hover .photo-img {
             transform: scale(1.05);
         }
         
-        .memory-date {
+        .photo-date {
             font-family: 'Dancing Script', cursive;
             color: #c71585;
             font-size: 1.3rem;
@@ -712,20 +579,71 @@
             font-weight: 700;
         }
         
-        .memory-caption {
+        .photo-caption {
             font-size: 1rem;
             line-height: 1.5;
             color: #2c3e50;
             font-weight: 500;
         }
         
-        .video-section {
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #9b6dff, #ff6dc7);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
+            transition: 0.3s;
+            border: 2px solid white;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
+        }
+        
+        .nav-btn.back {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        }
+        
+        /* Video Screen */
+        .video-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            z-index: 600;
+            padding: 20px;
+        }
+        
+        .video-screen.show {
+            display: flex;
+        }
+        
+        .video-container {
             max-width: 800px;
-            margin: 3rem auto;
+            width: 100%;
             text-align: center;
         }
         
-        .video-section h2 {
+        .video-container h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
             color: #b0306e;
@@ -751,21 +669,39 @@
             object-fit: cover;
         }
         
-        .letter-section {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 30px;
-            text-align: center;
-            margin: 3rem auto;
-            max-width: 800px;
+        /* Letter Screen */
+        .letter-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            z-index: 500;
+            padding: 20px;
         }
         
-        .letter-section h2 {
+        .letter-screen.show {
+            display: flex;
+        }
+        
+        .letter-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .letter-container h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
             color: #b0306e;
-            text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
             margin-bottom: 1rem;
         }
         
@@ -773,36 +709,28 @@
             font-size: 1.2rem;
             line-height: 1.8;
             color: #2c3e50;
-            font-weight: 600;
-            text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+            font-weight: 500;
+            white-space: pre-line;
         }
         
-        .memory-footer {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .goodbye-btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            background: linear-gradient(45deg, #ff69b4, #da70d6);
-            color: white;
+        .greeting-return-btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff99cc);
             border: none;
             border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
             cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            font-weight: bold;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-            animation: float 3s infinite ease-in-out;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            transition: 0.3s;
             border: 2px solid white;
         }
         
-        .goodbye-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        .greeting-return-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
         /* Contact Page */
@@ -1001,16 +929,9 @@
             color: #4a4a4a;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
         @media (max-width: 768px) {
-            .reasons-container { grid-template-columns: 1fr; }
-            .memory-header h1 { font-size: 2.5rem; }
-            .memory-container { grid-template-columns: 1fr; }
-            .letter-section { padding: 1.5rem; }
+            .photo-header h1 { font-size: 2.5rem; }
+            .photo-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1041,14 +962,14 @@
         </svg>
     </div>
 
-    <!-- Play Button -->
+    <!-- Play Button (only on countdown screen) -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
 
-    <!-- Contact Button -->
+    <!-- Contact Button (always visible) -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
@@ -1079,14 +1000,14 @@
         <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
 
-    <!-- GREETING SCREEN -->
+    <!-- GREETING SCREEN (Page 1) -->
     <div class="greeting-screen" id="greetingScreen">
         <h1>Happy Birthday Priya</h1>
         <div class="greeting-text" id="greetingText"></div>
         <button class="enter-btn" onclick="goToCakeScreen()">Click to enter your world 💕</button>
     </div>
 
-    <!-- CAKE SCREEN -->
+    <!-- CAKE SCREEN (Page 2) -->
     <div class="cake-screen" id="cakeScreen">
         <div class="cake-container">
             <div class="cake-emoji" id="cakeEmoji">🎂</div>
@@ -1094,54 +1015,59 @@
             <div class="cake-status" id="cakeStatus"></div>
             <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
         </div>
+        <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN -->
-    <div class="reasons-screen" id="reasonsScreen">
-        <div class="reasons-header">
-            <h2>Why You're My Best Friend! 💖</h2>
-        </div>
-        <div class="reasons-container" id="reasonsContainer"></div>
-        <button class="reasons-next-btn" onclick="goToMemoryScreen()">Enter Storyline 💫</button>
-    </div>
-
-    <!-- MEMORY SCREEN -->
-    <div class="memory-screen" id="memoryScreen">
-        <div class="memory-header">
+    <!-- PHOTO ALBUM SCREEN (Page 3) -->
+    <div class="photo-screen" id="photoScreen">
+        <div class="photo-header">
             <h1>Our Beautiful Moments Together</h1>
             <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
         </div>
 
-        <div class="memory-container">
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop" alt="Memory 1" class="memory-img">
-                <div class="memory-date">Her Smile Says It All</div>
-                <div class="memory-caption">You’re truly one of the sweetest girls I know, and I feel lucky to have a sis like you.❤️</div>
+        <div class="photo-container">
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop" alt="Memory 1" class="photo-img">
+                <div class="photo-date">Her Smile Says It All</div>
+                <div class="photo-caption">You’re truly one of the sweetest girls I know, and I feel lucky to have a sis like you.❤️</div>
             </div>
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop" alt="Memory 2" class="memory-img">
-                <div class="memory-date">Together Vibes</div>
-                <div class="memory-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop" alt="Memory 2" class="photo-img">
+                <div class="photo-date">Together Vibes</div>
+                <div class="photo-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
             </div>
-            <div class="memory-card">
-                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop" alt="Memory 3" class="memory-img">
-                <div class="memory-date">Pretty Soul</div>
-                <div class="memory-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop" alt="Memory 3" class="photo-img">
+                <div class="photo-date">Pretty Soul</div>
+                <div class="photo-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
             </div>
         </div>
 
-        <!-- Video Section -->
-        <div class="video-section">
+        <div class="nav-buttons">
+            <button class="nav-btn back" onclick="goBackToCake()">Back</button>
+            <button class="nav-btn" onclick="goToVideoScreen()">Next: Video</button>
+        </div>
+    </div>
+
+    <!-- VIDEO SCREEN (Page 4) -->
+    <div class="video-screen" id="videoScreen">
+        <div class="video-container">
             <h2>A Special Video Message</h2>
             <div class="video-wrapper">
                 <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                 </video>
             </div>
+            <div class="nav-buttons">
+                <button class="nav-btn back" onclick="goBackToPhoto()">Back</button>
+                <button class="nav-btn" onclick="goToLetterScreen()">Next: Letter</button>
+            </div>
         </div>
+    </div>
 
-        <!-- Letter Section -->
-        <div class="letter-section">
+    <!-- LETTER SCREEN (Page 5) -->
+    <div class="letter-screen" id="letterScreen">
+        <div class="letter-container">
             <h2>A Letter for You 💌</h2>
             <div class="letter-content">
                 <p>Every laugh, every chat, and every moment we've shared has been truly special.💫</p>
@@ -1150,7 +1076,10 @@
                 <p>You deserve all the joy in the world—keep shining and spreading your beautiful energy.✨</p>
                 <p>Until We Meet Again 💝</p>
             </div>
-            <button class="goodbye-btn" onclick="closeWebsite()">Until We Meet Again 💝</button>
+            <div class="nav-buttons">
+                <button class="nav-btn back" onclick="goBackToVideo()">Back</button>
+                <button class="greeting-return-btn" onclick="returnToGreeting()">Happy Birthday Priya</button>
+            </div>
         </div>
     </div>
 
@@ -1245,30 +1174,6 @@
             name: "Priya"
         };
 
-        // Reasons data
-        const reasons = [
-            { 
-                text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", 
-                emoji: "🌟",
-                gif: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif" // Replace with your GIF URLs
-            },
-            { 
-                text: "May your day be filled with love, laughter, and endless joy.", 
-                emoji: "💗",
-                gif: "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
-            },
-            { 
-                text: "Wishing you success, happiness, and everything your heart desires.", 
-                emoji: "💕",
-                gif: "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
-            },
-            { 
-                text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", 
-                emoji: "🌟",
-                gif: "https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif"
-            }
-        ];
-
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('name')) {
             CONFIG.name = decodeURIComponent(urlParams.get('name'));
@@ -1332,44 +1237,18 @@
             }
         }
 
-        // Global click for audio
+        // Global click to enable audio (only for countdown)
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
-                enableAudio();
+                audioAllowed = true;
+                document.getElementById('playBtn').classList.add('hide');
             }
         });
 
-        function enableAudio() {
-            if (audioAllowed) return;
-            audioAllowed = true;
-            
-            document.getElementById('playBtn').classList.add('hide');
-            
-            if (countdownFinished && !birthdayAudioPlayed) {
-                birthdayAudio.play().then(() => {
-                    birthdayAudioPlayed = true;
-                }).catch(e => console.log('Audio failed:', e));
-            }
-            
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            let birthday = new Date(currentYear, CONFIG.month, CONFIG.day, 0, 0, 0);
-            if (now > birthday) {
-                birthday = new Date(currentYear + 1, CONFIG.month, CONFIG.day, 0, 0, 0);
-            }
-            const diff = birthday - now;
-            if (diff <= 11000 && diff > 0 && !countdownAudioPlayed) {
-                countdownAudio.play().then(() => {
-                    countdownAudioPlayed = true;
-                }).catch(e => console.log('Countdown audio failed:', e));
-            }
-            
-            setTimeout(startMicrophone, 1000);
-        }
-
         window.startAudio = function(event) {
             if (event) event.stopPropagation();
-            enableAudio();
+            audioAllowed = true;
+            document.getElementById('playBtn').classList.add('hide');
         };
 
         // Schedule auto-reset after 24 hours
@@ -1382,11 +1261,14 @@
                 confettiShown = false;
                 cakeCut = false;
                 candlesBlown = 0;
+                // Hide all screens and show countdown
                 document.getElementById('greetingScreen').classList.remove('show');
                 document.getElementById('cakeScreen').classList.remove('show');
-                document.getElementById('reasonsScreen').classList.remove('show');
-                document.getElementById('memoryScreen').classList.remove('show');
+                document.getElementById('photoScreen').classList.remove('show');
+                document.getElementById('videoScreen').classList.remove('show');
+                document.getElementById('letterScreen').classList.remove('show');
                 document.getElementById('countdownScreen').classList.remove('hide');
+                // Restart countdown update
                 updateCountdown();
             }, 86400000);
         }
@@ -1412,10 +1294,6 @@
                 
                 typeGreeting();
                 
-                if (audioAllowed) {
-                    setTimeout(startMicrophone, 1000);
-                }
-
                 scheduleAutoReset();
                 return;
             }
@@ -1442,6 +1320,7 @@
                     document.getElementById('secs').textContent = String(secs).padStart(2, '0');
                 }
                 
+                // Countdown audio in last 11 seconds
                 if (diff <= 11000 && diff > 0 && !countdownAudioPlayed && audioAllowed) {
                     countdownAudio.play().then(() => {
                         countdownAudioPlayed = true;
@@ -1452,8 +1331,15 @@
             }
         }
 
-        // Go to Cake Screen
+        // Go to Cake Screen (and start birthday audio)
         window.goToCakeScreen = function() {
+            // Start birthday audio (only if not already playing)
+            if (!birthdayAudioPlayed) {
+                birthdayAudio.play().then(() => {
+                    birthdayAudioPlayed = true;
+                }).catch(e => console.log('Birthday audio failed:', e));
+            }
+
             gsap.to('#greetingScreen', {
                 opacity: 0,
                 duration: 1,
@@ -1484,13 +1370,12 @@
         }
 
         function showCakeNextButton() {
-            // Check if button already exists
             if (!document.getElementById('cakeNextBtn')) {
                 const nextBtn = document.createElement('button');
                 nextBtn.id = 'cakeNextBtn';
                 nextBtn.className = 'cake-next-btn';
                 nextBtn.textContent = 'Enter Storyline 💫';
-                nextBtn.onclick = goToReasonsScreen;
+                nextBtn.onclick = goToPhotoScreen;
                 document.getElementById('cakeScreen').appendChild(nextBtn);
             }
         }
@@ -1614,6 +1499,7 @@
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
+            // Stop birthday audio
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
             
@@ -1633,69 +1519,89 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        // Go to Reasons Screen
-        window.goToReasonsScreen = function() {
+        // Navigation functions
+        window.goToPhotoScreen = function() {
             gsap.to('#cakeScreen', {
                 opacity: 0,
                 duration: 1,
                 onComplete: () => {
                     document.getElementById('cakeScreen').classList.remove('show');
-                    document.getElementById('reasonsScreen').classList.add('show');
-                    renderReasons();
+                    document.getElementById('photoScreen').classList.add('show');
                 }
             });
         };
 
-        // Render reasons cards
-        function renderReasons() {
-            const container = document.getElementById('reasonsContainer');
-            container.innerHTML = '';
-            reasons.forEach((reason, index) => {
-                const card = document.createElement('div');
-                card.className = 'reason-card';
-                card.innerHTML = `
-                    <div class="reason-text">${reason.emoji} ${reason.text}</div>
-                    <div class="reason-emoji">${reason.emoji}</div>
-                    <div class="gif-overlay">
-                        <img src="${reason.gif}" alt="GIF">
-                    </div>
-                `;
-                container.appendChild(card);
-                
-                gsap.from(card, {
-                    opacity: 0,
-                    y: 50,
-                    duration: 0.5,
-                    delay: index * 0.2,
-                    ease: "back.out"
-                });
-            });
-        }
-
-        // Go to Memory Screen
-        window.goToMemoryScreen = function() {
-            gsap.to('#reasonsScreen', {
+        window.goBackToCake = function() {
+            gsap.to('#photoScreen', {
                 opacity: 0,
                 duration: 1,
                 onComplete: () => {
-                    document.getElementById('reasonsScreen').classList.remove('show');
-                    document.getElementById('memoryScreen').classList.add('show');
+                    document.getElementById('photoScreen').classList.remove('show');
+                    document.getElementById('cakeScreen').classList.add('show');
                 }
             });
         };
 
-        // Close website (or show letter)
-        window.closeWebsite = function() {
-            // You can make this scroll to letter or close
-            gsap.to('body', {
+        window.goToVideoScreen = function() {
+            gsap.to('#photoScreen', {
                 opacity: 0,
-                duration: 2,
+                duration: 1,
                 onComplete: () => {
-                    window.close(); // May not work in all browsers
+                    document.getElementById('photoScreen').classList.remove('show');
+                    document.getElementById('videoScreen').classList.add('show');
                 }
             });
         };
 
+        window.goBackToPhoto = function() {
+            gsap.to('#videoScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('videoScreen').classList.remove('show');
+                    document.getElementById('photoScreen').classList.add('show');
+                }
+            });
+        };
+
+        window.goToLetterScreen = function() {
+            gsap.to('#videoScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('videoScreen').classList.remove('show');
+                    document.getElementById('letterScreen').classList.add('show');
+                }
+            });
+        };
+
+        window.goBackToVideo = function() {
+            gsap.to('#letterScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('letterScreen').classList.remove('show');
+                    document.getElementById('videoScreen').classList.add('show');
+                }
+            });
+        };
+
+        window.returnToGreeting = function() {
+            gsap.to('#letterScreen', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    document.getElementById('letterScreen').classList.remove('show');
+                    document.getElementById('greetingScreen').classList.add('show');
+                    // Restart typing effect if needed
+                    greetingElement.textContent = '';
+                    charIndex = 0;
+                    typeGreeting();
+                }
+            });
+        };
+
+        // Contact page functions
         window.openContactPage = function() {
             document.getElementById('contactPage').classList.add('show');
         };
