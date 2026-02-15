@@ -645,7 +645,7 @@
     </style>
 </head>
 <body>
-    <!-- ⭐ অডিও ফাইল লিংক - আপনার নতুন লিংক ⭐ -->
+    <!-- অডিও ফাইল লিংক -->
     
     <!-- কাউন্টডাউনের শেষ ১০ সেকেন্ডের অডিও -->
     <audio id="countdownAudio" preload="auto">
@@ -691,7 +691,7 @@
                 <span class="count-label">সেকেন্ড</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:০৪ PM এ চমক!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 আজ রাত ৯:১১ PM এ চমক!</div>
     </div>
     
     <!-- মেইন কন্টেন্ট -->
@@ -892,15 +892,15 @@
         let birthdayAudioPlayed = false;
         let countdownAudioPlayed = false;
         
-        // ---------- কাউন্টডাউন (টেস্ট ৯:০৪ PM) ----------
+        // ---------- কাউন্টডাউন (টেস্ট ৯:১১ PM) ----------
         function updateCountdown() {
             if (countdownFinished) return;
             
             const now = new Date();
             
-            // আজ রাত ৯:০৪ PM টেস্ট
+            // আজ রাত ৯:১১ PM টেস্ট
             const testTime = new Date();
-            testTime.setHours(21, 4, 0); // ৯:০৪ PM
+            testTime.setHours(21, 11, 0); // ৯:১১ PM
             testTime.setSeconds(0);
             testTime.setMilliseconds(0);
             
