@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🎂 জন্মদিনের চমক</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             overflow-x: hidden;
             color: white;
         }
@@ -34,7 +35,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(0,0,0,0.6), rgba(139,0,139,0.5));
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(128,0,128,0.5));
             z-index: -1;
         }
         
@@ -49,7 +50,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 1000;
             transition: 1s;
             text-align: center;
@@ -62,7 +63,7 @@
         }
         
         .countdown-title {
-            font-size: 40px;
+            font-size: clamp(30px, 6vw, 50px);
             color: gold;
             margin-bottom: 30px;
             text-shadow: 0 0 20px red;
@@ -70,7 +71,7 @@
         
         .countdown-box {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
             margin-bottom: 30px;
@@ -78,26 +79,26 @@
         
         .count-item {
             background: rgba(255,255,255,0.1);
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 20px;
-            min-width: 100px;
+            min-width: 80px;
             border: 2px solid gold;
         }
         
         .count-number {
-            font-size: 50px;
+            font-size: clamp(35px, 8vw, 50px);
             font-weight: bold;
             color: gold;
             display: block;
         }
         
         .count-label {
-            font-size: 16px;
+            font-size: 14px;
             color: white;
         }
         
         .countdown-message {
-            font-size: 30px;
+            font-size: clamp(20px, 5vw, 30px);
             color: white;
             text-shadow: 0 0 10px gold;
         }
@@ -124,16 +125,16 @@
         }
         
         .hero h1 {
-            font-size: 60px;
-            background: linear-gradient(45deg, gold, pink, cyan);
+            font-size: clamp(40px, 10vw, 70px);
+            background: linear-gradient(45deg, gold, hotpink, cyan);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
         
         .birthday-name {
-            font-size: 70px;
-            font-family: cursive;
+            font-size: clamp(40px, 12vw, 80px);
+            font-family: 'Dancing Script', cursive;
             color: gold;
             text-shadow: 0 0 30px gold;
             margin-bottom: 30px;
@@ -142,16 +143,16 @@
         /* কেক সেকশন */
         .cake-section {
             background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 60px;
+            padding: 30px 20px;
+            border-radius: 50px;
             border: 3px solid gold;
-            max-width: 600px;
+            max-width: 550px;
             width: 100%;
             margin: 0 auto;
         }
         
         .cake-emoji {
-            font-size: 120px;
+            font-size: clamp(80px, 20vw, 120px);
             text-align: center;
             filter: drop-shadow(0 0 30px gold);
         }
@@ -160,45 +161,47 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin: 20px 0;
-            font-size: 40px;
+            font-size: clamp(30px, 8vw, 45px);
         }
         
         .candle {
             cursor: pointer;
             transition: 0.3s;
-            animation: flicker 1s infinite;
+            animation: flicker 0.5s infinite alternate;
+            display: inline-block;
         }
         
         .candle.blown {
-            opacity: 0.3;
+            opacity: 0.2;
             filter: grayscale(1);
             pointer-events: none;
+            animation: none;
         }
         
         @keyframes flicker {
-            0%,100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(1.1); opacity: 0.9; }
         }
         
         .cake-status {
-            font-size: 24px;
+            font-size: 18px;
             color: gold;
             margin: 20px 0;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid gold;
-            border-radius: 50px;
+            border-radius: 40px;
             background: rgba(0,0,0,0.3);
         }
         
         .cut-btn {
             background: linear-gradient(45deg, gold, red);
             color: black;
-            font-size: 28px;
-            padding: 15px 40px;
+            font-size: 24px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 50px;
+            border-radius: 40px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
@@ -216,7 +219,7 @@
             box-shadow: 0 0 30px gold;
         }
         
-        /* কন্টেন্ট সেকশন - শুরুতে লুকানো */
+        /* কন্টেন্ট সেকশন */
         .content-sections {
             display: none;
             margin-top: 50px;
@@ -226,14 +229,14 @@
             display: block;
         }
         
-        /* ফটো অ্যালবাম */
         .section-title {
-            font-size: 40px;
+            font-size: 30px;
             color: gold;
             text-align: center;
-            margin: 50px 0 30px;
+            margin: 40px 0 20px;
         }
         
+        /* ফটো অ্যালবাম */
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -257,7 +260,7 @@
         
         .photo-item:hover {
             transform: scale(1.05);
-            border-color: red;
+            border-color: hotpink;
         }
         
         .photo-item img {
@@ -293,28 +296,112 @@
         
         .video-info {
             padding: 15px;
-        }
-        
-        .video-title {
-            font-size: 20px;
             color: gold;
         }
         
         /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255,255,255,0.1);
-            padding: 40px;
+            padding: 30px;
             border-radius: 40px;
             border: 3px solid gold;
-            margin: 50px 0;
+            margin: 40px 0;
         }
         
         .message-text {
-            font-size: 30px;
+            font-size: 24px;
             font-family: cursive;
-            line-height: 1.8;
+            line-height: 1.6;
             text-align: center;
             color: white;
+        }
+        
+        /* কন্ট্যাক্ট বাটন */
+        .contact-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+            border: 2px solid gold;
+        }
+        
+        .contact-title {
+            font-size: 30px;
+            color: gold;
+            margin-bottom: 25px;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid white;
+            min-width: 160px;
+            justify-content: center;
+        }
+        
+        .contact-btn.email {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+        }
+        
+        .contact-btn.phone {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+        }
+        
+        .contact-btn.whatsapp {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+        }
+        
+        .contact-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px gold;
+        }
+        
+        /* মাইক্রোফোন বাটন */
+        .mic-btn {
+            background: rgba(0,0,0,0.8);
+            color: gold;
+            border: 2px solid gold;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mic-btn i {
+            color: gold;
+            font-size: 20px;
+        }
+        
+        .mic-btn.active {
+            animation: micPulse 1s infinite;
+        }
+        
+        @keyframes micPulse {
+            0%,100% { box-shadow: 0 0 20px gold; }
+            50% { box-shadow: 0 0 40px hotpink; }
         }
         
         /* লাইটবক্স */
@@ -351,35 +438,11 @@
             cursor: pointer;
         }
         
-        /* মাইক্রোফোন পারমিশন */
-        .mic-permission {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: black;
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: 2px solid gold;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            z-index: 1500;
-        }
-        
-        .mic-permission button {
-            background: gold;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
         footer {
             text-align: center;
             padding: 30px;
             border-top: 2px solid gold;
-            margin-top: 50px;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -393,7 +456,7 @@
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ জন্মদিন আসতে বাকি</h1>
-        <div class="countdown-box" id="countdown">
+        <div class="countdown-box">
             <div class="count-item">
                 <span class="count-number" id="days">00</span>
                 <span class="count-label">দিন</span>
@@ -416,7 +479,7 @@
     
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content" id="mainContent">
-        <!-- হিরো সেকশন - শুধু কেক -->
+        <!-- হিরো সেকশন -->
         <section class="hero">
             <h1>🎉 Happy Birthday 🎉</h1>
             <div class="birthday-name" id="birthdayName">প্রিয়জন</div>
@@ -427,10 +490,15 @@
                 <div class="candles" id="candles"></div>
                 <div class="cake-status" id="cakeStatus"></div>
                 <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 কেক কাটো</button>
+                
+                <!-- মাইক্রোফোন বাটন -->
+                <button class="mic-btn" id="micBtn" onclick="toggleMicrophone()">
+                    <i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান
+                </button>
             </div>
         </section>
         
-        <!-- কন্টেন্ট সেকশন - কেক কাটার পর দেখাবে -->
+        <!-- কন্টেন্ট সেকশন -->
         <div class="content-sections" id="contentSections">
             <!-- ফটো অ্যালবাম -->
             <h2 class="section-title">📸 স্মৃতির ভুবন</h2>
@@ -462,17 +530,13 @@
                     <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=340&fit=crop">
                         <source src="https://www.w3schools.com/html/mov_bbb.mp4">
                     </video>
-                    <div class="video-info">
-                        <div class="video-title">🎥 প্রথম শুভেচ্ছা</div>
-                    </div>
+                    <div class="video-info">প্রথম শুভেচ্ছা</div>
                 </div>
                 <div class="video-card">
                     <video controls poster="https://images.unsplash.com/photo-1529333166437-7750a6dd5a30?w=600&h=340&fit=crop">
                         <source src="https://www.w3schools.com/html/movie.mp4">
                     </video>
-                    <div class="video-info">
-                        <div class="video-title">🎥 বিশেষ বার্তা</div>
-                    </div>
+                    <div class="video-info">বিশেষ বার্তা</div>
                 </div>
             </div>
             
@@ -484,6 +548,22 @@
 তোমার জীবন হোক আনন্দে ভরপুর। 💝
 
 🎂 শুভ জন্মদিন 🎂
+                </div>
+            </div>
+            
+            <!-- কন্ট্যাক্ট সেকশন -->
+            <div class="contact-section">
+                <h2 class="contact-title">📞 যোগাযোগ করুন</h2>
+                <div class="contact-buttons">
+                    <button class="contact-btn email" onclick="window.location.href='mailto:example@gmail.com'">
+                        <i class="fas fa-envelope"></i> ইমেল
+                    </button>
+                    <button class="contact-btn phone" onclick="window.location.href='tel:+880123456789'">
+                        <i class="fas fa-phone"></i> ফোন
+                    </button>
+                    <button class="contact-btn whatsapp" onclick="window.open('https://wa.me/880123456789')">
+                        <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+                    </button>
                 </div>
             </div>
         </div>
@@ -509,7 +589,7 @@
             name: "প্রিয়জন"
         };
         
-        // ইউআরএল থেকে নাম নাও
+        // ইউআরএল থেকে নাম নিন
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('name')) {
             CONFIG.name = decodeURIComponent(urlParams.get('name'));
@@ -525,10 +605,9 @@
         let audioContext = null;
         let analyser = null;
         let blowInterval = null;
+        let micActive = false;
         
-        // ---------- ফাংশন ----------
-        
-        // কাউন্টডাউন আপডেট
+        // ---------- কাউন্টডাউন ----------
         function updateCountdown() {
             const now = new Date();
             const currentYear = now.getFullYear();
@@ -552,8 +631,6 @@
                 
                 loadState();
                 renderCake();
-                
-                setTimeout(requestMic, 2000);
                 return;
             }
             
@@ -572,7 +649,7 @@
             }
         }
         
-        // স্টেট লোড
+        // ---------- স্টেট লোড ----------
         function loadState() {
             const today = new Date();
             const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
@@ -585,12 +662,13 @@
             }
         }
         
-        // কেক রেন্ডার
+        // ---------- কেক রেন্ডার ----------
         function renderCake() {
             const cakeEmoji = document.getElementById('cakeEmoji');
             const candlesDiv = document.getElementById('candles');
             const statusDiv = document.getElementById('cakeStatus');
             const cutBtn = document.getElementById('cutBtn');
+            const micBtn = document.getElementById('micBtn');
             
             if (cakeCut) {
                 cakeEmoji.textContent = '🍰';
@@ -598,14 +676,16 @@
                 statusDiv.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
                 cutBtn.style.display = 'none';
-                stopMic();
+                micBtn.style.display = 'none';
+                stopMicrophone();
                 return;
             }
             
             cakeEmoji.textContent = '🎂';
             cutBtn.style.display = 'block';
+            micBtn.style.display = 'flex';
             
-            // মোমবাতি দেখাও
+            // মোমবাতি
             let html = '';
             for (let i = 0; i < totalCandles; i++) {
                 const blown = i < candlesBlown ? 'blown' : '';
@@ -616,21 +696,21 @@
             if (candlesBlown === totalCandles) {
                 statusDiv.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
                 cutBtn.disabled = false;
-                stopMic();
+                stopMicrophone();
             } else {
                 statusDiv.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে`;
                 cutBtn.disabled = true;
             }
         }
         
-        // স্টেট সেভ
+        // ---------- স্টেট সেভ ----------
         function saveState() {
             const today = new Date();
             const dateStr = `${today.getFullYear()}-${CONFIG.month + 1}-${CONFIG.day}`;
             localStorage.setItem(`blown_${dateStr}`, candlesBlown);
         }
         
-        // মোমবাতি নেভাও (ট্যাপ)
+        // ---------- ট্যাপ করে মোমবাতি নেভানো ----------
         window.blowCandle = function(index) {
             if (cakeCut || candlesBlown === totalCandles || index < candlesBlown) return;
             
@@ -645,7 +725,7 @@
             });
         };
         
-        // একসাথে একাধিক মোমবাতি নেভাও
+        // ---------- ফুঁ দিয়ে মোমবাতি নেভানো ----------
         function blowMultipleCandles(count) {
             if (cakeCut || candlesBlown === totalCandles) return;
             
@@ -656,38 +736,35 @@
                 renderCake();
                 
                 confetti({
-                    particleCount: 10 * count,
-                    spread: 50,
+                    particleCount: 8 * count,
+                    spread: 40,
                     colors: ['#aaa']
                 });
             }
         }
         
-        // মাইক্রোফোন চাও
-        function requestMic() {
-            if (cakeCut || candlesBlown === totalCandles) return;
+        // ---------- মাইক্রোফোন টগল ----------
+        window.toggleMicrophone = function() {
+            const micBtn = document.getElementById('micBtn');
             
-            const div = document.createElement('div');
-            div.className = 'mic-permission';
-            div.id = 'micDiv';
-            div.innerHTML = `
-                <span>🎤 মাইক্রোফোন অনুমতি দিন</span>
-                <button onclick="enableMic()">অনুমতি দিন</button>
-                <button onclick="this.parentElement.remove()">বাদ দিন</button>
-            `;
-            document.body.appendChild(div);
-        }
+            if (micActive) {
+                stopMicrophone();
+                micBtn.classList.remove('active');
+                micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান';
+                micActive = false;
+            } else {
+                startMicrophone();
+            }
+        };
         
-        // মাইক্রোফোন চালু
-        window.enableMic = function() {
-            document.getElementById('micDiv')?.remove();
-            
+        // ---------- মাইক্রোফোন চালু ----------
+        function startMicrophone() {
             if (cakeCut || candlesBlown === totalCandles) return;
             
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     audioStream = stream;
-                    audioContext = new AudioContext();
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
                     analyser = audioContext.createAnalyser();
                     const source = audioContext.createMediaStreamSource(stream);
                     source.connect(analyser);
@@ -700,7 +777,7 @@
                     
                     blowInterval = setInterval(() => {
                         if (cakeCut || candlesBlown === totalCandles) {
-                            stopMic();
+                            stopMicrophone();
                             return;
                         }
                         
@@ -711,34 +788,47 @@
                         }
                         const avg = sum / bufferLength;
                         
-                        if (avg > 60) {
+                        // ফুঁ শনাক্ত
+                        if (avg > 50) {
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2));
                         }
                     }, 150);
+                    
+                    // বাটন আপডেট
+                    const micBtn = document.getElementById('micBtn');
+                    micBtn.classList.add('active');
+                    micBtn.innerHTML = '<i class="fas fa-microphone-alt"></i> ফুঁ দিচ্ছেন...';
+                    micActive = true;
                 })
-                .catch(() => {
-                    alert('মাইক্রোফোন নেই! মোমবাতিতে ট্যাপ করুন');
+                .catch(err => {
+                    alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! মোমবাতিতে ট্যাপ করে নিভান।');
                 });
-        };
+        }
         
-        // মাইক্রোফোন বন্ধ
-        function stopMic() {
+        // ---------- মাইক্রোফোন বন্ধ ----------
+        function stopMicrophone() {
             if (blowInterval) {
                 clearInterval(blowInterval);
                 blowInterval = null;
             }
+            
             if (audioStream) {
                 audioStream.getTracks().forEach(t => t.stop());
                 audioStream = null;
             }
+            
             if (audioContext) {
                 audioContext.close();
                 audioContext = null;
             }
-            document.getElementById('micDiv')?.remove();
+            
+            const micBtn = document.getElementById('micBtn');
+            micBtn.classList.remove('active');
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i> ফুঁ দিয়ে মোমবাতি নেভান';
+            micActive = false;
         }
         
-        // কেক কাটা
+        // ---------- কেক কাটা ----------
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
             
@@ -748,21 +838,31 @@
             cakeCut = true;
             localStorage.setItem(`cut_${dateStr}`, 'true');
             
-            stopMic();
+            stopMicrophone();
             renderCake();
             document.getElementById('contentSections').classList.add('show');
             
-            confetti({ particleCount: 200, spread: 100 });
-            setTimeout(() => confetti({ particleCount: 150, spread: 80, colors: ['gold', 'pink'] }), 200);
+            // কনফেটি
+            confetti({ particleCount: 150, spread: 80 });
+            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['gold', 'hotpink'] }), 200);
+            setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
         
-        // লাইটবক্স
+        // ---------- লাইটবক্স ----------
         window.openLightbox = function(url) {
             document.getElementById('lightboxImg').src = url;
             document.getElementById('lightbox').classList.add('show');
         };
         
-        // চেক করো আজ জন্মদিন কিনা
+        // ---------- কনফেটি লাইব্রেরি ----------
+        function confetti(options) {
+            // সিম্পল কনফেটি
+            if (typeof window.confetti === 'function') {
+                window.confetti(options);
+            }
+        }
+        
+        // ---------- চেক করো আজ জন্মদিন কিনা ----------
         const today = new Date();
         if (today.getMonth() === CONFIG.month && today.getDate() === CONFIG.day) {
             document.getElementById('countdownScreen').classList.add('hide');
@@ -770,14 +870,18 @@
             loadState();
             renderCake();
             confetti({ particleCount: 100, spread: 70 });
-            setTimeout(requestMic, 2000);
         } else {
             setInterval(updateCountdown, 1000);
             updateCountdown();
         }
         
-        // পৃষ্ঠা ছাড়ার সময় মাইক্রোফোন বন্ধ
-        window.addEventListener('beforeunload', stopMic);
+        // ---------- পৃষ্ঠা ছাড়ার সময় মাইক্রোফোন বন্ধ ----------
+        window.addEventListener('beforeunload', function() {
+            stopMicrophone();
+        });
     </script>
+    
+    <!-- কনফেটি লাইব্রেরি -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </body>
 </html>
