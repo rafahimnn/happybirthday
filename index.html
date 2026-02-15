@@ -12,12 +12,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             color: white;
+            min-height: 100vh;
         }
 
         /* ভিডিও ব্যাকগ্রাউন্ড */
@@ -29,13 +31,13 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(0.9) contrast(1.1);
+            filter: brightness(0.8) contrast(1.1);
             animation: slowZoom 20s infinite alternate;
         }
 
         @keyframes slowZoom {
             from { transform: scale(1); }
-            to { transform: scale(1.05); }
+            to { transform: scale(1.08); }
         }
 
         .overlay {
@@ -45,38 +47,13 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, 
-                rgba(255, 107, 107, 0.2) 0%,
-                rgba(78, 205, 196, 0.2) 25%,
-                rgba(69, 183, 209, 0.2) 50%,
-                rgba(150, 206, 180, 0.2) 75%,
-                rgba(255, 107, 107, 0.2) 100%);
-            backdrop-filter: blur(3px);
+                rgba(255, 107, 107, 0.15) 0%,
+                rgba(78, 205, 196, 0.15) 25%,
+                rgba(69, 183, 209, 0.15) 50%,
+                rgba(150, 206, 180, 0.15) 75%,
+                rgba(255, 107, 107, 0.15) 100%);
+            backdrop-filter: blur(2px);
             z-index: -1;
-        }
-
-        /* স্পার্কল ইফেক্ট */
-        .sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #FFE66D;
-            border-radius: 50%;
-            animation: sparkle 3s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
         }
 
         /* কাউন্টডাউন স্ক্রিন */
@@ -93,7 +70,7 @@
             text-align: center;
             z-index: 9999;
             transition: opacity 1s ease;
-            padding: 20px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
         }
@@ -104,74 +81,74 @@
         }
 
         .countdown-title {
-            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: #FFE66D;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px #FF6B6B, 0 0 40px #4ECDC4;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px #FF6B6B, 0 0 30px #4ECDC4;
             animation: glow 2s infinite;
         }
 
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px #FFE66D, 0 0 40px #FF6B6B; }
-            50% { text-shadow: 0 0 40px #4ECDC4, 0 0 60px #45B7D1; }
+            0%, 100% { text-shadow: 0 0 15px #FFE66D, 0 0 30px #FF6B6B; }
+            50% { text-shadow: 0 0 30px #4ECDC4, 0 0 45px #45B7D1; }
         }
 
         .countdown-box {
             background: rgba(78, 205, 196, 0.1);
             backdrop-filter: blur(10px);
-            padding: clamp(25px, 5vw, 40px);
-            border-radius: 40px;
+            padding: clamp(20px, 4vw, 35px);
+            border-radius: 30px;
             border: 2px solid #FFE66D;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 230, 109, 0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 230, 109, 0.2);
             width: 100%;
-            max-width: 700px;
+            max-width: 600px;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: clamp(10px, 2vw, 20px);
+            gap: clamp(8px, 2vw, 15px);
         }
 
         .count-item {
             background: rgba(255, 255, 255, 0.1);
-            padding: clamp(15px, 4vw, 25px) clamp(5px, 2vw, 15px);
-            border-radius: 25px;
+            padding: clamp(10px, 3vw, 20px) 5px;
+            border-radius: 20px;
             border: 2px solid #FFE66D;
         }
 
         .count-number {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: clamp(2rem, 7vw, 4rem);
             font-weight: 800;
             background: linear-gradient(135deg, #FFE66D, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
             line-height: 1;
-            filter: drop-shadow(0 0 20px #FFE66D);
+            filter: drop-shadow(0 0 15px #FFE66D);
         }
 
         .count-label {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .countdown-message {
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-size: clamp(1.1rem, 4vw, 1.6rem);
             color: #fff;
-            margin-top: 20px;
+            margin-top: 15px;
             text-shadow: 0 0 10px #FFE66D;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
         /* মেইন কন্টেন্ট */
@@ -192,7 +169,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
         /* হিরো সেকশন */
@@ -203,53 +180,53 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-size: clamp(2.5rem, 9vw, 4.5rem);
             background: linear-gradient(135deg, #FFE66D, #FF6B6B, #4ECDC4, #45B7D1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px #FFE66D);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 25px #FFE66D);
             animation: rainbow 5s infinite;
         }
 
         @keyframes rainbow {
-            0%, 100% { filter: drop-shadow(0 0 20px #FFE66D); }
-            25% { filter: drop-shadow(0 0 30px #FF6B6B); }
-            50% { filter: drop-shadow(0 0 40px #4ECDC4); }
-            75% { filter: drop-shadow(0 0 30px #45B7D1); }
+            0%, 100% { filter: drop-shadow(0 0 15px #FFE66D); }
+            25% { filter: drop-shadow(0 0 25px #FF6B6B); }
+            50% { filter: drop-shadow(0 0 30px #4ECDC4); }
+            75% { filter: drop-shadow(0 0 25px #45B7D1); }
         }
 
         .birthday-name {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(3.5rem, 12vw, 6rem);
+            font-size: clamp(3rem, 11vw, 5.5rem);
             background: linear-gradient(135deg, #FFE66D, #FFFFFF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255, 230, 109, 0.8);
-            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(255, 230, 109, 0.7);
+            margin-bottom: 25px;
             animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* কেক সেকশন */
         .cake-section {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: clamp(25px, 5vw, 40px);
-            border-radius: 50px;
-            border: 3px solid #FFE66D;
-            margin: 40px 0;
+            padding: clamp(20px, 4vw, 35px);
+            border-radius: 40px;
+            border: 2px solid #FFE66D;
+            margin: 30px 0;
             width: 100%;
-            max-width: 650px;
-            box-shadow: 0 30px 60px rgba(255, 107, 107, 0.3), inset 0 0 50px rgba(78, 205, 196, 0.3);
+            max-width: 550px;
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2), inset 0 0 30px rgba(78, 205, 196, 0.2);
         }
 
         .cake-container {
@@ -260,53 +237,54 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            padding: 10px;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 8px;
         }
 
         .candle-item {
-            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
             cursor: pointer;
             transition: 0.2s;
             animation: flicker 0.5s infinite alternate;
             padding: 5px;
             user-select: none;
             color: #FFE66D;
-            text-shadow: 0 0 20px #FF6B6B;
+            text-shadow: 0 0 15px #FF6B6B;
         }
 
         .candle-item:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 10px #FFE66D);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px #FFE66D);
         }
 
         .candle-item.blown {
-            opacity: 0.3;
+            opacity: 0.2;
             animation: none;
             filter: grayscale(1);
-            cursor: not-allowed;
+            cursor: default;
+            pointer-events: none;
         }
 
         @keyframes flicker {
             from { opacity: 1; transform: scale(1); }
-            to { opacity: 0.9; transform: scale(1.1); }
+            to { opacity: 0.8; transform: scale(1.05); }
         }
 
         .cake-emoji {
-            font-size: clamp(6rem, 20vw, 10rem);
-            filter: drop-shadow(0 20px 40px #FFE66D);
+            font-size: clamp(5rem, 18vw, 8rem);
+            filter: drop-shadow(0 15px 30px #FFE66D);
             transition: 0.3s;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .cake-status {
-            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
             color: #fff;
-            margin: 20px 0;
-            background: rgba(69, 183, 209, 0.2);
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
-            border-radius: 50px;
+            margin: 15px 0;
+            background: rgba(69, 183, 209, 0.15);
+            padding: clamp(8px, 2.5vw, 12px) clamp(12px, 3.5vw, 18px);
+            border-radius: 40px;
             border: 2px solid #FFE66D;
             display: inline-block;
             width: 100%;
@@ -314,71 +292,73 @@
 
         .button-group {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: clamp(12px, 3vw, 15px) clamp(30px, 6vw, 50px);
+            padding: clamp(10px, 2.5vw, 12px) clamp(25px, 5vw, 40px);
             border: none;
-            border-radius: 50px;
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            border-radius: 40px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             background: linear-gradient(135deg, #FFE66D, #FF6B6B);
             color: #2C3E50;
             border: 2px solid #FFFFFF;
-            box-shadow: 0 10px 30px rgba(255, 230, 109, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 230, 109, 0.3);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            min-width: 180px;
+            gap: 8px;
+            min-width: 150px;
             justify-content: center;
         }
 
         .action-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
+            opacity: 0.3;
+            cursor: default;
             transform: none;
             box-shadow: none;
+            pointer-events: none;
         }
 
         .action-btn:not(:disabled):hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px #FFE66D;
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px #FFE66D;
         }
 
         /* ফটো অ্যালবাম - ৬টি ছবি */
         .photo-album {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 50px 0;
+            gap: 12px;
+            margin: 40px 0;
         }
 
         @media (min-width: 768px) {
             .photo-album {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
         }
 
         .photo-item {
             position: relative;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
             aspect-ratio: 3/4;
-            border: 3px solid #FFE66D;
+            border: 2px solid #FFE66D;
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
-            padding: 3px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 2px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .photo-item:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-5px) scale(1.01);
             border-color: #FF6B6B;
         }
 
@@ -387,22 +367,22 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 17px;
+            border-radius: 13px;
         }
 
         .photo-overlay {
             position: absolute;
-            bottom: 3px;
-            left: 3px;
-            right: 3px;
-            padding: 15px;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            padding: 10px;
             background: linear-gradient(transparent, rgba(44, 62, 80, 0.9));
             color: #FFE66D;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-size: clamp(0.8rem, 2vw, 1rem);
             font-weight: 600;
             transform: translateY(100%);
             transition: 0.3s;
-            border-radius: 0 0 17px 17px;
+            border-radius: 0 0 13px 13px;
         }
 
         .photo-item:hover .photo-overlay {
@@ -413,29 +393,30 @@
         .video-gallery {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
-            margin: 50px 0;
+            gap: 15px;
+            margin: 40px 0;
         }
 
         @media (min-width: 768px) {
             .video-gallery {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
         }
 
         .video-card {
             background: rgba(78, 205, 196, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
             overflow: hidden;
             border: 2px solid #FFE66D;
             transition: 0.3s;
         }
 
         .video-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: #FF6B6B;
-            box-shadow: 0 20px 40px rgba(255, 230, 109, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 230, 109, 0.2);
         }
 
         .video-wrapper {
@@ -454,36 +435,36 @@
         }
 
         .video-info {
-            padding: 15px;
+            padding: 12px;
         }
 
         .video-title {
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
             color: #FFE66D;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .video-desc {
             color: #ddd;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
         }
 
         /* মেসেজ সেকশন */
         .message-section {
             background: rgba(255, 107, 107, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 30px);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: clamp(25px, 6vw, 50px) clamp(15px, 4vw, 25px);
             text-align: center;
-            margin: 50px 0;
-            border: 3px solid #FFE66D;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            margin: 40px 0;
+            border: 2px solid #FFE66D;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .message-text {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            line-height: 1.8;
+            font-size: clamp(1.3rem, 4.5vw, 2.2rem);
+            line-height: 1.6;
             white-space: pre-line;
             background: linear-gradient(135deg, #FFFFFF, #FFE66D);
             -webkit-background-clip: text;
@@ -493,21 +474,21 @@
         /* সেকশন টাইটেল */
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 7vw, 2.8rem);
-            margin: 60px 0 30px;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin: 40px 0 20px;
             background: linear-gradient(135deg, #FFE66D, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255, 230, 109, 0.5));
+            filter: drop-shadow(0 0 15px rgba(255, 230, 109, 0.4));
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: clamp(80px, 15vw, 120px);
-            height: 4px;
+            width: clamp(60px, 12vw, 100px);
+            height: 3px;
             background: linear-gradient(90deg, #FFE66D, #FF6B6B, #4ECDC4);
-            margin: 20px auto;
+            margin: 12px auto;
             border-radius: 2px;
         }
 
@@ -523,7 +504,7 @@
             z-index: 10000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .lightbox.active {
@@ -533,8 +514,8 @@
         .lightbox img {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 20px;
-            box-shadow: 0 0 50px #FFE66D, 0 0 100px #FF6B6B;
+            border-radius: 15px;
+            box-shadow: 0 0 40px #FFE66D, 0 0 70px #FF6B6B;
             animation: zoom 0.3s;
         }
 
@@ -545,43 +526,45 @@
 
         .lightbox .close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
             color: white;
             cursor: pointer;
             transition: 0.3s;
-            text-shadow: 0 0 20px #FFE66D;
+            text-shadow: 0 0 15px #FFE66D;
         }
 
         .lightbox .close:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
             color: #FFE66D;
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 30px 15px;
             color: #FFFFFF;
             border-top: 2px solid #FFE66D;
-            margin-top: 50px;
+            margin-top: 30px;
+            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
         }
 
         /* মাইক্রোফোন পারমিশন ইন্ডিকেটর */
         .mic-permission {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(44, 62, 80, 0.9);
+            bottom: 15px;
+            right: 15px;
+            background: rgba(44, 62, 80, 0.95);
             backdrop-filter: blur(5px);
-            padding: 15px 25px;
-            border-radius: 50px;
+            padding: 12px 20px;
+            border-radius: 40px;
             border: 2px solid #FFE66D;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             z-index: 100;
             animation: slideIn 0.5s;
+            max-width: 90%;
         }
 
         @keyframes slideIn {
@@ -591,21 +574,23 @@
 
         .mic-permission i {
             color: #FFE66D;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .mic-permission span {
             color: white;
+            font-size: 0.9rem;
         }
 
         .mic-permission button {
             background: #FFE66D;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 15px;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             color: #2C3E50;
+            font-size: 0.9rem;
         }
 
         .mic-permission button:hover {
@@ -618,11 +603,10 @@
     <!-- ভিডিও ব্যাকগ্রাউন্ড -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
+        <!-- ব্যাকআপ ভিডিও (যদি প্রথমটা না চলে) -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-blurred-background-with-lights-439-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
-
-    <!-- স্পার্কল ইফেক্ট -->
-    <div class="sparkles" id="sparkles"></div>
 
     <!-- কাউন্টডাউন স্ক্রিন -->
     <div class="countdown-screen" id="countdownScreen">
@@ -741,7 +725,7 @@
             <!-- মেসেজ সেকশন -->
             <section>
                 <div class="message-section">
-                    <h2 class="section-title" style="margin-bottom: 20px;">💌 ভালোবাসার কথা</h2>
+                    <h2 class="section-title" style="margin-bottom: 15px;">💌 ভালোবাসার কথা</h2>
                     <p class="message-text">
 আজকের এই বিশেষ দিনে জানাই অফুরান ভালোবাসা।
 তোমার জীবন হোক আনন্দে ভরপুর। 💝
@@ -781,34 +765,16 @@
         }
         document.getElementById('birthdayName').textContent = CONFIG.name;
 
-        // স্পার্কল ইফেক্ট
-        function createSparkles() {
-            const container = document.getElementById('sparkles');
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    sparkle.style.left = Math.random() * 100 + '%';
-                    sparkle.style.top = Math.random() * 100 + '%';
-                    sparkle.style.animationDelay = Math.random() * 3 + 's';
-                    sparkle.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                    container.appendChild(sparkle);
-                    
-                    setTimeout(() => sparkle.remove(), 3000);
-                }, i * 200);
-            }
-        }
-        
-        // প্রতি ৫ সেকেন্ড পর স্পার্কল
-        setInterval(createSparkles, 5000);
-        createSparkles();
-
         // স্টেট
         let cakeCut = false;
-        let candlesBlown = 0; // কতগুলো মোমবাতি নিভেছে
+        let candlesBlown = 0;
         let totalCandles = CONFIG.age;
         let confettiShown = false;
-        let micEnabled = false;
+        let mediaStream = null;
+        let audioContext = null;
+        let analyser = null;
+        let microphone = null;
+        let checkBlowInterval = null;
 
         // আজ কি জন্মদিন?
         function isBirthdayToday() {
@@ -835,12 +801,12 @@
                 if (!confettiShown) {
                     confettiShown = true;
                     // কনফেটি
-                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
                     setTimeout(() => {
-                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] });
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] });
                     }, 200);
                     setTimeout(() => {
-                        confetti({ particleCount: 150, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] });
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] });
                     }, 400);
                 }
                 
@@ -851,8 +817,10 @@
                 loadCakeState();
                 renderCake();
                 
-                // মাইক্রোফোন পারমিশন চাও
-                setTimeout(requestMicrophone, 1000);
+                // মাইক্রোফোন পারমিশন চাও (যদি মোমবাতি বাকি থাকে)
+                if (candlesBlown < totalCandles && !cakeCut) {
+                    setTimeout(requestMicrophone, 1000);
+                }
                 
                 return;
             }
@@ -900,6 +868,9 @@
                 candlesGrid.innerHTML = '';
                 cakeStatus.textContent = '🎉 কেক কাটা হয়েছে! শুভ জন্মদিন! 🎉';
                 cutBtn.disabled = true;
+                
+                // মাইক্রোফোন বন্ধ করো
+                stopMicrophone();
                 return;
             }
             
@@ -916,14 +887,46 @@
             if (candlesBlown === totalCandles) {
                 cakeStatus.textContent = '🎉 সব মোমবাতি নিভে গেছে! এখন কেক কাটো';
                 cutBtn.disabled = false;
+                
+                // সব মোমবাতি নিভে গেলে মাইক্রোফোন বন্ধ করো
+                stopMicrophone();
             } else {
                 cakeStatus.textContent = `${totalCandles - candlesBlown}টি মোমবাতি জ্বলছে - ফুঁ দাও বা মোমবাতিতে ট্যাপ করো`;
                 cutBtn.disabled = true;
             }
         }
 
+        // মাইক্রোফোন বন্ধ করার ফাংশন
+        function stopMicrophone() {
+            if (checkBlowInterval) {
+                clearInterval(checkBlowInterval);
+                checkBlowInterval = null;
+            }
+            
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+            }
+            
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+            
+            // মাইক্রোফোন পারমিশন ডিভ লুকাও
+            const micDiv = document.getElementById('micPermission');
+            if (micDiv) {
+                micDiv.remove();
+            }
+        }
+
         // মাইক্রোফোন অনুরোধ
         function requestMicrophone() {
+            // যদি সব মোমবাতি নিভে গেছে বা কেক কাটা হয়ে গেছে তাহলে আর চাইবে না
+            if (candlesBlown === totalCandles || cakeCut) {
+                return;
+            }
+            
             const micDiv = document.createElement('div');
             micDiv.className = 'mic-permission';
             micDiv.id = 'micPermission';
@@ -944,22 +947,33 @@
         window.enableMicrophone = function() {
             document.getElementById('micPermission')?.remove();
             
+            // যদি সব মোমবাতি নিভে গেছে তাহলে আর চালাবে না
+            if (candlesBlown === totalCandles || cakeCut) {
+                return;
+            }
+            
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
-                    micEnabled = true;
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const analyser = audioContext.createAnalyser();
-                    const microphone = audioContext.createMediaStreamSource(stream);
+                    mediaStream = stream;
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    microphone = audioContext.createMediaStreamSource(stream);
                     microphone.connect(analyser);
                     analyser.fftSize = 256;
                     
                     const bufferLength = analyser.frequencyBinCount;
                     const dataArray = new Uint8Array(bufferLength);
                     
+                    // আগের ইন্টারভাল থাকলে ক্লিয়ার করো
+                    if (checkBlowInterval) {
+                        clearInterval(checkBlowInterval);
+                    }
+                    
                     // চেক করা হচ্ছে ফুঁর জন্য
-                    const checkBlow = setInterval(() => {
+                    checkBlowInterval = setInterval(() => {
+                        // যদি সব মোমবাতি নিভে গেছে বা কেক কাটা হয়ে গেছে তাহলে বন্ধ করো
                         if (cakeCut || candlesBlown === totalCandles) {
-                            clearInterval(checkBlow);
+                            stopMicrophone();
                             return;
                         }
                         
@@ -971,16 +985,10 @@
                         let average = sum / bufferLength;
                         
                         // যদি ফুঁর লেভেল বেশি হয়
-                        if (average > 80) {
+                        if (average > 70) { // থ্রেশহোল্ড একটু কমালাম
                             blowMultipleCandles(2 + Math.floor(Math.random() * 2)); // 2-3টি মোমবাতি নেভাও
                         }
-                    }, 200);
-                    
-                    // ১ মিনিট পর বন্ধ
-                    setTimeout(() => {
-                        clearInterval(checkBlow);
-                        stream.getTracks().forEach(track => track.stop());
-                    }, 60000);
+                    }, 150);
                 })
                 .catch(err => {
                     alert('মাইক্রোফোন অনুমতি দেওয়া হয়নি! মোমবাতিতে ট্যাপ করে নিভাও।');
@@ -1000,11 +1008,16 @@
                 
                 // স্মোক ইফেক্ট
                 confetti({
-                    particleCount: 10 * count,
-                    spread: 60,
+                    particleCount: 8 * count,
+                    spread: 50,
                     colors: ['#aaaaaa', '#cccccc'],
-                    startVelocity: 15
+                    startVelocity: 12
                 });
+                
+                // সব মোমবাতি নিভে গেলে মাইক্রোফোন বন্ধ করো
+                if (candlesBlown === totalCandles) {
+                    stopMicrophone();
+                }
             }
         };
 
@@ -1020,11 +1033,16 @@
                 
                 // স্মোক ইফেক্ট
                 confetti({
-                    particleCount: 5,
-                    spread: 40,
+                    particleCount: 4,
+                    spread: 30,
                     colors: ['#aaaaaa'],
-                    startVelocity: 10
+                    startVelocity: 8
                 });
+                
+                // সব মোমবাতি নিভে গেলে মাইক্রোফোন বন্ধ করো
+                if (candlesBlown === totalCandles) {
+                    stopMicrophone();
+                }
             }
         };
 
@@ -1049,12 +1067,15 @@
             cakeCut = true;
             localStorage.setItem(`cakeCut_${dateStr}`, 'true');
             
+            // মাইক্রোফোন বন্ধ করো
+            stopMicrophone();
+            
             renderCake();
             
             // কনফেটি
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] }), 200);
-            setTimeout(() => confetti({ particleCount: 100, spread: 100, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] }), 400);
+            confetti({ particleCount: 120, spread: 60, origin: { y: 0.6 } });
+            setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.5, x: 0.2 }, colors: ['#FFE66D', '#FF6B6B'] }), 200);
+            setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.5, x: 0.8 }, colors: ['#4ECDC4', '#45B7D1'] }), 400);
         };
 
         // লাইটবক্স
@@ -1074,15 +1095,24 @@
             document.getElementById('mainContent').classList.add('visible');
             loadCakeState();
             renderCake();
-            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
             
-            // মাইক্রোফোন পারমিশন চাও
-            setTimeout(requestMicrophone, 2000);
+            // মাইক্রোফোন পারমিশন চাও (যদি মোমবাতি বাকি থাকে)
+            setTimeout(() => {
+                if (candlesBlown < totalCandles && !cakeCut) {
+                    requestMicrophone();
+                }
+            }, 2000);
         } else {
             // না হলে কাউন্টডাউন চালাও
             setInterval(updateCountdown, 1000);
             updateCountdown();
         }
+
+        // উইন্ডো আনলোড হলে মাইক্রোফোন বন্ধ করো
+        window.addEventListener('beforeunload', function() {
+            stopMicrophone();
+        });
     </script>
 </body>
 </html>
