@@ -592,7 +592,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.85); /* অপাসিটি কমানো হয়েছে (০.৯৫ → ০.৮৫) */
+            background: rgba(255, 255, 255, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -894,6 +894,7 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
+        /* ===== UPDATED LETTER SCREEN with animated photo ===== */
         .letter-screen {
             position: fixed;
             top: 0;
@@ -927,18 +928,21 @@
             font-size: 2.5rem;
             color: #b0306e;
             margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
         }
         
-        .letter-content {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #2c3e50;
-            font-weight: 500;
-            white-space: pre-line;
+        .letter-container img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin: 20px 0;
+            opacity: 0;
+            transform: scale(0.8);
         }
         
         .letter-return-btn {
-            margin-top: 30px;
+            margin-top: 20px;
             padding: 12px 30px;
             background: linear-gradient(45deg, #ff69b4, #ff99cc);
             border: none;
@@ -950,10 +954,14 @@
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
             transition: 0.3s;
             border: 2px solid white;
+            display: inline-block;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
         }
         
         .letter-return-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) translateY(0);
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
@@ -1346,17 +1354,12 @@
         </div>
     </div>
 
+    <!-- ===== ANIMATED LETTER SCREEN with photo & button ===== -->
     <div class="letter-screen" id="letterScreen">
         <div class="letter-container">
-            <h2>A Letter for You 💌</h2>
-            <div class="letter-content">
-                <p>Every laugh, every chat, and every moment we've shared has been truly special.💫</p>
-                <p>I'm so grateful for the bond we have, and for the positivity you always bring into my life.</p>
-                <p>On your birthday, I just wish for endless happiness, love, and success to come your way.🌸</p>
-                <p>You deserve all the joy in the world—keep shining and spreading your beautiful energy.✨</p>
-                <p>Until We Meet Again 💝</p>
-            </div>
-            <button class="letter-return-btn" onclick="returnToGreeting()">Happy Birthday Priya</button>
+            <h2 id="letterHeading">💖 A Special Moment 💖</h2>
+            <img id="letterImage" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=800&fit=crop" alt="Cherished memory">
+            <button class="letter-return-btn" id="letterBtn" onclick="goToInstagram()">see your soulmate</button>
         </div>
     </div>
 
@@ -1441,8 +1444,8 @@
         });
 
         const CONFIG = {
-            month: 1,
-            day: 17,
+            month: 1,        // February (0 = January)
+            day: 17,         // updated to 17
             age: 16,
             name: "Natu.."
         };
@@ -1562,6 +1565,19 @@
                 document.getElementById('videoScreen').classList.add('show');
             } else if (screen === 'letter') {
                 document.getElementById('letterScreen').classList.add('show');
+                // Animate letter screen elements
+                gsap.fromTo('#letterHeading', 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+                );
+                gsap.fromTo('#letterImage', 
+                    { opacity: 0, scale: 0.8 }, 
+                    { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.2)", delay: 0.2 }
+                );
+                gsap.fromTo('#letterBtn', 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", delay: 0.4 }
+                );
             }
         }
 
@@ -1975,19 +1991,9 @@
             });
         };
 
-        window.returnToGreeting = function() {
-            gsap.to('#letterScreen', {
-                opacity: 0,
-                duration: 1,
-                onComplete: () => {
-                    document.getElementById('letterScreen').classList.remove('show');
-                    document.getElementById('greetingScreen').classList.add('show');
-                    updateHistory('greeting');
-                    greetingElement.textContent = '';
-                    charIndex = 0;
-                    typeGreeting();
-                }
-            });
+        // ===== Instagram link =====
+        window.goToInstagram = function() {
+            window.open('https://www.instagram.com/rafahimn', '_blank');
         };
 
         window.openContactPage = function() {
