@@ -22,7 +22,6 @@
             min-height: 100vh;
         }
         
-        /* Video Background */
         .video-bg {
             position: fixed;
             top: 0;
@@ -50,7 +49,6 @@
             z-index: -1;
         }
         
-        /* Floating Butterflies & Flowers */
         .floating-elements {
             position: fixed;
             top: 0;
@@ -98,7 +96,6 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Custom Heart Cursor */
         .custom-cursor {
             width: 30px;
             height: 30px;
@@ -115,7 +112,6 @@
             filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
         }
         
-        /* Floating Hearts */
         .floating-hearts {
             position: fixed;
             width: 100%;
@@ -137,7 +133,6 @@
             100% { transform: translate(var(--translate-x, 0), -100vh) rotate(360deg); }
         }
         
-        /* Sparkle Effect */
         .magic-sparkles {
             position: fixed;
             top: 0;
@@ -170,7 +165,6 @@
             100% { transform: translateY(-50px); }
         }
         
-        /* Contact Button */
         .contact-float-btn {
             position: fixed;
             bottom: 20px;
@@ -200,7 +194,6 @@
             box-shadow: 0 0 30px #9370db;
         }
         
-        /* Play Button */
         .play-float-btn {
             position: fixed;
             bottom: 20px;
@@ -240,7 +233,6 @@
             50% { transform: scale(1.1); opacity: 0.9; }
         }
         
-        /* Countdown Screen */
         .countdown-screen {
             position: fixed;
             top: 0;
@@ -313,7 +305,6 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
         
-        /* Greeting Screen */
         .greeting-screen {
             position: fixed;
             top: 0;
@@ -385,7 +376,6 @@
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
         
-        /* Cake Screen */
         .cake-screen {
             position: fixed;
             top: 0;
@@ -519,7 +509,6 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* ====== REASONS SCREEN - Fixed text wrapping ====== */
         .reasons-screen {
             position: fixed;
             top: 0;
@@ -553,7 +542,7 @@
         
         .reasons-container {
             width: 100%;
-            max-width: 1000px; /* Increased width to fit long text in one line */
+            max-width: 1000px;
             margin: 0 auto;
             min-height: 300px;
             display: flex;
@@ -567,7 +556,7 @@
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
-            max-width: 950px; /* Increased width */
+            max-width: 950px;
             width: 100%;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
@@ -583,13 +572,13 @@
         
         .reason-text {
             font-size: 1.2rem;
-            line-height: 1.4; /* Reduced line height for single line */
+            line-height: 1.4;
             color: #4a4a4a;
             margin-bottom: 1rem;
             font-weight: 500;
-            white-space: nowrap; /* Prevents text from wrapping */
-            overflow: visible; /* Shows all text */
-            text-overflow: clip; /* No ellipsis */
+            white-space: nowrap;
+            overflow: visible;
+            text-overflow: clip;
             max-width: 100%;
         }
         
@@ -666,7 +655,6 @@
             50% { transform: scale(1.2); }
         }
         
-        /* Photo Album Screen */
         .photo-screen {
             position: fixed;
             top: 0;
@@ -805,7 +793,6 @@
             box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
-        /* Video Screen */
         .video-screen {
             position: fixed;
             top: 0;
@@ -907,7 +894,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* Letter Screen */
         .letter-screen {
             position: fixed;
             top: 0;
@@ -971,7 +957,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -1013,7 +998,6 @@
             color: #ff69b4;
         }
         
-        /* Contact Page */
         .contact-page {
             position: fixed;
             top: 0;
@@ -1213,7 +1197,7 @@
             .reasons-header h1 { font-size: 2.5rem; }
             .reason-text { 
                 font-size: 1rem; 
-                white-space: normal; /* Allow wrapping on mobile if needed */
+                white-space: normal;
             }
             .photo-header h1 { font-size: 2.5rem; }
             .photo-container { grid-template-columns: 1fr; }
@@ -1222,10 +1206,8 @@
     </style>
 </head>
 <body>
-    <!-- Floating Butterflies & Flowers -->
     <div class="floating-elements" id="floatingElements"></div>
 
-    <!-- Audio Files -->
     <audio id="countdownAudio" preload="auto">
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/countdown.mp3" type="audio/mpeg">
     </audio>
@@ -1234,44 +1216,37 @@
         <source src="https://raw.githubusercontent.com/rafahimnn/happybirthday/refs/heads/main/Happy%20birthday%20Party%20Song%20Status%20Video%20shorts.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Video Background -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-candles-in-the-dark-1327-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
 
-    <!-- Floating Hearts & Sparkles -->
     <div class="magic-sparkles"></div>
     <div class="floating-hearts" id="floatingHearts"></div>
 
-    <!-- Custom Heart Cursor -->
     <div class="custom-cursor">
         <svg viewBox="0 0 24 24">
             <path fill="#ff69b4" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
     </div>
 
-    <!-- Play Button -->
     <div class="play-float-btn" id="playBtn">
         <button onclick="startAudio(event)">
             <i class="fas fa-play"></i>
         </button>
     </div>
 
-    <!-- Contact Button -->
     <div class="contact-float-btn">
         <button onclick="openContactPage()" aria-label="Contact">
             <i class="fas fa-comment"></i>
         </button>
     </div>
 
-    <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <span class="close" onclick="closeLightbox(event)">&times;</span>
         <img src="" id="lightboxImg">
     </div>
 
-    <!-- COUNTDOWN SCREEN -->
     <div class="countdown-screen" id="countdownScreen">
         <h1 class="countdown-title">⏰ Time Left for Birthday</h1>
         <div class="countdown-box">
@@ -1295,14 +1270,12 @@
         <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
     </div>
 
-    <!-- GREETING SCREEN -->
     <div class="greeting-screen" id="greetingScreen">
         <h1>Happy Birthday Priya</h1>
         <div class="greeting-text" id="greetingText"></div>
         <button class="enter-btn" onclick="goToCakeScreen()">Click to enter your world 💕</button>
     </div>
 
-    <!-- CAKE SCREEN -->
     <div class="cake-screen" id="cakeScreen">
         <div class="cake-container">
             <div class="cake-emoji" id="cakeEmoji">🎂</div>
@@ -1310,22 +1283,17 @@
             <div class="cake-status" id="cakeStatus"></div>
             <button class="cut-btn" id="cutBtn" onclick="cutCake()" disabled>🍰 Cut Cake</button>
         </div>
-        <!-- Next button will be added dynamically after cake cut -->
     </div>
 
-    <!-- REASONS SCREEN - Exact copy of cause.html with fixed text -->
     <div class="reasons-screen" id="reasonsScreen">
         <div class="reasons-header">
             <h1>Why You're My Best Friend! 💖</h1>
         </div>
-        <div class="reasons-container" id="reasonsContainer">
-            <!-- Cards will be dynamically inserted here -->
-        </div>
+        <div class="reasons-container" id="reasonsContainer"></div>
         <div class="reason-counter" id="reasonCounter">Reason 1 of 4</div>
         <button class="reasons-btn" id="reasonsBtn" onclick="handleReasonClick()">Click Here... 💕</button>
     </div>
 
-    <!-- PHOTO ALBUM SCREEN -->
     <div class="photo-screen" id="photoScreen">
         <div class="photo-header">
             <h1>Our Beautiful Moments Together</h1>
@@ -1353,7 +1321,6 @@
         <button class="photo-next-btn" onclick="goToVideoScreen()">Next: Video Message 🎥</button>
     </div>
 
-    <!-- VIDEO SCREEN -->
     <div class="video-screen" id="videoScreen">
         <h2>A Special Video Message</h2>
         <div class="video-container">
@@ -1379,7 +1346,6 @@
         </div>
     </div>
 
-    <!-- LETTER SCREEN -->
     <div class="letter-screen" id="letterScreen">
         <div class="letter-container">
             <h2>A Letter for You 💌</h2>
@@ -1394,7 +1360,6 @@
         </div>
     </div>
 
-    <!-- CONTACT PAGE -->
     <div class="contact-page" id="contactPage">
         <div class="contact-container">
             <h2><i class="fas fa-envelope"></i> Contact</h2>
@@ -1443,12 +1408,10 @@
     </div>
 
     <script>
-        // EmailJS initialization
         (function() {
             emailjs.init("MV90CKf_ZoIgGoU9w");
         })();
 
-        // Contact form handler
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -1477,11 +1440,10 @@
                 });
         });
 
-        // ========== CONFIGURATION - BIRTHDAY 16 FEBRUARY ==========
         const CONFIG = {
-            month: 1,        // February (0 = January, 1 = February)
-            day: 16,         // 16th February
-            age: 16,         // 16 years old
+            month: 1,
+            day: 16,
+            age: 16,
             name: "Priya"
         };
 
@@ -1490,7 +1452,6 @@
             CONFIG.name = decodeURIComponent(urlParams.get('name'));
         }
 
-        // Floating elements (butterflies & flowers)
         function createFloatingElement() {
             const container = document.getElementById('floatingElements');
             const elements = [
@@ -1513,17 +1474,14 @@
             setTimeout(() => el.remove(), 15000);
         }
 
-        // Start floating elements
         setInterval(createFloatingElement, 2000);
         for (let i = 0; i < 10; i++) {
             setTimeout(createFloatingElement, i * 500);
         }
 
-        // Audio elements
         const countdownAudio = document.getElementById('countdownAudio');
         const birthdayAudio = document.getElementById('birthdayWish');
 
-        // State variables
         let cakeCut = false;
         let candlesBlown = 0;
         let totalCandles = CONFIG.age;
@@ -1538,34 +1496,32 @@
         let audioAllowed = false;
         let resetTimer = null;
 
-        // Reasons data - exactly like cause.html
         const reasons = [
             { 
                 text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", 
                 emoji: "🌟",
-                gif: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif"
+                gif: "gif1.gif"
             },
             { 
                 text: "May your day be filled with love, laughter, and endless joy.", 
                 emoji: "💗",
-                gif: "https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
+                gif: "gif2.gif"
             },
             { 
                 text: "Wishing you success, happiness, and everything your heart desires.", 
                 emoji: "💕",
-                gif: "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
+                gif: "gif1.gif"
             },
             { 
                 text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳", 
                 emoji: "🌟",
-                gif: "https://media.giphy.com/media/l0MYt5jH6gkTWm8qo/giphy.gif"
+                gif: "gif2.gif"
             }
         ];
         
         let currentReasonIndex = 0;
         let isTransitioning = false;
 
-        // History management
         let historyStack = ['countdown'];
         
         function updateHistory(screen) {
@@ -1609,7 +1565,6 @@
             }
         }
 
-        // Floating hearts generator
         function createFloatingHeart() {
             const container = document.getElementById('floatingHearts');
             const heart = document.createElement('div');
@@ -1624,7 +1579,6 @@
         }
         setInterval(createFloatingHeart, 800);
 
-        // Custom cursor
         const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', (e) => {
             gsap.to(cursor, {
@@ -1634,7 +1588,6 @@
             });
         });
 
-        // Typing effect
         const greetingText = "Hey You Know What! You're the most adorable human i ever met! 💖";
         const greetingElement = document.getElementById('greetingText');
         let charIndex = 0;
@@ -1647,7 +1600,6 @@
             }
         }
 
-        // Audio permission
         document.body.addEventListener('click', function globalClickHandler() {
             if (!audioAllowed) {
                 audioAllowed = true;
@@ -1661,7 +1613,6 @@
             document.getElementById('playBtn').classList.add('hide');
         };
 
-        // Lightbox
         window.openLightbox = function(src) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('lightbox').classList.add('show');
@@ -1673,7 +1624,6 @@
             }
         };
 
-        // Auto reset after 24 hours
         function scheduleAutoReset() {
             if (resetTimer) clearTimeout(resetTimer);
             resetTimer = setTimeout(() => {
@@ -1690,7 +1640,6 @@
             }, 86400000);
         }
 
-        // Countdown update
         function updateCountdown() {
             const now = new Date();
             const isBirthdayToday = (now.getMonth() === CONFIG.month && now.getDate() === CONFIG.day);
@@ -1735,7 +1684,6 @@
             }
         }
 
-        // Go to Cake Screen
         window.goToCakeScreen = function() {
             if (!birthdayAudioPlayed) {
                 birthdayAudio.play().then(() => {
@@ -1754,7 +1702,6 @@
             });
         };
 
-        // Cake functions
         function loadCakeState() {
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
@@ -1904,7 +1851,6 @@
             setTimeout(() => confetti({ particleCount: 100, spread: 60, colors: ['cyan', 'purple'] }), 400);
         };
 
-        // Reasons screen functions - exactly like cause.html
         function createReasonCard(reason) {
             const card = document.createElement('div');
             card.className = 'reason-card';
@@ -1973,7 +1919,6 @@
             displayReason();
         };
 
-        // Navigation functions
         window.goToReasonsScreen = function() {
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
@@ -1989,7 +1934,7 @@
                     document.getElementById('cakeScreen').classList.remove('show');
                     document.getElementById('reasonsScreen').classList.add('show');
                     updateHistory('reasons');
-                    displayReason(); // Show first reason immediately
+                    displayReason();
                 }
             });
         };
@@ -2045,7 +1990,6 @@
             });
         };
 
-        // Contact page
         window.openContactPage = function() {
             document.getElementById('contactPage').classList.add('show');
         };
@@ -2060,7 +2004,6 @@
             }
         }
 
-        // Start countdown
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
