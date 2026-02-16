@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>🎂 Birthday Surprise - 16 February</title>
+    <title>Happy birthday my dear lovely wife 💫</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@700&family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -894,8 +894,8 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* ===== FINAL FIXED SCREEN ===== */
-        .final-screen {
+        /* ===== ORIGINAL LETTER SCREEN ===== */
+        .letter-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -908,84 +908,137 @@
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             z-index: 500;
             padding: 20px;
-            text-align: center;
         }
         
-        .final-screen.show {
+        .letter-screen.show {
             display: flex;
         }
         
-        .final-container {
+        .letter-container {
             max-width: 600px;
-            width: 100%;
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 2rem 1.5rem;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.4);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
         }
         
-        .reveal-btn {
+        .letter-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #b0306e;
+            margin-bottom: 1rem;
+        }
+        
+        .letter-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2c3e50;
+            font-weight: 500;
+            white-space: pre-line;
+        }
+        
+        .letter-return-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
             background: linear-gradient(45deg, #ff69b4, #ff99cc);
             border: none;
-            border-radius: 60px;
-            padding: 1rem 2rem;
-            font-size: 1.3rem;
+            border-radius: 50px;
             color: white;
+            font-size: 1.2rem;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
             transition: 0.3s;
             border: 2px solid white;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .letter-return-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+        }
+        
+        /* ===== SECRET PHOTO SCREEN ===== */
+        .secret-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 300px;
-            margin: 0 auto 1.5rem;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffe6f0, #ffe0f0);
+            z-index: 550;
+            padding: 20px;
         }
         
-        .reveal-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #ff69b4;
+        .secret-screen.show {
+            display: flex;
         }
         
-        .hidden-photo {
+        .secret-container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            border: 2px solid white;
+        }
+        
+        .secret-photo {
             width: 100%;
             max-height: 400px;
             object-fit: cover;
-            border-radius: 25px;
+            border-radius: 30px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            margin: 1.5rem 0;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.4s, transform 0.4s;
+            cursor: pointer;
+            transition: transform 0.3s;
             border: 3px solid white;
+            animation: photoReveal 0.8s ease-out;
         }
         
-        .hidden-photo.show {
-            opacity: 1;
-            transform: scale(1);
+        .secret-photo:hover {
+            transform: scale(1.02);
+        }
+        
+        @keyframes photoReveal {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
         
         .soulmate-btn {
+            margin-top: 30px;
+            padding: 12px 30px;
             background: linear-gradient(45deg, #9b6dff, #ff6dc7);
             border: none;
-            border-radius: 60px;
-            padding: 0.9rem 2rem;
-            font-size: 1.2rem;
+            border-radius: 50px;
             color: white;
+            font-size: 1.2rem;
             cursor: pointer;
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4);
             transition: 0.3s;
             border: 2px solid white;
-            width: 100%;
-            max-width: 280px;
-            margin: 0.5rem auto 0;
+            display: inline-block;
+            text-decoration: none;
+            animation: btnPop 0.5s ease-out 0.3s both;
+        }
+        
+        @keyframes btnPop {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
         
         .soulmate-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #9b6dff;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(155, 109, 255, 0.6);
         }
         
         .lightbox {
@@ -1289,7 +1342,7 @@
                 <span class="count-label">Secs</span>
             </div>
         </div>
-        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 16 Feb 12:00 AM!</div>
+        <div class="countdown-message" id="countdownMessage">🎂 Surprise at 17 Feb 12:00 AM!</div>
     </div>
 
     <div class="greeting-screen" id="greetingScreen">
@@ -1323,18 +1376,18 @@
         </div>
 
         <div class="photo-container">
-            <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1200&h=1800&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=600&fit=crop&q=80" alt="Memory 1" class="photo-img">
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpg')">
+                <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpgg" alt="Memory 1" class="photo-img">
                 <div class="photo-date">Her Smile Says It All</div>
-                <div class="photo-caption">You're truly one of the sweetest girls I know, and I feel lucky to have a sis like you.❤️</div>
+                <div class="photo-caption">You're truly one of the sweetest girls I know, and I feel lucky to have a wife like you.❤️</div>
             </div>
-            <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1200&h=1800&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=600&fit=crop&q=80" alt="Memory 2" class="photo-img">
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg')">
+                <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg" alt="Memory 2" class="photo-img">
                 <div class="photo-date">Together Vibes</div>
                 <div class="photo-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
             </div>
-            <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=1200&h=1800&fit=crop')">
-                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?w=400&h=600&fit=crop&q=80" alt="Memory 3" class="photo-img">
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg')">
+                <img src=https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg" alt="Memory 3" class="photo-img">
                 <div class="photo-date">Pretty Soul</div>
                 <div class="photo-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
             </div>
@@ -1364,24 +1417,33 @@
                     </div>
                 </div>
             </div>
-            <button class="video-next-btn" onclick="goToFinalScreen()">See your last surprise 💌</button>
+            <button class="video-next-btn" onclick="goToLetterScreen()">See your letter 💌</button>
         </div>
     </div>
 
-    <!-- ===== FIXED FINAL SCREEN ===== -->
-    <div class="final-screen" id="finalScreen">
-        <div class="final-container">
-            <button class="reveal-btn" id="revealPhotoBtn" onclick="revealPhoto()">
-                <i class="fas fa-camera"></i> Click to see a secret photo
-            </button>
-            
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=800&fit=crop" 
-                 alt="Special memory" 
-                 class="hidden-photo" 
-                 id="secretPhoto">
-            
+    <div class="letter-screen" id="letterScreen">
+        <div class="letter-container">
+            <h2>A Letter for You 💌</h2>
+            <div class="letter-content">
+                <p>Every laugh, every chat, and every moment we've shared has been truly special.💫</p>
+                <p>I'm so grateful for the bond we have, and for the positivity you always bring into my life.</p>
+                <p>On your birthday, I just wish for endless happiness, love, and success to come your way.🌸</p>
+                <p>You deserve all the joy in the world—keep shining and spreading your beautiful energy.✨</p>
+                <p>Until We Meet Again 💝</p>
+            </div>
+            <button class="letter-return-btn" onclick="goToSecretScreen()">Again,Happy Birthday Honey</button>
+        </div>
+    </div>
+
+    <!-- ===== SECRET PHOTO SCREEN ===== -->
+    <div class="secret-screen" id="secretScreen">
+        <div class="secret-container">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=1000&fit=crop" 
+                 alt="Secret Memory" 
+                 class="secret-photo" 
+                 onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=1500&fit=crop')">
             <button class="soulmate-btn" onclick="goToInstagram()">
-                <i class="fab fa-instagram"></i> see your soulmate
+                <i class="fab fa-instagram"></i> See Your Soulmate
             </button>
         </div>
     </div>
@@ -1572,7 +1634,8 @@
             document.getElementById('reasonsScreen').classList.remove('show');
             document.getElementById('photoScreen').classList.remove('show');
             document.getElementById('videoScreen').classList.remove('show');
-            document.getElementById('finalScreen').classList.remove('show');
+            document.getElementById('letterScreen').classList.remove('show');
+            document.getElementById('secretScreen').classList.remove('show');
             
             if (screen === 'countdown') {
                 document.getElementById('countdownScreen').classList.remove('hide');
@@ -1586,8 +1649,10 @@
                 document.getElementById('photoScreen').classList.add('show');
             } else if (screen === 'video') {
                 document.getElementById('videoScreen').classList.add('show');
-            } else if (screen === 'final') {
-                document.getElementById('finalScreen').classList.add('show');
+            } else if (screen === 'letter') {
+                document.getElementById('letterScreen').classList.add('show');
+            } else if (screen === 'secret') {
+                document.getElementById('secretScreen').classList.add('show');
             }
         }
 
@@ -1989,29 +2054,30 @@
             });
         };
 
-        window.goToFinalScreen = function() {
+        window.goToLetterScreen = function() {
             gsap.to('#videoScreen', {
                 opacity: 0,
                 duration: 1,
                 onComplete: () => {
                     document.getElementById('videoScreen').classList.remove('show');
-                    document.getElementById('finalScreen').classList.add('show');
-                    updateHistory('final');
+                    document.getElementById('letterScreen').classList.add('show');
+                    updateHistory('letter');
                 }
             });
         };
 
-        // ===== REVEAL PHOTO FUNCTION =====
-        window.revealPhoto = function() {
-            const photo = document.getElementById('secretPhoto');
-            photo.classList.add('show');
-            // Disable the button after click so it can't be clicked again
-            document.getElementById('revealPhotoBtn').disabled = true;
-            document.getElementById('revealPhotoBtn').style.opacity = '0.6';
-            document.getElementById('revealPhotoBtn').style.cursor = 'default';
+        window.goToSecretScreen = function() {
+            gsap.to('#letterScreen', {
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    document.getElementById('letterScreen').classList.remove('show');
+                    document.getElementById('secretScreen').classList.add('show');
+                    updateHistory('secret');
+                }
+            });
         };
 
-        // ===== Instagram link =====
         window.goToInstagram = function() {
             window.open('https://www.instagram.com/rafahimn', '_blank');
         };
