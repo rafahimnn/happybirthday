@@ -894,7 +894,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* ===== ORIGINAL LETTER SCREEN ===== */
         .letter-screen {
             position: fixed;
             top: 0;
@@ -960,7 +959,6 @@
             box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
         }
         
-        /* ===== SECRET PHOTO SCREEN ===== */
         .secret-screen {
             position: fixed;
             top: 0;
@@ -1375,25 +1373,26 @@
             <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
         </div>
 
-      <div class="photo-container">
-    <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpg')">
-        <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpg" alt="Memory 1" class="photo-img">
-        <div class="photo-date">Her Smile Says It All</div>
-        <div class="photo-caption">You're truly one of the sweetest girls I know, and I feel lucky to have a wife like you.❤️</div>
-    </div>
-    
-    <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg')">
-        <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg" alt="Memory 2" class="photo-img">
-        <div class="photo-date">Together Vibes</div>
-        <div class="photo-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
-    </div>
-    
-    <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg')">
-        <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg" alt="Memory 3" class="photo-img">
-        <div class="photo-date">Pretty Soul</div>
-        <div class="photo-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
-    </div>
-</div>
+        <div class="photo-container">
+            <!-- Photo 1 (fixed) -->
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpg')">
+                <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264075/1763024498529_lnymog.jpg" alt="Memory 1" class="photo-img">
+                <div class="photo-date">Her Smile Says It All</div>
+                <div class="photo-caption">You're truly one of the sweetest girls I know, and I feel lucky to have a wife like you.❤️</div>
+            </div>
+            <!-- Photo 2 (ok) -->
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg')">
+                <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264087/1763027969271_fknfl3.jpg" alt="Memory 2" class="photo-img">
+                <div class="photo-date">Together Vibes</div>
+                <div class="photo-caption">May your journey ahead be filled with happiness, success, and endless smiles.😊💕</div>
+            </div>
+            <!-- Photo 3 (fixed quotes) -->
+            <div class="photo-card" onclick="openLightbox('https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg')">
+                <img src="https://res.cloudinary.com/dpctt0wao/image/upload/v1771264092/IMG_20260128_210003_145_l8bpoy.jpg" alt="Memory 3" class="photo-img">
+                <div class="photo-date">Pretty Soul</div>
+                <div class="photo-caption">Keep being the amazing person you are—you make every moment brighter.🌸💖</div>
+            </div>
+        </div>
 
         <button class="photo-next-btn" onclick="goToVideoScreen()">Again Your Storylane 🎥</button>
     </div>
@@ -1741,14 +1740,33 @@
                 countdownFinished = true;
                 countdownAudio.pause();
                 countdownAudio.currentTime = 0;
+                
+                // Greeting screen দেখাও
                 document.getElementById('countdownScreen').classList.add('hide');
                 document.getElementById('greetingScreen').classList.add('show');
+                
+                // 🔊 কাউন্টডাউন শেষ, সাথে সাথে birthday audio বাজাও
+                if (!birthdayAudioPlayed) {
+                    birthdayAudio.play()
+                        .then(() => {
+                            birthdayAudioPlayed = true;
+                            console.log("🎵 Birthday audio started automatically");
+                        })
+                        .catch(error => {
+                            console.log("⚠️ Autoplay failed:", error);
+                            // অটোপ্লে ব্যর্থ হলে playBtn দেখাও (Fallback)
+                            document.getElementById('playBtn').classList.remove('hide');
+                        });
+                }
+                
                 historyStack = ['greeting'];
                 history.replaceState({ screen: 'greeting' }, '', '#greeting');
+                
                 if (!confettiShown) {
                     confettiShown = true;
                     confetti({ particleCount: 100, spread: 70 });
                 }
+                
                 typeGreeting();
                 scheduleAutoReset();
                 return;
@@ -1778,11 +1796,7 @@
         }
 
         window.goToCakeScreen = function() {
-            if (!birthdayAudioPlayed) {
-                birthdayAudio.play().then(() => {
-                    birthdayAudioPlayed = true;
-                }).catch(e => {});
-            }
+            // এখানে birthday audio বন্ধ করা নেই, চলতে থাকবে
             gsap.to('#greetingScreen', {
                 opacity: 0,
                 duration: 1,
@@ -1929,8 +1943,9 @@
 
         window.cutCake = function() {
             if (cakeCut || candlesBlown !== totalCandles) return;
-            birthdayAudio.pause();
-            birthdayAudio.currentTime = 0;
+            
+            // কেক কাটার সময় birthday audio বন্ধ হবে না (সরিয়ে দেওয়া)
+            
             const today = new Date();
             const month = String(CONFIG.month + 1).padStart(2, '0');
             const day = String(CONFIG.day).padStart(2, '0');
@@ -2013,8 +2028,10 @@
         };
 
         window.goToReasonsScreen = function() {
+            // 🛑 "Enter your storyline" এ ক্লিক করলে birthday audio বন্ধ হবে
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
+            
             currentReasonIndex = 0;
             document.getElementById('reasonsBtn').textContent = "Click Here... 💕";
             document.getElementById('reasonsBtn').classList.remove('story-mode');
